@@ -314,7 +314,7 @@ class QuestionController extends Controller
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-
+//
 
         return redirect()->route('view-question', ['question_id'=> $question]);
 
