@@ -267,7 +267,7 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
+                    <li class="sidebar-search" style="font-size: 17px;">
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
@@ -279,22 +279,24 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="index.html"><i class="fa fa-dashboard fa-2x fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
-                        <a href="{{URL::route('admin-question-loader')}}"><i class="fa fa-table fa-fw"></i> Questions </a>
+                        <a href="{{URL::route('admin-question-loader')}}"><i class="fa fa-question-circle fa-2x fa-fw"></i>all Questions </a>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-edit fa-fw"></i>Tutors </a>
+
+                        <a href="forms.html"><i class="fa fa-users fa-2x fa-fw"></i>All Tutors</a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Payments <span class="fa arrow"></span></a>
+
+                        <a href="#"><i class="fa fa-google-wallet fa-2x fa-fw"></i> Payments</a>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user fa-2x fa-fw" ></i>My Profile</a>
 
                         <!-- /.nav-second-level -->
                     </li>
