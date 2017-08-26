@@ -2,7 +2,6 @@
    @extends('layout.admin-blank-layout')
    @section( 'title')
        Admin Home Page
-
    @endsection
    @section('pagename')
        Admin Home
@@ -20,12 +19,12 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
+                                    <span> Questions asked   </span><span class="huge">26</span>
                                     <div>Use this Panel To ask Question </div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{route('post-questions')}}">
                             <div class="panel-footer">
                                 <span class="pull-left"><span style="font-size: 30px; font-weight:900;">Ask Question</span></span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

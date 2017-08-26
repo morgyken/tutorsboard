@@ -50,7 +50,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+            <a class="navbar-brand" href="index.html">TutorsBoard V-2.01 </a>
         </div>
         <!-- /.navbar-header -->
 
@@ -279,7 +279,7 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-2x fa-fw"></i> Dashboard</a>
+                        <a href="{{URL::route('adm-dashboard')}}"><i class="fa fa-dashboard fa-2x fa-fw"></i> Dashboard</a>
                     </li>
 
                     <li>
@@ -287,16 +287,16 @@
                     </li>
                     <li>
 
-                        <a href="forms.html"><i class="fa fa-users fa-2x fa-fw"></i>All Tutors</a>
+                        <a href="{{URL::route('adm-tutors')}}"><i class="fa fa-users fa-2x fa-fw"></i>All Tutors</a>
                     </li>
 
                     <li>
 
-                        <a href="#"><i class="fa fa-google-wallet fa-2x fa-fw"></i> Payments</a>
+                        <a href="{{URL::route('adm-payments')}}"><i class="fa fa-google-wallet fa-2x fa-fw"></i> Payments</a>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-user fa-2x fa-fw" ></i>My Profile</a>
+                        <a href="{{URL::route('adm-profile')}}"><i class="fa fa-user fa-2x fa-fw" ></i>My Profile</a>
 
                         <!-- /.nav-second-level -->
                     </li>

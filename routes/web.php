@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-        return view('gen.index');
+    return view('gen.index');
 })->name('home');
 
 Auth::routes();
@@ -84,7 +84,9 @@ Route::get('admin-question-loader',array('as'=>'admin-question-loader','uses'=>'
 Route::get('adm-payments',array('as'=>'adm-payments','uses'=>'AdminController@AdmPayments'));
 Route::get('adm-tutors',array('as'=>'adm-tutors','uses'=>'AdminController@AdmTutors'));
 Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmProfile'));
-Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashbord'));
+
+Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashboard'));
+
 
 
 
