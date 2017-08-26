@@ -294,9 +294,9 @@ class QuestionController extends Controller
 
     public function  PostAnswer(Request $request, $question){
 
-           $file = Input::file('file');
+        $file = Input::file('file');
 
-            $dest = public_path().'/storage/uploads/'.$question.'/answer/';
+        $dest = public_path().'/storage/uploads/'.$question.'/answer/';
 
             foreach ($file as $files){
                 $name =  $files->getClientOriginalName();

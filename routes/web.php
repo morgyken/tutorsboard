@@ -76,3 +76,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('autocomplete-search',array('as'=>'autocomplete.search','uses'=>'SearchController@index'));
 
 Route::post('autocomplete-ajax',array('as'=>'searchajax','uses'=>'SearchController@autoComplete'));
+
+
+Route::get('admin-question-loader',array('as'=>'admin-question-loader','uses'=>'AdminController@AdmQLoader'));
+
