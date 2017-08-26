@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
 Route::get('all-questions',array('as'=>'all-questions','uses'=>'QuestionController@allQuestions'));
 
 Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'QuestionController@askQuestions'));
