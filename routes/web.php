@@ -77,6 +77,14 @@ Route::post('autocomplete-search',array('as'=>'autocomplete.search','uses'=>'Sea
 
 Route::post('autocomplete-ajax',array('as'=>'searchajax','uses'=>'SearchController@autoComplete'));
 
+//admin routes starts here
+
 
 Route::get('admin-question-loader',array('as'=>'admin-question-loader','uses'=>'AdminController@AdmQLoader'));
+Route::get('adm-payments',array('as'=>'adm-payments','uses'=>'AdminController@AdmPayments'));
+Route::get('adm-tutors',array('as'=>'adm-tutors','uses'=>'AdminController@AdmTutors'));
+Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmProfile'));
+Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashbord'));
+
+
 
