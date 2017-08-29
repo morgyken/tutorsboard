@@ -1,3 +1,5 @@
+
+
 @extends('layout.admin-blank-layout')
 @section( 'title')
     Admin Questions
@@ -21,111 +23,32 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Registration Date </th>
+                                        <th>Total Amount </th>
+
                                     </tr>
                                 </thead>
+
+                                @foreach( $users as $user => $value)
                                 <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-                                    </tr>
 
-                                    <tr class="gradeA">
-                                        <td>Gecko</td>
-                                        <td>Firefox 2.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td class="center">1.8</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Gecko</td>
-                                        <td>Firefox 3.0</td>
-                                        <td>Win 2k+ / OSX.3+</td>
-                                        <td class="center">1.9</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Gecko</td>
-                                        <td>Camino 1.0</td>
-                                        <td>OSX.2+</td>
-                                        <td class="center">1.8</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Webkit</td>
-                                        <td>Safari 1.2</td>
-                                        <td>OSX.3</td>
-                                        <td class="center">125.5</td>
-                                        <td class="center">A</td>
-                                    </tr>
+                                <a href="#" ><tr class=" odd gradeX" style="cursor: pointer">
 
+                                        <td> {{$value-> name}} </td>
+                                        <td> {{ $value-> email }} </td>
+                                        <td> {{$value -> created_at}} </td>
+                                        <td> Ksh. 56 </td>
+                                    </tr>
+                                </a>
 
+                                @endforeach
 
-                                    <tr class="gradeA">
-                                        <td>Misc</td>
-                                        <td>NetFront 3.1</td>
-                                        <td>Embedded devices</td>
-                                        <td class="center">-</td>
-                                        <td class="center">C</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Misc</td>
-                                        <td>NetFront 3.4</td>
-                                        <td>Embedded devices</td>
-                                        <td class="center">-</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeX">
-                                        <td>Misc</td>
-                                        <td>Dillo 0.8</td>
-                                        <td>Embedded devices</td>
-                                        <td class="center">-</td>
-                                        <td class="center">X</td>
-                                    </tr>
-                                    <tr class="gradeX">
-                                        <td>Misc</td>
-                                        <td>Links</td>
-                                        <td>Text only</td>
-                                        <td class="center">-</td>
-                                        <td class="center">X</td>
-                                    </tr>
-                                    <tr class="gradeX">
-                                        <td>Misc</td>
-                                        <td>Lynx</td>
-                                        <td>Text only</td>
-                                        <td class="center">-</td>
-                                        <td class="center">X</td>
-                                    </tr>
-                                    <tr class="gradeC">
-                                        <td>Misc</td>
-                                        <td>IE Mobile</td>
-                                        <td>Windows Mobile 6</td>
-                                        <td class="center">-</td>
-                                        <td class="center">C</td>
-                                    </tr>
-                                    <tr class="gradeC">
-                                        <td>Misc</td>
-                                        <td>PSP browser</td>
-                                        <td>PSP</td>
-                                        <td class="center">-</td>
-                                        <td class="center">C</td>
-                                    </tr>
-                                    <tr class="gradeU">
-                                        <td>Other browsers</td>
-                                        <td>All others</td>
-                                        <td>-</td>
-                                        <td class="center">-</td>
-                                        <td class="center">U</td>
-                                    </tr>
                                 </tbody>
                             </table>
+
+                            <h5>{{ $users->links() }}</h5>
                             <!-- /.table-responsive -->
                             <div class="well">
                                 <h4>DataTables Usage Information</h4>

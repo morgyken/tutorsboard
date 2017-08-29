@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,7 +13,11 @@ class AdminController extends Controller
     }
 
     public function AdmTutors(){
-        return view ('adm.allTutors');
+
+        $user = DB::table('users')->paginate(25);
+
+        return view ('adm.allTutors',['users'=> $user ] );
+
     }
 
     public function AdmPayments(){

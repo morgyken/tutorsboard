@@ -11,6 +11,8 @@ class SampleController extends Controller
 {
     public static  function sample(){
 
-        return view('adm.questions');
+        $user = DB::table('users')->paginate(25);
+
+        return view('adm.questions', ['users'=> $user ]);
     }
 }

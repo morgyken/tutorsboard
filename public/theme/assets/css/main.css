@@ -10,6 +10,7 @@
 	font-weight:300;
 	margin-top:50px;
 }
+
 img{
 	-webkit-border-radius:50$;
 	-moz-border-radius: 50%;
@@ -37,6 +38,11 @@ img{
 	box-shadow:inset 0px 0px 0px 3px rgba(255,255,255,.5);
 	background: transparent;
 }
+
+#cursor-pointer{
+	cursor: pointer;
+}
+
 #head .btn-default:hover,
 #head .btn-default:focus { color:rgba(255,255,255,.8);
 	-webkit-box-shadow:inset 0px 0px 0px 3px rgba(255,255,255,.8);
@@ -160,3 +166,4 @@ img.pull-left { margin-right: 10px; }
 
 .widget-simplenav { margin-left:-5px; }
 .widget-simplenav a{ margin:0 5px; }
+

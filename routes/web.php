@@ -36,9 +36,11 @@ Route::get('post-deadlinePrice',array('as'=>'post-deadlinePrice','uses'=>'Questi
 
 Route::post('PostQuestionPriceDeadline',array('as'=>'PostQuestionPrice','uses'=>'QuestionController@PostQuestionPriceDeadline'));
 
-Route::get('datetime-picker', function(){
+Route::get('sample-12', function(){
 
-    return view('quest.sample');
+    $user = DB::table('question_bodies')->paginate(25);
+
+    return view('part.profile-revised',  ['question'=> $user ]);
 });
 
 //admin commwnts

@@ -16,7 +16,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{URL::asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
+        <!-- MetisMenu CSS -->
     <link href="{{URL::asset('admin/vendor/metisMenu/metisMenu.min.css')}}'" rel="stylesheet">
 
     <!-- Custom CSS -->
