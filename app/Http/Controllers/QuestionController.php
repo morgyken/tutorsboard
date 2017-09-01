@@ -277,17 +277,6 @@ class QuestionController extends Controller
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
-        /*
-         *
-        $quest = new AssignQuestion;
-
-        $quest->assigned = 1;
-        $quest->question_id = $question;
-        $quest->user_id = Auth::user()->email;
-        $quest->save();
-
-        */
-
         return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
@@ -302,7 +291,6 @@ class QuestionController extends Controller
                 $name =  $files->getClientOriginalName();
                 $files->move($dest, $name);
             }
-
 
        DB::table('post_answers')->insert(
             [
@@ -440,9 +428,7 @@ class QuestionController extends Controller
 
                 ]);
 
-
-
-            $request->session()->put('question_id',  $question_id);
+           $request->session()->put('question_id',  $question_id);
 
             return redirect()->route('post-deadlinePrice');
     }
