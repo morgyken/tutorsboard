@@ -29,6 +29,8 @@ Route::get('view-question/{question_id}',array('as'=>'view-question','uses'=>'Qu
 
 Route::post('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
 
+Route::get('questions-answered',array('as'=>'questions-answered','uses'=>'AdminController@QuestionsAnswered'));
+
 /*
  * Post deadline and price using these two
  */
@@ -38,9 +40,7 @@ Route::post('PostQuestionPriceDeadline',array('as'=>'PostQuestionPrice','uses'=>
 
 Route::get('sample-12', function(){
 
-    $user = DB::table('question_bodies')->paginate(25);
-
-    return view('part.profile-revised',  ['question'=> $user ]);
+  return view('adm.answered_questions');
 });
 
 //admin commwnts

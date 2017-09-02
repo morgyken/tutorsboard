@@ -1,3 +1,52 @@
+<style type="text/css">
+    .question > quest{
+        color:#333;
+        cursor: pointer;
+    }
+    .question_table{
+        font-size: 12px;
+    }
+
+</style>
+
+<?php
+
+function ConvertTime12( $seconds){
+
+    $dtF = new \DateTime('@0');
+
+    $dtT = new \DateTime("@$seconds");
+
+    $days =  $dtF->diff($dtT)->format('%a');
+
+    if($days> 0){
+        return $dtF->diff($dtT)->format('%a d %h hrs');
+    }
+    else {
+        return $dtF->diff($dtT)->format('%h hrs %i min');
+    }
+
+
+
+}
+
+function getDeadlineInSeconds1($deadline){
+
+
+    $deadline = new \Carbon\Carbon($deadline);
+
+    $now = \Carbon\Carbon::now();
+    $difference = $deadline -> diffInSeconds($now);
+
+
+    $interval = ConvertTime12($difference);
+
+    return $interval; // array ['h']=>h, ['m]=> m, ['s'] =>s
+
+
+
+}
+?>
 @extends('layout.admin-blank-layout')
 @section( 'title')
     Admin Questions
@@ -14,123 +63,57 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            DataTables Advanced Tables
+                           All Questions
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table width="100%" class="table  question_table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>#</th>
+                                        <th>Question ID</th>
+                                        <th>status </th>
+                                        <th>Date Posted</th>
+                                        <th>Time Left</th>
+                                        <th>Summary</th>
+                                        <th>Price</th>
+
                                     </tr>
                                 </thead>
+                                <?php $count1 = 0  ?>
                                 <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-                                    </tr>
 
-                                    <tr class="gradeA">
-                                        <td>Gecko</td>
-                                        <td>Firefox 2.0</td>
-                                        <td>Win 98+ / OSX.2+</td>
-                                        <td class="center">1.8</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Gecko</td>
-                                        <td>Firefox 3.0</td>
-                                        <td>Win 2k+ / OSX.3+</td>
-                                        <td class="center">1.9</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Gecko</td>
-                                        <td>Camino 1.0</td>
-                                        <td>OSX.2+</td>
-                                        <td class="center">1.8</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Webkit</td>
-                                        <td>Safari 1.2</td>
-                                        <td>OSX.3</td>
-                                        <td class="center">125.5</td>
-                                        <td class="center">A</td>
-                                    </tr>
+                                @foreach($question as $quest=>$value)
+                                    <?php  $question_id1 = substr($value->question_id, 0, 8) ;
+                                    $rand = rand(70, 75);
+                                    $summ = substr($value->summary, 0, $rand) ;
+                                    $deadline = getDeadlineInSeconds1($value->question_deadline);
+                                    $count1 ++;
+                                    $date=date_create($value->created_at);
 
+                                    ?>
+                                        <tr class="odd gradeX">
+                                            <td>{{ $count1 }}</td>
+                                            <td><a href="{{URL::to('/view-question/'.$value->question_id)}}">{{strtoupper($question_id1)}}... </a></td>
+                                                    <td class="center">{{$value->status}}</td>
+                                                    <td>{{ date_format($date,"m-d H:i") }}</td>
+                                                    <td>{{$deadline}}</td>
+                                                    <td>{{$summ}}...</td>
+                                                    <td class="center"> Ksh. {{$value->question_price}}</td>
 
-
-                                    <tr class="gradeA">
-                                        <td>Misc</td>
-                                        <td>NetFront 3.1</td>
-                                        <td>Embedded devices</td>
-                                        <td class="center">-</td>
-                                        <td class="center">C</td>
-                                    </tr>
-                                    <tr class="gradeA">
-                                        <td>Misc</td>
-                                        <td>NetFront 3.4</td>
-                                        <td>Embedded devices</td>
-                                        <td class="center">-</td>
-                                        <td class="center">A</td>
-                                    </tr>
-                                    <tr class="gradeX">
-                                        <td>Misc</td>
-                                        <td>Dillo 0.8</td>
-                                        <td>Embedded devices</td>
-                                        <td class="center">-</td>
-                                        <td class="center">X</td>
-                                    </tr>
-                                    <tr class="gradeX">
-                                        <td>Misc</td>
-                                        <td>Links</td>
-                                        <td>Text only</td>
-                                        <td class="center">-</td>
-                                        <td class="center">X</td>
-                                    </tr>
-                                    <tr class="gradeX">
-                                        <td>Misc</td>
-                                        <td>Lynx</td>
-                                        <td>Text only</td>
-                                        <td class="center">-</td>
-                                        <td class="center">X</td>
-                                    </tr>
-                                    <tr class="gradeC">
-                                        <td>Misc</td>
-                                        <td>IE Mobile</td>
-                                        <td>Windows Mobile 6</td>
-                                        <td class="center">-</td>
-                                        <td class="center">C</td>
-                                    </tr>
-                                    <tr class="gradeC">
-                                        <td>Misc</td>
-                                        <td>PSP browser</td>
-                                        <td>PSP</td>
-                                        <td class="center">-</td>
-                                        <td class="center">C</td>
-                                    </tr>
-                                    <tr class="gradeU">
-                                        <td>Other browsers</td>
-                                        <td>All others</td>
-                                        <td>-</td>
-                                        <td class="center">-</td>
-                                        <td class="center">U</td>
-                                    </tr>
+                                        </tr>
+                                @endforeach
                                 </tbody>
                             </table>
+                            <h5>{{ $question->links() }}</h5>
+
+
                             <!-- /.table-responsive -->
                             <div class="well">
-                                <h4>DataTables Usage Information</h4>
-                                <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images. For complete documentation on DataTables, visit their website at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.</p>
-                                <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
+                                <h4>You can go to Tutor side All questions </h4>
+                                <p>The questions cn also be accessed through the tutor view, you cn use this link to access tutor side of the of the available question
+                                    <a target="_blank" href="https://datatables.net/"> </a>.</p>
+                                <a class="btn btn-default btn-lg btn-block" target="_blank" href="{{ URL:: to('/all-questions') }}">View Tutor side Questions </a>
                             </div>
                         </div>
                         <!-- /.panel-body -->
@@ -144,288 +127,239 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Kitchen Sink
+                            Answered Questions
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped question_table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
+                                            <th>Question ID</th>
+                                            <th>Remaining Time </th>
+                                            <th>Amount </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Basic Table
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Striped Rows
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Bordered Table
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive table-bordered">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Hover Rows
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-                <div class="col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Context Classes
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="success">
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr class="info">
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr class="warning">
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>4</td>
-                                            <td>John</td>
-                                            <td>Smith</td>
-                                            <td>@jsmith</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
+                                    <?php  $count= 0;  $sum =0; ?>
+                                    @foreach($question as $quest=>$value)
 
+                                        <?php
+                                            $count ++;
+                                            $sum += $value->question_price;
+                                            $question_id1 = substr($value->question_id, 0, 8) ;
+                                            $rand = rand(75, 90);
+                                            $summ = substr($value->summary, 0, $rand) ;
+                                            $deadline = getDeadlineInSeconds1($value->question_deadline);
+                                            $date=date_create($value->created_at);
+
+                                        ?>
+                                        <tr>
+                                            <th>{{$count}}</th>
+                                            <td><a href="{{URL::to('/view-question/'.$value->question_id)}}">{{strtoupper($question_id1)}}... </a></td>
+                                            <td>{{$deadline}}</td>
+                                            <td class="center"> Ksh. {{$value->question_price}}</td>
+                                        </tr>
+
+                                    @endforeach
+                                    <tr>
+                                        <th>Total </th>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="center"> Ksh. {{ $sum  }}</td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                <h3>Vew more <a href="{{URL::to ('/questions-answered')}}">  here </a> </h3>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
                     </div>
+                    <!-- /.panel -->
                 </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Reassigned Questions
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped question_table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Question ID</th>
+                                        <th>Remaining Time </th>
+                                        <th>Amount </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php  $count= 0;  $sum =0; ?>
+                                    @foreach($question as $quest=>$value)
+
+                                        <?php
+                                        $count ++;
+                                        $sum += $value->question_price;
+                                        $question_id1 = substr($value->question_id, 0, 8) ;
+                                        $rand = rand(75, 90);
+                                        $summ = substr($value->summary, 0, $rand) ;
+                                        $deadline = getDeadlineInSeconds1($value->question_deadline);
+                                        $date=date_create($value->created_at);
+
+                                        ?>
+                                        <tr>
+                                            <th>{{$count}}</th>
+                                            <td><a href="{{URL::to('/view-question/'.$value->question_id)}}">{{strtoupper($question_id1)}}... </a></td>
+                                            <td>{{$deadline}}</td>
+                                            <td class="center"> Ksh. {{$value->question_price}}</td>
+                                        </tr>
+
+                                    @endforeach
+                                    <tr>
+                                        <th>Total </th>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="center"> Ksh. {{ $sum  }}</td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                <h3>Vew more <a href="{{URL::to ('/questions-answered')}}">  here </a> </h3>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Disputed Questions
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped question_table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Question ID</th>
+                                        <th>Remaining Time </th>
+                                        <th>Amount </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php  $count= 0;  $sum =0; ?>
+                                    @foreach($question as $quest=>$value)
+
+                                        <?php
+                                        $count ++;
+                                        $sum += $value->question_price;
+                                        $question_id1 = substr($value->question_id, 0, 8) ;
+                                        $rand = rand(75, 90);
+                                        $summ = substr($value->summary, 0, $rand) ;
+                                        $deadline = getDeadlineInSeconds1($value->question_deadline);
+                                        $date=date_create($value->created_at);
+
+                                        ?>
+                                        <tr>
+                                            <th>{{$count}}</th>
+                                            <td><a href="{{URL::to('/view-question/'.$value->question_id)}}">{{strtoupper($question_id1)}}... </a></td>
+                                            <td>{{$deadline}}</td>
+                                            <td class="center"> Ksh. {{$value->question_price}}</td>
+                                        </tr>
+
+                                    @endforeach
+                                    <tr>
+                                        <th>Total </th>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="center"> Ksh. {{ $sum  }}</td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                <h3>Vew more <a href="{{URL::to ('/questions-answered')}}">  here </a> </h3>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Finished Questions
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped question_table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Question ID</th>
+                                        <th>Remaining Time </th>
+                                        <th>Amount </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php  $count= 0;  $sum =0; ?>
+                                    @foreach($question as $quest=>$value)
+
+                                        <?php
+                                        $count ++;
+                                        $sum += $value->question_price;
+                                        $question_id1 = substr($value->question_id, 0, 8) ;
+                                        $rand = rand(75, 90);
+                                        $summ = substr($value->summary, 0, $rand) ;
+                                        $deadline = getDeadlineInSeconds1($value->question_deadline);
+                                        $date=date_create($value->created_at);
+
+                                        ?>
+                                        <tr>
+                                            <th>{{$count}}</th>
+                                            <td><a href="{{URL::to('/view-question/'.$value->question_id)}}">{{strtoupper($question_id1)}}... </a></td>
+                                            <td>{{$deadline}}</td>
+                                            <td class="center"> Ksh. {{$value->question_price}}</td>
+                                        </tr>
+
+                                    @endforeach
+                                    <tr>
+                                        <th>Total </th>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="center"> Ksh. {{ $sum  }}</td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                                <h3>Vew more <a href="{{URL::to ('/questions-answered')}}">  here </a> </h3>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-6 -->
+            </div>
+
 
                 @endsection

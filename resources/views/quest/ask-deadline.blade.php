@@ -67,9 +67,6 @@
                                 @include('part.datetimepicker')
 
                     </div>
-
-
-
                 </div>
             </div>
                 <div class="well well-lg">
@@ -79,9 +76,9 @@
                 </div>
                 <button type='input' class="btn btn-primary btn-md btn-block">
                     <h3>
-                        <strong>Continue to Payment
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"> </strong>
-                        </span>
+                        <strong>  Finish
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </strong>
                     </h3></button>
             </div>
     </form>

@@ -91,6 +91,11 @@ class QuestionController extends Controller
 
         $time = new DateTimeModel();
 
+        /*
+        * return the comments in the following
+        *
+        */
+
         $interval = $time ->getDeadlineInSeconds($question_id);
 
         /*
@@ -157,7 +162,35 @@ class QuestionController extends Controller
             ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
             ->paginate(10);
 
+
+
+        if(
+        empty(
+        $user= User::where('usertype', '=', Auth::user()->email)->first()
+        )
+
+        )
+        {
+            $user = array();
+        }
+        else{
+
+            $user = DB::table('user')->where('email', '=',Auth::user()->email) ->get();
+
+            //$comments= MakeComments::select('user_id', 'comment_body', 'post_date') -> where('question_id',
+            //'=', $question_id)->get();
+        }
+
         return view ('quest.question-det', [
+
+            /*
+             * Get user type here
+             */
+            'usertype' =>$user,
+
+            /*
+             * Get Question
+             */
 
             'question' => $question,
 
@@ -277,11 +310,29 @@ class QuestionController extends Controller
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
+
+
         return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
 
+
+    //Question Status
+
+    public function Status($question_id, $status){
+
+        DB::table('question_status_models')->insert(
+            [
+                'question_id' =>$question_id,
+                'status' => $status,
+                'user_id' => Auth::user()->email,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+    }
     public function  PostAnswer(Request $request, $question){
+
+        //file uploads
 
         $file = Input::file('file');
 
@@ -291,6 +342,8 @@ class QuestionController extends Controller
                 $name =  $files->getClientOriginalName();
                 $files->move($dest, $name);
             }
+
+        //Insert into database
 
        DB::table('post_answers')->insert(
             [
@@ -302,11 +355,15 @@ class QuestionController extends Controller
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-//
+
+        //update status
+
+        $this->Status($question, 'answered');
 
         return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
+
 
 
     public function questionAll()
@@ -350,37 +407,6 @@ class QuestionController extends Controller
     Post Questions
     */
 
-    public function PostQuestion1(Request $request){
-
-        $question_id = rand(9999, 99999);
-        $quest = new PostQuestionModel;
-        $number_of_words = rand (250,320);
-        $summary = substr($request->question_body,0, $number_of_words);
-
-        $sum_post = str_replace(array('h1', 'h2', 'h3', 'h4', 'h5'),' ', $summary);
-        $quest->summary = $sum_post;
-        $quest->question_body = $request->question_body;
-        $quest->user_id = Auth::User()->email;
-        $quest->category = $request->category;
-        $quest->special = $request->special;
-        $quest->question_id = $request->category;
-
-        $quest->save();
-
-        /*
-         *  For each question Make a file directory
-         *
-         */
-
-        $request->session()->put('question_id', $quest->question_id );
-
-        //return redirect()->route('price.deadline');
-
-    }
-
-    /*
-     * Return view questions
-     */
 
     public function viewQuestion(){
 
@@ -427,6 +453,8 @@ class QuestionController extends Controller
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
                 ]);
+
+            $this->Status($question_id, 'new');
 
            $request->session()->put('question_id',  $question_id);
 
@@ -480,13 +508,13 @@ class QuestionController extends Controller
         return $randomString;
     }
 
-    public function allQuestions (){
+   public function allQuestions (){
 
 
         $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
-            ->paginate(10);
+            ->paginate(25);
 
 
         return view('home', ['question' => $questions]);
