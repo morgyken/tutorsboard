@@ -14,6 +14,8 @@ class AdminController extends Controller
 
         $answered   =   $this->returnQuery(15, 'answered');
 
+        $answered   =   $this->returnQuery(15, 'accepted');
+
         $disputed   =   $this->returnQuery(15, 'disputed');
 
         $new        =   $this->returnQuery(20, 'new');
@@ -23,6 +25,8 @@ class AdminController extends Controller
         $finished   =   $this->returnQuery(15, 'finished');
 
         $reassigned =   $this->returnQuery(15, 'reassigned');
+
+        $reassigned =   $this->returnQuery(15, 'cancelled');
 
         return view ('adm.allQuestions',
             [
@@ -90,5 +94,7 @@ class AdminController extends Controller
     public function AdmDashboard(){
         return view ('adm.index-admin');
     }
+
+
 
 }

@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\QuestionStatusModel;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
+use App\AcceptQuestion;
 use App\AssignQuestion;
 use App\CreditCardDetails;
 use App\Transaction;
+use App\User;
 use App\PostcommentModel;
 use App\MakePaymentModel;
 use App\DateTimeModel;
@@ -162,31 +165,16 @@ class QuestionController extends Controller
             ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
             ->paginate(10);
 
+            $user12 = Auth::User()->email;
 
-
-        if(
-        empty(
-        $user= User::where('usertype', '=', Auth::user()->email)->first()
-        )
-
-        )
-        {
-            $user = array();
-        }
-        else{
-
-            $user = DB::table('user')->where('email', '=',Auth::user()->email) ->get();
-
-            //$comments= MakeComments::select('user_id', 'comment_body', 'post_date') -> where('question_id',
-            //'=', $question_id)->get();
-        }
+            $user = DB::table('users')->where('email', '=', $user12) ->get();
 
         return view ('quest.question-det', [
 
             /*
              * Get user type here
              */
-            'usertype' =>$user,
+            'user' =>$user,
 
             /*
              * Get Question
@@ -232,9 +220,27 @@ class QuestionController extends Controller
     }
 
     /*
-     * Increase deadline
+     * ccept Answer
      *
      */
+    public function AcceptAnswer(Request $request, $question)
+    {
+        $quest = new QuestionStatusModel ;
+
+        $quest->question_id = $question;
+
+        $quest->status = 'Accepted';
+
+
+        $quest->user_id = Auth::user()->email;
+
+        $quest->save();
+
+        return redirect()->route('question.det', ['question_id'=> $question]);
+
+    }
+
+
 
     public function increaseDeadline(Request $request, $question)
     {

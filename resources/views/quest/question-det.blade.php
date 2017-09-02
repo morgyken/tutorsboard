@@ -89,53 +89,11 @@
                     </blockquote>
 
                     <hr>
-                    @if ($assigned =='Assigned')
-                        <div class="col-md-3">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans">Answer Question</button>
-                        </div>
-
-                        <div class="col-md-3">
-                            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#reply">Reply</button>
-                        </div>
-                        <div class="col-md-3">
-                            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#message">Send Us a Message </button>
-                        </div>
-
-                        <div class="col-md-3">
-                            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#message">Opt Out of Question </button>
-                        </div>
-                    @else
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Commit to Answer</button>
-                        </div>
-
-                        <div class="col-md-4">
-                            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#reply">Reply</button>
-                        </div>
-                        <div class="col-md-4">
-                            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#message">Send Us a Message </button>
-                        </div>
-                    @endif
-                    <div class="row">
-
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans">Reassign Question</button>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans"> Dispute Question</button>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans"> Cancel</button>
-                        </div>
-                    </div>
-
-
-
-
+                @include('part.user-links')
 
                 @include('part.modal')
 
-                @include('part.modal-ans')
+                @include('part.modal-commit-to-ans')
 
                     <!-- Comments Form -->
                     <div class="card collapse my-4" id="reply">
