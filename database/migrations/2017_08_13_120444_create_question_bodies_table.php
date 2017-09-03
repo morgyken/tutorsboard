@@ -18,7 +18,7 @@ class CreateQuestionBodiesTable extends Migration
             $table->text('summary');
             $table->text('special');
             $table->text('question_body');
-            $table->integer('question_id');
+            $table->integer('question_id')->unique();
             $table->text('user_id');
             $table->text('category');
             $table->timestamps();

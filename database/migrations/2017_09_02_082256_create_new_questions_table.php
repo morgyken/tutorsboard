@@ -16,6 +16,10 @@ class CreateNewQuestionsTable extends Migration
         Schema::create('new_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->rememberToken();
+            $table->string('question_id');
+            $table->string('user_id');
+            $table->string('status');
         });
     }
 
