@@ -10,7 +10,7 @@
 </style>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="myModal-commit" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -20,8 +20,10 @@
                     <h4 class="modal-title">Are you Sure you want to Answer the Question?</h4>
                 </div>
                 <div class="modal-body clearfix">
-                    <form action="{{route('commit.answer', ['question_id' => $question['question_id']])}}" method="post" >
+                    <form action="{{route('update-question', ['question_id' => $question['question_id']])}}" method="post" >
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
+                         <input type="hidden" name="update" value="commit">
                         <p id="ans"> Virtute voluptaria dissentiunt has ad. Cu eos audiam fabellas, vis nisl percipit probatus no.
 
                             explicari ei. At ludus utroque tacimates pri, ne ius natum delicata iracundia.</p>

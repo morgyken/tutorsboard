@@ -1,56 +1,63 @@
-<?php $usertype = Auth::User()->user_type; ?>
+<?php $usertype = Auth::User()->user_type; 
+echo $usertype;
+?>
 
-@if($usertype != 'admin')
+@if($usertype = 'admin')
+   
+ <p><a href="#" data-toggle="collapse" data-target="#reply">Reply</a>
+
+  
+<p> <a href="#"  data-toggle="collapse" style="margin-right: 12px;"  data-target="#message">Send Us a Message </a>
+
+
     @if ($assigned =='Assigned')
-        <div class="col-md-3">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans">Answer Question</button>
-        </div>
-
-        <div class="col-md-3">
-            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#reply">Reply</button>
-        </div>
-        <div class="col-md-3">
-            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#message">Send Us a Message </button>
-        </div>
-
-        <div class="col-md-3">
-            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#message">Opt Out of Question </button>
-        </div>
+    
+        <p>   <a href="#"  data-toggle="modal" data-target="#myModal-ans">Answer Question</a>
+   
+          <p>  <a href="#"  data-toggle="collapse" style="margin-right: 12px;"  data-target="#message">Opt Out of Question </a>
+       
     @else
-        <div class="col-md-4">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Commit to Answer</button>
-        </div>
-
-        <div class="col-md-4">
-            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#reply">Reply</button>
-        </div>
-        <div class="col-md-4">
-            <button data-toggle="collapse" style="margin-right: 12px;" class="btn btn-primary btn-block" data-target="#message">Send Us a Message </button>
-        </div>
+      
+           <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Commit to Answer</a>
+       
     @endif
 @else
 
     <div class="row">
-        <div class="col-md-3">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans"> Dispute Question</button>
-        </div>
+        
+       <p> <a href="#" data-toggle="modal" data-target="#myModal-dispute"> Dispute Question</a>
+        
+        
+       
+       <p>   <a href="#"  data-toggle="modal" data-target="#myModal-unassign">Unassign</a>
+      
 
 
-        <div class="col-md-2">
-            <button type="button" class="btn btn-primary btn-block center" data-toggle="modal" data-target="#myModal-ans">Comment</button>
-        </div>
+       
+          <p> <a href="#"  data-toggle="collapse" data-target="#reply1">Comment</a>
+    
 
-        <div class="col-md-2">
-            <button type="button" class="btn btn-primary btn-block center" data-toggle="modal" data-target="#myModal-ans">Cancel</button>
-        </div>
+       
+          <p> <a href="#"  data-toggle="modal" data-target="#myModal-cancel">Cancel</a>
+    
+    </div>
 
-        <div class="col-md-2">
-            <button type="button" class="btn btn-primary btn-block center" data-toggle="modal" data-target="#myModal-ans">Accept</button>
-        </div>
+   <div class="row">
 
-        <div class="col-md-3">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal-ans">Reassign Question</button>
-        </div>
+       
+        <p> <a href="#"   data-toggle="modal" data-target="#modal-accept">Accept</a>
+        
+        
+        <p> <a href="#"  data-toggle="modal" data-target="#myModal-reassign">Reassign Question</a>
+       
+
+        
+        <p> <a href="#"  data-toggle="modal" data-target="#myModal-finish">Mark As Finished</a>
+       
+        
+    
+        <p> <a href="#"  data-toggle="modal" data-target="#myModal-unassign">Unassign</a>
+        
 
     </div>
 

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class QuestionStatusModel extends Model
 {
+    protected $table = 'question_status_models';
+    
     protected $dateFormat = 'Y/m/d H:i:s';
     protected $connection = 'mysql';
 

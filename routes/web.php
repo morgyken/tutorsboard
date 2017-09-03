@@ -50,19 +50,17 @@ Route::post('/post-admin-comments/{question_id}', ['as'=> 'post-comments1', 'use
 
 Route::post('/post-comments/{question_id}', ['as'=> 'post-comments', 'uses' => 'QuestionController@PostComments']);
 
-Route::post('/commit-to-answer/{question_id}', ['uses' => 'QuestionController@CommitToAnswer'])->name('commit.answer');
-
-
 Route::get('sample',array('as'=>'sample','uses'=>'SampleController@sample'));
+
 /*
- * View Question details here
+ * Update Question Status here
  */
 
 
+Route::post('/update-question/{question_id}', array('as' => 'update-question', 'uses'=>'QuestionController@UpdateQuestionStatus'));
 
 /*
- * Check autocomplete
- * This url is used in the autcomplete of the input forms
+ * accept answer here 
  */
 
 

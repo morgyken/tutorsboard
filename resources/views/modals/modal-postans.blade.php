@@ -10,22 +10,25 @@
 </style>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal-accept" role="dialog">
+<div class="modal fade" id="myModal-ans" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Are you Sure you want to Accept the Answer? </h4>
+                <h4 class="modal-title">Are you Sure you want to Answer the Question?</h4>
             </div>
             <div class="modal-body clearfix">
 
 
-                <form action="{{ route('post.answer', ['question_id' => $question['question_id']]) }}"  enctype="multipart/form-data" method="POST">
-                    <p> Virtute voluptaria dissentiunt has ad. Cu eos audiam fabellas,
-                        vis nisl percipit probatus no. Sed ad summo maiestatis scriptorem, et quo meis probatus,.</p>
+                <form action="{{ route('update-question', ['question_id' => $question['question_id']]) }}"  enctype="multipart/form-data" method="POST">
+                    <p> Use  this to post an answer. The answer will continue being used. </p> 
+                       .</p>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    
+                     <input type="hidden" name="update" value="postAnswer" >
+                     
                     <div class="form-group">
                         <textarea class="form-control form-control input-lg" name="answer_body" rows="6"></textarea>
                     </div>

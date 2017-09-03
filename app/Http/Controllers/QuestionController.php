@@ -72,14 +72,9 @@ class QuestionController extends Controller
 
         $question_price= PostQuestionPrice::where('question_id', '=', $question_id)->firstOrFail();
 
-        $assigned = AssignQuestion::select('assigned')->where('question_id', '=', $question_id)->orderby('updated_at', 'DESC')->first();
+        $assigned = QuestionStatusModel::select('status')->where('question_id', '=', $question_id)->orderby('updated_at', 'DESC')->first();
 
-        if($assigned['assigned']==1){
-            $ass = 'Assigned';
-        }
-        else{
-            $ass = 'Not Assigned';
-        }
+        
         /*
          * Pull whole question details
          *
@@ -186,7 +181,7 @@ class QuestionController extends Controller
              * Assigned is assigned
              */
 
-            'assigned'=>$ass,
+            'assigned'=>$assigned,
 
             /*
              * Pass the main price of the question
@@ -223,20 +218,171 @@ class QuestionController extends Controller
      * ccept Answer
      *
      */
-    public function AcceptAnswer(Request $request, $question)
+    public function UpdateQuestionStatus(Request $request, $question)
     {
-        $quest = new QuestionStatusModel ;
+        /*
+         * Post answer here 
+         */
+        if($request->update =='postAnswer'){
+            //file uploads
 
-        $quest->question_id = $question;
+        $file = Input::file('file');
+      
+        if(is_array($file)){
 
-        $quest->status = 'Accepted';
+        $dest = public_path().'/storage/uploads/'.$question.'/answer/';
 
+        foreach ($file as $files){
+                /*
+                 * loop through multiple files 
+                 */
+                $name =  $files->getClientOriginalName();
+                $files->move($dest, $name);
+            }
+            
+        }
+        else{
+            $name =  $files->getClientOriginalName();
+             $files->move($dest, $name);
+        }    
+            
+        /*
+         * Update the question status
+         */
+            
+         DB::table('post_answers')->insert(
+            [
+                'overdue' => '0',
+                'question_id' =>$question,
+                'user_id' => Auth::user()->email,
+                'answered' => 1,
+                'answer_body' => $request['answer_body'],
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
 
-        $quest->user_id = Auth::user()->email;
+        //update status
 
-        $quest->save();
+        $this->Status($question, 'answered');
 
-        return redirect()->route('question.det', ['question_id'=> $question]);
+        
+        }
+    
+        /*
+         * Check if the request is commit 
+         */
+        
+        if($request->update =='commit'){
+            
+            DB::table('assign_questions')->insert(
+            [
+                'assigned' => 1,
+                'question_id' =>$question,
+                'user_id' => Auth::user()->email,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+        $this->UpdateStatus($question, 'Assigned');
+            
+        }
+        
+        /*
+         * Check if the request is dispute
+         */
+        
+        if($request->update =='dispute'){
+            DB::table('dispute_questions')->insert(
+            [
+                'status' => 'disputed',
+                'question_id' =>$question,
+                'reason' => $request->input('message'),                
+                'user_id' => Auth::user()->email,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+            
+            
+            $this->UpdateStatus($question_id, 'disputed');
+        }
+        
+        /*
+         * Check if the request is finished
+         */
+        
+        if($request->update =='finished'){
+            $this->QuestionStatusHistory('finished_questions', $question, 'finished');
+            
+             $this->UpdateStatus($question_id, 'finished');
+            
+        }
+        
+        
+         /*
+         * Check if the request is unassined
+         */
+        
+        if($request->update =='unassign'){
+            
+              $this->QuestionStatusHistory('unassined_questions', $question, 'available');
+              
+               $this->UpdateStatus($question_id, 'available');
+            
+        }       
+        
+        
+         /*
+         * Check if the request is paid 
+         */
+        
+        if($request->update =='paid'){
+            
+              $this->QuestionStatusHistory('finished_questions', $question, 'paid');
+              
+               $this->UpdateStatus($question_id, 'paid');
+            
+        }
+        
+        
+        /*
+         * Check if the request is reassigned
+         */
+        
+        if($request->update =='reassign'){
+              $this->QuestionStatusHistory('finished_questions', $question, 'reassigned');
+              
+               $this->UpdateStatus($question_id, 'reassigned');
+        }
+        
+        
+        /*
+         * Check if the request is Accept
+         */
+        
+        
+        
+        if($request->update =='cancel'){
+              $this->QuestionStatusHistory('finished_questions', $question, 'cancelled');
+              
+              $this->UpdateStatus($question_id, 'cancelled');
+        }
+        
+        /*
+         * Check if the request is Accept Answer
+         */
+               
+        if($request->update =='accept'){
+            
+            $this->UpdateStatus($question_id, 'accept');
+            
+            $this->QuestionStatusHistory('accept_questions', $question, 'accept');
+
+        }
+        
+        /*
+         * Add status to the questuon
+         */
+        
+        return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
 
@@ -269,7 +415,7 @@ class QuestionController extends Controller
         $quest->user_id = Auth::user()->email;
         $quest->save();
 
-        return redirect()->route('question.det', ['question_id'=> $question]);
+        return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
 
@@ -304,12 +450,16 @@ class QuestionController extends Controller
 
         return redirect()->route('view-question', ['question_id'=> $question]);
     }
+    
+    /*
+     * Use this function to update question status history
+     */
 
-    public function CommitToAnswer($question){
+    public function QuestionStatusHistory($database, $question,$mess){
 
-        DB::table('assign_questions')->insert(
+        DB::table($database)->insert(
             [
-                'assigned' => 1,
+                'status' => $mess,
                 'question_id' =>$question,
                 'user_id' => Auth::user()->email,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
@@ -321,6 +471,21 @@ class QuestionController extends Controller
         return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
+    
+    /*
+     * Update status here 
+     */
+    
+        public function UpdateStatus($question_id, $status){
+
+        DB::table('question_status_models')->where('question_id', $question_id)
+                ->update(
+                            [
+                                'status' => $status, 
+                                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                            ] 
+                        );            
+          }
 
 
     //Question Status
@@ -348,6 +513,12 @@ class QuestionController extends Controller
                 $name =  $files->getClientOriginalName();
                 $files->move($dest, $name);
             }
+            
+        /*
+         * Update the question status
+         */
+            
+            $this->UpdateQuestionStatus($request, $question);
 
         //Insert into database
 
@@ -436,7 +607,7 @@ class QuestionController extends Controller
         }
 
 
-         public function askQuestions(Request $request)
+        public function askQuestions(Request $request)
         {
 
             $question_id = str_random(25);
@@ -459,8 +630,15 @@ class QuestionController extends Controller
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
                 ]);
+           /*
+            * Update status using the status functon
+            */
 
             $this->Status($question_id, 'new');
+            
+            /*
+             * Add question Id to session, this is to be used in the adding of the price
+             */
 
            $request->session()->put('question_id',  $question_id);
 

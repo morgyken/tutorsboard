@@ -61,7 +61,7 @@
                         <span class="">Posted on {{ $fdate }}  </span>
 
                         <span style="float: right;" >
-                            <p style="font-size: 25px"> <span class="label label-danger">  {{$assigned}}</span></p>
+                            <p style="font-size: 25px"> <span class="label label-danger">  {{ucfirst($assigned->status)}}</span></p>
                         </span>
 
                     </div>
@@ -91,11 +91,12 @@
                     <hr>
                 @include('part.user-links')
 
-                @include('part.modal')
+                @include('modals.modals-all')
 
-                @include('part.modal-commit-to-ans')
-
-                    <!-- Comments Form -->
+r>
+                    </div>
+                    
+                     <!-- Comments Form -->
                     <div class="card collapse my-4" id="reply">
                         <h5 class="card-header" style="margin-top: 20px;">Reply Student</h5>
                         <div class="card-body">
@@ -113,7 +114,7 @@
 
 
                     <!-- Comments Form -->
-                    <div class="card collapse my-4" id="message">
+                    <div class="card collapse my-4" id="reply1">
                         <h5 class="card-header">Send us a messge</h5>
                         <div class="card-body">
                             <form action="{{ route('post-comments1', ['question_id' => $question['question_id']]) }}" method="POST">

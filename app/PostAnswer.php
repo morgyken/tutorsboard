@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PostAnswer extends Model
 {
     protected $table = 'post_answers';
+    
     protected $dateFormat = 'Y/m/d H:i:s';
     protected $connection = 'mysql';
 

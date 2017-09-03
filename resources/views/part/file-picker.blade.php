@@ -7,7 +7,7 @@
         position: absolute;
         top: 0;
         right: 0;
-        min-width: auto%;
+        min-width: auto;
         min-height: 100%;
         font-size: auto;
         text-align: right;
@@ -24,7 +24,7 @@
 </style>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link href="{{URL::asset('theme/assets/css/bootstrap-theme.css  ') }} rel="stylesheet">
+<link href="{{URL::asset('theme/assets/css/bootstrap-theme.css  ') }}" rel="stylesheet">
 
         <div>
             <div class="input-group">

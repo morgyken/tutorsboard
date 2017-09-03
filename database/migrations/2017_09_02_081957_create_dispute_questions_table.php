@@ -20,6 +20,7 @@ class CreateDisputeQuestionsTable extends Migration
             $table->string('question_id');
             $table->string('user_id');
             $table->string('status');
+            $table->text('reason');
         });
     }
 

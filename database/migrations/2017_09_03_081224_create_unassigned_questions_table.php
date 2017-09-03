@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssignQuestionsTable extends Migration
+class CreateUnassignedQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateAssignQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assign_questions', function (Blueprint $table) {
+        Schema::create('unassigned_questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');    
-            $table-> boolean('assigned');
             $table->timestamps();
             $table->rememberToken();
+            $table->string('question_id');
+            $table->string('user_id');
+            $table->string('status');
         });
     }
 
@@ -29,6 +30,6 @@ class CreateAssignQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assign_questions');
+        Schema::dropIfExists('unassigned_questions');
     }
 }
