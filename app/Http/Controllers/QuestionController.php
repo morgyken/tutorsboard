@@ -302,7 +302,7 @@ class QuestionController extends Controller
             ]);
             
             
-            $this->UpdateStatus($question_id, 'disputed');
+            $this->UpdateStatus($question, 'disputed');
         }
         
         /*
@@ -437,12 +437,21 @@ class QuestionController extends Controller
     }
 
     public function  PostComments(Request $request, $question){
+        
+        if($request->commtype == 'admin'){
+            $comm = 'Adm'; 
+        }
+        
+        else{
+            $comm = 'tut';
+        }
+      
 
         DB::table('post_comments')->insert(
             [
                 'comment_body' => $request['comment_body'],
                 'question_id' =>$question,
-                'message_type'=>'gen Comments',
+                'message_type'=>$comm,
                 'user_id' => Auth::user()->email,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
