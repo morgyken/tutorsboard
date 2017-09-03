@@ -13,8 +13,6 @@
 
 @section('content')
 
-
-
     <!-- container -->
     <div class="container">
 
@@ -61,7 +59,9 @@
                         <span class="">Posted on {{ $fdate }}  </span>
 
                         <span style="float: right;" >
-                            <p style="font-size: 25px"> <span class="label label-danger">  {{ucfirst($assigned->status)}}</span></p>
+                            <p style="font-size: 25px"> <span class="label label-danger"> 
+                                    {{var_dump($assigned['status'])}}
+                                </span></p>
                         </span>
 
                     </div>

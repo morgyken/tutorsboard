@@ -72,21 +72,15 @@ class QuestionController extends Controller
 
         $question_price= PostQuestionPrice::where('question_id', '=', $question_id)->firstOrFail();
 
-        $assigned = QuestionStatusModel::select('status')->where('question_id', '=', $question_id)->orderby('updated_at', 'DESC')->first();
-
         
-        /*
-         * Pull whole question details
-         *
-         */
-
         $question = PostQuestionModel::where('question_id', '=', $question_id)->firstOrFail();
         /*
          * Pull question price in this model quesry
          *
          */
-
-
+    
+        $assigned = DB::table('question_status_models')->where('question_id', '=', $question_id)->first();     
+          
         $time = new DateTimeModel();
 
         /*
