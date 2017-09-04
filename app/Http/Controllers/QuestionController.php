@@ -5,6 +5,7 @@ use App\QuestionStatusModel;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
+use Storage; 
 use App\AcceptQuestion;
 use App\AssignQuestion;
 use App\CreditCardDetails;
@@ -58,6 +59,19 @@ class QuestionController extends Controller
         $quest->save();
 
         return redirect()->route('question.det', ['question_id'=> $question]);
+    }
+    
+    /*
+     * file download from the view 
+     */
+    
+    public function downloads($question, $fileName){
+        
+        
+            $path = public_path().'/storage/uploads/'.$question.'/answer/'.$fileName;   
+            
+            
+            return Response::download($path);
     }
 
     /*
@@ -153,10 +167,25 @@ class QuestionController extends Controller
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
             ->paginate(10);
+        
 
             $user12 = Auth::User()->email;
 
             $user = DB::table('users')->where('email', '=', $user12) ->get();
+            
+            $path = public_path().'/storage/uploads/'.$question.'/answer/';
+                                
+            $files = Storage::allFiles($path);
+            
+            $manuals = [];
+         
+            $filesInFolder = \File::files($path);
+
+            foreach($filesInFolder as $path)
+            {
+                $manuals[] = pathinfo($path);
+            }     
+      
 
         return view ('quest.question-det', [
 
@@ -170,6 +199,12 @@ class QuestionController extends Controller
              */
 
             'question' => $question,
+            
+            /*
+             * Files and more file details 
+             */
+            
+            'files'=>$manuals,
 
             /*
              * Assigned is assigned
@@ -257,7 +292,8 @@ class QuestionController extends Controller
 
         //update status
 
-        $this->Status($question, 'answered');
+        //$this->Status($question, 'answered');
+        $this->UpdateStatus($question, 'answered');
 
         
         }
@@ -306,7 +342,19 @@ class QuestionController extends Controller
         if($request->update =='finished'){
             $this->QuestionStatusHistory('finished_questions', $question, 'finished');
             
-             $this->UpdateStatus($question_id, 'finished');
+             $this->UpdateStatus($question, 'finished');
+            
+        }
+        
+        /*
+         * Check if the request is finished
+         */
+        
+        if($request->update =='optout'){
+            
+            $this->QuestionStatusHistory('unassigned_questions', $question, 'available');
+            
+             $this->UpdateStatus($question, 'available');
             
         }
         
@@ -317,9 +365,9 @@ class QuestionController extends Controller
         
         if($request->update =='unassign'){
             
-              $this->QuestionStatusHistory('unassined_questions', $question, 'available');
+              $this->QuestionStatusHistory('unassigned_questions', $question, 'available');
               
-               $this->UpdateStatus($question_id, 'available');
+               $this->UpdateStatus($question, 'available');
             
         }       
         
@@ -332,11 +380,10 @@ class QuestionController extends Controller
             
               $this->QuestionStatusHistory('finished_questions', $question, 'paid');
               
-               $this->UpdateStatus($question_id, 'paid');
+               $this->UpdateStatus($question, 'paid');
             
         }
-        
-        
+                
         /*
          * Check if the request is reassigned
          */
@@ -344,7 +391,7 @@ class QuestionController extends Controller
         if($request->update =='reassign'){
               $this->QuestionStatusHistory('finished_questions', $question, 'reassigned');
               
-               $this->UpdateStatus($question_id, 'reassigned');
+               $this->UpdateStatus($question, 'reassigned');
         }
         
         
@@ -357,7 +404,7 @@ class QuestionController extends Controller
         if($request->update =='cancel'){
               $this->QuestionStatusHistory('finished_questions', $question, 'cancelled');
               
-              $this->UpdateStatus($question_id, 'cancelled');
+              $this->UpdateStatus($question, 'cancelled');
         }
         
         /*
@@ -366,9 +413,9 @@ class QuestionController extends Controller
                
         if($request->update =='accept'){
             
-            $this->UpdateStatus($question_id, 'accept');
+            $this->UpdateStatus($question, 'accepted');
             
-            $this->QuestionStatusHistory('accept_questions', $question, 'accept');
+            $this->QuestionStatusHistory('accept_questions', $question, 'accepted');
 
         }
         
@@ -469,8 +516,6 @@ class QuestionController extends Controller
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
-
-
         return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
@@ -479,31 +524,28 @@ class QuestionController extends Controller
      * Update status here 
      */
     
-        public function UpdateStatus($question_id, $status){
-
-        DB::table('question_status_models')->where('question_id', $question_id)
-                ->update(
-                            [
-                                'status' => $status, 
-                                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                            ] 
-                        );            
-          }
+    public function UpdateStatus($question_id, $status){
+            
+    $priceSquestDet = DB::table('question_status_models')->where('question_id', $question_id)->get();
+  
+     
+    if(!$priceSquestDet->isEmpty()){      
+      
+       
+                DB::table('question_status_models')->where('question_id', $question_id)
+                        ->update(
+                                    [
+                                        'status' => $status, 
+                                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                                    ] 
+                                );  
+            }
+      }
 
 
     //Question Status
 
-    public function Status($question_id, $status){
-
-        DB::table('question_status_models')->insert(
-            [
-                'question_id' =>$question_id,
-                'status' => $status,
-                'user_id' => Auth::user()->email,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ]);
-    }
+    
     public function  PostAnswer(Request $request, $question){
 
         //file uploads
@@ -581,8 +623,6 @@ class QuestionController extends Controller
 
     }
 
-
-
     /*
     Post Questions
     */
@@ -597,22 +637,21 @@ class QuestionController extends Controller
 /*
  * use this to delete string
  */
-        public static  function delete_all_between($beginning, $end, $string) {
-            $beginningPos = strpos($string, $beginning);
-            $endPos = strpos($string, $end);
-            if ($beginningPos === false || $endPos === false) {
-                return $string;
-            }
+    public static  function delete_all_between($beginning, $end, $string) {
+        $beginningPos = strpos($string, $beginning);
+        $endPos = strpos($string, $end);
+        if ($beginningPos === false || $endPos === false) {
+            return $string;
+        }
 
-            $textToDelete = substr($string, $beginningPos, ($endPos + strlen($end)) - $beginningPos);
+        $textToDelete = substr($string, $beginningPos, ($endPos + strlen($end)) - $beginningPos);
 
-            return str_replace($textToDelete, '', $string);
+        return str_replace($textToDelete, '', $string);
         }
 
 
         public function askQuestions(Request $request)
         {
-
             $question_id = str_random(25);
 
             $number_of_words = rand (300,400);
@@ -620,6 +659,38 @@ class QuestionController extends Controller
             $summary = substr($request->question_body,0, $number_of_words);
 
             $summary1 = strip_tags($summary);
+            
+            /*
+             * 
+             * file picker starts here 
+             */
+            
+            
+            $file = Input::file('file');
+      
+            if(is_array($file)){
+
+            $dest = public_path().'/storage/uploads/'.$question_id.'/question/';
+
+            foreach ($file as $files){
+                    /*
+                     * loop through multiple files 
+                     */
+                    $name =  $files->getClientOriginalName();
+                    $files->move($dest, $name);
+                }
+
+            }
+            else{
+                $name =  $files->getClientOriginalName();
+                 $files->move($dest, $name);
+            }    
+            
+            
+
+            /*
+             * Insert into database 
+             */
 
            DB::table('question_bodies')->insert(
                 [

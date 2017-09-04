@@ -30,7 +30,7 @@ Route::get('view-question/{question_id}',array('as'=>'view-question','uses'=>'Qu
 Route::post('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
 
 Route::get('questions-answered',array('as'=>'questions-answered','uses'=>'AdminController@QuestionsAnswered'));
-
+Route::get('file-download/{question_id}/{filename}',array('as'=>'file-download','uses'=>'QuestionController@downloads'));
 /*
  * Post deadline and price using these two
  */
@@ -50,7 +50,7 @@ Route::post('/post-admin-comments/{question_id}', ['as'=> 'post-comments1', 'use
 
 Route::post('/post-comments/{question_id}', ['as'=> 'post-comments', 'uses' => 'QuestionController@PostComments']);
 
-Route::get('sample',array('as'=>'sample','uses'=>'SampleController@sample'));
+Route::get('sample/{question}/{status}',array('as'=>'sample','uses'=>'QuestionController@UpdateStatus'));
 
 /*
  * Update Question Status here
@@ -85,6 +85,8 @@ Route::get('adm-tutors',array('as'=>'adm-tutors','uses'=>'AdminController@AdmTut
 Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmProfile'));
 
 Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashboard'));
+
+
 
 
 

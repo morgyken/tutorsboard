@@ -60,7 +60,13 @@
 
                         <span style="float: right;" >
                             <p style="font-size: 25px"> <span class="label label-danger"> 
-                                    {{var_dump($assigned['status'])}}
+                                    @if($assigned->status)
+                                    
+                                       {{ $assigned->status}}
+                                        
+                                     @else
+                                       New
+                                     @endif                                   
                                 </span></p>
                         </span>
 
@@ -87,14 +93,28 @@
 
                         {!! $question->summary !!}}
                     </blockquote>
+                    
+                        @foreach($files as $file)  
+                        
+                        
+                      
+                        <p><a href="{{route('file-download', 
+                                    [
+                                        'question_id' =>$question['question_id'],
+                                        'filename'=>$file['basename']  
+                                     ])}}"
+                                ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
+                        @endforeach
+                    
 
                     <hr>
+                   
+                    
                 @include('part.user-links')
 
                 @include('modals.modals-all')
-
-r>
-                    </div>
+                
+                   
                     
                      <!-- Comments Form -->
                     <div class="card collapse my-4" id="reply">

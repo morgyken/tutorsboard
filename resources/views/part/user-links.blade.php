@@ -6,14 +6,16 @@ echo $usertype;
 <p><a href="#" data-toggle="collapse" data-target="#reply">Reply</a></p>
 
   
-<p> <a href="#"  data-toggle="collapse" style="margin-right: 12px;"  data-target="#message">Send Us a Message </a></p>
+<p> <a href="#"  data-toggle="collapse" style="margin-right: 12px;"  
+       data-target="#message">Send Us a Message </a></p>
 
   
     
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-ans">Answer Question</a></p>
    
           <p>  <a href="#"  data-toggle="collapse" style="margin-right: 12px;"  
-                  data-target="#message">Opt Out of Question </a></p>
+                  data-target="#myModal-opt-out">Opt Out of Question </a></p>
+                  
        
 <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Commit to Answer</a></p>
        

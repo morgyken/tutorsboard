@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionStatusModelsTable extends Migration
+class CreateUnassignedQuestionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateQuestionStatusModelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_status_models', function (Blueprint $table) {
+        Schema::create('unassigned_questions', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->rememberToken();
@@ -30,6 +30,6 @@ class CreateQuestionStatusModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_status_models');
+        Schema::dropIfExists('unassigned_questions');
     }
 }
