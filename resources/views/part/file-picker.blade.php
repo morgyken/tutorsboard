@@ -31,7 +31,8 @@
                 <span class="input-group-btn">
                     <span class="btn btn-primary btn-file">
 
-                        Browse Files... <input type="file" class="input-lg" placeholder="No file selected" name="file[]" multiple>
+                        Browse Files... <input type="file" class="input-lg" placeholder="No file selected" 
+                                               name="file[]" multiple>
                     </span>
                 </span>
                 <input type="text" class="form-control" readonly>

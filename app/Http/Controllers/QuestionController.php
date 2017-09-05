@@ -5,7 +5,8 @@ use App\QuestionStatusModel;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
-use Storage; 
+use Storage;
+use Response;
 use App\AcceptQuestion;
 use App\AssignQuestion;
 use App\CreditCardDetails;
@@ -63,12 +64,15 @@ class QuestionController extends Controller
     
     /*
      * file download from the view 
+     * $qeustion is the question iD
+     * File name is the passed file name
+     * $type can be questron or answer folder
      */
     
-    public function downloads($question, $fileName){
+    public function downloads($question, $fileName, $type){
         
         
-            $path = public_path().'/storage/uploads/'.$question.'/answer/'.$fileName;   
+            $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;   
             
             
             return Response::download($path);
@@ -173,7 +177,7 @@ class QuestionController extends Controller
 
             $user = DB::table('users')->where('email', '=', $user12) ->get();
             
-            $path = public_path().'/storage/uploads/'.$question.'/answer/';
+            $path = public_path().'/storage/uploads/'.$question_id.'/answer/';
                                 
             $files = Storage::allFiles($path);
             
@@ -242,6 +246,8 @@ class QuestionController extends Controller
 
         ]);
     }
+    
+
 
     /*
      * ccept Answer
@@ -479,6 +485,19 @@ class QuestionController extends Controller
 
     public function  PostComments(Request $request, $question){
         
+           
+        $comments_id = rand(1000, 9999);
+        
+        
+       $path=  public_path().'/storage/uploads/'.$question.'/comments/'.$comments_id.'/';
+     
+       $this-> FileUploads1($request, $path);
+            
+        /*
+         * Give comments an IDentificatiion Number
+         */
+     
+        
         if($request->commtype == 'admin'){
             $comm = 'Adm'; 
         }
@@ -487,17 +506,28 @@ class QuestionController extends Controller
             $comm = 'tut';
         }
       
-
+        /*
+         * Post Comments
+         */
         DB::table('post_comments')->insert(
             [
                 'comment_body' => $request['comment_body'],
+                'comments_id' =>$comments_id,
                 'question_id' =>$question,
                 'message_type'=>$comm,
                 'user_id' => Auth::user()->email,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-
+        
+        /*
+         * Upload files 
+         * The files go to comments sections 
+         * Folder for uploading files be comments
+         */
+        
+        
+        
         return redirect()->route('view-question', ['question_id'=> $question]);
     }
     
@@ -542,6 +572,21 @@ class QuestionController extends Controller
             }
       }
 
+      
+      public function FileUploads(Request $request, $path){
+          
+         $file = Input::file('file');
+         
+        // dd($file);
+         
+          $dest = $path;
+
+            foreach ($file as $files){
+                $name =  $files->getClientOriginalName();
+                $files->move($dest, $name);
+            }
+            
+      }
 
     //Question Status
 

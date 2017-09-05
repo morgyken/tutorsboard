@@ -30,7 +30,7 @@ Route::get('view-question/{question_id}',array('as'=>'view-question','uses'=>'Qu
 Route::post('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
 
 Route::get('questions-answered',array('as'=>'questions-answered','uses'=>'AdminController@QuestionsAnswered'));
-Route::get('file-download/{question_id}/{filename}',array('as'=>'file-download','uses'=>'QuestionController@downloads'));
+Route::get('file-download/{question_id}/{filename}/{type}',array('as'=>'file-download','uses'=>'QuestionController@downloads'));
 /*
  * Post deadline and price using these two
  */
@@ -38,10 +38,9 @@ Route::get('post-deadlinePrice',array('as'=>'post-deadlinePrice','uses'=>'Questi
 
 Route::post('PostQuestionPriceDeadline',array('as'=>'PostQuestionPrice','uses'=>'QuestionController@PostQuestionPriceDeadline'));
 
-Route::get('sample-12', function(){
+//Route::post('/sample-one/{question_id}', array('as' => 'sample-one', 'uses'=>'QuestionController@FileUploads'));
 
-  return view('adm.answered_questions');
-});
+
 
 //admin commwnts
 
