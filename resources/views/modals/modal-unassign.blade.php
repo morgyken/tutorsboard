@@ -28,7 +28,7 @@
                     <p id="ans"> Virtute voluptaria dissentiunt has ad. Cu eos audiam fabellas, vis nisl percipit probatus no.
 
                         explicari ei. At ludus utroque tacimates pri, ne ius natum delicata iracundia.</p>
-                    <button type="input" class="btn btn-md col-sm-3 btn-success btn-block"> Commit to Answer</button>
+                    <button type="input" class="btn btn-md col-sm-3 btn-success btn-block"> Unassign Tutor</button>
                     <button type="reset" class="btn btn-md col-sm-3 btn-warning btn-block" data-dismiss="modal"> Cancel</button>
                 </form>
             </div>

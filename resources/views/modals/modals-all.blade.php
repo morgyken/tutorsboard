@@ -11,5 +11,6 @@
 @include('modals.modal-unassign')
 @include('modals.modal-commit')
 @include('modals.modal-unassign')
+@include('modals.modal-opt-out')
 
 

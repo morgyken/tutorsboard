@@ -93,12 +93,14 @@
 
                         {!! $question->summary !!}}
                     </blockquote>
+
+                    <blockquote class="blockquote">
+
+                        <h4> Available Files </h4>
                     
-                        @foreach($files as $file)  
+                        @foreach($files as $file)
                         
-                        
-                      
-                        <p><a href="{{route('file-download', 
+                            <p><a href="{{route('file-download',
                                     [
                                         'question_id' =>$question['question_id'],
                                         'filename'=>$file['basename'],
@@ -106,89 +108,38 @@
                                      ])}}"
                                 ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
                         @endforeach
+
+                    </blockquote>
                     
 
                     <hr>
                    
                     
                 @include('part.user-links')
+                
 
                 @include('modals.modals-all')
                                
                     
-                     <!-- Comments Form -->
-                    <div class="card collapse my-4" id="reply">
-                        <h5 class="card-header" style="margin-top: 20px;">Reply Student</h5>
-                        <div class="card-body">
-                            <form action="{{ route('post-comments', ['question_id' => $question['question_id']]) }}" 
-                                  method="POST" enctype="multipart/form-data"/>
-
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                
-                                <input type="hidden" name="commtype" value="admin"  >
-                                
-                                <div class="form-group">
-                                    <textarea class="form-control form-control input-lg" name="comment_body" rows="3"></textarea>
-                                </div>
-                                 <div class="form-group">
-                                    <label for="usr">Include Files</label>
-                                    
-                                    @include('part.file-picker')
-                                    
-                                  </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </form>
-                        </div>
-                        <hr>
-                    </div>
-                     
-                     
-                     <!-- Comments Form -->
-                    <div class="card collapse my-4" id="message">
-                        <h5 class="card-header" style="margin-top: 20px;">Reply Student</h5>
-                        <div class="card-body">
-                            <form action="{{ route('post-comments', ['question_id' => $question['question_id']]) }}" method="POST">
-
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                
-                                <input type="hidden" name="commtype" value="admin"  >
-                                
-                                <div class="form-group">
-                                    <textarea class="form-control form-control input-lg" name="comment_body" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </form>
-                        </div>
-                        <hr>
-                    </div>
-
-
-                    <!-- Comments Form -->
-                    <div class="card collapse my-4" id="reply1">
-                        <h5 class="card-header">Send us a messge</h5>
-                        <div class="card-body">
-                            <form action="{{ route('post-comments1', ['question_id' => $question['question_id']]) }}" method="POST">
-
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <div class="form-group">
-                                    <textarea class="form-control form-control input-lg" name="comment_body" rows="3"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </form>
-                        </div>
-                        <hr>
-                    </div>
+                 @include('modals.comments-add')
 
                     <!-- Single Comment -->
 
-                    <div class="col-md-offset-1" style="margin-top:90px">
-                      <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
-                        <div class="col-md-10">
-                            <h5>Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
 
-                    <hr>
+
+                    @foreach($comments as $comment =>$val )
+                            <div class="col-md-12" style="margin-top:12px">
+                                <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
+                                <div class="col-md-10">
+                                    <h5>Coment Header </h5> <p> {{$val->comment_body}} </p>
+                                </div>
+                            </div>
+
+                    @endforeach
+
+
+
+                     <hr>
                </div>
 
             </article>

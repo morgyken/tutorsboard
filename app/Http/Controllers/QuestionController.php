@@ -77,6 +77,21 @@ class QuestionController extends Controller
             
             return Response::download($path);
     }
+    /*
+     * comments files download
+     */
+
+    public function CommentFiles($question, $fileName, $type, $comentId){
+
+
+        $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;
+
+
+        return Response::download($path);
+    }
+
+
+
 
     /*
      * get question details
@@ -86,7 +101,9 @@ class QuestionController extends Controller
          *  Check if assigned is assigned
          * Init assignment
          */
+
         $ass ='';
+
 
         $question_price= PostQuestionPrice::where('question_id', '=', $question_id)->firstOrFail();
 
@@ -119,16 +136,19 @@ class QuestionController extends Controller
 
         )
         {
-            $comments = array();
+            $comments = [];
         }
         else{
 
-            $comments = DB::table('post_comments')->where('question_id', '=', $question_id) ->get();
-
-            //$comments= MakeComments::select('user_id', 'comment_body', 'post_date') -> where('question_id',
-            //'=', $question_id)->get();
+            $comments = DB::table('post_comments')
+                ->where('question_id', $question_id)
+                ->where('message_type', 'adm')
+                ->get();
+           // $comments = PostcommentModel::select('user_id', 'comment_body', 'post_date') -> where('question_id',
+           // '=', $question_id)->get();
         }
-        //return $comments;
+
+        //dd($comments);
 
         /*
          * Price suggestions
@@ -164,6 +184,7 @@ class QuestionController extends Controller
 
             $deadlines = DB::table('suggest_deadlines')->where('question_id', '=', $question_id) ->get();
         }
+        
 
         $posted= DB::table('question_bodies')->where('question_id', '=', $question_id)->value('created_at');
 
@@ -179,8 +200,7 @@ class QuestionController extends Controller
             
             $path = public_path().'/storage/uploads/'.$question_id.'/answer/';
                                 
-            $files = Storage::allFiles($path);
-            
+
             $manuals = [];
          
             $filesInFolder = \File::files($path);
@@ -188,8 +208,12 @@ class QuestionController extends Controller
             foreach($filesInFolder as $path)
             {
                 $manuals[] = pathinfo($path);
-            }     
-      
+            }
+
+        /**
+         * Comment files generator
+         */
+
 
         return view ('quest.question-det', [
 
@@ -197,6 +221,12 @@ class QuestionController extends Controller
              * Get user type here
              */
             'user' =>$user,
+            
+            /*
+             * Return Comments
+             */
+            
+            'comments' => $comments,
 
             /*
              * Get Question
@@ -223,11 +253,6 @@ class QuestionController extends Controller
             'question_price' => $question_price,
             /*
              * Pass comments all of them
-             */
-
-            'comment' => $comments,
-            /*
-             * Pass the price to the view
              */
 
             'price1' => $priceSuggestion,
@@ -485,13 +510,11 @@ class QuestionController extends Controller
 
     public function  PostComments(Request $request, $question){
         
-           
         $comments_id = rand(1000, 9999);
-        
         
        $path=  public_path().'/storage/uploads/'.$question.'/comments/'.$comments_id.'/';
      
-       $this-> FileUploads1($request, $path);
+       $this-> FileUploads($request, $path);
             
         /*
          * Give comments an IDentificatiion Number
@@ -571,14 +594,11 @@ class QuestionController extends Controller
                                 );  
             }
       }
-
       
       public function FileUploads(Request $request, $path){
           
          $file = Input::file('file');
-         
-        // dd($file);
-         
+
           $dest = $path;
 
             foreach ($file as $files){

@@ -10,7 +10,6 @@ class PostcommentModel extends Model
     protected $dateFormat = 'Y/m/d H:i:s';
     protected $connection = 'mysql';
 
-
     protected $fillable = [
         'user_id', 'question_id', 'comment_body', 'message_type' ,'post_date',
     ];

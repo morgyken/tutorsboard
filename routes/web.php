@@ -18,6 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 
+
+Route::post('comment-files/{question_id}/{filename}/{type}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFiles'));
+
 Route::get('all-questions',array('as'=>'all-questions','uses'=>'QuestionController@allQuestions'));
 
 Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'QuestionController@askQuestions'));
@@ -37,9 +40,6 @@ Route::get('file-download/{question_id}/{filename}/{type}',array('as'=>'file-dow
 Route::get('post-deadlinePrice',array('as'=>'post-deadlinePrice','uses'=>'QuestionController@postdeadlinePrice'));
 
 Route::post('PostQuestionPriceDeadline',array('as'=>'PostQuestionPrice','uses'=>'QuestionController@PostQuestionPriceDeadline'));
-
-//Route::post('/sample-one/{question_id}', array('as' => 'sample-one', 'uses'=>'QuestionController@FileUploads'));
-
 
 
 //admin commwnts
