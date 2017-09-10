@@ -77,7 +77,9 @@ class AdminController extends Controller
 
     public function AdmTutors(){
 
-        $user = DB::table('users')->paginate(25);
+        $user = DB::table('users')
+                ->where('user-type', '')
+                ->paginate(25);
 
         return view ('adm.allTutors',['users'=> $user ] );
 

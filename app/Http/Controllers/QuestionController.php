@@ -71,10 +71,8 @@ class QuestionController extends Controller
     
     public function downloads($question, $fileName, $type){
         
-        
             $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;   
-            
-            
+
             return Response::download($path);
     }
     /*
@@ -90,20 +88,10 @@ class QuestionController extends Controller
         return Response::download($path);
     }
 
-
-
-
     /*
      * get question details
      */
     public function QuestionDetails($question_id){
-        /*
-         *  Check if assigned is assigned
-         * Init assignment
-         */
-
-        $ass ='';
-
 
         $question_price= PostQuestionPrice::where('question_id', '=', $question_id)->firstOrFail();
 
@@ -273,11 +261,6 @@ class QuestionController extends Controller
     }
     
 
-
-    /*
-     * ccept Answer
-     *
-     */
     public function UpdateQuestionStatus(Request $request, $question)
     {
         /*
@@ -293,16 +276,19 @@ class QuestionController extends Controller
         $dest = public_path().'/storage/uploads/'.$question.'/answer/';
 
         foreach ($file as $files){
+
+
                 /*
                  * loop through multiple files 
                  */
+
                 $name =  $files->getClientOriginalName();
                 $files->move($dest, $name);
             }
             
         }
         else{
-            $name =  $files->getClientOriginalName();
+            $name =  $files ->getClientOriginalName();
              $files->move($dest, $name);
         }    
             
@@ -321,12 +307,8 @@ class QuestionController extends Controller
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
-        //update status
-
-        //$this->Status($question, 'answered');
         $this->UpdateStatus($question, 'answered');
 
-        
         }
     
         /*
@@ -343,7 +325,8 @@ class QuestionController extends Controller
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-        $this->UpdateStatus($question, 'Assigned');
+
+            $this->UpdateStatus($question, 'Assigned');
             
         }
         
@@ -386,7 +369,6 @@ class QuestionController extends Controller
             $this->QuestionStatusHistory('unassigned_questions', $question, 'available');
             
              $this->UpdateStatus($question, 'available');
-            
         }
         
         
@@ -429,8 +411,6 @@ class QuestionController extends Controller
         /*
          * Check if the request is Accept
          */
-        
-        
         
         if($request->update =='cancel'){
               $this->QuestionStatusHistory('finished_questions', $question, 'cancelled');
@@ -508,13 +488,21 @@ class QuestionController extends Controller
         return redirect()->route('view-question', ['question_id'=> $question]);
     }
 
+    /*
+     * Files data to database here I dream
+     */
+
+    public function Information(Request $request){
+
+
+    }
+
     public function  PostComments(Request $request, $question){
-        
         $comments_id = rand(1000, 9999);
         
-       $path=  public_path().'/storage/uploads/'.$question.'/comments/'.$comments_id.'/';
+        $path=  public_path().'/storage/uploads/'.$question.'/comments/'.$comments_id.'/';
      
-       $this-> FileUploads($request, $path);
+        $this-> FileUploads($request, $path);
             
         /*
          * Give comments an IDentificatiion Number
@@ -549,8 +537,6 @@ class QuestionController extends Controller
          * Folder for uploading files be comments
          */
         
-        
-        
         return redirect()->route('view-question', ['question_id'=> $question]);
     }
     
@@ -560,14 +546,14 @@ class QuestionController extends Controller
 
     public function QuestionStatusHistory($database, $question,$mess){
 
-        DB::table($database)->insert(
-            [
-                'status' => $mess,
-                'question_id' =>$question,
-                'user_id' => Auth::user()->email,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ]);
+            DB::table($database)->insert(
+                [
+                    'status' => $mess,
+                    'question_id' =>$question,
+                    'user_id' => Auth::user()->email,
+                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
 
         return redirect()->route('view-question', ['question_id'=> $question]);
 
@@ -596,16 +582,21 @@ class QuestionController extends Controller
       }
       
       public function FileUploads(Request $request, $path){
+
+        /*
+         * The state of the school
+         */
           
          $file = Input::file('file');
 
           $dest = $path;
 
             foreach ($file as $files){
+
                 $name =  $files->getClientOriginalName();
+
                 $files->move($dest, $name);
             }
-            
       }
 
     //Question Status
@@ -663,8 +654,6 @@ class QuestionController extends Controller
          * return Question Blog
          */
 
-        //return $questions;
-
         return view('questions.question-blog', ['question' => $questions]);
     }
 
@@ -688,20 +677,14 @@ class QuestionController extends Controller
 
     }
 
-    /*
-    Post Questions
-    */
-
-
     public function viewQuestion(){
 
-
-          return view('quest.question-det');
+        return view('quest.question-det');
     }
 
-/*
- * use this to delete string
- */
+        /*
+         * use this to delete string
+         */
     public static  function delete_all_between($beginning, $end, $string) {
         $beginningPos = strpos($string, $beginning);
         $endPos = strpos($string, $end);
@@ -730,7 +713,6 @@ class QuestionController extends Controller
              * file picker starts here 
              */
             
-            
             $file = Input::file('file');
       
             if(is_array($file)){
@@ -749,9 +731,7 @@ class QuestionController extends Controller
             else{
                 $name =  $files->getClientOriginalName();
                  $files->move($dest, $name);
-            }    
-            
-            
+            }
 
             /*
              * Insert into database 
@@ -786,8 +766,6 @@ class QuestionController extends Controller
 
     public function PostQuestionPriceDeadline(Request $request){
 
-
-
         DB::table('post_question_prices')->insert(
             [
                 'question_id' =>session('question_id'),
@@ -809,6 +787,7 @@ class QuestionController extends Controller
     public function postdeadlinePrice(){
 
         return view('quest.ask-deadline');
+
         }
 
     /*
@@ -818,8 +797,7 @@ class QuestionController extends Controller
     public function postQuestions(){
         return view('quest.ask-question');
     }
-    /* File input is done here
-        */
+
     public function generateRandomString() {
         $length = 12;
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

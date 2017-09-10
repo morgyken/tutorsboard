@@ -30,4 +30,10 @@ class PostcommentModel extends Model
         'post_date'
     ];
 
+    public function QuestionFileupload(){
+
+        return $this->hasMany( QuestionFileupload::Class);
+
+    }
+
 }

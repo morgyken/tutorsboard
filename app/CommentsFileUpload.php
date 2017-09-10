@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class QuestionFileupload extends Model
+class CommentsFileUpload extends Model
 {
-    protected $table = 'question_filkeuploads';
+    protected $table = 'comment_fileuploads';
     protected $dateFormat = 'Y/m/d H:i:s';
     protected $connection = 'mysql';
     public $timestamps = true;
@@ -21,7 +21,7 @@ class QuestionFileupload extends Model
         return $this->belongsTo('App\User');
     }
     protected $fillable = [
-         'question_id', 'filename',
+        'question_id', 'comment_id', 'filename',
 
     ];
 
@@ -31,5 +31,6 @@ class QuestionFileupload extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id', 'remember_token',
-    ];}
+        'question_id', 'remember_token',
+    ];
+}
