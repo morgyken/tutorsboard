@@ -37,7 +37,21 @@ class DateTimeModel extends Model
         $deadline = Carbon::parse($question_price);
 
         $now = Carbon::now();
+
         $difference = $deadline -> diffInSeconds($now);
+
+
+        $TimeStart = strtotime(\Carbon\Carbon::now());
+
+        $TimeEnd = strtotime($deadline);
+
+        $Difference = ($TimeEnd - $TimeStart);
+
+        if($Difference < 0){
+
+            return '<span style="background:red; padding: 4px; color:#fff">Overdue</span>';
+        }
+
 
 
         $interval = DateTimeModel::ConvertTime($difference);

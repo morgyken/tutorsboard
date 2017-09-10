@@ -86,6 +86,9 @@ Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmP
 Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashboard'));
 
 
+Route::get('tut-profile/{email}/{optional?}',array('as'=>'tut-profile','uses'=>'AdminController@TutProfile'));
+
+
 
 
 

@@ -11,11 +11,6 @@
 	margin-top:50px;
 }
 
-img{
-	-webkit-border-radius:50%;
-	-moz-border-radius: 50%;
-	border-radius: 50% ;
-}
 #head.secondary { height:100px; min-height: 100px; padding-top:0px; }
 #head .lead {
 	font-family:"Open sans", Helvetica, Arial;
@@ -60,6 +55,47 @@ img{
 	#head { min-height:420px; padding-top:160px; }
 	#head .lead { font-size: 34px; }
 }
+
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.fb2-image-lg{
+	z-index: 0;
+	width: 100%;
+	height: 150px;
+	margin-bottom: 10px;
+	margin-top: -20px;
+}
+
+.fb-image-profile
+{
+	margin: -90px 10px 0px 50px;
+	z-index: 9;
+	height: 180px;
+	width: 150px;
+	border-radius: 50%;
+}
+
+@media (max-width:768px)
+{
+
+	.fb-profile-text>h1{
+		font-weight: 700;
+		font-size:16px;
+	}
+
+	.fb-image-profile
+	{
+		margin: -45px 10px 0px 25px;
+		z-index: 9;
+		width: 20%;
+	}
+}
+
+
 
 
 /* Autohide navbar */

@@ -9,11 +9,11 @@
             </li>
 
             <li>
-                <a href="{{URL::route('admin-question-loader')}}"><i class="fa fa-question-circle fa-2x fa-fw"></i>Assigned  </a>
+                <a href="{{route('tut-profile',['email' => $user->email, 'optional' => 'assigned'] )}}"><i class="fa fa-question-circle fa-2x fa-fw"></i>Assigned  </a>
             </li>
             <li>
 
-                <a href="{{URL::route('adm-tutors')}}"><i class="fa fa-users fa-2x fa-fw"></i>Answered</a>
+                <a href="{{route('tut-profile',['email' => $user->email, 'optional' => 'answered'] )}}"><i class="fa fa-users fa-2x fa-fw"></i>Answered</a>
             </li>
             <li>
 

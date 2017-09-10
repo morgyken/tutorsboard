@@ -530,7 +530,20 @@ class QuestionController extends Controller
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-        
+
+        /*
+         * post files
+         */
+        DB::table('comment_fileuploads')->insert(
+            [
+               'comment_id' =>$comments_id,
+                'question_id' =>$question,
+                'filename'=>$path,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+
+
         /*
          * Upload files 
          * The files go to comments sections 

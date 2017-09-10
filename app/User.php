@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\question_body;
 
 
 class User extends Authenticatable
@@ -27,4 +28,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function question_body()
+    {
+        return $this->hasMany('App\Comment', 'user_id', 'email');
+
+    }
 }

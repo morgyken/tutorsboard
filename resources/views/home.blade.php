@@ -32,14 +32,25 @@ function getDeadlineInSeconds1($deadline){
     $deadline = new \Carbon\Carbon($deadline);
 
     $now = \Carbon\Carbon::now();
+
     $difference = $deadline -> diffInSeconds($now);
+
+    $TimeStart = strtotime(\Carbon\Carbon::now());
+
+    $TimeEnd = strtotime($deadline);
+
+    $Difference = ($TimeEnd - $TimeStart);
+
+    if($Difference < 0){
+
+        return 'Overdue';
+    }
+
 
 
     $interval = ConvertTime12($difference);
 
     return $interval; // array ['h']=>h, ['m]=> m, ['s'] =>s
-
-
 
 }
 ?>
