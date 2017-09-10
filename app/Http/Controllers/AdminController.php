@@ -76,6 +76,13 @@ class AdminController extends Controller
             ->where('status', 'answered')
             ->count();
 
+        $sum = DB::table('question_bodies')
+            ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
+            ->where('question_bodies.user_id', $email)
+            ->where('status', 'answered')
+            ->sum('question_price');
+
         $user = DB::table('users')
             ->where('email', $email)
             ->first();
@@ -108,7 +115,7 @@ class AdminController extends Controller
 
 
         }
-        return view('part.profile-revised',['comments'=> $comments, 'user'=>$user, 'count'=>$count]);
+        return view('tut.profile-revised',['comments'=> $comments,'sum' => $sum, 'user'=>$user, 'count'=>$count]);
 
     }
 

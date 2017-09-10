@@ -74,8 +74,8 @@
 <div class="container">
     <div class="well clearfix">
         <div class="col-sm-4"> <h4> Final Earning</h4>  </div>
-        <div  class="col-sm-4"><h4>Total Earning </h4> </div>
-        <div class="col-sm-4"> <h4>Other details </h4> </div>
+        <div  class="col-sm-4"><h4>Available Earnings ${{$sum}}</h4> </div>
+        <div class="col-sm-4"> <a href="" class="btn btn-warning">Request Withdrawal </a>  </div>
     </div>
 </div>
 
@@ -107,7 +107,7 @@
 
                 <td> {{$value->question_id}} </td>
                 <td> {!! substr( $value-> summary, 0, 100)!!}  </td>
-                <td> Ksh. 34 </td>
+                <td> {!! $value->question_price !!}</td>
                     <td> {{$value -> status}} </td>
             </tr>
             </a>
