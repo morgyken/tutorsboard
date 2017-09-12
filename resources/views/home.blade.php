@@ -87,6 +87,7 @@ function getDeadlineInSeconds1($deadline){
             </div>
             <hr>
             @foreach($question as $quest=>$value)
+                @if(!$value->question_deadline == 'overdue')
                 <div class="question">
 
                 <a href="{{URL::to('/view-question/'.$value->question_id)}}">
@@ -97,6 +98,7 @@ function getDeadlineInSeconds1($deadline){
                         <p>{{ $value->summary  }}  </p>
                     </div>
                     <div class="col-md-2">
+
                         <?php  $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);  ?>
 
                         <h4 style="padding-bottom:20px;">
@@ -109,7 +111,9 @@ function getDeadlineInSeconds1($deadline){
                     </div>
                 </a>
                 </div>
+                @endif
                 <hr>
+
             @endforeach
             <h5>{{ $question->links() }}</h5>
 

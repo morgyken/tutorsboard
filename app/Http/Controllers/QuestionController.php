@@ -7,6 +7,7 @@ use Carbon\CarbonInterval;
 use DB;
 use Storage;
 use Response;
+use Session;
 use App\AcceptQuestion;
 use App\AssignQuestion;
 use App\CreditCardDetails;
@@ -31,8 +32,27 @@ class QuestionController extends Controller
      * Suggest Price Increase here
      * The real course the price
      */
+
+    public function PayRequests(Request $request){
+
+        $request_id = Input::get('checkbox');
+
+        if(is_array($request_id)) {
+            foreach ($request_id as $request => $val) {
+                DB::table('payment_requests')->where('request_id', $val)
+                    ->update(
+                        [
+                            'status' => 'paid',
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ]
+                    );
+            }
+        }
+
+        return redirect()->route('adm-tut-payments');
+    }
     
-    public function PostPaymentRequest($amount){
+    public function PostPaymentRequest(Request $request, $amount){
         
         $request_id = str_random(12);
         
@@ -46,7 +66,20 @@ class QuestionController extends Controller
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-       
+
+        $questions = Session::get('questions');
+
+        foreach($questions as $comm => $val){
+            DB::table('post_question_prices')->where('question_id', $val)
+                ->update(
+                    [
+                        'paid' => 1,
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+        }
+
             return redirect()->route('tut-profile', ['email'=>$user_id]);
     }
 
@@ -673,8 +706,6 @@ class QuestionController extends Controller
 
     }
 
-
-
     public function questionAll()
     {
         /*
@@ -784,7 +815,7 @@ class QuestionController extends Controller
             * Update status using the status functon
             */
 
-            $this->Status($question_id, 'new');
+            $this->UpdateStatus($question_id, 'new');
             
             /*
              * Add question Id to session, this is to be used in the adding of the price
@@ -845,7 +876,11 @@ class QuestionController extends Controller
 
         $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->join('question_status_models', 'question_status_models.question_id', '=', 'question_bodies.question_id')
             ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
+            ->where('status', 'available')
+            ->where('status', 'new')
+
             ->paginate(25);
 
 

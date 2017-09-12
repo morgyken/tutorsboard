@@ -25,16 +25,17 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             
-                            <form action="" method="post"> 
+                            <form action="{{route('tut-payment')}}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <div class="col-md-3">User ID </div>
-                                        <div class="col-md-2">Request ID </div>
-                                        
-                                        <div class="col-md-1">Status </div>
-                                        <div class="col-md-3">Amount  </div>
-                                        <div class="col-md-2">Pay  </div>
+                                        <td> <div class="col-md-3">User ID </div></td>
+                                        <td> <div class="col-md-2">Request ID </div></td>
+
+                                        <td> <div class="col-md-1">Paid </div></td>
+                                        <td> <div class="col-md-3">Amount  </div></td>
+                                        <td> <div class="col-md-2">Pay  </div></td>
 
 
                                     </tr>
@@ -46,16 +47,20 @@
                                 
                                 <tbody>
                                 <tr class="odd gradeX" style="cursor: pointer; margin-top: 7px;">
+                                    <td>
                                <div class="col-md-3"><a href="{{route('tut-profile', ['email'=> $value->user_id] )}}">
-                                       {{ $value-> user_id }}</a> </div>                                    
-                               <div class="col-md-2"> {{$value-> request_id}} 
-                                    </div>
-                                        
-                                            <div class="col-md-1">{{$value -> status}} </div>
-                                                <div class="col-md-3"> {{$value -> amount}} </div>
-                                                 <div class="col-md-2">
-                                                     <input type="checkbox" name="checkbox[]" value="" />
-                                                 </div>                                               
+                                       {{ $value-> user_id }}</a> </div>   </td>
+                              <td> <div class="col-md-2"> {{$value-> request_id}}
+                                    </div></td>
+                                    <td>@if($value -> status =='paid')
+                                            <div class="col-md-1"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                    @else
+                                        <div class="col-md-1"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                    @endif</td>
+                                    <td> <div class="col-md-3"> {{$value -> amount}} </div></td>
+                                    <td>  <div class="col-md-2">
+                                                     <input type="checkbox" name="checkbox[]" value="{{$value-> request_id}}" />
+                                                 </div>  </td>
                                                
                                                                                  
                                  </tr>

@@ -83,7 +83,6 @@ Route::get('adm-payments',array('as'=>'adm-payments','uses'=>'AdminController@Ad
 Route::get('adm-tutors',array('as'=>'adm-tutors','uses'=>'AdminController@AdmTutors'));
 
 Route::get('adm-tut-payments',array('as'=>'adm-tut-payments','uses'=>'AdminController@AdmGetPyments'));
-
 Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmProfile'));
 
 Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashboard'));
@@ -95,7 +94,7 @@ Route::get('tut-profile/{email}/{optional?}',array('as'=>'tut-profile','uses'=>'
 
 Route::get('adm-post-payments/{amount}/{request_id}',array('as'=>'post-payments','uses'=>'AdminController@AdmPostPyments'));
 
-
+Route::post('tut-payment12',array('as'=>'tut-payment','uses'=>'QuestionController@PayRequests'));
 
 
 

@@ -15,7 +15,7 @@ class AdminController extends Controller
     /*
      * Paymemt requests 
      */
-    
+
     public function AdmGetPyments(){
         
         $payreq = DB::table('payment_requests')           
@@ -109,6 +109,14 @@ class AdminController extends Controller
             ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
             ->where('question_bodies.user_id', $email)
             ->where('status', 'answered')
+            ->where('paid', 0)
+            ->sum('question_price');
+
+        $sum_2 = DB::table('question_bodies')
+            ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
+            ->where('question_bodies.user_id', $email)
+            ->where('status', 'answered')
             ->sum('question_price');
 
         $user = DB::table('users')
@@ -122,6 +130,7 @@ class AdminController extends Controller
                 ->select('question_bodies.question_id', 'question_bodies.summary',
                     'question_status_models.status',
                     'post_question_prices.created_at',
+                    'post_question_prices.paid',
                     'post_question_prices.question_deadline', 'post_question_prices.question_price')
                 ->orderBy('post_question_prices.created_at', 'asc')
                 ->where('question_bodies.user_id', $email)
@@ -143,7 +152,27 @@ class AdminController extends Controller
 
 
         }
-        return view('tut.profile-revised',['comments'=> $comments,'sum' => $sum, 'user'=>$user, 'count'=>$count]);
+        return view('tut.profile-revised',[
+            'comments'=> $comments,
+            /*
+             * Current sum
+             */
+            'sum' => $sum,
+            /*
+             * user profile
+             */
+
+            'user'=>$user,
+
+            'count'=>$count,
+
+            /*
+             * cumulative sum
+             */
+
+            'sum_2' => $sum_2,
+
+        ]);
 
     }
 

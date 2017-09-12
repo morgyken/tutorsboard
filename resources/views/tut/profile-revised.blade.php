@@ -69,13 +69,28 @@
 
             </div>
         </div>
+        <?php
+
+            $myarray = array();
+            foreach($comments as $comm=> $val){
+
+                $myarray [] = $val->question_id;
+            }    //  dd($myarray);
+
+        ?>
+        {{ Session::put('questions', $myarray) }}
 
 </div> <!-- /container -->
 <div class="container">
     <div class="well clearfix">
-        <div class="col-sm-4"> <h4> Final Earning</h4>  </div>
-        <div  class="col-sm-4"><h4>Available Earnings ${{$sum}}</h4> </div>
-        <div class="col-sm-4"> <a href="{{ route('post-payment-request', ['amount'=> $sum]) }}" class="btn btn-warning">Request Withdrawal </a>  </div>
+
+        <div class="col-sm-4"> <h4>Total Earnings <span class="label label-default">Ksh {{ $sum_2 }}</span> </h4>  </div>
+
+        <div class="col-sm-4"> <h4>Available Earnings  <span class="label label-default">Ksh {{ $sum }}</span> </h4>  </div>
+
+        <div class="col-sm-4"> <a href="{{ route('post-payment-request',
+                            ['amount'=> $sum ]) }}"
+                                  class="btn btn-warning">Request Withdrawal </a>  </div>
     </div>
 </div>
 
@@ -95,20 +110,32 @@
                 <th>Total Amount </th>
 
                 <th>Status</th>
+                <th> Paid </th>
 
 
             </tr>
             </thead>
+            <?php $array = array(); ?>
 
              @foreach( $comments as $quest=> $value)
             <tbody>
 
-            <a href="#"> <tr class="odd gradeX" style="cursor: pointer">
 
+            <a href="#"> <tr class="odd gradeX" style="cursor: pointer">
+                <?php  $array [] = $value->question_id  ?>
                 <td> {{$value->question_id}} </td>
                 <td> {!! substr( $value-> summary, 0, 100)!!}  </td>
                 <td> {!! $value->question_price !!}</td>
                     <td> {{$value -> status}} </td>
+
+                    @if($value->paid==1)
+                        <td> Paid </td>
+
+                    @else
+                        <td>  </td>
+                    @endif
+
+
             </tr>
             </a>
 
