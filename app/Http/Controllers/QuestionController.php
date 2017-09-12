@@ -881,7 +881,7 @@ class QuestionController extends Controller
             ->where('status', 'available')
             ->where('status', 'new')
 
-            ->paginate(25);
+            ->paginate(25);//this is a new chaffff
 
 
         return view('home', ['question' => $questions]);
