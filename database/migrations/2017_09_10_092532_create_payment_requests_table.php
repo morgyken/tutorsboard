@@ -17,9 +17,10 @@ class CreatePaymentRequestsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->rememberToken();
-            $table->text('withdrawal_id');
+            $table->text('request_id');
+            $table->text('amount');
             $table->string('user_id');
-            $table->string('status');
+            $table->string('status')->nullable();
         });
     }
 

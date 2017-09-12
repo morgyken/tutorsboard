@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaymentRequest extends Model
 {
-    protected $table = 'paid_questions';
+    protected $table = 'payment_requests';
 
     protected $dateFormat = 'Y/m/d H:i:s';
     protected $connection = 'mysql';
 
 
     protected $fillable = [
-        'user_id', 'question_id' ,'answer_body','answered', 'overdue',
+        'user_id', 'request_id' ,'amount','user_id', 'statu',
     ];
 
 
     protected $hidden = [
-        'userid', 'remember_token',
+        'user_id', 'remember_token',
     ];
 
 }

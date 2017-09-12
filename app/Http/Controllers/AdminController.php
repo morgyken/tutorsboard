@@ -12,6 +12,34 @@ use App\question_body;
 
 class AdminController extends Controller
 {
+    /*
+     * Paymemt requests 
+     */
+    
+    public function AdmGetPyments(){
+        
+        $payreq = DB::table('payment_requests')           
+                ->paginate(34);
+        
+        return view('adm.dopayments', ['payment_req'=> $payreq]);
+        
+    }
+    
+     public function AdmPostPyments($request_id, $amount){
+        
+        
+        DB::table('payments')->insert(
+            [              
+                'user_id' => Auth::user()->email,
+                'amount' => $amount,
+                'withdrawal_id' => $request_id,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+       
+        return view('adm.dopayments', ['payment_req'=> $payreq]);
+        
+    }
     public function AdmQLoader(){
 
         $questions  =   $this->returnQuery12(20);

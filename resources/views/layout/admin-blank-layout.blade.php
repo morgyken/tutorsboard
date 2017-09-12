@@ -292,7 +292,7 @@
 
                     <li>
 
-                        <a href="{{URL::route('adm-payments')}}"><i class="fa fa-google-wallet fa-2x fa-fw"></i> Payments</a>
+                        <a href="{{URL::route('adm-tut-payments')}}"><i class="fa fa-google-wallet fa-2x fa-fw"></i> Payments</a>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>

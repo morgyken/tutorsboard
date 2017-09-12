@@ -75,7 +75,7 @@
     <div class="well clearfix">
         <div class="col-sm-4"> <h4> Final Earning</h4>  </div>
         <div  class="col-sm-4"><h4>Available Earnings ${{$sum}}</h4> </div>
-        <div class="col-sm-4"> <a href="" class="btn btn-warning">Request Withdrawal </a>  </div>
+        <div class="col-sm-4"> <a href="{{ route('post-payment-request', ['amount'=> $sum]) }}" class="btn btn-warning">Request Withdrawal </a>  </div>
     </div>
 </div>
 

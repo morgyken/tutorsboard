@@ -13,12 +13,12 @@ class Payments extends Model
 
 
     protected $fillable = [
-        'user_id', 'question_id' ,'answer_body','answered', 'overdue',
+        'quesion_id', 'withdrawal_id' ,'user_id','status', 'amount',
     ];
 
 
     protected $hidden = [
-        'userid', 'remember_token',
+        'question_id', 'remember_token',
     ];
 
 }

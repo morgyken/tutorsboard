@@ -31,6 +31,24 @@ class QuestionController extends Controller
      * Suggest Price Increase here
      * The real course the price
      */
+    
+    public function PostPaymentRequest($amount){
+        
+        $request_id = str_random(12);
+        
+        $user_id = Auth::user()->email;
+        
+        DB::table('payment_requests')->insert(
+            [              
+                'user_id' => Auth::user()->email,
+                'amount' => $amount,
+                'request_id' => $request_id,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+       
+            return redirect()->route('tut-profile', ['email'=>$user_id]);
+    }
 
     public function suggestPricePrice(Request $request, $question)
     {

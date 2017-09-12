@@ -81,12 +81,20 @@ Route::post('autocomplete-ajax',array('as'=>'searchajax','uses'=>'SearchControll
 Route::get('admin-question-loader',array('as'=>'admin-question-loader','uses'=>'AdminController@AdmQLoader'));
 Route::get('adm-payments',array('as'=>'adm-payments','uses'=>'AdminController@AdmPayments'));
 Route::get('adm-tutors',array('as'=>'adm-tutors','uses'=>'AdminController@AdmTutors'));
+
+Route::get('adm-tut-payments',array('as'=>'adm-tut-payments','uses'=>'AdminController@AdmGetPyments'));
+
 Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmProfile'));
 
 Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashboard'));
 
+Route::get('post-payment-request/{amount}',array('as'=>'post-payment-request','uses'=>'QuestionController@PostPaymentRequest'));
 
 Route::get('tut-profile/{email}/{optional?}',array('as'=>'tut-profile','uses'=>'AdminController@TutProfile'));
+
+
+Route::get('adm-post-payments/{amount}/{request_id}',array('as'=>'post-payments','uses'=>'AdminController@AdmPostPyments'));
+
 
 
 
