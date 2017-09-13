@@ -32,6 +32,53 @@ class QuestionController extends Controller
      * Suggest Price Increase here
      * The real course the price
      */
+    public function index(){
+        /*
+         * Check for Overdue classifications
+         */
+        $question_deadline = DB::table('post_question_prices')->get();
+
+         foreach($question_deadline as $deadline => $val){
+
+            $deadline1 = $this->getDeadlineInSeconds1($val->question_deadline);
+
+           DB::table('post_question_prices')->where('question_id',$val->question_id )
+                ->update(
+                    [
+                        'overdue' => $deadline1,
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+        }
+
+
+             return view('gen.index');
+    }
+    /*
+     * checks if deadline is overdue or not
+     */
+    public function getDeadlineInSeconds1($deadline)
+
+    {
+        $deadline = new \Carbon\Carbon($deadline);
+
+        $TimeStart = strtotime(\Carbon\Carbon::now());
+
+        $TimeEnd = strtotime($deadline);
+
+        $Difference = ($TimeEnd - $TimeStart);
+
+
+        //return $Difference;
+
+        if ($Difference < 0) {
+
+            return 1; //true overdue
+        }
+        else return 0; //false not overdue
+
+    }
 
     public function PayRequests(Request $request){
 
@@ -112,7 +159,6 @@ class QuestionController extends Controller
 
         return redirect()->route('question.det', ['question_id'=> $question]);
     }
-    
     /*
      * file download from the view 
      * $qeustion is the question iD
@@ -236,8 +282,10 @@ class QuestionController extends Controller
             $user12 = Auth::User()->email;
 
             $user = DB::table('users')->where('email', '=', $user12) ->get();
+
+            //return the question files
             
-            $path = public_path().'/storage/uploads/'.$question_id.'/answer/';
+            $path = public_path().'/storage/uploads/'.$question_id.'/question/';
                                 
 
             $manuals = [];
@@ -249,9 +297,29 @@ class QuestionController extends Controller
                 $manuals[] = pathinfo($path);
             }
 
+            //return the answer files
+
+        $path1 = public_path().'/storage/uploads/'.$question_id.'/answer/';
+
+
+        $manuals1 = [];
+
+        $filesInFolder1 = \File::files($path1);
+
+        foreach($filesInFolder1 as $path)
+        {
+            $manuals1[] = pathinfo($path);
+        }
+
         /**
          * Comment files generator
          */
+
+        /*
+         * Get answer comments
+         */
+
+        $answer = DB::table('post_answers')->where('question_id', $question_id)->get();
 
 
         return view ('quest.question-det', [
@@ -278,6 +346,12 @@ class QuestionController extends Controller
              */
             
             'files'=>$manuals,
+
+            /*
+             * Files answer files
+             */
+
+            'files1'=>$manuals1,
 
             /*
              * Assigned is assigned
@@ -307,6 +381,8 @@ class QuestionController extends Controller
             'price' => $question_price->question_price,
 
            'posted' => $posted,
+
+            'answer' => $answer,
 
         ]);
     }
@@ -522,24 +598,7 @@ class QuestionController extends Controller
 
     }
 
-    //admin comments
-
-    public function  PostAdminComments(Request $request, $question){
-
-        DB::table('post_comments')->insert(
-            [
-                'comment_body' => $request['comment_body'],
-                'question_id' =>$question,
-                'message_type'=>'admin comm',
-                'user_id' => Auth::user()->email,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ]);
-
-        return redirect()->route('view-question', ['question_id'=> $question]);
-    }
-
-    /*
+       /*
      * Files data to database here I dream
      */
 
@@ -656,7 +715,7 @@ class QuestionController extends Controller
             }
       }
       
-      public function FileUploads(Request $request, $path){
+    public function FileUploads(Request $request, $path){
 
         /*
          * The state of the school
@@ -771,7 +830,7 @@ class QuestionController extends Controller
         }
 
 
-        public function askQuestions(Request $request)
+    public function askQuestions(Request $request)
         {
             $question_id = str_random(25);
 
@@ -863,6 +922,23 @@ class QuestionController extends Controller
 
         }
 
+    //admin comments
+
+    public function  PostAdminComments(Request $request, $question){
+
+        DB::table('post_comments')->insert(
+            [
+                'comment_body' => $request['comment_body'],
+                'question_id' =>$question,
+                'message_type'=>'admin comm',
+                'user_id' => Auth::user()->email,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            ]);
+
+        return redirect()->route('view-question', ['question_id'=> $question]);
+    }
+
     /*
      * Open View to post questions
      */
@@ -888,19 +964,18 @@ class QuestionController extends Controller
 
        $questions = DB::table('question_bodies')
 
-           ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-           ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
-
-          // ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-           ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
+           ->join('post_question_prices', 'question_bodies.question_id', '=',
+               'post_question_prices.question_id')
+           ->join('question_status_models', 'question_bodies.question_id', '=',
+               'question_status_models.question_id')
+           ->select('question_bodies.*','post_question_prices.question_deadline',
+               'post_question_prices.question_price')
            ->where('status', 'new')
+           ->where('overdue', 0)
+           ->orderby('post_question_prices.question_deadline', 'asc')
            ->paginate(25);
 
-            //->paginate(25);//this is a new chaffff
-
-       //dd($questions);
-
-        return view('home', ['question' => $questions]);
+       return view('home', ['question' => $questions]);
 
     }
 

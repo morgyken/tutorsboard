@@ -51,6 +51,8 @@
                 <?php
                 $date=date_create($posted);
                 $fdate = date_format($date,"F j, Y, g:i A");
+                $question_status = $assigned->status;
+
                 ?>
 
                 <!-- Date/Time -->
@@ -97,14 +99,15 @@
                     <blockquote class="blockquote">
 
                         <h4> Available Files </h4>
-                    
+
+
                         @foreach($files as $file)
                         
                             <p><a href="{{route('file-download',
                                     [
                                         'question_id' =>$question['question_id'],
                                         'filename'=>$file['basename'],
-                                        'type' =>'answer'
+                                        'type' =>'question'
                                      ])}}"
                                 ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
                         @endforeach
@@ -123,7 +126,32 @@
                     
                  @include('modals.comments-add')
 
+                    <blockquote class="blockquote">
+
+                        @foreach($answer as $ans =>$val )
+                            <div class="col-md-12" style="margin-top:12px">
+                                <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
+                                <div class="col-md-10">
+                                    <h5>Posted By{{$val->user_id}}</h5> <p> {{$val->answer_body}} </p>
+                                </div>
+                            </div>
+
+                        @endforeach
                     <!-- Single Comment -->
+                    <h4> Answer Files </h4>
+
+                    @foreach($files1 as $file)
+
+                        <p><a href="{{route('file-download',
+                                    [
+                                        'question_id' =>$question['question_id'],
+                                        'filename'=>$file['basename'],
+                                        'type' =>'answer'
+                                     ])}}"
+                            ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
+                        @endforeach
+
+                        </blockquote>
 
 
 

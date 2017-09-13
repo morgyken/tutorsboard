@@ -16,6 +16,7 @@ class CreatePostQuestionPricesTable extends Migration
         Schema::create('post_question_prices', function (Blueprint $table) {
             $table->increments('id');
             $table->text('question_id');
+            $table->integer('overdue');
             $table->integer('paid')->nullable();
             $table->integer('question_price');
             $table->dateTime('question_deadline');

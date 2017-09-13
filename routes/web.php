@@ -11,12 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('gen.index');
-})->name('home');
 
 Auth::routes();
-
+Route::get('/', array('uses'=>'QuestionController@index'))->name('home');
 
 
 Route::post('comment-files/{question_id}/{filename}/{type}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFiles'));
