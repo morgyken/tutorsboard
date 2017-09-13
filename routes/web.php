@@ -13,8 +13,12 @@
 
 
 Auth::routes();
+
 Route::get('/', array('uses'=>'QuestionController@index'))->name('home');
 
+Route::get('/get-comment-files/{question}/{filename}/{type}/{comment_id}', ['as' =>'comment-files', 'uses' => 'QuestionController@commentsFilesDownloads']);
+
+Route::get('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
 
 Route::post('comment-files/{question_id}/{filename}/{type}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFiles'));
 
@@ -24,13 +28,13 @@ Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'QuestionControl
 
 Route::get('post-questions',array('as'=>'post-questions','uses'=>'QuestionController@postQuestions'));
 
-
 Route::get('view-question/{question_id}',array('as'=>'view-question','uses'=>'QuestionController@QuestionDetails'));
 
 Route::post('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
 
 Route::get('questions-answered',array('as'=>'questions-answered','uses'=>'AdminController@QuestionsAnswered'));
-Route::get('file-download/{question_id}/{filename}/{type}',array('as'=>'file-download','uses'=>'QuestionController@downloads'));
+
+Route::get('file-download/{question_id}/{filename}/{type}{comment_id?}',array('as'=>'file-download','uses'=>'QuestionController@downloads'));
 /*
  * Post deadline and price using these two
  */

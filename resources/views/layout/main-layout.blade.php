@@ -135,7 +135,7 @@
 </div>	<!-- /container -->
 
 
-<footer id="footer" class="top-space">
+<footer id="footer" class="top-space" style="font-size:15px; color:#0c0c0c">
 
     <div class="footer1">
         <div class="container">
@@ -144,16 +144,16 @@
                 <div class="col-md-3 widget">
                     <h3 class="widget-title">Contact</h3>
                     <div class="widget-body">
-                        <p>+234 23 9873237<br>
-                            <a href="mailto:#">some.email@somewhere.com</a><br>
+                        <p>+254 23 9873237<br>
+                            <a href="mailto:#">tutorsboard@tutorsboard.co.ke</a><br>
                             <br>
-                            234 Hidden Pond Road, Ashland City, TN 37015
+                            Mombasa Road Nairobi Opp Equity Bank Nairobi
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-3 widget">
-                    <h3 class="widget-title">Follow me</h3>
+                    <h3 class="widget-title">Follow us</h3>
                     <div class="widget-body">
                         <p class="follow-me-icons clearfix">
                             <a href=""><i class="fa fa-twitter fa-2"></i></a>
@@ -165,10 +165,10 @@
                 </div>
 
                 <div class="col-md-6 widget">
-                    <h3 class="widget-title">Text widget</h3>
+                    <h3 class="widget-title">Join Us Today</h3>
                     <div class="widget-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-                        <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+                        <p>Getting to college is an achievement to everyone. Lasting in college is another option for students who find it hard to sustain themselves in the college. While in the college, it is vital to have a source of income. That can help in sustainance and pocket money. Join us today and earn while studying!</p>
+
                     </div>
                 </div>
 

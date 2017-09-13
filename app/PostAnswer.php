@@ -13,7 +13,7 @@ class PostAnswer extends Model
 
 
     protected $fillable = [
-        'user_id', 'question_id' ,'answer_body','answered', 'overdue',
+        'user_id','answer_id', 'question_id' ,'answer_body','answered', 'overdue',
     ];
 
 

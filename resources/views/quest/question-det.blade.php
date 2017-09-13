@@ -39,9 +39,7 @@
                 <hr>
 
                 <div class="col-lg-3">
-
-                    @include('part.vertical-menu1')
-
+                @include('part.gen-tut-nav')
                 </div>
 
                 <div class="col-lg-9">
@@ -128,43 +126,77 @@
 
                     <blockquote class="blockquote">
 
-                        @foreach($answer as $ans =>$val )
+                        <h2> Comments Area</h2>
+                        @foreach($comments as $comment =>$val )
                             <div class="col-md-12" style="margin-top:12px">
                                 <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
                                 <div class="col-md-10">
-                                    <h5>Posted By{{$val->user_id}}</h5> <p> {{$val->answer_body}} </p>
+                                    <h5>{{$val->comments_id}} </h5> <p> {{$val->comment_body}} </p>
+                                    <h4>
+                                        Available files
+                                    </h4>
+                                    <?php
+
+                                    $files12 = \App\Http\Controllers\QuestionController::getCommentFiles($val->comments_id);
+                                    ?>
+
+                                    @if(!empty($files12))
+
+                                        @foreach($files12 as $comfile =>$val )
+                                            <p><a href="{{URL::to('/get-comment-files',
+                                        [
+                                            'question_id' =>$question['question_id'],
+                                            'filename'=>$val->file_name,
+                                            'type' =>'comments',
+                                            'comment_id' =>$val->comment_id
+
+                                         ])}}"
+                                                ><i class="icon-download-alt">{{$val->file_name}}</a>   </p>
+                                        @endforeach
+                                    @endif
                                 </div>
-                            </div>
 
-                        @endforeach
-                    <!-- Single Comment -->
-                    <h4> Answer Files </h4>
-
-                    @foreach($files1 as $file)
-
-                        <p><a href="{{route('file-download',
-                                    [
-                                        'question_id' =>$question['question_id'],
-                                        'filename'=>$file['basename'],
-                                        'type' =>'answer'
-                                     ])}}"
-                            ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
-                        @endforeach
-
-                        </blockquote>
-
-
-
-                    @foreach($comments as $comment =>$val )
-                            <div class="col-md-12" style="margin-top:12px">
-                                <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
-                                <div class="col-md-10">
-                                    <h5>Coment Header </h5> <p> {{$val->comment_body}} </p>
-                                </div>
                             </div>
 
                     @endforeach
+                    </blockquote>
 
+
+                    <blockquote class="blockquote">
+
+                       <h2> Answer Area</h2>
+
+                        @foreach($answers as $ans =>$val )
+                            <div class="col-md-12" style="margin-top:12px">
+                                <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
+                                <div class="col-md-10">
+                                    <h5>Posted By {{ $val->user_id }}: Answer ID{{$val->answer_id}} </h5> <p> {{$val->answer_body}} </p>
+                                    <h4>        Available files                   </h4>
+                                    <?php
+
+                                    $files13 = \App\Http\Controllers\QuestionController::getAnswerFiles($val->answer_id);
+                                    ?>
+
+                                    @if(!empty($files13))
+
+                                        @foreach($files13 as $comfile =>$val )
+                                            <p><a href="{{URL::to('/get-comment-files',
+                                        [
+                                            'question_id' =>$question['question_id'],
+                                            'filename'=>$val->file_name,
+                                            'type' =>'answer',
+                                            'answer_id' =>$val->answer_id
+
+                                         ])}}"
+                                                ><i class="icon-download-alt">{{$val->file_name}}</a>   </p>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                            </div>
+
+                        @endforeach
+                    </blockquote>
 
 
                      <hr>

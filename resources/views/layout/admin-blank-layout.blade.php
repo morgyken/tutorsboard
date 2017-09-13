@@ -264,48 +264,7 @@
         </ul>
         <!-- /.navbar-top-links -->
 
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search" style="font-size: 17px;">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                    <li>
-                        <a href="{{URL::route('adm-dashboard')}}"><i class="fa fa-dashboard fa-2x fa-fw"></i> Dashboard</a>
-                    </li>
-
-                    <li>
-                        <a href="{{URL::route('admin-question-loader')}}"><i class="fa fa-question-circle fa-2x fa-fw"></i>all Questions </a>
-                    </li>
-                    <li>
-
-                        <a href="{{URL::route('adm-tutors')}}"><i class="fa fa-users fa-2x fa-fw"></i>All Tutors</a>
-                    </li>
-
-                    <li>
-
-                        <a href="{{URL::route('adm-tut-payments')}}"><i class="fa fa-google-wallet fa-2x fa-fw"></i> Payments</a>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="{{URL::route('adm-profile')}}"><i class="fa fa-user fa-2x fa-fw" ></i>My Profile</a>
-
-                        <!-- /.nav-second-level -->
-                    </li>
-                </ul>
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
-        <!-- /.navbar-static-side -->
-    </nav>
+       @include('tut-nav-bar')
 
     <div id="page-wrapper">
         <div class="row">

@@ -165,27 +165,24 @@ class QuestionController extends Controller
      * File name is the passed file name
      * $type can be questron or answer folder
      */
-    
-    public function downloads($question, $fileName, $type){
-        
-            $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;   
 
-            return Response::download($path);
-    }
-    /*
-     * comments files download
-     */
-
-    public function CommentFiles($question, $fileName, $type, $comentId){
+    public function commentsFilesDownloads($question, $fileName, $type, $comment_id){
 
 
-        $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;
-
+        $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$comment_id.'/'.$fileName;
 
         return Response::download($path);
     }
+    
+    public function downloads($question, $fileName, $type){
 
-    /*
+        
+            $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;
+
+            return Response::download($path);
+    }
+
+       /*
      * get question details
      */
     public function QuestionDetails($question_id){
@@ -382,11 +379,11 @@ class QuestionController extends Controller
 
            'posted' => $posted,
 
-            'answer' => $answer,
+            'answers' => $answer,
 
         ]);
     }
-    
+
 
     public function UpdateQuestionStatus(Request $request, $question)
     {
@@ -397,34 +394,40 @@ class QuestionController extends Controller
             //file uploads
 
         $file = Input::file('file');
+
+        $answer_id = rand (1000,9999);
+
+        $dest = public_path().'/storage/uploads/'.$question.'/answer/'.$answer_id.'/';
       
         if(is_array($file)){
 
-        $dest = public_path().'/storage/uploads/'.$question.'/answer/';
-
-        foreach ($file as $files){
 
 
-                /*
-                 * loop through multiple files 
-                 */
+            foreach ($file as $files){
 
-                $name =  $files->getClientOriginalName();
-                $files->move($dest, $name);
+                    /*
+                     * loop through multiple files
+                     */
+
+                    $name =  $files->getClientOriginalName();
+                    $files->move($dest, $name);
+
+                DB::table('answer_files')->insert(
+                    [
+
+                        'answer_id'    =>  $answer_id,
+                        'file_name'      =>  $name,
+                        'file_path'     =>  $dest,
+                        'created_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                    ]);
+                }
+
             }
-            
-        }
-        else{
-            $name =  $files ->getClientOriginalName();
-             $files->move($dest, $name);
-        }    
-            
-        /*
-         * Update the question status
-         */
-            
+
          DB::table('post_answers')->insert(
             [
+                'answer_id'    =>  $answer_id,
                 'overdue' => '0',
                 'question_id' =>$question,
                 'user_id' => Auth::user()->email,
@@ -434,7 +437,7 @@ class QuestionController extends Controller
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
-        $this->UpdateStatus($question, 'answered');
+            $this->UpdateStatus($question, 'answered');
 
         }
     
@@ -617,7 +620,7 @@ class QuestionController extends Controller
         /*
          * Give comments an IDentificatiion Number
          */
-     
+        $file = Input::file('file');
         
         if($request->commtype == 'admin'){
             $comm = 'Adm'; 
@@ -632,26 +635,35 @@ class QuestionController extends Controller
          */
         DB::table('post_comments')->insert(
             [
-                'comment_body' => $request['comment_body'],
-                'comments_id' =>$comments_id,
-                'question_id' =>$question,
-                'message_type'=>$comm,
-                'user_id' => Auth::user()->email,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'comment_body'  =>  $request['comment_body'],
+                'comments_id'   =>  $comments_id,
+                'question_id'   =>  $question,
+                'message_type'  =>  $comm,
+                'user_id'       =>  Auth::user()->email,
+                'created_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
         /*
          * post files
          */
-        DB::table('comment_fileuploads')->insert(
-            [
-               'comment_id' =>$comments_id,
-                'question_id' =>$question,
-                'filename'=>$path,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ]);
+
+        foreach ($file as $files){
+
+            $name =  $files->getClientOriginalName();
+
+            DB::table('comment_files')->insert(
+                [
+                    'comment_id'    =>  $comments_id,
+                    'file_name'      =>  $name,
+                    'file_path'     =>  $path,
+                    'created_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
+        }
+
+
+
 
 
         /*
@@ -661,6 +673,24 @@ class QuestionController extends Controller
          */
         
         return redirect()->route('view-question', ['question_id'=> $question]);
+    }
+    /*
+     * Get Comments files
+     */
+    public static  function getCommentFiles($comment_id){
+
+        $files =  DB::table('comment_files')->where('comment_id', $comment_id)->get();
+
+        return $files;
+    }
+
+    /*
+     * get answer files
+     */
+    public static  function getAnswerFiles($answer_id){
+        $files =  DB::table('answer_files')->where('answer_id', $answer_id)->get();
+
+        return $files;
     }
     
     /*
@@ -734,19 +764,30 @@ class QuestionController extends Controller
       }
 
     //Question Status
-
     
     public function  PostAnswer(Request $request, $question){
 
         //file uploads
+        $answer_id = rand (1000,9999);
 
         $file = Input::file('file');
 
-        $dest = public_path().'/storage/uploads/'.$question.'/answer/';
+        $dest = public_path().'/storage/uploads/'.$question.'/answer/'.$answer_id;
 
             foreach ($file as $files){
                 $name =  $files->getClientOriginalName();
                 $files->move($dest, $name);
+
+                DB::table('answer_files')->insert(
+                    [
+
+                        'answer_id'    =>  $answer_id,
+                        'file_name'      =>  $name,
+                        'file_path'     =>  $dest,
+                        'created_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                    ]);
+
             }
             
         /*
@@ -759,6 +800,7 @@ class QuestionController extends Controller
 
        DB::table('post_answers')->insert(
             [
+                'answer_id'    =>  $answer_id,
                 'overdue' => '0',
                 'question_id' =>$question,
                 'user_id' => Auth::user()->email,

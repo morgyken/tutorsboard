@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostAnswersTable extends Migration
+class CreateAnswerFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreatePostAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_answers', function (Blueprint $table) {
+        Schema::create('answer_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
-            $table->string('answer_id');
-            $table-> string('question_id');
-            $table-> boolean('answered');
-            $table-> text('answer_body');
-            $table->text('overdue');
-            $table->rememberToken();
             $table->timestamps();
+            $table->rememberToken();
+            $table->text('answer_id');
+            $table->text('file_name');
+            $table->text('file_path');
         });
     }
 
@@ -33,6 +30,6 @@ class CreatePostAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_answers');
+        Schema::dropIfExists('answer_files');
     }
 }
