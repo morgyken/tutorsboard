@@ -1,0 +1,1013 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 13, 2017 at 05:26 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `homeassign`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accept_questions`
+--
+
+CREATE TABLE `accept_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `accept_questions`
+--
+
+INSERT INTO `accept_questions` (`id`, `created_at`, `updated_at`, `remember_token`, `question_id`, `user_id`, `status`) VALUES
+(1, '2017-09-04 12:47:32', '2017-09-04 12:47:32', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'accept'),
+(2, '2017-09-04 12:49:06', '2017-09-04 12:49:06', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'accepted'),
+(3, '2017-09-13 03:42:01', '2017-09-13 03:42:01', NULL, 'aIsKXa3rdtiLF3onKpAmSDDVO', 'morgyken@gmail.com', 'new');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `answer_files`
+--
+
+CREATE TABLE `answer_files` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `answer_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `answer_files`
+--
+
+INSERT INTO `answer_files` (`id`, `created_at`, `updated_at`, `remember_token`, `answer_id`, `file_name`, `file_path`) VALUES
+(1, '2017-09-13 09:24:52', '2017-09-13 09:24:52', NULL, '9491', '2017-09-01_LI - Copy.jpg', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/DKw0tOHDWvgX1QHfaTWjBJ556/answer/9491/'),
+(2, '2017-09-13 09:24:52', '2017-09-13 09:24:52', NULL, '9491', '2017-09-01_LI.jpg', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/DKw0tOHDWvgX1QHfaTWjBJ556/answer/9491/'),
+(3, '2017-09-13 09:26:14', '2017-09-13 09:26:14', NULL, '5815', '01 Causes Of World WAR II(1) - for merge.docx', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/DKw0tOHDWvgX1QHfaTWjBJ556/answer/5815/'),
+(4, '2017-09-13 09:26:14', '2017-09-13 09:26:14', NULL, '5815', '01 Causes Of World WAR II(1).docx', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/DKw0tOHDWvgX1QHfaTWjBJ556/answer/5815/');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assign_questions`
+--
+
+CREATE TABLE `assign_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `assigned` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `assign_questions`
+--
+
+INSERT INTO `assign_questions` (`id`, `user_id`, `question_id`, `assigned`, `created_at`, `updated_at`, `remember_token`) VALUES
+(1, 'morgyken@gmail.com', '52cPaGQDnBgtlrpfZxyzJXPqe', 1, '2017-09-03 07:11:37', '2017-09-03 07:11:37', NULL),
+(2, 'morgyken@gmail.com', 'h7j05uqqpkFaNlzz1HvRg2VHn', 1, '2017-09-03 07:13:09', '2017-09-03 07:13:09', NULL),
+(3, 'morgyken@gmail.com', 'h7j05uqqpkFaNlzz1HvRg2VHn', 1, '2017-09-03 07:13:36', '2017-09-03 07:13:36', NULL),
+(4, 'morgyken@gmail.com', 'h7j05uqqpkFaNlzz1HvRg2VHn', 1, '2017-09-03 07:14:13', '2017-09-03 07:14:13', NULL),
+(5, 'morgyken@gmail.com', 'Q7OsKXRO1IzdjqdOCU6LQYNEU', 1, '2017-09-03 07:14:32', '2017-09-03 07:14:32', NULL),
+(6, 'morgyken@gmail.com', 'Q7OsKXRO1IzdjqdOCU6LQYNEU', 1, '2017-09-03 07:15:13', '2017-09-03 07:15:13', NULL),
+(7, 'morgyken@gmail.com', 'phPT1f38dyPkFKlBUuxmCUgai', 1, '2017-09-03 07:15:33', '2017-09-03 07:15:33', NULL),
+(8, 'morgyken@gmail.com', 'aZ5UWYvRn4FqV053yBSTvkiZv', 1, '2017-09-03 08:12:42', '2017-09-03 08:12:42', NULL),
+(9, 'morgyken@gmail.com', 'aZ5UWYvRn4FqV053yBSTvkiZv', 1, '2017-09-03 08:39:50', '2017-09-03 08:39:50', NULL),
+(10, 'morgyken@gmail.com', 'aZ5UWYvRn4FqV053yBSTvkiZv', 1, '2017-09-03 08:39:59', '2017-09-03 08:39:59', NULL),
+(11, 'morgyken@gmail.com', 'aZ5UWYvRn4FqV053yBSTvkiZv', 1, '2017-09-03 08:43:03', '2017-09-03 08:43:03', NULL),
+(12, 'morgyken@gmail.com', 'x6raVq9aNM2OUg2LRweD17rim', 1, '2017-09-03 11:37:56', '2017-09-03 11:37:56', NULL),
+(13, 'morgyken@gmail.com', 'x6raVq9aNM2OUg2LRweD17rim', 1, '2017-09-03 11:39:22', '2017-09-03 11:39:22', NULL),
+(14, 'morgyken@gmail.com', 'h7j05uqqpkFaNlzz1HvRg2VHn', 1, '2017-09-03 11:53:38', '2017-09-03 11:53:38', NULL),
+(15, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 10:14:13', '2017-09-04 10:14:13', NULL),
+(16, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 10:45:30', '2017-09-04 10:45:30', NULL),
+(17, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 10:47:27', '2017-09-04 10:47:27', NULL),
+(18, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:05:09', '2017-09-04 11:05:09', NULL),
+(19, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:05:59', '2017-09-04 11:05:59', NULL),
+(20, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:11:27', '2017-09-04 11:11:27', NULL),
+(21, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:13:35', '2017-09-04 11:13:35', NULL),
+(22, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:14:36', '2017-09-04 11:14:36', NULL),
+(23, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:14:46', '2017-09-04 11:14:46', NULL),
+(24, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:19:07', '2017-09-04 11:19:07', NULL),
+(25, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:20:01', '2017-09-04 11:20:01', NULL),
+(26, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:21:04', '2017-09-04 11:21:04', NULL),
+(27, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:21:40', '2017-09-04 11:21:40', NULL),
+(28, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:22:17', '2017-09-04 11:22:17', NULL),
+(29, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:24:49', '2017-09-04 11:24:49', NULL),
+(30, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:25:14', '2017-09-04 11:25:14', NULL),
+(31, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:31:25', '2017-09-04 11:31:25', NULL),
+(32, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:34:33', '2017-09-04 11:34:33', NULL),
+(33, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:36:39', '2017-09-04 11:36:39', NULL),
+(34, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:37:04', '2017-09-04 11:37:04', NULL),
+(35, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:45:05', '2017-09-04 11:45:05', NULL),
+(36, 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, '2017-09-04 11:45:25', '2017-09-04 11:45:25', NULL),
+(37, 'morgyken@gmail.com', '52cPaGQDnBgtlrpfZxyzJXPqe', 1, '2017-09-04 11:59:29', '2017-09-04 11:59:29', NULL),
+(38, 'morgyken@gmail.com', 'epBOhxDgv8mLRX4J9AeL29oMu', 1, '2017-09-04 12:25:01', '2017-09-04 12:25:01', NULL),
+(39, 'morgyken@gmail.com', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 1, '2017-09-13 06:03:28', '2017-09-13 06:03:28', NULL),
+(40, 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, '2017-09-13 09:11:36', '2017-09-13 09:11:36', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cancel_questions`
+--
+
+CREATE TABLE `cancel_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment_files`
+--
+
+CREATE TABLE `comment_files` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `comment_files`
+--
+
+INSERT INTO `comment_files` (`id`, `created_at`, `updated_at`, `remember_token`, `comment_id`, `file_name`, `file_path`) VALUES
+(1, '2017-09-13 07:03:32', '2017-09-13 07:03:32', NULL, '4178', '2017-09-01 (1)_LI.jpg', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/e1ff5SsHeOjcmJpWMZ9zYDop0/comments/4178/'),
+(2, '2017-09-13 07:03:32', '2017-09-13 07:03:32', NULL, '4178', '2017-09-01_LI - Copy.jpg', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/e1ff5SsHeOjcmJpWMZ9zYDop0/comments/4178/'),
+(3, '2017-09-13 07:03:32', '2017-09-13 07:03:32', NULL, '4178', '2017-09-01_LI.jpg', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/e1ff5SsHeOjcmJpWMZ9zYDop0/comments/4178/'),
+(4, '2017-09-13 09:27:25', '2017-09-13 09:27:25', NULL, '5399', '01 Causes Of World WAR II(1).docx', 'C:\\xampp\\htdocs\\tutorsboard\\public/storage/uploads/DKw0tOHDWvgX1QHfaTWjBJ556/comments/5399/');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment_fileuploads`
+--
+
+CREATE TABLE `comment_fileuploads` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filename` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dispute_questions`
+--
+
+CREATE TABLE `dispute_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reason` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `dispute_questions`
+--
+
+INSERT INTO `dispute_questions` (`id`, `created_at`, `updated_at`, `remember_token`, `question_id`, `user_id`, `status`, `reason`) VALUES
+(1, '2017-09-03 08:41:42', '2017-09-03 08:41:42', NULL, 'aZ5UWYvRn4FqV053yBSTvkiZv', 'morgyken@gmail.com', 'disputed', 'Here is my disputed message'),
+(2, '2017-09-03 08:42:37', '2017-09-03 08:42:37', NULL, 'aZ5UWYvRn4FqV053yBSTvkiZv', 'morgyken@gmail.com', 'disputed', 'Here is my disputed message'),
+(3, '2017-09-04 12:43:26', '2017-09-04 12:43:26', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'disputed', 'I do not like this answer'),
+(4, '2017-09-04 14:09:34', '2017-09-04 14:09:34', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'disputed', 'here is a dispute'),
+(5, '2017-09-05 14:23:55', '2017-09-05 14:23:55', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'disputed', 'This is the question and all the This is the question and all the This is the question and all the This is the question and all the');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finished_questions`
+--
+
+CREATE TABLE `finished_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `finished_questions`
+--
+
+INSERT INTO `finished_questions` (`id`, `created_at`, `updated_at`, `remember_token`, `question_id`, `user_id`, `status`) VALUES
+(1, '2017-09-04 13:45:31', '2017-09-04 13:45:31', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'cancelled');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2017_08_13_120444_create_question_bodies_table', 2),
+(4, '2017_08_13_120858_create_question_students_table', 2),
+(5, '2017_08_18_153206_create_post_question_prices_table', 3),
+(6, '2017_07_13_210813_create_assign_questions_table', 4),
+(7, '2017_07_13_212730_create_post_answers_table', 4),
+(8, '2017_07_13_212807_create_make_comments_table', 4),
+(9, '2017_07_15_130716_create_suggest_price_increases_table', 4),
+(10, '2017_07_15_140158_create_suggest_deadlines_table', 4),
+(23, '2017_08_20_203502_create_question_owner_tables_table', 5),
+(24, '2017_08_21_170516_create_postcomment_models_table', 6),
+(25, '2017_08_26_173116_create_payment_models_table', 6),
+(26, '2017_08_29_082649_create_question_status_models_table', 6),
+(27, '2017_09_02_081931_create_accept_questions_table', 6),
+(28, '2017_09_02_081943_create_reassign_questions_table', 6),
+(29, '2017_09_02_081957_create_dispute_questions_table', 6),
+(30, '2017_09_02_082021_create_cancel_questions_table', 6),
+(31, '2017_09_02_082132_create_paid_questions_table', 6),
+(32, '2017_09_02_082158_create_finished_questions_table', 6),
+(33, '2017_09_02_082256_create_new_questions_table', 6),
+(35, '2017_09_03_081224_create_unassigned_questions_table', 7),
+(36, '2017_09_05_201831_create_comment_fileuploads_table', 8),
+(37, '2017_09_05_201854_create_question_fileuploads_table', 8),
+(44, '2017_09_10_092532_create_payment_requests_table', 9),
+(45, '2017_09_10_092653_create_payments_table', 9),
+(47, '2017_09_13_094124_create_comment_files_table', 10),
+(48, '2017_09_13_113522_create_answer_files_table', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `new_questions`
+--
+
+CREATE TABLE `new_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `paid_questions`
+--
+
+CREATE TABLE `paid_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `withdrawal_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_requests`
+--
+
+CREATE TABLE `payment_requests` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `request_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payment_requests`
+--
+
+INSERT INTO `payment_requests` (`id`, `created_at`, `updated_at`, `remember_token`, `request_id`, `amount`, `user_id`, `status`) VALUES
+(1, '2017-09-10 12:07:33', '2017-09-12 15:04:31', NULL, 'XCPyW4Ka2WeI', '25', 'morgyken@gmail.com', 'paid'),
+(4, '2017-09-12 17:00:30', '2017-09-12 17:00:30', NULL, 'o055godoOZgY', '53', 'morgyken@gmail.com', NULL),
+(5, '2017-09-12 17:02:47', '2017-09-12 17:02:47', NULL, 'QGbWGOiuJYUF', '53', 'morgyken@gmail.com', NULL),
+(6, '2017-09-12 17:03:38', '2017-09-12 17:03:38', NULL, 'PUuseJuk5lTu', '53', 'morgyken@gmail.com', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_answers`
+--
+
+CREATE TABLE `post_answers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `answer_id` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_id` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answered` tinyint(1) NOT NULL,
+  `answer_body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `overdue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `post_answers`
+--
+
+INSERT INTO `post_answers` (`id`, `answer_id`, `user_id`, `question_id`, `answered`, `answer_body`, `overdue`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, '', 'morgyken@gmail.com', 'phPT1f38dyPkFKlBUuxmCUgai', 1, 'This is my answer thank you', '0', NULL, '2017-09-03 07:20:46', '2017-09-03 07:20:46'),
+(2, '', 'morgyken@gmail.com', 'phPT1f38dyPkFKlBUuxmCUgai', 1, 'Here is my answer. Thank you', '0', NULL, '2017-09-03 07:47:07', '2017-09-03 07:47:07'),
+(3, '', 'morgyken@gmail.com', 'aZ5UWYvRn4FqV053yBSTvkiZv', 1, 'Here is my video', '0', NULL, '2017-09-03 08:19:33', '2017-09-03 08:19:33'),
+(4, '', 'morgyken@gmail.com', 'aZ5UWYvRn4FqV053yBSTvkiZv', 1, 'Here is my answer. Thank you', '0', NULL, '2017-09-03 08:21:45', '2017-09-03 08:21:45'),
+(5, '', 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, 'hp89ugtigi', '0', NULL, '2017-09-04 11:28:28', '2017-09-04 11:28:28'),
+(6, '', 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, 'hekokjjksjksdsd', '0', NULL, '2017-09-04 11:37:51', '2017-09-04 11:37:51'),
+(7, '', 'morgyken@gmail.com', 'MKAFs4NiliHS6Fs0uLLmQ67NK', 1, 'gjklfklklgf', '0', NULL, '2017-09-04 11:39:54', '2017-09-04 11:39:54'),
+(8, '', 'morgyken@gmail.com', '52cPaGQDnBgtlrpfZxyzJXPqe', 1, 'fjkdfhkdfhdkf', '0', NULL, '2017-09-04 12:02:59', '2017-09-04 12:02:59'),
+(9, '', 'morgyken@gmail.com', '52cPaGQDnBgtlrpfZxyzJXPqe', 1, 'fjkdfhkdfhdkf', '0', NULL, '2017-09-04 12:07:07', '2017-09-04 12:07:07'),
+(10, '', 'morgyken@gmail.com', '52cPaGQDnBgtlrpfZxyzJXPqe', 1, 'fjkdfhkdfhdkf', '0', NULL, '2017-09-04 12:07:21', '2017-09-04 12:07:21'),
+(11, '', 'morgyken@gmail.com', 'epBOhxDgv8mLRX4J9AeL29oMu', 1, 'drytruy', '0', NULL, '2017-09-04 12:25:14', '2017-09-04 12:25:14'),
+(12, '', 'morgyken@gmail.com', 'epBOhxDgv8mLRX4J9AeL29oMu', 1, 'drytruy', '0', NULL, '2017-09-04 12:42:00', '2017-09-04 12:42:00'),
+(13, '', 'morgyken@gmail.com', 'epBOhxDgv8mLRX4J9AeL29oMu', 1, 'This is a good', '0', NULL, '2017-09-04 13:46:54', '2017-09-04 13:46:54'),
+(14, '', 'morgyken@gmail.com', 'qgD5MfTQ8Fslt02LwmPeFHt77', 1, 'wftrdh', '0', NULL, '2017-09-05 04:28:50', '2017-09-05 04:28:50'),
+(15, '', 'morgyken@gmail.com', 'qgD5MfTQ8Fslt02LwmPeFHt77', 1, 'here is my answer', '0', NULL, '2017-09-05 04:30:06', '2017-09-05 04:30:06'),
+(16, '', 'morgyken@gmail.com', 'epBOhxDgv8mLRX4J9AeL29oMu', 1, 'question answered', '0', NULL, '2017-09-05 13:22:42', '2017-09-05 13:22:42'),
+(17, '', 'morgyken@gmail.com', 'qgD5MfTQ8Fslt02LwmPeFHt77', 1, 'Look at the following', '0', NULL, '2017-09-12 15:32:32', '2017-09-12 15:32:32'),
+(18, '', 'morgyken@gmail.com', 'epBOhxDgv8mLRX4J9AeL29oMu', 1, 'here is my answer', '0', NULL, '2017-09-12 15:33:49', '2017-09-12 15:33:49'),
+(19, '', 'morgyken@gmail.com', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 1, 'I have the answers here', '0', NULL, '2017-09-13 06:11:22', '2017-09-13 06:11:22'),
+(20, '', 'morgyken@gmail.com', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 1, 'I have put my answer in the following and I cannot go on having the answer which is incomplete. Please take my answer and have it as one', '0', NULL, '2017-09-13 06:36:55', '2017-09-13 06:36:55'),
+(21, '6525', 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, 'just accepts a path to file. Because I would like to work with local and cloud storage I need to find a way to retrieve files from cloud storage and return them as download to the user. Any idea?', '0', NULL, '2017-09-13 09:17:38', '2017-09-13 09:17:38'),
+(22, '8775', 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, 'just accepts a path to file. Because I would like to work with local and cloud storage I need to find a way to retrieve files from cloud storage and return them as download to the user. Any idea?', '0', NULL, '2017-09-13 09:19:39', '2017-09-13 09:19:39'),
+(23, '2360', 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, 'just accepts a path to file. Because I would like to work with local and cloud storage I need to find a way to retrieve files from cloud storage and return them as download to the user. Any idea?', '0', NULL, '2017-09-13 09:20:47', '2017-09-13 09:20:47'),
+(24, '3674', 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, 'just accepts a path to file. Because I would like to work with local and cloud storage I need to find a way to retrieve files from cloud storage and return them as download to the user. Any idea?', '0', NULL, '2017-09-13 09:22:22', '2017-09-13 09:22:22'),
+(25, '9491', 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, 'just accepts a path to file. Because I would like to work with local and cloud storage I need to find a way to retrieve files from cloud storage and return them as download to the user. Any idea?', '0', NULL, '2017-09-13 09:24:52', '2017-09-13 09:24:52'),
+(26, '5815', 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 1, 'I am working on a CSV download feature for a project. I finally got it working with the following (relies directly on Symfony Components (http://symfony.com/doc/current/components/http_foundation.html#serving-files)). When I tried replacing $response = new Response($fileContent); with $response = response() it didn\'t work. Without, that i', '0', NULL, '2017-09-13 09:26:14', '2017-09-13 09:26:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_comments`
+--
+
+CREATE TABLE `post_comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment_body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comments_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `post_comments`
+--
+
+INSERT INTO `post_comments` (`id`, `user_id`, `question_id`, `comment_body`, `comments_id`, `message_type`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'morgyken@gmail.com', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 'I have a comment here have a look at it', '3191', 'Adm', NULL, '2017-09-13 07:02:19', '2017-09-13 07:02:19'),
+(2, 'morgyken@gmail.com', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 'I have a comment here have a look at it', '9178', 'Adm', NULL, '2017-09-13 07:03:16', '2017-09-13 07:03:16'),
+(3, 'morgyken@gmail.com', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 'I have a comment here have a look at it', '4178', 'Adm', NULL, '2017-09-13 07:03:31', '2017-09-13 07:03:31'),
+(4, 'morgyken@gmail.com', 'DKw0tOHDWvgX1QHfaTWjBJ556', 'Now i\'m using Laravel 5 to do a new project and i tried this method to call a controller function from my blade template .But its not working and showing some errors.', '5399', 'Adm', NULL, '2017-09-13 09:27:25', '2017-09-13 09:27:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_question_prices`
+--
+
+CREATE TABLE `post_question_prices` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `paid` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_price` int(11) NOT NULL,
+  `overdue` int(11) NOT NULL,
+  `question_deadline` datetime NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `post_question_prices`
+--
+
+INSERT INTO `post_question_prices` (`id`, `paid`, `question_id`, `question_price`, `overdue`, `question_deadline`, `remember_token`, `created_at`, `updated_at`) VALUES
+(21, '1', 'epBOhxDgv8mLRX4J9AeL29oMu', 28, 1, '2017-09-04 21:00:00', NULL, '2017-09-04 12:22:34', '2017-09-13 11:00:54'),
+(22, '1', 'qgD5MfTQ8Fslt02LwmPeFHt77', 25, 1, '2017-09-07 22:00:00', NULL, '2017-09-04 12:23:15', '2017-09-13 11:00:54'),
+(23, NULL, 'TS0laZOraMgHSUiGPVtNiFX7v', 25, 1, '2017-09-03 20:00:00', NULL, '2017-09-12 18:08:18', '2017-09-13 11:00:54'),
+(24, NULL, 'EWY3cQc2CICNixLvE6ba9KIx4', 26, 0, '2017-09-15 18:00:00', NULL, '2017-09-12 18:13:50', '2017-09-13 11:00:54'),
+(25, NULL, 'aIsKXa3rdtiLF3onKpAmSDDVO', 38, 0, '2017-09-14 18:00:00', NULL, '2017-09-13 03:42:13', '2017-09-13 11:00:54'),
+(26, NULL, 'Hj2KmRNfkEwfDup1Tw64VSDf9', 26, 1, '2017-09-03 18:00:00', NULL, '2017-09-13 03:49:18', '2017-09-13 11:00:54'),
+(27, NULL, '4qlhhIPlpMhoZpIIiTJBekmbc', 36, 0, '2017-09-23 18:00:00', NULL, '2017-09-13 03:50:30', '2017-09-13 11:00:55'),
+(28, NULL, 'e1ff5SsHeOjcmJpWMZ9zYDop0', 30, 0, '2017-09-15 18:00:00', NULL, '2017-09-13 03:53:20', '2017-09-13 11:00:55'),
+(29, NULL, 'DKw0tOHDWvgX1QHfaTWjBJ556', 27, 0, '2017-09-16 23:00:00', NULL, '2017-09-13 03:54:12', '2017-09-13 11:00:55'),
+(30, NULL, '4hq0GIERl84BOSXgNuh57dEW7', 27, 1, '2017-09-03 22:00:00', NULL, '2017-09-13 03:54:42', '2017-09-13 11:00:55'),
+(31, NULL, 's38dKbpWLwIqwhmcaFPjuTgg3', 33, 1, '2017-09-03 22:00:00', NULL, '2017-09-13 03:56:49', '2017-09-13 11:00:55'),
+(32, NULL, 'Vwi2aiRtArEkA58ETdxJ9thkC', 27, 0, '2017-09-21 21:00:00', NULL, '2017-09-13 03:57:29', '2017-09-13 11:00:55'),
+(33, NULL, 'ddDgpdXpyN6cqRHXhRX4rauVO', 33, 1, '2017-09-03 21:00:00', NULL, '2017-09-13 03:58:10', '2017-09-13 11:00:55'),
+(34, NULL, '5acP6uQrR6lwWKice8gzvkVn3', 28, 1, '2017-09-03 21:00:00', NULL, '2017-09-13 03:58:39', '2017-09-13 11:00:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_bodies`
+--
+
+CREATE TABLE `question_bodies` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `summary` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `special` text COLLATE utf8mb4_unicode_ci,
+  `question_body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_bodies`
+--
+
+INSERT INTO `question_bodies` (`id`, `summary`, `special`, `question_body`, `question_id`, `user_id`, `category`, `created_at`, `updated_at`, `remember_token`) VALUES
+(1, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, facete salutatus ea mea, modo magna delicata mei an. Lorem omittam suavitate pri ei, cu altera admodum est. At per case prima pertinacia, cu vix sumo tibique torquatos. An tritani maluisset mnesarchum per. Pro soluta suscipit expetendis cu, est te dicunt verterem pertinax, has id illud platonem efficiendi. Quo rebum tollit repudianda', 'Dicta zril petentium ne eos, eam rebum appetere reformidans ei. Solum clita melius an mea. At sint modus altera eos, id cibo euismod mei, ad vitae primis laoreet vel. Doctus detraxit sit cu. His mollis aliquid vivendum et', '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, facete salutatus ea mea, modo magna delicata mei an. Lorem omittam suavitate pri ei, cu altera admodum est. At per case prima pertinacia, cu vix sumo tibique torquatos. An tritani maluisset mnesarchum per. Pro soluta suscipit expetendis cu, est te dicunt verterem pertinax, has id illud platonem efficiendi. Quo rebum tollit repudiandae ex, sit te autem postulant, facer percipitur an nec.</p>\r\n\r\n<p>Quot scriptorem ullamcorper per in. Eam ut dicta maiorum repudiare. Possit accusamus assueverit sea in, usu vivendum hendrerit ex. Ad has iuvaret impedit voluptatibus.</p>\r\n\r\n<p>Mea ei soleat vivendum evertitur, eu duis singulis consequat sit, te quas vivendo instructior est. Oblique disputationi duo cu. Aeque tollit sea ut. Odio intellegebat id nec, ferri phaedrum usu ex. Tollit reprimique sadipscing et vix, pro semper appetere ex, at mucius iisque ornatus vis.</p>\r\n\r\n<p>Erat electram ne ius, per utinam meliore pericula te. Utamur nominati aliquando has at. Per denique officiis et. Sea ea honestatis contentiones. Case antiopam qui in.</p>\r\n\r\n<p>Ut fastidii constituto sea, no per eripuit delicata, sed utinam bonorum in. Quo soleat possim mediocritatem in, ut quem insolens inimicus quo, quod conclusionemque ut duo. Vis ea quot timeam. Te suas elitr quo, tritani constituto ut mea. Mei mundi nobis delicatissimi et, velit vivendum cum eu. Pro placerat phaedrum efficiantur id, pri at dicant meliore mediocritatem, audire epicurei appetere mea et.</p>\r\n\r\n<p>Ei putant delicatissimi vis, autem illud suscipit cu usu, cu vim clita verterem. Duo te atqui accusamus disputando, veri doming platonem mei in. Ubique propriae pri at, an agam graeci maiestatis nam. An alterum civibus mea, nibh rebum definitionem sed in, no sed autem necessitatibus. Et aeterno diceret sea, cu quis ludus his.</p>\r\n\r\n<p>Duo ad appareat electram consetetur, meis vidisse numquam vis ut. Ei falli qualisque assueverit mel, te sit aperiam mediocrem. At quem tantas fuisset est, vim verterem scribentur dissentiet ea, pro ea nulla accusamus patrioque. Possim tacimates mea no, an detracto posidonium has, his cu iusto deserunt. Eu vel nostro eirmod tritani, recusabo senserit qui eu.</p>\r\n\r\n<p>Has altera postulant referrentur ut, sea ea amet altera perpetua. Minimum efficiendi ut usu, no tractatos expetenda pro. Ei mea volumus delectus, omnium verear volutpat eam ut. Amet debet menandri at sea, in mei deterruisset necessitatibus, nam eu melius electram. Zril semper inciderint quo an.</p>\r\n\r\n<p>Ius saepe antiopam postulant ea, te paulo nullam quo. Est odio eruditi at, in debitis voluptatum sed, ne sed fierent mentitum offendit. Est in quaeque luptatum, ius ea esse petentium vituperata. Nulla fastidii iudicabit est eu. Eam ut partiendo vituperata, et sonet liberavisse vis.</p>\r\n\r\n<p>Vitae quando appellantur ex nec, ad volumus noluisse quo, detraxit insolens id pro. Ei quot zril sea. Eius latine delectus duo cu. At putent tamquam graecis est, vel quis discere eu.</p>\r\n\r\n<p>Liber nominavi urbanitas vis ad, eam delenit voluptatum ne. Ex sed dolor congue deleniti. Abhorreant reprehendunt cum no, ius utinam deterruisset at. Quaeque perpetua no vis, ius rebum maiorum ea. Duo reque dolorem te, duo in percipit lucilius.</p>\r\n\r\n<p>Id his quidam suscipiantur. Ad qui congue putent nonumes. Et ius luptatum consequat aliquando, minim tempor fabellas an vix. Impetus denique ne his, sed ex unum facer utroque. Exerci sapientem posidonium in pro, id ius quis paulo iudicabit.</p>\r\n\r\n<p>Sed nostrud expetenda evertitur eu. Tale scripta ut sit. Ne eam altera malorum virtute. Sit ea aliquam feugiat delenit, an magna fabulas adolescens mea, qui dolorum habemus ex.</p>\r\n\r\n<p>Dicta zril petentium ne eos, eam rebum appetere reformidans ei. Solum clita melius an mea. At sint modus altera eos, id cibo euismod mei, ad vitae primis laoreet vel. Doctus detraxit sit cu. His mollis aliquid vivendum et.</p>\r\n\r\n<p>Vim an etiam efficiendi disputationi. Duo quaeque.</p>', 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'Home page', '2017-09-04 12:22:23', '2017-09-04 12:22:23', NULL),
+(2, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, facete salutatus ea mea, modo magna delicata mei an. Lorem omittam suavitate pri ei, cu altera admodum est. At per case prima pertinacia, cu vix sumo tibique torquatos. An tritani maluisset mnesarchum per. Pro soluta suscipit expetendis c', 'Vitae quando appellantur ex nec, ad volumus noluisse quo, detraxit insolens id pro. Ei quot zril sea. Eius latine delectus duo cu. At putent tamquam graecis est, vel quis discere eu.\r\n\r\nLiber nominavi urbanitas vis ad, eam delenit voluptatum ne. Ex sed dolor congue deleniti. Abhorreant reprehendunt cum no, ius utinam deterruisset at. Quaeque perpetua no vis, ius rebum maiorum ea. Duo reque dolorem te, duo in percipit lucilius.', '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, facete salutatus ea mea, modo magna delicata mei an. Lorem omittam suavitate pri ei, cu altera admodum est. At per case prima pertinacia, cu vix sumo tibique torquatos. An tritani maluisset mnesarchum per. Pro soluta suscipit expetendis cu, est te dicunt verterem pertinax, has id illud platonem efficiendi. Quo rebum tollit repudiandae ex, sit te autem postulant, facer percipitur an nec.</p>\r\n\r\n<p>Quot scriptorem ullamcorper per in. Eam ut dicta maiorum repudiare. Possit accusamus assueverit sea in, usu vivendum hendrerit ex. Ad has iuvaret impedit voluptatibus.</p>\r\n\r\n<p>Mea ei soleat vivendum evertitur, eu duis singulis consequat sit, te quas vivendo instructior est. Oblique disputationi duo cu. Aeque tollit sea ut. Odio intellegebat id nec, ferri phaedrum usu ex. Tollit reprimique sadipscing et vix, pro semper appetere ex, at mucius iisque ornatus vis.</p>\r\n\r\n<p>Erat electram ne ius, per utinam meliore pericula te. Utamur nominati aliquando has at. Per denique officiis et. Sea ea honestatis contentiones. Case antiopam qui in.</p>\r\n\r\n<p>Ut fastidii constituto sea, no per eripuit delicata, sed utinam bonorum in. Quo soleat possim mediocritatem in, ut quem insolens inimicus quo, quod conclusionemque ut duo. Vis ea quot timeam. Te suas elitr quo, tritani constituto ut mea. Mei mundi nobis delicatissimi et, velit vivendum cum eu. Pro placerat phaedrum efficiantur id, pri at dicant meliore mediocritatem, audire epicurei appetere mea et.</p>\r\n\r\n<p>Ei putant delicatissimi vis, autem illud suscipit cu usu, cu vim clita verterem. Duo te atqui accusamus disputando, veri doming platonem mei in. Ubique propriae pri at, an agam graeci maiestatis nam. An alterum civibus mea, nibh rebum definitionem sed in, no sed autem necessitatibus. Et aeterno diceret sea, cu quis ludus his.</p>\r\n\r\n<p>Duo ad appareat electram consetetur, meis vidisse numquam vis ut. Ei falli qualisque assueverit mel, te sit aperiam mediocrem. At quem tantas fuisset est, vim verterem scribentur dissentiet ea, pro ea nulla accusamus patrioque. Possim tacimates mea no, an detracto posidonium has, his cu iusto deserunt. Eu vel nostro eirmod tritani, recusabo senserit qui eu.</p>\r\n\r\n<p>Has altera postulant referrentur ut, sea ea amet altera perpetua. Minimum efficiendi ut usu, no tractatos expetenda pro. Ei mea volumus delectus, omnium verear volutpat eam ut. Amet debet menandri at sea, in mei deterruisset necessitatibus, nam eu melius electram. Zril semper inciderint quo an.</p>\r\n\r\n<p>Ius saepe antiopam postulant ea, te paulo nullam quo. Est odio eruditi at, in debitis voluptatum sed, ne sed fierent mentitum offendit. Est in quaeque luptatum, ius ea esse petentium vituperata. Nulla fastidii iudicabit est eu. Eam ut partiendo vituperata, et sonet liberavisse vis.</p>\r\n\r\n<p>Vitae quando appellantur ex nec, ad volumus noluisse quo, detraxit insolens id pro. Ei quot zril sea. Eius latine delectus duo cu. At putent tamquam graecis est, vel quis discere eu.</p>\r\n\r\n<p>Liber nominavi urbanitas vis ad, eam delenit voluptatum ne. Ex sed dolor congue deleniti. Abhorreant reprehendunt cum no, ius utinam deterruisset at. Quaeque perpetua no vis, ius rebum maiorum ea. Duo reque dolorem te, duo in percipit lucilius.</p>\r\n\r\n<p>Id his quidam suscipiantur. Ad qui congue putent nonumes. Et ius luptatum consequat aliquando, minim tempor fabellas an vix. Impetus denique ne his, sed ex unum facer utroque. Exerci sapientem posidonium in pro, id ius quis paulo iudicabit.</p>\r\n\r\n<p>Sed nostrud expetenda evertitur eu. Tale scripta ut sit. Ne eam altera malorum virtute. Sit ea aliquam feugiat delenit, an magna fabulas adolescens mea, qui dolorum habemus ex.</p>\r\n\r\n<p>Dicta zril petentium ne eos, eam rebum appetere reformidans ei. Solum clita melius an mea. At sint modus altera eos, id cibo euismod mei, ad vitae primis laoreet vel. Doctus detraxit sit cu. His mollis aliquid vivendum et.</p>\r\n\r\n<p>Vim an etiam efficiendi disputationi. Duo quaeque.</p>', 'qgD5MfTQ8Fslt02LwmPeFHt77', 'morgyken@gmail.com', 'History', '2017-09-04 12:23:08', '2017-09-04 12:23:08', NULL),
+(8, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu ', 'Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.\r\n\r\nQuis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.', '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>', 'Hj2KmRNfkEwfDup1Tw64VSDf9', 'morgyken@gmail.com', 'my details', '2017-09-13 03:49:13', '2017-09-13 03:49:13', NULL),
+(10, 'I have a question here\r\n\r\nLorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.\r\n\r\nDelicata inco', 'An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\nPaulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.', '<h1>I have a question here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>', 'e1ff5SsHeOjcmJpWMZ9zYDop0', 'morgyken@gmail.com', 'Huge Data', '2017-09-13 03:53:10', '2017-09-13 03:53:10', NULL),
+(11, 'This is Pythagoras Theory\r\n\r\nAn cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\n', 'An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\nPaulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.', '<h1>This is Pythagoras Theory</h1>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>', 'DKw0tOHDWvgX1QHfaTWjBJ556', 'morgyken@gmail.com', 'Star Warz', '2017-09-13 03:54:00', '2017-09-13 03:54:00', NULL),
+(12, 'Post Question Here\r\n\r\nAn cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ', 'An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\nPaulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\nPaulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.', '<h1>Post Question Here</h1>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>', '4hq0GIERl84BOSXgNuh57dEW7', 'morgyken@gmail.com', 'History', '2017-09-13 03:54:35', '2017-09-13 03:54:35', NULL),
+(13, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus co', NULL, '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>', 's38dKbpWLwIqwhmcaFPjuTgg3', 'morgyken@gmail.com', 'Home made', '2017-09-13 03:56:38', '2017-09-13 03:56:38', NULL),
+(14, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut us', NULL, '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>', 'Vwi2aiRtArEkA58ETdxJ9thkC', 'morgyken@gmail.com', 'Origi One', '2017-09-13 03:57:19', '2017-09-13 03:57:19', NULL),
+(15, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer', 'Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.\r\n\r\nDelicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.\r\n\r\nEa usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.\r\n\r\nMea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.\r\n\r\nMutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.\r\n\r\nEam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.\r\n\r\nAn cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\nPaulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.\r\n\r\nQuis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.', '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>', 'ddDgpdXpyN6cqRHXhRX4rauVO', 'morgyken@gmail.com', 'Home Science', '2017-09-13 03:58:01', '2017-09-13 03:58:01', NULL),
+(16, 'Post Question Here\r\n\r\nLorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea', 'Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.\r\n\r\nDelicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.\r\n\r\nEa usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.\r\n\r\nMea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.\r\n\r\nMutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.\r\n\r\nEam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.\r\n\r\nAn cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.\r\n\r\nPaulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.\r\n\r\nQuis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.', '<h1>Post Question Here</h1>\r\n\r\n<p>Lorem ipsum dolor sit amet, eos ei quod doctus honestatis, his no feugait apeirian persecuti. Utinam repudiandae cum in, doctus iriure pri ei, euripidis consetetur ad eum. Nonumy voluptatum eu sed, eum dicant fierent inimicus an, eos et enim lucilius senserit. Probo lobortis antiopam ut usu. Mea eu erat mandamus consectetuer.</p>\r\n\r\n<p>Delicata incorrupte cu qui, autem doming ea sed, commodo legendos petentium ex pri. Diam nullam philosophia pri an, cum at ludus legere periculis. Tamquam erroribus ex cum, alia choro quando et est. His ea dicant impetus adolescens, ad ius sale prompta dissentias. Cu vis gloriatur elaboraret, erant impetus ut eos, vim no dolor elaboraret disputando.</p>\r\n\r\n<p>Ea usu atqui erant saperet, vitae torquatos no qui, qui et dicat prompta. Affert fastidii mandamus ei pri, id ceteros volutpat vim. Sed in vitae pertinax deseruisse, duis postea petentium ius ea, ut per ocurreret deseruisse. Pro ex fabulas alienum. Ut mea eius fabulas veritus.</p>\r\n\r\n<p>Mea zril aliquando adolescens no, prima mazim tempor quo et. Ei quo dicta reprehendunt. Vel augue putent id, percipit gloriatur deterruisset est at. Hinc volutpat et sit. Ut error vocibus facilisi usu, an decore reprehendunt qui. Aeterno civibus perfecto ei eam, has at affert labore.</p>\r\n\r\n<p>Mutat minim facilis qui no. Pro nulla nonumy an, quo no porro utroque, cu agam mentitum insolens sit. Dico repudiandae sed cu. Dicta euripidis eum no. Ea torquatos voluptatibus mei. Vitae legimus voluptatum an vim.</p>\r\n\r\n<p>Eam in intellegam conclusionemque. Ex case fabulas usu, id duo postea dolorum sadipscing, et delicata philosophia mea. Porro omnium ius ut, cum mollis senserit no, an vel aperiri nonumes. Quo apeirian antiopam in. Eu dolore vocent meliore est, id qui nonumes invidunt, et tota reque vivendo vis.</p>\r\n\r\n<p>An cum insolens postulant, dolorum dolorem officiis in per. Has invidunt antiopam pericula at. Ne cibo urbanitas vel, ut nec partem dolores, ei tota elitr cum. Est erat ceteros prodesset an, ne est oportere persecuti liberavisse. Usu eu natum vidisse suavitate. In solum argumentum ius, vero fastidii disputationi ut vim.</p>\r\n\r\n<p>Paulo fuisset invidunt cu per, mei an reque oratio aeterno. Vide dolores deserunt in vim, aliquip iuvaret expetenda ut pro, ad alia consectetuer vim. Docendi explicari vulputate no pro, justo facer eleifend no mei. Possit epicuri eam no, te semper mediocrem mei, nam modus oratio saperet id.</p>\r\n\r\n<p>Quis suas mazim eu per. Diam essent assueverit cu quo, soleat accusata definitionem ex nam. Sed no latine docendi maiestatis. Vix melius imperdiet disputando ei.</p>', '5acP6uQrR6lwWKice8gzvkVn3', 'morgyken@gmail.com', 'History', '2017-09-13 03:58:30', '2017-09-13 03:58:30', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_owner_tables`
+--
+
+CREATE TABLE `question_owner_tables` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_status_models`
+--
+
+CREATE TABLE `question_status_models` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `question_status_models`
+--
+
+INSERT INTO `question_status_models` (`id`, `created_at`, `updated_at`, `remember_token`, `question_id`, `user_id`, `status`) VALUES
+(14, '2017-09-04 12:22:23', '2017-09-12 17:30:07', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'available'),
+(15, '2017-09-04 12:23:08', '2017-09-12 15:32:32', NULL, 'qgD5MfTQ8Fslt02LwmPeFHt77', 'morgyken@gmail.com', 'answered'),
+(16, '2017-09-13 03:49:13', '2017-09-13 03:49:13', NULL, 'Hj2KmRNfkEwfDup1Tw64VSDf9', 'morgyken@gmail.com', 'new'),
+(17, '2017-09-13 03:50:17', '2017-09-13 03:50:17', NULL, '4qlhhIPlpMhoZpIIiTJBekmbc', 'morgyken@gmail.com', 'new'),
+(18, '2017-09-13 03:53:10', '2017-09-13 06:36:55', NULL, 'e1ff5SsHeOjcmJpWMZ9zYDop0', 'morgyken@gmail.com', 'answered'),
+(19, '2017-09-13 03:54:00', '2017-09-13 09:26:14', NULL, 'DKw0tOHDWvgX1QHfaTWjBJ556', 'morgyken@gmail.com', 'answered'),
+(20, '2017-09-13 03:54:35', '2017-09-13 03:54:35', NULL, '4hq0GIERl84BOSXgNuh57dEW7', 'morgyken@gmail.com', 'new'),
+(21, '2017-09-13 03:56:38', '2017-09-13 03:56:38', NULL, 's38dKbpWLwIqwhmcaFPjuTgg3', 'morgyken@gmail.com', 'new'),
+(22, '2017-09-13 03:57:19', '2017-09-13 03:57:19', NULL, 'Vwi2aiRtArEkA58ETdxJ9thkC', 'morgyken@gmail.com', 'new'),
+(23, '2017-09-13 03:58:01', '2017-09-13 03:58:01', NULL, 'ddDgpdXpyN6cqRHXhRX4rauVO', 'morgyken@gmail.com', 'new'),
+(24, '2017-09-13 03:58:30', '2017-09-13 03:58:30', NULL, '5acP6uQrR6lwWKice8gzvkVn3', 'morgyken@gmail.com', 'new');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_students`
+--
+
+CREATE TABLE `question_students` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `question_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reassign_questions`
+--
+
+CREATE TABLE `reassign_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suggest_deadlines`
+--
+
+CREATE TABLE `suggest_deadlines` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `question_deadline` datetime NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suggest_price_increases`
+--
+
+CREATE TABLE `suggest_price_increases` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `suggested_price` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `unassigned_questions`
+--
+
+CREATE TABLE `unassigned_questions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `question_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `unassigned_questions`
+--
+
+INSERT INTO `unassigned_questions` (`id`, `created_at`, `updated_at`, `remember_token`, `question_id`, `user_id`, `status`) VALUES
+(1, '2017-09-04 13:44:22', '2017-09-04 13:44:22', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'available'),
+(2, '2017-09-05 14:23:14', '2017-09-05 14:23:14', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'available'),
+(3, '2017-09-05 14:24:45', '2017-09-05 14:24:45', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'available'),
+(4, '2017-09-05 15:14:22', '2017-09-05 15:14:22', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'available'),
+(5, '2017-09-12 17:30:07', '2017-09-12 17:30:07', NULL, 'epBOhxDgv8mLRX4J9AeL29oMu', 'morgyken@gmail.com', 'available');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user-type` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `user-type`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Morgna', 'morgyken@gmail.com', '$2y$10$ez4AJzKmy8m6kAxN1MIqDubru110JTR9dJThz7Tqvepu5Ovm3ddKu', '', 'HWDcCSsQEJN873Na3gz9ejjYicYSMkkAG5iO9V1Dn7kgags5aqvN2pmSN26d', '2017-08-11 11:36:03', '2017-08-11 11:36:03'),
+(2, 'OwGoyXXNdk', 'LxsQxddoHT@gmail.com', '$2y$10$S.IybKcQVgsDzTuwHxuifOzFn1R/yw5iTX23u/yY/UVMuUDzn2hHG', '', NULL, NULL, NULL),
+(3, 'Mr. Floyd Bergnaum PhD', 'dereck15@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', '0wCUQgiEj3', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(4, 'Dr. Afton Williamson', 'hwalter@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'mdfFoFv02G', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(5, 'Dr. Itzel Upton', 'jedidiah.nitzsche@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'tIR0GQA9Zf', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(6, 'Jazmin Wintheiser', 'ryan.cassin@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'xE7mWEES5e', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(7, 'Layla Schmidt', 'cruickshank.karine@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'rQvErGIUog', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(8, 'Laurel Hudson', 'gjerde@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'h3cTUATo43', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(9, 'Danny Bartell MD', 'thackett@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'khgkVKczaq', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(10, 'Dr. Sedrick Graham', 'ischoen@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'PSu1h08GRB', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(11, 'Jerrod Franecki', 'banderson@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', '6LzTKPOxUm', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(12, 'Molly Crooks IV', 'freida.emmerich@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'RgKMAJGDiw', '2017-08-13 12:11:52', '2017-08-13 12:11:52'),
+(13, 'Mrs. Yoshiko Shields II', 'ryan.kristian@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'XY9hcJOpye', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(14, 'Dora Kemmer', 'hardy.wilkinson@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'YmLPcQhao6', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(15, 'Madelynn Johns Sr.', 'idietrich@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'ukRz7EwLDz', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(16, 'Abigayle Kertzmann', 'chadrick.schinner@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'DoXG7AjUX7', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(17, 'Humberto Bergnaum', 'aryanna.oconnell@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'jljy9Rm0FK', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(18, 'Lawson Zulauf', 'kristofer.rosenbaum@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'u1jP3KPHHt', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(19, 'Idella Raynor', 'altenwerth.kamille@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'c2lsqwVlJg', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(20, 'Alfredo Dickinson', 'borer.frederique@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 's9VjPdz4Ay', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(21, 'Mckenna Christiansen DDS', 'jcollier@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'Dy3L68A71F', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(22, 'Tianna VonRueden', 'ashleigh.ohara@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'dv1U8Xm0FF', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(23, 'Dandre Corkery', 'hgusikowski@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'XHdM9O9LxJ', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(24, 'Osbaldo Gerhold IV', 'igulgowski@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'RhqybBM7mE', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(25, 'Albertha Schimmel', 'davis.milford@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'IFwFH9UASc', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(26, 'Prof. Malcolm Schumm PhD', 'tia.gislason@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'nBr3uGcK5v', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(27, 'Mr. Uriah Hand Sr.', 'wisozk.lloyd@example.net', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'lhfCb8SvBl', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(28, 'Isidro Johnson', 'rossie.oconnell@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', '5vh3Bi3731', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(29, 'Alfredo Kreiger', 'leonard27@example.com', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'PKdk0ejaQi', '2017-08-13 12:11:53', '2017-08-13 12:11:53'),
+(30, 'Dr. Orpha Stracke II', 'wyman.cierra@example.org', '$2y$10$T3HGMZA5lJASq73lHmHCGOwfa7531fPHy32XdYzDHV.Stji2RWqNG', '', 'CYlkmEJbcU', '2017-08-13 12:11:53', '2017-08-13 12:11:53');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `accept_questions`
+--
+ALTER TABLE `accept_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `answer_files`
+--
+ALTER TABLE `answer_files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assign_questions`
+--
+ALTER TABLE `assign_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cancel_questions`
+--
+ALTER TABLE `cancel_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comment_files`
+--
+ALTER TABLE `comment_files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comment_fileuploads`
+--
+ALTER TABLE `comment_fileuploads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dispute_questions`
+--
+ALTER TABLE `dispute_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `finished_questions`
+--
+ALTER TABLE `finished_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `new_questions`
+--
+ALTER TABLE `new_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `paid_questions`
+--
+ALTER TABLE `paid_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_requests`
+--
+ALTER TABLE `payment_requests`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `post_answers`
+--
+ALTER TABLE `post_answers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `post_comments`
+--
+ALTER TABLE `post_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `post_question_prices`
+--
+ALTER TABLE `post_question_prices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `question_bodies`
+--
+ALTER TABLE `question_bodies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `question_owner_tables`
+--
+ALTER TABLE `question_owner_tables`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `question_status_models`
+--
+ALTER TABLE `question_status_models`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `question_id` (`question_id`);
+
+--
+-- Indexes for table `question_students`
+--
+ALTER TABLE `question_students`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reassign_questions`
+--
+ALTER TABLE `reassign_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `suggest_deadlines`
+--
+ALTER TABLE `suggest_deadlines`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `suggest_price_increases`
+--
+ALTER TABLE `suggest_price_increases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `unassigned_questions`
+--
+ALTER TABLE `unassigned_questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `accept_questions`
+--
+ALTER TABLE `accept_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `answer_files`
+--
+ALTER TABLE `answer_files`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `assign_questions`
+--
+ALTER TABLE `assign_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+--
+-- AUTO_INCREMENT for table `cancel_questions`
+--
+ALTER TABLE `cancel_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `comment_files`
+--
+ALTER TABLE `comment_files`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `comment_fileuploads`
+--
+ALTER TABLE `comment_fileuploads`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `dispute_questions`
+--
+ALTER TABLE `dispute_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `finished_questions`
+--
+ALTER TABLE `finished_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+--
+-- AUTO_INCREMENT for table `new_questions`
+--
+ALTER TABLE `new_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `paid_questions`
+--
+ALTER TABLE `paid_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `payment_requests`
+--
+ALTER TABLE `payment_requests`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `post_answers`
+--
+ALTER TABLE `post_answers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `post_comments`
+--
+ALTER TABLE `post_comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `post_question_prices`
+--
+ALTER TABLE `post_question_prices`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT for table `question_bodies`
+--
+ALTER TABLE `question_bodies`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `question_owner_tables`
+--
+ALTER TABLE `question_owner_tables`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `question_status_models`
+--
+ALTER TABLE `question_status_models`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT for table `question_students`
+--
+ALTER TABLE `question_students`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `reassign_questions`
+--
+ALTER TABLE `reassign_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `suggest_deadlines`
+--
+ALTER TABLE `suggest_deadlines`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `suggest_price_increases`
+--
+ALTER TABLE `suggest_price_increases`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `unassigned_questions`
+--
+ALTER TABLE `unassigned_questions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
