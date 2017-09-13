@@ -55,6 +55,12 @@ class QuestionController extends Controller
 
              return view('gen.index');
     }
+    public function about(){
+        /*
+         * Check for Overdue classifications
+        */
+        return view('part.about-us');
+    }
     /*
      * checks if deadline is overdue or not
      */
@@ -181,6 +187,8 @@ class QuestionController extends Controller
 
             return Response::download($path);
     }
+
+
 
        /*
      * get question details

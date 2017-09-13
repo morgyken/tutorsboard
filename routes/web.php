@@ -15,6 +15,8 @@
 Auth::routes();
 
 Route::get('/', array('uses'=>'QuestionController@index'))->name('home');
+Route::get('/about', array('uses'=>'QuestionController@about'))->name('about');
+
 
 Route::get('/get-comment-files/{question}/{filename}/{type}/{comment_id}', ['as' =>'comment-files', 'uses' => 'QuestionController@commentsFilesDownloads']);
 
