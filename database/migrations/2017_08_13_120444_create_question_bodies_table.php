@@ -16,7 +16,7 @@ class CreateQuestionBodiesTable extends Migration
         Schema::create('question_bodies', function (Blueprint $table) {
             $table->increments('id');
             $table->text('summary');
-            $table->text('special');
+            $table->text('special')->nullable();
             $table->text('question_body');
             $table->integer('question_id')->unique();
             $table->text('user_id');

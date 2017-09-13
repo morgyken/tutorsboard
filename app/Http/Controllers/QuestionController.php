@@ -643,6 +643,17 @@ class QuestionController extends Controller
                                     ] 
                                 );  
             }
+            else{
+                DB::table('question_status_models')->insert(
+                    [
+                        'status' => $status,
+                        'question_id' =>$question_id,
+                        'user_id' => Auth::user()->email,
+                        'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    ]);
+
+            }
       }
       
       public function FileUploads(Request $request, $path){
@@ -816,7 +827,7 @@ class QuestionController extends Controller
             */
 
             $this->UpdateStatus($question_id, 'new');
-            
+
             /*
              * Add question Id to session, this is to be used in the adding of the price
              */
@@ -874,15 +885,20 @@ class QuestionController extends Controller
    public function allQuestions (){
 
 
-        $questions = DB::table('question_bodies')
-            ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->join('question_status_models', 'question_status_models.question_id', '=', 'question_bodies.question_id')
-            ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
-            ->where('status', 'available')
-            ->where('status', 'new')
 
-            ->paginate(25);//this is a new chaffff
+       $questions = DB::table('question_bodies')
 
+           ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+           ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
+
+          // ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+           ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
+           ->where('status', 'new')
+           ->paginate(25);
+
+            //->paginate(25);//this is a new chaffff
+
+       //dd($questions);
 
         return view('home', ['question' => $questions]);
 
