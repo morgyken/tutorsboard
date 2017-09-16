@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-    <title>Progressus - Free business bootstrap template by GetTemplate</title>
+    <title>Home Assign: The Best Place to Earn</title>
 
     <link rel="shortcut icon" href="{{URL::asset('theme/assets/images/gt_favicon.png ') }}">
 

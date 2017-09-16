@@ -264,7 +264,7 @@
         </ul>
         <!-- /.navbar-top-links -->
 
-       @include('tut-nav-bar')
+       @include('part.tut-nav-bar')
 
     <div id="page-wrapper">
         <div class="row">

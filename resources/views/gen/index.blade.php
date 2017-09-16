@@ -20,10 +20,11 @@
 	<!-- Intro -->
 	<div class="container text-center">
 		<br> <br>
-		<h2 class="thin">The best place to tell people why they are here</h2>
+		<h2 class="thin">We are the Best for Online Jobs in today. Join us today</h2>
 		<p class="text-muted">
-			The difference between involvement and commitment is like an eggs-and-ham breakfast:<br> 
-			the chicken was involved; the pig was committed.
+		<p>There ae many companies offering the same services in town. we come with a difference of coming
+			up with</p> <p>different products in the market. We pay faster and our payment
+			process is very reliable. Join us today and earn extra income while studying.</p>
 		</p>
 	</div>
 	<!-- /Intro-->
@@ -32,19 +33,20 @@
 	<div class="jumbotron top-space">
 		<div class="container">
 			
-			<h3 class="text-center thin">Reasons to use this template</h3>
+			<h3 class="text-center thin">Reasons to join Home Assign</h3>
 			
 			<div class="row">
 				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-cogs fa-5"></i>Bootstrap-powered</h4></div>
+					<div class="h-caption"><h4><i class="fa fa-cogs fa-5"></i>A lot of Jobs</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque aliquid adipisci aspernatur. Soluta quisquam dignissimos earum quasi voluptate. Amet, dignissimos, tenetur vitae dolor quam iusto assumenda hic reprehenderit?</p>
+						<p>While getting to college, it is not a good idea not to have an income of your own. We are part of the online schemes that work
+							tirelessly to ensure that you get the value of what you need. Join us today, learn how to write and earn while studying. Do not miss this opportunity</p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-flash fa-5"></i>Fat-free</h4></div>
+					<div class="h-caption"><h4><i class="fa fa-flash fa-5"></i>It is Free to Join</h4></div>
 					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores, commodi, sequi quis ad fugit omnis cumque a libero error nesciunt molestiae repellat quos perferendis numquam quibusdam rerum repellendus laboriosam reprehenderit! </p>
+						<p> </p>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 highlight">

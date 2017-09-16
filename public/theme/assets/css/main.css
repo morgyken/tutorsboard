@@ -17,11 +17,19 @@
 	font-size:44px;
 	margin-bottom:6px;
 	color:white;
+	font-weight:800;
+	color:#055ec4;
 	line-height:1.15em;
 }
 
 #head .tagline { color:rgba(255,255,255,0.75);
-	margin-bottom:25px; }
+	margin-bottom:25px;
+	font-weight:800;
+	border-color: #000;
+	padding: 12px;
+	background:rgba(12,53,193,0.74);
+
+}
 #head .tagline a { color:#fff; }
 #head .btn { margin-bottom:10px;}
 #head .btn-default {
