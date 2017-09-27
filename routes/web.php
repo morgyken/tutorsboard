@@ -12,11 +12,14 @@
 */
 
 Route::get('/', function () {
+
     return view('gen.index');
 })->name('home');
 
 Auth::routes();
 
+
+//Route::get('sample',array('as'=>'sample','uses'=>'DateTimeController@getDeadlineInSeconds12'));
 
 
 Route::post('comment-files/{question_id}/{filename}/{type}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFiles'));

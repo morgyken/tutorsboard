@@ -876,14 +876,18 @@ class QuestionController extends Controller
 
         $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->join('question_status_models', 'question_status_models.question_id', '=', 'question_bodies.question_id')
-            ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
-            ->where('status', 'available')
-            ->where('status', 'new')
+            ->leftjoin('question_status_models', 'question_status_models.question_id', '=', 'question_bodies.question_id')
+            ->select('question_bodies.*','post_question_prices.question_deadline',
+                'post_question_prices.question_price','post_question_prices.overdue')
+            
+            ->where('overdue',0)
+           
 
             ->paginate(25);
 
+           // dd($questions);
 
+        //dd($questions); 
         return view('home', ['question' => $questions]);
 
     }

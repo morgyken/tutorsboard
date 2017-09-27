@@ -53,6 +53,29 @@ function getDeadlineInSeconds1($deadline){
     return $interval; // array ['h']=>h, ['m]=> m, ['s'] =>s
 
 }
+
+function getDeadlineInSeconds12($deadline){
+
+
+    $deadline = new \Carbon\Carbon($deadline);
+
+    $now = \Carbon\Carbon::now();
+
+    $difference = $deadline -> diffInSeconds($now);
+
+    $TimeStart = strtotime(\Carbon\Carbon::now());
+
+    $TimeEnd = strtotime($deadline);
+
+    $Difference = ($TimeEnd - $TimeStart);
+
+   return $Difference;
+}
+?>
+<?php 
+
+\App\Http\Controllers\DateTimeController::UpdateDeadline();
+
 ?>
 @extends('layout.main-layout')
 
@@ -87,7 +110,16 @@ function getDeadlineInSeconds1($deadline){
             </div>
             <hr>
             @foreach($question as $quest=>$value)
-                @if(!$value->question_deadline == 'overdue')
+
+              
+
+                <?php  $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);
+
+                $deadline12 = getDeadlineInSeconds12($value->question_deadline);
+
+                ?>
+
+
                 <div class="question">
 
                 <a href="{{URL::to('/view-question/'.$value->question_id)}}">
@@ -99,7 +131,7 @@ function getDeadlineInSeconds1($deadline){
                     </div>
                     <div class="col-md-2">
 
-                        <?php  $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);  ?>
+
 
                         <h4 style="padding-bottom:20px;">
                             <span class="label label-danger label-lg ">
@@ -108,11 +140,15 @@ function getDeadlineInSeconds1($deadline){
                         <h4> <span class="label label-warning ">Ksh: {{$value->question_price}}</span></h4>
                     </div>
 
+
                     </div>
                 </a>
                 </div>
-                @endif
+
+
+
                 <hr>
+               
 
             @endforeach
             <h5>{{ $question->links() }}</h5>
@@ -123,7 +159,7 @@ function getDeadlineInSeconds1($deadline){
         <!-- /Article -->
 
     </div>
-</div>	<!-- /container -->
+</div>  <!-- /container -->
 
 @endsection
 
