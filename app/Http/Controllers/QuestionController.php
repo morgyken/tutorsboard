@@ -126,17 +126,38 @@ class QuestionController extends Controller
 
             return Response::download($path);
     }
+
     /*
      * comments files download
      */
 
-    public function CommentFiles($question, $fileName, $type, $comentId){
+    public function CommentFilesDownload($question, $fileName, $comment_id){
 
-
-        $path = public_path().'/storage/uploads/'.$question.'/'.$type.'/'.$fileName;
-
+        $path = public_path().'/storage/uploads/'.$question.'/comments/'.$comment_id.'/'.$fileName;
 
         return Response::download($path);
+    }
+
+
+    public static function CommentFiles($comment_id, $question_id){
+
+
+        $path_comm = public_path().'/storage/uploads/'.$question_id.'/comments/'.$comment_id;
+
+        $manuals = [];
+
+        $filesInFolder = \File::files($path_comm);
+
+
+
+        foreach($filesInFolder as $path)
+        {
+            $manuals [] = pathinfo($path);
+        }
+
+
+        return $manuals;
+
     }
 
     /*
@@ -144,16 +165,16 @@ class QuestionController extends Controller
      */
     public function QuestionDetails($question_id){
 
-        $question_price= PostQuestionPrice::where('question_id', '=', $question_id)->firstOrFail();
+        $question_price= PostQuestionPrice::where('question_id',$question_id)->firstOrFail();
 
         
-        $question = PostQuestionModel::where('question_id', '=', $question_id)->firstOrFail();
+        $question = PostQuestionModel::where('question_id', $question_id)->firstOrFail();
         /*
          * Pull question price in this model quesry
          *
          */
     
-        $assigned = DB::table('question_status_models')->where('question_id', '=', $question_id)->first();     
+        $assigned = DB::table('question_status_models')->where('question_id',$question_id)->first();     
           
         $time = new DateTimeModel();
 
@@ -170,7 +191,7 @@ class QuestionController extends Controller
          */
         if(
         empty(
-        $comments= PostQuestionModel::where('question_id', '=', $question_id)->first()
+        $comments= PostQuestionModel::where('question_id', $question_id)->first()
         )
 
         )
@@ -181,13 +202,10 @@ class QuestionController extends Controller
 
             $comments = DB::table('post_comments')
                 ->where('question_id', $question_id)
-                ->where('message_type', 'adm')
+                ->where('message_type', 'Comment')
                 ->get();
-           // $comments = PostcommentModel::select('user_id', 'comment_body', 'post_date') -> where('question_id',
-           // '=', $question_id)->get();
         }
 
-        //dd($comments);
 
         /*
          * Price suggestions
@@ -236,13 +254,17 @@ class QuestionController extends Controller
             $user12 = Auth::User()->email;
 
             $user = DB::table('users')->where('email', '=', $user12) ->get();
+
+            /**
+             * Question files generator
+             */
             
-            $path = public_path().'/storage/uploads/'.$question_id.'/answer/';
+            $path_question = public_path().'/storage/uploads/'.$question_id.'/question/';
                                 
 
             $manuals = [];
          
-            $filesInFolder = \File::files($path);
+            $filesInFolder = \File::files($path_question);
 
             foreach($filesInFolder as $path)
             {
@@ -250,8 +272,19 @@ class QuestionController extends Controller
             }
 
         /**
-         * Comment files generator
+         * Answer files generator
          */
+        $path_ans = public_path().'/storage/uploads/'.$question_id.'/answer/';
+
+
+        $manuals_ans = [];
+
+        $filesInFolder_ans = \File::files($path_ans);
+
+        foreach($filesInFolder_ans as $path)
+        {
+            $manuals_ans[] = pathinfo($path);
+        }
 
 
         return view ('quest.question-det', [
@@ -285,6 +318,8 @@ class QuestionController extends Controller
 
             'assigned'=>$assigned,
 
+
+
             /*
              * Pass the main price of the question
              */
@@ -307,6 +342,8 @@ class QuestionController extends Controller
             'price' => $question_price->question_price,
 
            'posted' => $posted,
+
+            'answer_files' => $manuals_ans
 
         ]);
     }
@@ -346,9 +383,10 @@ class QuestionController extends Controller
         /*
          * Update the question status
          */
-            
+        
          DB::table('post_answers')->insert(
             [
+                'answer_id'=>rand(9000,90000),
                 'overdue' => '0',
                 'question_id' =>$question,
                 'user_id' => Auth::user()->email,
@@ -522,22 +560,6 @@ class QuestionController extends Controller
 
     }
 
-    //admin comments
-
-    public function  PostAdminComments(Request $request, $question){
-
-        DB::table('post_comments')->insert(
-            [
-                'comment_body' => $request['comment_body'],
-                'question_id' =>$question,
-                'message_type'=>'admin comm',
-                'user_id' => Auth::user()->email,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ]);
-
-        return redirect()->route('view-question', ['question_id'=> $question]);
-    }
 
     /*
      * Files data to database here I dream
@@ -551,55 +573,45 @@ class QuestionController extends Controller
     public function  PostComments(Request $request, $question){
         $comments_id = rand(1000, 9999);
         
-        $path=  public_path().'/storage/uploads/'.$question.'/comments/'.$comments_id.'/';
+        $path=  public_path().'/storage/uploads/'.$question.'/comments/'.$comments_id;
      
         $this-> FileUploads($request, $path);
             
         /*
          * Give comments an IDentificatiion Number
          */
-     
-        
-        if($request->commtype == 'admin'){
-            $comm = 'Adm'; 
-        }
-        
-        else{
-            $comm = 'tut';
-        }
-      
-        /*
-         * Post Comments
-         */
+
+        $path1 = '/storage/uploads/'.$question.'/comments/'.$comments_id;
+
         DB::table('post_comments')->insert(
             [
                 'comment_body' => $request['comment_body'],
                 'comments_id' =>$comments_id,
                 'question_id' =>$question,
-                'message_type'=>$comm,
+                'message_type'=>$request->commtype,
                 'user_id' => Auth::user()->email,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
-        /*
-         * post files
-         */
-        DB::table('comment_fileuploads')->insert(
-            [
-               'comment_id' =>$comments_id,
-                'question_id' =>$question,
-                'filename'=>$path,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ]);
+        $file = Input::file('file');
 
 
-        /*
-         * Upload files 
-         * The files go to comments sections 
-         * Folder for uploading files be comments
-         */
+        foreach ($file as $files){
+
+            $name =  $files->getClientOriginalName();
+
+            DB::table('comment_files')->insert(
+                [
+                    'file_name' => $name,
+                    'comment_id' => $comments_id,
+                    'file_path'=> $path1,
+                     'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
+
+        }
+
         
         return redirect()->route('view-question', ['question_id'=> $question]);
     }
@@ -660,6 +672,7 @@ class QuestionController extends Controller
                 $name =  $files->getClientOriginalName();
 
                 $files->move($dest, $name);
+
             }
       }
 
@@ -779,7 +792,7 @@ class QuestionController extends Controller
       
             if(is_array($file)){
 
-            $dest = public_path().'/storage/uploads/'.$question_id.'/question/';
+            $dest = public_path().'/storage/uploads/'.$question_id.'/qestion/';
 
             foreach ($file as $files){
                     /*
@@ -813,9 +826,17 @@ class QuestionController extends Controller
                 ]);
            /*
             * Update status using the status functon
-            */
+            
+             DB::table('question_status_models')->insert(
+                [
+                   
+                    'question_id' =>$question_id,
+                    'user_id' => Auth::user()->email,
+                    'status' => 'New',
+                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
-            $this->UpdateStatus($question_id, 'new');
+                ]);
             
             /*
              * Add question Id to session, this is to be used in the adding of the price

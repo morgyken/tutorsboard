@@ -60,13 +60,11 @@
 
                         <span style="float: right;" >
                             <p style="font-size: 25px"> <span class="label label-danger"> 
-                                    @if($assigned->status)
+                                   
                                     
                                        {{ $assigned->status}}
-                                        
-                                     @else
-                                       New
-                                     @endif                                   
+
+                                                                      
                                 </span></p>
                         </span>
 
@@ -96,7 +94,7 @@
 
                     <blockquote class="blockquote">
 
-                        <h4> Available Files </h4>
+                        <h4> Question attachments</h4>
                     
                         @foreach($files as $file)
                         
@@ -104,7 +102,7 @@
                                     [
                                         'question_id' =>$question['question_id'],
                                         'filename'=>$file['basename'],
-                                        'type' =>'answer'
+                                        'type' =>'question'
                                      ])}}"
                                 ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
                         @endforeach
@@ -127,11 +125,40 @@
 
 
 
+
                     @foreach($comments as $comment =>$val )
                             <div class="col-md-12" style="margin-top:12px">
                                 <img class="d-flex mr-3 col-md-2  rounded-circle" id="comm-pic" src="http://placehold.it/40x50" alt="">
                                 <div class="col-md-10">
-                                    <h5>Coment Header </h5> <p> {{$val->comment_body}} </p>
+
+
+                                    <h5> {{$val->comments_id}} Coment Header </h5> <p> {{$val->comment_body}} </p>
+
+                                    <blockquote class="blockquote">
+
+                                        <h4> Comment Attachments</h4>
+
+
+                                        <?php $filescomm = \App\Http\Controllers\QuestionController::CommentFiles($val->comments_id, $question['question_id']);
+
+
+                                        ?>
+
+                                            @foreach($filescomm as $file23)
+
+                                                <p style="font-size:12px "><a href="{{route('comment-files',
+                                    [
+                                        'question_id' =>$question['question_id'],
+                                        'filename'=>$file23['basename'],
+                                        'comment_id' =>$val->comments_id
+                                     ])}}"
+                                                    ><i class="icon-download-alt">{{$file23['basename'] }}</a>   </p>
+                                            @endforeach
+
+
+
+
+                                    </blockquote>
                                 </div>
                             </div>
 
@@ -140,6 +167,23 @@
 
 
                      <hr>
+
+                    <blockquote class="blockquote">
+
+                        <h4> Answer  Attachments</h4>
+
+                        @foreach($answer_files as $file)
+
+                            <p><a href="{{route('file-download',
+                                    [
+                                        'question_id' =>$question['question_id'],
+                                        'filename'=>$file['basename'],
+                                        'type' =>'answer'
+                                     ])}}"
+                                ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
+                        @endforeach
+
+                    </blockquote>
                </div>
 
             </article>

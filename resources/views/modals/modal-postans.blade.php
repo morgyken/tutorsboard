@@ -36,7 +36,7 @@
                         <label for="usr">Include Files</label>
                         @include('part.file-picker')
                     </div>
-                    <button type="input" class="btn btn-md col-sm-3 btn-success btn-block"> Commit to Answer</button>
+                    <button type="input" class="btn btn-md col-sm-3 btn-success btn-block">Give your Answer</button>
                     <button type="reset" class="btn btn-md col-sm-3 btn-warning btn-block" data-dismiss="modal"> Cancel</button>
                 </form>
 

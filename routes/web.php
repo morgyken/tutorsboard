@@ -22,7 +22,7 @@ Auth::routes();
 //Route::get('sample',array('as'=>'sample','uses'=>'DateTimeController@getDeadlineInSeconds12'));
 
 
-Route::post('comment-files/{question_id}/{filename}/{type}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFiles'));
+Route::get('comment-files/{question_id}/{filename}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFilesDownload'));
 
 Route::get('all-questions',array('as'=>'all-questions','uses'=>'QuestionController@allQuestions'));
 
