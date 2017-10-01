@@ -58,9 +58,9 @@
         <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
         <div class="fb-profile-text">
             <div class="col-dm-9">
-                <h3>Name: {{$user->name}}</h3>
+                <h3>Name: {{Auth::user()->name}}</h3>
                 <p> Tutor Since: <?php
-                    $date = new DateTime($user->created_at);
+                    $date = new DateTime(Auth::user()->created_at);
                     echo $date->format("l jS \of F Y");
 
                     ?></p>
@@ -101,123 +101,72 @@
 
     </div>
     <div class="clearfix col-md-9">
-        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-            <thead>
-            <tr>
-                <th>Question Id</th>
-                <th>Summary</th>
 
-                <th>Total Amount </th>
+        <article class="col-md-9 maincontent">
+            <header class="page-header">
+                <h1 class="page-title"> Available Questions</h1>
+            </header>
 
-                <th>Status</th>
-                <th> Paid </th>
+            <div class="clearfix">
+                <div class="col-md-10">
+                    <h4>Question Detail  </h4>
+                </div>
+                <div class="col-md-2">
+                    <h4> Other Details</h4>
+                </div>
 
-
-            </tr>
-            </thead>
-            <?php $array = array(); ?>
-
-             @foreach( $comments as $quest=> $value)
-            <tbody>
-
-
-            <a href="#"> <tr class="odd gradeX" style="cursor: pointer">
-                <?php  $array [] = $value->question_id  ?>
-                <td> {{$value->question_id}} </td>
-                <td> {!! substr( $value-> summary, 0, 100)!!}  </td>
-                <td> {!! $value->question_price !!}</td>
-                    <td> {{$value -> status}} </td>
-
-                    @if($value->paid==1)
-                        <td> Paid </td>
-
-                    @else
-                        <td>  </td>
-                    @endif
+            </div>
+            <hr>
+            @foreach($question as $quest=>$value)
 
 
-            </tr>
-            </a>
+
+                <?php  $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);
+
+                $deadline12 = getDeadlineInSeconds12($value->question_deadline);
+
+                ?>
+
+
+                <div class="question">
+
+                    <a href="{{URL::to('/view-question/'.$value->question_id)}}">
+                        <div class="clearfix quest">
+                            <div class="col-md-10" style="color:#333">
+
+                                <h4>{{$value->category}}</h4>
+                                <p>{{ $value->summary  }}  </p>
+                            </div>
+                            <div class="col-md-2">
+
+
+
+                                <h4 style="padding-bottom:20px;">
+                            <span class="label label-danger label-lg ">
+                                {{ $array_of_deadline }}
+                            </span>  </h4>
+                                <h4> <span class="label label-warning ">Ksh: {{$value->question_price}}</span></h4>
+                            </div>
+
+
+                        </div>
+                    </a>
+                </div>
+
+
+
+                <hr>
+
 
             @endforeach
+            <h5>{{ $question->links() }}</h5>
 
-            </tbody>
-            </table>
 
+
+        </article>
+        <!-- /Article -->
             <h5>{{ $comments->links() }}</h5>
     </div>
 </div>
 
-<footer id="footer" class="top-space">
-
-    <div class="footer1">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-3 widget">
-                    <h3 class="widget-title">Contact</h3>
-                    <div class="widget-body">
-                        <p>+234 23 9873237<br>
-                            <a href="mailto:#">some.email@somewhere.com</a><br>
-                            <br>
-                            234 Hidden Pond Road, Ashland City, TN 37015
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-3 widget">
-                    <h3 class="widget-title">Follow me</h3>
-                    <div class="widget-body">
-                        <p class="follow-me-icons clearfix">
-                            <a href=""><i class="fa fa-twitter fa-2"></i></a>
-                            <a href=""><i class="fa fa-dribbble fa-2"></i></a>
-                            <a href=""><i class="fa fa-github fa-2"></i></a>
-                            <a href=""><i class="fa fa-facebook fa-2"></i></a>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 widget">
-                    <h3 class="widget-title">Text widget</h3>
-                    <div class="widget-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
-                        <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
-                    </div>
-                </div>
-
-            </div> <!-- /row of widgets -->
-        </div>
-    </div>
-
-    <div class="footer2">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-6 widget">
-                    <div class="widget-body">
-                        <p class="simplenav">
-                            <a href="#">Home</a> |
-                            <a href="about.blade.php">About</a> |
-                            <a href="sidebar-right.blade.php">Sidebar</a> |
-                            <a href="contact.blade.php">Contact</a> |
-                            <b><a href="signup.blade.php">Sign up</a></b>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-6 widget">
-                    <div class="widget-body">
-                        <p class="text-right">
-                            Copyright &copy; 2014, Your name. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a>
-                        </p>
-                    </div>
-                </div>
-
-            </div> <!-- /row of widgets -->
-        </div>
-    </div>
-</footer>
-
-
-
-
+@include('part.footer')

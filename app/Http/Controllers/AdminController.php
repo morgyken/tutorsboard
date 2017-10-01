@@ -8,7 +8,10 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+
 use App\question_body;
+
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -90,7 +93,8 @@ class AdminController extends Controller
 
         return $question1;
     }
-    public function TutProfile($email, $optional=null){
+
+    public function findTutorprofile($email, $optional = null){
 
         $count = DB::table('question_bodies')
             ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
@@ -138,21 +142,53 @@ class AdminController extends Controller
         }
         else{
             $comments = DB::table('question_bodies')
-                    ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-                    ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
-                    ->select('question_bodies.question_id', 'question_bodies.summary',
-                        'question_status_models.status',
-                        'post_question_prices.created_at',
-                        'post_question_prices.question_deadline', 'post_question_prices.question_price')
-                    ->orderBy('post_question_prices.created_at', 'asc')
-                    ->where('question_bodies.user_id', $email)
-                    ->where('status', $optional)
-                    ->paginate(10);
+                ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+                ->leftjoin('question_status_models', 'question_bodies.question_id', '=', 'question_status_models.question_id')
+                ->select('question_bodies.question_id', 'question_bodies.summary',
+                    'question_status_models.status',
+                    'post_question_prices.created_at',
+                    'post_question_prices.question_deadline', 'post_question_prices.question_price')
+                ->orderBy('post_question_prices.created_at', 'asc')
+                ->where('question_bodies.user_id', $email)
+                ->where('status', $optional)
+                ->paginate(10);
 
 
 
         }
-        return view('tut.profile-revised',[
+
+        $return = array('comments'=>$comments, 'sum'=>$sum, 'sum2'=>$sum_2,'count'=> $count );
+
+
+        return $return;
+    }
+    public function TutProfile($email, $optional=null){
+
+        $details = $this->findTutorprofile($email, $optional);
+
+        $sum = $details['sum'];
+
+        $sum_2 = $details['sum2'];
+
+        $comments = $details['comments'];
+
+        $count=  $details['count'];
+
+
+        $user = Auth::User()->name;
+
+        $questions = DB::table('question_bodies')
+            ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_status_models', 'question_status_models.question_id', '=', 'question_bodies.question_id')
+            ->select('question_bodies.*','post_question_prices.question_deadline',
+                'post_question_prices.question_price','post_question_prices.overdue')
+
+            ->where('overdue',0)
+
+            ->paginate(25);
+
+
+        return view('tut.home',[
             'comments'=> $comments,
             /*
              * Current sum
@@ -161,6 +197,8 @@ class AdminController extends Controller
             /*
              * user profile
              */
+
+            'question' => $questions,
 
             'user'=>$user,
 
@@ -215,6 +253,231 @@ class AdminController extends Controller
     public function AdmDashboard(){
         return view ('adm.index-admin');
     }
+
+
+
+    public function QuestionDetails($question_id, $optional= null){
+
+       $email = Auth::user()->email;
+
+        $details = $this->findTutorprofile($email, $optional);
+
+        $sum = $details['sum'];
+
+        $sum_2 = $details['sum2'];
+
+        $comments1 = $details['comments'];
+
+        $count=  $details['count'];
+
+
+        $user1 = Auth::User()->name;
+
+
+
+        $question_price= PostQuestionPrice::where('question_id',$question_id)->firstOrFail();
+
+
+        $question = PostQuestionModel::where('question_id', $question_id)->firstOrFail();
+        /*
+         * Pull question price in this model quesry
+         *
+         */
+
+        $assigned = DB::table('question_status_models')->where('question_id',$question_id)->first();
+
+        $time = new DateTimeModel();
+
+        /*
+        * return the comments in the following
+        *
+        */
+
+        $interval = $time ->getDeadlineInSeconds($question_id);
+
+        /*
+         * return the comments in the following
+         *
+         */
+        if(
+        empty(
+        $comments= PostQuestionModel::where('question_id', $question_id)->first()
+        )
+
+        )
+        {
+            $comments = [];
+        }
+        else{
+
+            $comments = DB::table('post_comments')
+                ->where('question_id', $question_id)
+                ->where('message_type', 'Comment')
+                ->get();
+        }
+
+
+        /*
+         * Price suggestions
+         *
+         */
+        if(
+        empty(
+        $priceSuggestion= SuggestPriceIncrease::where('question_id', '=', $question_id)->first()
+        )
+
+        )
+        {
+            $priceSuggestion= array();
+        }
+        else{
+
+            $priceSuggestion = DB::table('suggest_price_increases')->where('question_id', '=', $question_id) ->get();
+        }
+        /*
+       * Get Sugegsted deadline
+       */
+
+        if(
+        empty(
+        $deadlines= SuggestDeadline::where('question_id', '=', $question_id)->get()
+        )
+
+        )
+        {
+            $deadlines= array();
+        }
+        else{
+
+            $deadlines = DB::table('suggest_deadlines')->where('question_id', '=', $question_id) ->get();
+        }
+
+
+        $posted= DB::table('question_bodies')->where('question_id', '=', $question_id)->value('created_at');
+
+        $questions = DB::table('question_bodies')
+            ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
+            ->paginate(10);
+
+
+        $user12 = Auth::User()->email;
+
+        $user = DB::table('users')->where('email', '=', $user12) ->get();
+
+        /**
+         * Question files generator
+         */
+
+        $path_question = public_path().'/storage/uploads/'.$question_id.'/question/';
+
+
+        $manuals = [];
+
+        $filesInFolder = \File::files($path_question);
+
+        foreach($filesInFolder as $path)
+        {
+            $manuals[] = pathinfo($path);
+        }
+
+        /**
+         * Answer files generator
+         */
+        $path_ans = public_path().'/storage/uploads/'.$question_id.'/answer/';
+
+
+        $manuals_ans = [];
+
+        $filesInFolder_ans = \File::files($path_ans);
+
+        foreach($filesInFolder_ans as $path)
+        {
+            $manuals_ans[] = pathinfo($path);
+        }
+
+
+        return view ('quest.question-det12', [
+
+            /*
+             * Get user type here
+             */
+            'user' =>$user,
+
+            /*
+             * Return Comments
+             */
+
+            'comments' => $comments,
+
+            /*
+             * Get Question
+             */
+
+            'question' => $question,
+
+            /*
+             * Files and more file details
+             */
+
+            'files'=>$manuals,
+
+            /*
+             * Assigned is assigned
+             */
+
+            'assigned'=>$assigned,
+
+            'comments1'=> $comments1,
+            /*
+             * Current sum
+             */
+            'sum' => $sum,
+            /*
+             * user profile
+             */
+
+            'question' => $questions,
+
+            'user1'=>$user1,
+
+            'count'=>$count,
+
+            /*
+             * cumulative sum
+             */
+
+            'sum_2' => $sum_2,
+
+
+            /*
+             * Pass the main price of the question
+             */
+
+            'question_price' => $question_price,
+            /*
+             * Pass comments all of them
+             */
+
+            'price1' => $priceSuggestion,
+
+            /*
+             * pass suggested deadline to the view
+             */
+
+            'deadlines' => $deadlines,
+
+            'difference' => $interval,
+
+            'price' => $question_price->question_price,
+
+            'posted' => $posted,
+
+            'answer_files' => $manuals_ans
+
+        ]);
+    }
+
 
 
 

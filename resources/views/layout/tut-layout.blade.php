@@ -53,22 +53,22 @@
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
-    <div class="fb-profile">
-        <img align="left" class="fb2-image-lg" src="{{URL::asset('admin/images/image.jpg')}}" alt="Profile image example"/>
-        <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
-        <div class="fb-profile-text">
-            <div class="col-dm-9">
-                <h3>Name: {{$user->name}}</h3>
-                <p> Tutor Since: <?php
-                    $date = new DateTime($user->created_at);
-                    echo $date->format("l jS \of F Y");
+<div class="fb-profile">
+    <img align="left" class="fb2-image-lg" src="{{URL::asset('admin/images/image.jpg')}}" alt="Profile image example"/>
+    <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
+    <div class="fb-profile-text">
+        <div class="col-dm-9">
+            <h3>Name: {{Auth::User()->name}}</h3>
+            <p> Tutor Since: <?php
+                $date = new DateTime(Auth::User()->created_at);
+                echo $date->format("l jS \of F Y");
 
-                    ?></p>
-                <p>Answered {{$count}}</p>
+                ?></p>
+            <p>Answered {{$count}}</p>
 
 
-            </div>
         </div>
+    </div>
 
 </div> <!-- /container -->
 <div class="container">
@@ -76,50 +76,20 @@
         <div class="col-sm-4"> <h4> Final Earning</h4>  </div>
         <div  class="col-sm-4"><h4>Total Earning </h4> </div>
         <div class="col-sm-4"> <h4>Other details </h4> </div>
-    </div>
+    </div>;;
 </div>
 
 <div class="container">
 
     <div class="col-md-3">
-    @include('part.tut-nav-bar')
+        @include('part.tut-nav-bar')
 
     </div>
-    <div class="clearfix col-md-9">
-        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-            <thead>
-            <tr>
-                <th>Question Id</th>
-                <th>Summary</th>
+    <div class="clearfix col-md-9" style="background:#FAFAD2">
 
-                <th>Total Amount </th>
+        @yield('body')
 
-                <th>Status</th>
-
-
-            </tr>
-            </thead>
-
-             @foreach( $comments as $quest=> $value)
-            <tbody>
-
-            <a href="#"> <tr class="odd gradeX" style="cursor: pointer">
-
-                <td> {{$value->question_id}} </td>
-                <td> {!! substr( $value-> summary, 0, 100)!!}  </td>
-                <td> Ksh. 34 </td>
-                    <td> {{$value -> status}} </td>
-            </tr>
-            </a>
-
-            @endforeach
-
-            </tbody>
-            </table>
-
-            <h5>{{ $comments->links() }}</h5>
     </div>
 </div>
-
-@include('part.footer')
+@include('layout.footer')
 

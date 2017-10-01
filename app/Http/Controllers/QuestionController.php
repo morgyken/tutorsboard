@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Input;
 
 use Illuminate\Support\Facades\Auth;
 
-class QuestionController extends Controller
+class QuestionController extends AdminController
 {
     /*
      * Suggest Price Increase here
@@ -163,7 +163,20 @@ class QuestionController extends Controller
     /*
      * get question details
      */
-    public function QuestionDetails($question_id){
+    public function QuestionDetails($question_id, $optional=null){
+        $email = Auth::user()->email;
+
+        $details = $this->findTutorprofile($email, $optional);
+
+
+        $sum = $details['sum'];
+
+        $sum_2 = $details['sum2'];
+
+        $comments12 = $details['comments'];
+
+        $count=  $details['count'];
+
 
         $question_price= PostQuestionPrice::where('question_id',$question_id)->firstOrFail();
 
@@ -206,11 +219,6 @@ class QuestionController extends Controller
                 ->get();
         }
 
-
-        /*
-         * Price suggestions
-         *
-         */
         if(
         empty(
         $priceSuggestion= SuggestPriceIncrease::where('question_id', '=', $question_id)->first()
@@ -244,11 +252,6 @@ class QuestionController extends Controller
         
 
         $posted= DB::table('question_bodies')->where('question_id', '=', $question_id)->value('created_at');
-
-        $questions = DB::table('question_bodies')
-            ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->select('question_bodies.*','post_question_prices.question_deadline','post_question_prices.question_price'  )
-            ->paginate(10);
         
 
             $user12 = Auth::User()->email;
@@ -287,7 +290,7 @@ class QuestionController extends Controller
         }
 
 
-        return view ('quest.question-det', [
+        return view ('quest.question-det12', [
 
             /*
              * Get user type here
@@ -319,10 +322,11 @@ class QuestionController extends Controller
             'assigned'=>$assigned,
 
 
+            'sum' => $sum,
 
-            /*
-             * Pass the main price of the question
-             */
+
+            'sum_2' => $sum_2,
+
 
             'question_price' => $question_price,
             /*
@@ -343,7 +347,11 @@ class QuestionController extends Controller
 
            'posted' => $posted,
 
-            'answer_files' => $manuals_ans
+            'answer_files' => $manuals_ans,
+
+            'comments21' => $comments12,
+
+            'count' => $count
 
         ]);
     }
@@ -378,12 +386,7 @@ class QuestionController extends Controller
             }
             
         }
-        else{
-            $name =  $files ->getClientOriginalName();
-             $files->move($dest, $name);
-        }    
-            
-        /*
+       /*
          * Update the question status
          */
         
@@ -399,6 +402,18 @@ class QuestionController extends Controller
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
 
+
+            DB::table('post_comments')->insert(
+                [
+                    'comment_body' => "Thank you for providing answer in time",
+                    'comments_id' =>  rand(1000, 9999),
+                    'question_id' =>$question,
+                    'message_type'=>'answered',
+                    'user_id' => Auth::user()->email,
+                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
+
         $this->UpdateStatus($question, 'answered');
 
         }
@@ -409,14 +424,20 @@ class QuestionController extends Controller
 
         
         if($request->update =='commit'){
-            $status = DB::table('question_status_models')->select('status')->where ('question_id', $question)->first();
 
-            if($status->status=='Assigned' || $status->status == 'Available'){
 
-                echo '<p style="color:orangered"> The Question has Been assigned to another User, feelfree to take another question</p>';
+            DB::table('post_comments')->insert(
+                [
+                    'comment_body' => "Welcome! You have been assigned to this question,
+                    please ensure that you provide quality answer",
+                    'comments_id' =>  rand(1000, 9999),
+                    'question_id' =>$question,
+                    'message_type'=>'Commit',
+                    'user_id' => Auth::user()->email,
+                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
 
-                return redirect()->route('view-question', ['question_id'=> $question]);
-            }
             
             DB::table('assign_questions')->insert(
             [
@@ -909,13 +930,11 @@ class QuestionController extends Controller
                 'post_question_prices.question_price','post_question_prices.overdue')
             
             ->where('overdue',0)
-           
+
 
             ->paginate(25);
 
-           // dd($questions);
 
-        //dd($questions); 
         return view('home', ['question' => $questions]);
 
     }

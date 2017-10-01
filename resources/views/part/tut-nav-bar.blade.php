@@ -5,28 +5,23 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="{{URL::route('all-questions')}}"><i class="fa fa-dashboard fa-2x fa-fw"></i> All Questions</a>
+                <a href="{{route('all-questions')}}"><i class="fa fa-dashboard fa-2x fa-fw"></i> All Questions</a>
             </li>
 
             <li>
-                <a href="{{route('tut-profile',['email' => $user->email, 'optional' => 'assigned'] )}}"><i class="fa fa-question-circle fa-2x fa-fw"></i>Assigned  </a>
+                <a href=""><i class="fa fa-question-circle fa-2x fa-fw"></i>Assigned  </a>
             </li>
             <li>
 
-                <a href="{{route('tut-profile',['email' => $user->email, 'optional' => 'answered'] )}}"><i class="fa fa-users fa-2x fa-fw"></i>Answered</a>
+                <a href=""><i class="fa fa-users fa-2x fa-fw"></i>Answered</a>
             </li>
             <li>
 
-                <a href="{{URL::route('adm-tutors')}}"><i class="fa fa-users fa-2x fa-fw"></i>Financial Report</a>
+                <a href=""><i class="fa fa-users fa-2x fa-fw"></i>Financial Report</a>
             </li>
 
             <li>
-
-                <a href="{{URL::route('adm-tutors')}}"><i class="fa fa-users fa-2x fa-fw"></i>Withdraw Money</a>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-user fa-2x fa-fw" ></i>My Profile</a>
+                <a href="{{route('tut-profile', ['email',Auth::User()->email])}}"><i class="fa fa-user fa-2x fa-fw" ></i>Account Profile</a>
 
                 <!-- /.nav-second-level -->
             </li>

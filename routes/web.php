@@ -24,14 +24,14 @@ Auth::routes();
 
 Route::get('comment-files/{question_id}/{filename}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFilesDownload'));
 
-Route::get('all-questions',array('as'=>'all-questions','uses'=>'QuestionController@allQuestions'));
+Route::get('all-questions',array('as'=>'all-questions','uses'=>'AdminController@TutProfile'));
 
 Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'QuestionController@askQuestions'));
 
 Route::get('post-questions',array('as'=>'post-questions','uses'=>'QuestionController@postQuestions'));
 
 
-Route::get('view-question/{question_id}',array('as'=>'view-question','uses'=>'QuestionController@QuestionDetails'));
+Route::get('view-question/{question_id}/{optional?}',array('as'=>'view-question','uses'=>'QuestionController@QuestionDetails'));
 
 Route::post('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
 
