@@ -354,6 +354,9 @@ class QuestionController extends Controller
         /*
          * Post answer here 
          */
+
+
+
         if($request->update =='postAnswer'){
             //file uploads
 
@@ -403,8 +406,17 @@ class QuestionController extends Controller
         /*
          * Check if the request is commit 
          */
+
         
         if($request->update =='commit'){
+            $status = DB::table('question_status_models')->select('status')->where ('question_id', $question)->first();
+
+            if($status->status=='Assigned' || $status->status == 'Available'){
+
+                echo '<p style="color:orangered"> The Question has Been assigned to another User, feelfree to take another question</p>';
+
+                return redirect()->route('view-question', ['question_id'=> $question]);
+            }
             
             DB::table('assign_questions')->insert(
             [
@@ -803,10 +815,6 @@ class QuestionController extends Controller
                 }
 
             }
-            else{
-                $name =  $files->getClientOriginalName();
-                 $files->move($dest, $name);
-            }
 
             /*
              * Insert into database 
@@ -824,8 +832,7 @@ class QuestionController extends Controller
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
                 ]);
-           /*
-            * Update status using the status functon
+
             
              DB::table('question_status_models')->insert(
                 [

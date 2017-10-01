@@ -8,7 +8,7 @@ echo $usertype;
         <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Commit to Answer</a></p>
 
         <p> <a href="#"  data-toggle="collapse" style="margin-right: 12px;"
-               data-target="#message">Send Us a Message </a></p>
+               data-target="#Comment">Send Us a Message </a></p>
 
     @elseif($assigned->status == 'Assigned')
 

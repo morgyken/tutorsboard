@@ -93,8 +93,13 @@ function getDeadlineInSeconds12($deadline){
     </ol>
 
     <div class="row">
+        <div class="col-md-3">
 
-        <article class="col-md-12 maincontent">
+            @include('part.tut-nav-bar')
+
+        </div>
+
+        <article class="col-md-9 maincontent">
             <header class="page-header">
                 <h1 class="page-title"> Available Questions</h1>
             </header>

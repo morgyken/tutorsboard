@@ -24,9 +24,10 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
                          <input type="hidden" name="update" value="commit">
-                        <p id="ans"> Virtute voluptaria dissentiunt has ad. Cu eos audiam fabellas, vis nisl percipit probatus no.
+                        <p id="ans"> Take a minute and consider cancelling. Only take the project if you re sure you can Anwer the question.
 
-                            explicari ei. At ludus utroque tacimates pri, ne ius natum delicata iracundia.</p>
+                        </p>
+                        <p>Are you sure you will provide Quality answer for this Question? Then Click Confirm to continue </p>
                         <button type="input" class="btn btn-md col-sm-3 btn-success btn-block"> Commit to Answer</button>
                         <button type="reset" class="btn btn-md col-sm-3 btn-warning btn-block" data-dismiss="modal"> Cancel</button>
                     </form>

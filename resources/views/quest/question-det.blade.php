@@ -75,7 +75,7 @@
 
                     <div class="col-lg-2">
                         <!-- Preview Image -->
-                        <img width="130" height="150" class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+                        <img width="130" height="150" class="img-fluid rounded" src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjY8ZX08MzWAhVFuBQKHaQNBeYQjRwIBw&url=https%3A%2F%2Fwww.sde.co.ke%2Farticle%2F2000112450%2Fthe-modern-kenyan-man&psig=AOvVaw23_kC0vPnK52-W_X9DOFl7&ust=1506859951679655" alt="">
 
                         <hr>
                     </div>
@@ -132,21 +132,21 @@
                                 <div class="col-md-10">
 
 
-                                    <h5> {{$val->comments_id}} Coment Header </h5> <p> {{$val->comment_body}} </p>
+                                    <h5>Created at: {{$val->created_at}}</h5><p> {{$val->comment_body}} </p>
 
-                                    <blockquote class="blockquote">
-
-                                        <h4> Comment Attachments</h4>
 
 
                                         <?php $filescomm = \App\Http\Controllers\QuestionController::CommentFiles($val->comments_id, $question['question_id']);
 
 
                                         ?>
+                                    <div style="background:#fef9e7 ; padding: 10px; border-radius: 12px">
+                                        <h3 style="font-size: 17px;"> Comment Attachments</h3>
 
-                                            @foreach($filescomm as $file23)
 
-                                                <p style="font-size:12px "><a href="{{route('comment-files',
+                                    @foreach($filescomm as $file23)
+
+                                                <p style="font-size:12px; "><a href="{{route('comment-files',
                                     [
                                         'question_id' =>$question['question_id'],
                                         'filename'=>$file23['basename'],
@@ -155,10 +155,8 @@
                                                     ><i class="icon-download-alt">{{$file23['basename'] }}</a>   </p>
                                             @endforeach
 
+                                    </div>
 
-
-
-                                    </blockquote>
                                 </div>
                             </div>
 
@@ -168,7 +166,7 @@
 
                      <hr>
 
-                    <blockquote class="blockquote">
+                    <blockquote class="blockquote" style="padding: 16px; border-top: 23px;">
 
                         <h4> Answer  Attachments</h4>
 

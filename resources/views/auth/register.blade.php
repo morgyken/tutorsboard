@@ -44,6 +44,52 @@
                                         @endif
                                     </div>
                                 </div>
+                                <!--- has phone-->
+
+                                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">Phone Number</label>
+
+                                    <div class="col-md-6">
+                                        <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
+
+                                        @if ($errors->has('phone'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('university') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">University</label>
+
+                                    <div class="col-md-6">
+                                        <input id="university" type="text" class="form-control" name="university" value="{{ old('university') }}" required autofocus>
+
+                                        @if ($errors->has('university'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('university') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-group{{ $errors->has('idnumber') ? ' has-error' : '' }}">
+                                    <label for="idnumber" class="col-md-4 control-label">ID Number</label>
+
+                                    <div class="col-md-6">
+                                        <input id="name" type="text" class="form-control" name="idnumber" value="{{ old('idnumber') }}" required autofocus>
+
+                                        @if ($errors->has('idnumber'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('idnumber') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+
 
                                 <input id="name" type="hidden"  name="user_type" value="tutor">
 
