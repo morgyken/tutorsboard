@@ -148,14 +148,13 @@
 
                         <h4> {{$val->user_id}} Answered the Question</h4>
 
-
                         <h5>Created at: {{$val->created_at}}</h5><p style="background: #fff;padding: 12px;"> {{$val->comment_body}} </p>
 
                 <h4> Answer  Attachments</h4>
 
                 @foreach($answer_files as $file)
 
-                    <p style="font-size: 12px"><a href="{{route('file-download',
+                    <p style="font-size: 14px"><a href="{{route('file-download',
                                     [
                                         'question_id' =>$question['question_id'],
                                         'filename'=>$file['basename'],
