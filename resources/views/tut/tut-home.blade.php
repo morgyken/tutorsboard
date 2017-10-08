@@ -110,9 +110,7 @@
                                 <p>{{ $value->summary  }}  </p>
                             </div>
                             <div class="col-md-2">
-
-
-
+                                
                                 <h4 style="padding-bottom:20px;">
                             <span class="label label-danger label-lg ">
                                 {{ $array_of_deadline }}

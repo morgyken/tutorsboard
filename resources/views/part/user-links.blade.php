@@ -3,14 +3,14 @@ echo $usertype;
 ?>
 
 @if($usertype =='')
-    @if($assigned->status == 'New' || $assigned->status== 'Available' )
+    @if($assigned->current == 1 )
 
         <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Commit to Answer</a></p>
 
         <p> <a href="#"  data-toggle="collapse" style="margin-right: 12px;"
                data-target="#Comment">Send Us a Message </a></p>
 
-    @elseif($assigned->status == 'Assigned')
+    @elseif($assigned->assigned == 1)
 
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-ans">Answer Question</a></p>
 
@@ -18,7 +18,7 @@ echo $usertype;
 
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-optout">Opt Out Question</a></p>
 
-    @elseif($assigned->status == 'answered')
+    @elseif($assigned->answered == 1)
         <p> <a href="#"  data-toggle="collapse" data-target="#Comment">Comment on the Question</a></p>
 
         <p> <a href="#"  data-toggle="collapse" data-target="#message">Send Admin Message</a></p>

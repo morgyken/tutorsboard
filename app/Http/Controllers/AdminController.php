@@ -173,22 +173,22 @@ class AdminController extends Controller
         $comments = $details['comments'];
 
         $count=  $details['count'];
-
-
         $user = Auth::User()->name;
 
         $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->leftjoin('question_status_models', 'question_status_models.question_id', '=', 'question_bodies.question_id')
+            ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
             ->select('question_bodies.*','post_question_prices.question_deadline',
                 'post_question_prices.question_price','post_question_prices.overdue')
 
-            ->where('overdue',0)
+            ->where('current',1)
+
+            ->orderby('question_deadline', 'asc')
 
             ->paginate(25);
 
-
         return view('tut.home',[
+
             'comments'=> $comments,
             /*
              * Current sum

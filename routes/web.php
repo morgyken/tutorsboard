@@ -38,7 +38,7 @@ Route::get('comment-files/{question_id}/{filename}/{commentId}',array('as'=>'com
 
 Route::get('all-questions',array('as'=>'all-questions','uses'=>'AdminController@TutProfile'));
 
-Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'QuestionController@askQuestions'));
+Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'AskQuestionController@askQuestions'));
 
 Route::get('post-questions',array('as'=>'post-questions','uses'=>'QuestionController@postQuestions'));
 
@@ -55,7 +55,7 @@ Route::get('file-download/{question_id}/{filename}/{type}',array('as'=>'file-dow
  */
 Route::get('post-deadlinePrice',array('as'=>'post-deadlinePrice','uses'=>'QuestionController@postdeadlinePrice'));
 
-Route::post('PostQuestionPriceDeadline',array('as'=>'PostQuestionPrice','uses'=>'QuestionController@PostQuestionPriceDeadline'));
+Route::post('PostQuestionPriceDeadline',array('as'=>'PostQuestionPrice','uses'=>'AskQuestionController@PostQuestionPriceDeadline'));
 
 
 //admin commwnts
@@ -72,7 +72,7 @@ Route::get('sample/{question}/{status}',array('as'=>'sample','uses'=>'QuestionCo
  */
 
 
-Route::post('/update-question/{question_id}', array('as' => 'update-question', 'uses'=>'QuestionController@UpdateQuestionStatus'));
+Route::post('/update-question/{question_id}', array('as' => 'update-question', 'uses'=>'UpdateQuestionController@UpdateQuestionStatus'));
 
 /*
  * accept answer here 

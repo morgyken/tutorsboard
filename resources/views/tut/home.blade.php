@@ -9,7 +9,7 @@
         $dtF = new \DateTime('@0');
         $dtT = new \DateTime("@$seconds");
 
-        $days =  $dtF->diff($dtT)->format('%a');
+        $days = $dtF->diff($dtT)->format('%a');
 
         if($days> 0){
             return $dtF->diff($dtT)->format('%a days %h hours');

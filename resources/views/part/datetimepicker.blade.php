@@ -21,11 +21,22 @@
 
     </style>
 
+    <script>
+        var getdate = function (){
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var dateTime = date+' '+time;
+
+            return dateTime;
+        }
+
+    </script>
+
 
     <div class="form-group col-md-12">
 
         <input type="text" class="form-control myinput input-lg" name="question_deadline"
-               value="2017/9/03 18:00" id="datetimepicker4"/>
+               value=getdate() id="datetimepicker4"/>
     </div>
 
 

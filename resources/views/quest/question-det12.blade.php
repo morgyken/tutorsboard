@@ -38,7 +38,23 @@
                 <span style="float: right;" >
                             <p style="font-size: 25px"> <span class="label label-danger">
 
-                                       {{ $assigned->status}}
+                                    @if( $assigned->current ==1 )
+                                         New
+                                    @elseif($assigned->completed ==1)
+                                        Completed
+                                    @elseif($assigned->paid ==1)
+                                        Paid
+                                    @elseif($assigned->cancelled ==1)
+                                        Camcelled
+                                    @elseif($assigned->revision ==1)
+                                        Revision
+                                    @elseif($assigned->assigned ==1)
+                                        Assigned
+                                    @elseif($assigned->answered==1)
+                                        Answered
+                                    @endif
+
+
 
 
                                 </span></p>
@@ -140,33 +156,45 @@
 
             <hr>
 
-            <blockquote class="blockquote" style="padding: 16px; border-top: 23px;">
+            @if( $assigned->current ==1 )
+                <p> The Question is currently openned to all Tutors </p>
+            @elseif($assigned->completed ==1)
+                <p> The Question has been Answered and Is now complete</p>
 
-                <div class="col-md-12" style="margin-top:12px; background:#EEE8AA; border-radius: 8px;">
-                    <img class="d-flex mr-3 col-md-2  image-comment rounded-circle" id="comm-pic" src="{{URL::asset('http://lorempixel.com/180/180/people/9/')}}" alt="">
-                    <div class="col-md-10">
+            @elseif($assigned->cancelled ==1)
+                <p> This Question has been cancelled</p>
+            @elseif($assigned->revision ==1)
+                <p> The Question is under revision</p>
+            @elseif($assigned->answered ==1)
+                <blockquote class="blockquote" style="padding: 16px; border-top: 23px;">
 
-                        <h4> {{$val->user_id}} Answered the Question</h4>
+                    <div class="col-md-12" style="margin-top:12px; background:#EEE8AA; border-radius: 8px;">
+                        <img class="d-flex mr-3 col-md-2  image-comment rounded-circle" id="comm-pic" src="{{URL::asset('http://lorempixel.com/180/180/people/9/')}}" alt="">
+                        <div class="col-md-10">
 
-                        <h5>Created at: {{$val->created_at}}</h5><p style="background: #fff;padding: 12px;"> {{$val->comment_body}} </p>
 
-                <h4> Answer  Attachments</h4>
 
-                @foreach($answer_files as $file)
+                            <h4> Answer  Attachments</h4>
 
-                    <p style="font-size: 14px"><a href="{{route('file-download',
+                            @foreach($answer_files as $file)
+
+                                <p style="font-size: 14px"><a href="{{route('file-download',
                                     [
                                         'question_id' =>$question['question_id'],
                                         'filename'=>$file['basename'],
                                         'type' =>'answer'
                                      ])}}"
-                        ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
-                @endforeach
+                                    ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
+                            @endforeach
 
+                        </div>
                     </div>
-                </div>
 
-            </blockquote>
+                </blockquote>
+
+            @endif
+
+
         </div>
 
     </article>

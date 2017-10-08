@@ -17,19 +17,17 @@ class QuestionMatrix extends Model
 
     protected $table='users';
 
+    protected $dateFormat = 'Y/m/d H:i:s';
+    protected $connection = 'mysql';
+    public $timestamps = true;
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'id', 'remember_token',
     ];
-
-
-    public function question_body()
-    {
-        return $this->hasMany('App\Comment', 'user_id', 'email');
-
-    }
 }
