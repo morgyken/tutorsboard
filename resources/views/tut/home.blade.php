@@ -108,8 +108,6 @@
                             </span>  </h4>
                     <h4> <span class="label label-warning ">Ksh: {{$value->question_price}}</span></h4>
                 </div>
-
-
             </div>
         </a>
     </div>
