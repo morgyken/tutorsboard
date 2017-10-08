@@ -16,7 +16,19 @@ Route::get('/', function () {
     return view('gen.index');
 })->name('home');
 
+
+Route::get('sample-two/', function(){
+	return view('tut.sample');
+});
+
+
+
 Auth::routes();
+
+Route::post('profile-pic-view/',array('as'=>'profile-pic-view','uses'=>'UserController@ProfilePicView'));
+
+
+Route::post('profile-pic',array('as'=>'profile-pic','uses'=>'UserController@fileUpload'));
 
 
 //Route::get('sample',array('as'=>'sample','uses'=>'DateTimeController@getDeadlineInSeconds12'));
@@ -34,6 +46,7 @@ Route::get('post-questions',array('as'=>'post-questions','uses'=>'QuestionContro
 Route::get('view-question/{question_id}/{optional?}',array('as'=>'view-question','uses'=>'QuestionController@QuestionDetails'));
 
 Route::post('/post-answer/{question_id}', ['as' =>'post.answer', 'uses' => 'QuestionController@PostAnswer']);
+
 
 Route::get('questions-answered',array('as'=>'questions-answered','uses'=>'AdminController@QuestionsAnswered'));
 Route::get('file-download/{question_id}/{filename}/{type}',array('as'=>'file-download','uses'=>'QuestionController@downloads'));

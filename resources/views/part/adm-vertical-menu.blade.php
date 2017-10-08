@@ -1,4 +1,10 @@
-<style>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: morgyken
+ * Date: 10/7/2017
+ * Time: 5:16 PM
+ */<style>
 
     .glyphicon { margin-right:10px; }
     .panel-body { padding:0px; }
@@ -28,13 +34,13 @@
                             <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">All Orders</a> <span class="label label-success">100</span>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td>
                             <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Suggested Orders</a>
                         </td>
                     </tr>
-                   
+
                 </table>
             </div>
         </div>
@@ -43,7 +49,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
-                            </span>My Current Orders</a> 
+                            </span>My Current Orders</a>
             </h4>
         </div>
         <div id="collapseTwo" class="panel-collapse collapse">
@@ -112,7 +118,7 @@
                     <tr>
                         <td>
                             <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-                                Refunds</a>
+Refunds</a>
                         </td>
                     </tr>
                 </table>

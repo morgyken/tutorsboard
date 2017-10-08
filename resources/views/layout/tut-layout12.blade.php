@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/bootstrap.min.css ') }}">
+
+    <link href="{{URL::asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/font-awesome.min.css ') }}">
 
     <!-- Custom styles for our template -->
@@ -30,7 +32,7 @@
         document.documentElement.className += ' js';
     </script>
     <![endif]-->
-</head><link href="{{URL::asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+</head>
 <style>
 
 
@@ -47,6 +49,25 @@
         width: 150px;
         border-radius: 50%;
     }
+    .image-profile
+    {
+
+        border-radius: 50%;
+        border-color: #F0E68C;
+        border-width: 2px;
+        border-style: solid;
+        height: 150px;
+        width:210px;
+    }
+
+    .image-comment
+    {
+
+        border-radius: 50%;
+        border-color: #F0E68C;
+        border-width: 2px;
+        border-style: solid;
+    }
 
 
 </style>
@@ -56,11 +77,11 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <div class="fb-profile">
-    <a href="{{URL::to('/profile-pic-view')}}">
+    <a href="{{route('profile-pic-view')}}">
     <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>
     </a>
     
-    <a href="{{URL::to('/profile-pic-view')}}">
+    <a href="{{route('profile-pic-view')}}">
     <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Profile image example"/>
     </a>
     <div class="fb-profile-text">
@@ -83,20 +104,24 @@
         <div class="col-sm-4"> <h4> Final Earning</h4>  </div>
         <div  class="col-sm-4"><h4>Total Earning </h4> </div>
         <div class="col-sm-4"> <h4>Other details </h4> </div>
-    </div>;;
-</div>
+    </div>
+
 
 <div class="container">
-
     <div class="col-md-3">
         @include('part.vertical-menu1')
 
     </div>
-    <div class="clearfix col-md-9" style="background:#FAFAD2">
+    <div class="col-md-9">
+
 
         @yield('body')
 
     </div>
+
+</div>
 </div>
 @include('layout.footer')
+
+
 

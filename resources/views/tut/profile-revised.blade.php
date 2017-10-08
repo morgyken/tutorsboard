@@ -53,9 +53,11 @@
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
+<?php $user_id = Auth::User()->id;  ?>
+
     <div class="fb-profile">
-        <img align="left" class="fb2-image-lg" src="{{URL::asset('admin/images/image.jpg')}}" alt="Profile image example"/>
-        <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
+        <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>
+        <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Profile image example"/>
         <div class="fb-profile-text">
             <div class="col-dm-9">
                 <h3>Name: {{Auth::user()->name}}</h3>
