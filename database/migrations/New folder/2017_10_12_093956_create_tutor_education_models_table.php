@@ -4,23 +4,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostcommentModelsTable extends Migration
+class CreateTutorEducationModelsTable extends Migration
 {
-      /**
+    /**
      * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('post_comments', function (Blueprint $table) {
+        Schema::create('tutor_education_models', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('user_id');
-            $table->string('question_id');
-            $table->text('comment_body');
-            $table->text('message_type');
-            $table->rememberToken();
             $table->timestamps();
+            $table->rememberTocken();
+            $table->string('tutor_id');
+            $table->string('college');
+            $table->string('expertise');
+           
         });
     }
 
@@ -31,7 +31,6 @@ class CreatePostcommentModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('make_comments');
+        Schema::dropIfExists('tutor_education_models');
     }
 }
-

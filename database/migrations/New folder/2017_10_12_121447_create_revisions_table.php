@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSuggestPriceIncreasesTable extends Migration
+class CreateRevisionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateSuggestPriceIncreasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('suggest_price_increases', function (Blueprint $table) {
+        Schema::create('revisions', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('user_id');
-            $table->integer('question_id');
-            $table-> integer('suggested_price');
             $table->timestamps();
-            $table->rememberToken();
+            $table->rememberTocken();
+            $table->string('tutor_id');
+            $table->string('revision_id');
+            $table->string('question_id');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateSuggestPriceIncreasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suggest_price_increases');
+        Schema::dropIfExists('revisions');
     }
 }

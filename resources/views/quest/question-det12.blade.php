@@ -100,9 +100,7 @@
 
             </blockquote>
 
-
             <hr>
-
 
             @include('part.user-links')
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCancelQuestionsTable extends Migration
+class CreateTutorPaymentModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCancelQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cancel_questions', function (Blueprint $table) {
+        Schema::create('tutor_payment_models', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->rememberToken();
-            $table->string('question_id');
-            $table->string('user_id');
-            $table->string('status');
+            $table->rememberTocken();
+            $table->string('tutor_id');
+            $table->string('amount');
+            $table->string('payment_type');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateCancelQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cancel_questions');
+        Schema::dropIfExists('tutor_payment_models');
     }
 }

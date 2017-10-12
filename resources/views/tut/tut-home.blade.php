@@ -17,9 +17,6 @@
         else {
             return $dtF->diff($dtT)->format('%h hours %i min');
         }
-
-
-
     }
 
     function getDeadlineInSeconds1($deadline){

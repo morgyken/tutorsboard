@@ -8,8 +8,6 @@
 
 </style>
 
-<!--- used by tutors as vertical menu -->
-
 
 <div class="col-sm-12 col-md-12">
     <div class="panel-group" id="accordion">
@@ -43,7 +41,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
-                            </span>My Current Orders</a> 
+                            </span>My Current Orders</a>
             </h4>
         </div>
         <div id="collapseTwo" class="panel-collapse collapse">
@@ -51,32 +49,32 @@
                 <table class="table">
                     <tr>
                         <td>
-                            <a href="http://www.jquery2dotnet.com">Current</a> <span class="label label-success">$ 320</span>
+                            <a href="{{route('tut-links', ['view'=>'current'])}}">Current</a> <span class="label label-success">$ 320</span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.jquery2dotnet.com">Reassigned</a>
+                            <a href="{{route('tut-links', ['view'=>'reassigned'])}}">Reassigned</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.jquery2dotnet.com">Completed</a>
+                            <a href="{{route('tut-links', ['view'=>'completed'])}}">Completed</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.jquery2dotnet.com">For Revision</a>
+                            <a href="{{route('tut-links', ['view'=>'revision'])}}">For Revision</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.jquery2dotnet.com">Rated Orders</a>
+                            <a href="{{route('tut-links', ['view'=>'rated'])}}">Rated Orders</a>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <a href="http://www.jquery2dotnet.com">Finished Orders</a>
+                            <a href="{{route('tut-links', ['view'=>'paid'])}}">Finished Orders</a>
                         </td>
                     </tr>
                 </table>

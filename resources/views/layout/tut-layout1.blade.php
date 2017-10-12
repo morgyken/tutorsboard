@@ -17,6 +17,10 @@
     <link href="{{URL::asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/font-awesome.min.css ') }}">
 
+    <link rel="stylesheet" href="{{URL::asset('theme/assets/css/tabs.sideways.css ') }}">
+    
+    <link rel="stylesheet" href="{{URL::asset('theme/assets/css/tabs.css ') }}">
+
     <!-- Custom styles for our template -->
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/bootstrap-theme.css ') }}" media="screen" >
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/main.css') }}">

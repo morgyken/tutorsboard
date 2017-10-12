@@ -21,7 +21,7 @@
                     <h1 class="page-title">Registration</h1>
                 </header>
 
-                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="col-md-8 col-md-offset-2 col-sm-9 col-sm-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h3 class="thin text-center">Register a new account</h3>
@@ -30,6 +30,9 @@
 
                             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                                 {{ csrf_field() }}
+                                
+                                <h2> Personal Details </h2>
+                                <hr>
 
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label for="name" class="col-md-4 control-label">Name</label>
@@ -45,53 +48,38 @@
                                     </div>
                                 </div>
                                 <!--- has phone-->
-
-                                <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                                    <label for="name" class="col-md-4 control-label">Phone Number</label>
+                                 <div class="form-group{{ $errors->has('sname') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">Second Name</label>
 
                                     <div class="col-md-6">
-                                        <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required autofocus>
+                                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
-                                        @if ($errors->has('phone'))
+                                        @if ($errors->has('sname'))
                                             <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong>{{ $errors->first('sname') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                
+                                
+       
+
+                                <div class="form-group{{ $errors->has('town') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">Town/City</label>
+
+                                    <div class="col-md-6">
+                                        <input id="town" type="text" class="form-control" name="town" value="{{ old('phone') }}" required autofocus>
+
+                                        @if ($errors->has('town'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('town') }}</strong>
                                     </span>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('university') ? ' has-error' : '' }}">
-                                    <label for="name" class="col-md-4 control-label">University</label>
-
-                                    <div class="col-md-6">
-                                        <input id="university" type="text" class="form-control" name="university" value="{{ old('university') }}" required autofocus>
-
-                                        @if ($errors->has('university'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('university') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group{{ $errors->has('idnumber') ? ' has-error' : '' }}">
-                                    <label for="idnumber" class="col-md-4 control-label">ID Number</label>
-
-                                    <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control" name="idnumber" value="{{ old('idnumber') }}" required autofocus>
-
-                                        @if ($errors->has('idnumber'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('idnumber') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-
-
-                                <input id="name" type="hidden"  name="user_type" value="tutor">
+                              <input id="name" type="hidden"  name="user_type" value="tutor">
 
 
                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -127,6 +115,75 @@
 
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    </div>
+                                </div>
+                                
+                                 <h2> Acount Details  </h2>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Select Main picture</label>
+
+                                    <div class="col-md-6">
+                                        @include('part.file-picker1')
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Select Passport Photo</label>
+
+                                    <div class="col-md-6">
+                                         @include('part.file-picker2')
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Safricom Payment Line</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password-confirm" type="text" class="form-control" name="password_confirmation" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Enter Paypal email</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password-confirm" type="text" class="form-control" name="password_confirmation" required>
+                                    </div>
+                                </div>
+                                
+                                
+                                <h2> Education Profile   </h2>
+                                <hr>
+                                                             
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Universoty Attended</label>
+
+                                    <div class="col-md-6">
+                                        <input id="university" type="text" class="form-control" name="university" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Major Subject Area</label>
+
+                                    <div class="col-md-6">
+                                        <input id="university" type="text" class="form-control" name="course" required>
+                                    </div>
+                                </div>                                                                
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Upload Curriculum Vitae</label>
+
+                                    <div class="col-md-6">                                        
+                                        
+                                        @include('part.file-picker3')
+                                    </div>
+                                </div>
+                                
+                                                                                                
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Upload Degree Certificate</label>
+
+                                    <div class="col-md-6">
+                                         @include('part.file-picker4')
                                     </div>
                                 </div>
 

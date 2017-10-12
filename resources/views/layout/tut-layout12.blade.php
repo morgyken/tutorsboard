@@ -24,7 +24,6 @@
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="{{URL::asset('theme/assets/js/html5shiv.js') }}"></script>
-
     <style type="text/css">
         body { display: none; }
     </style>
@@ -34,13 +33,9 @@
     <![endif]-->
 </head>
 <style>
-
-
     /* ==========================================================================
        Author's custom styles
        ========================================================================== */
-
-
     .fb-image-profile
     {
         margin: -90px 10px 0px 50px;
@@ -51,7 +46,6 @@
     }
     .image-profile
     {
-
         border-radius: 50%;
         border-color: #F0E68C;
         border-width: 2px;
@@ -59,17 +53,13 @@
         height: 150px;
         width:210px;
     }
-
     .image-comment
     {
-
         border-radius: 50%;
         border-color: #F0E68C;
         border-width: 2px;
         border-style: solid;
     }
-
-
 </style>
 
 <?php $user_id = Auth::User()->id;  ?>
@@ -90,7 +80,6 @@
             <p> Tutor Since: <?php
                 $date = new DateTime(Auth::User()->created_at);
                 echo $date->format("l jS \of F Y");
-
                 ?></p>
             <p>Answered {{$count}}</p>
 
@@ -122,6 +111,3 @@
 </div>
 </div>
 @include('layout.footer')
-
-
-

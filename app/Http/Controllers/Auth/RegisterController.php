@@ -70,7 +70,6 @@ class RegisterController extends Controller
             'idnumber' => $data['idnumber'],
             'course' => $data['course'],
             'phone' =>$data['phone'],
-            'university'=>$data['university'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),

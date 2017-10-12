@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePaidQuestionsTable extends Migration
+class CreateLatesubmissionsModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePaidQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('paid_questions', function (Blueprint $table) {
+        Schema::create('latesubmissions_models', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->rememberToken();
+            $table->rememberTocken();
+            $table->string('tutor_id');
             $table->string('question_id');
-            $table->string('user_id');
-            $table->string('status');
+            
         });
     }
 
@@ -30,6 +30,6 @@ class CreatePaidQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paid_questions');
+        Schema::dropIfExists('latesubmissions_models');
     }
 }

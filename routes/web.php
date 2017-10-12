@@ -78,6 +78,19 @@ Route::post('/update-question/{question_id}', array('as' => 'update-question', '
  * accept answer here 
  */
 
+/**
+ * Tutot page questions
+ */
+
+Route::post('tut-questions',array('as'=>'tut-questions','uses'=>'TutController@index'));
+
+/**
+ *
+ * end tutor side
+ */
+
+
+
 
 Route::post('/autocomplete', array('as' => 'autocomplete', 'uses'=>'SearchController@autocomplete'));
 
@@ -106,6 +119,17 @@ Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@
 Route::get('post-payment-request/{amount}',array('as'=>'post-payment-request','uses'=>'QuestionController@PostPaymentRequest'));
 
 Route::get('tut-profile/{email}/{optional?}',array('as'=>'tut-profile','uses'=>'AdminController@TutProfile'));
+
+Route::get('tut-links/{view}/{optional?}',array('as'=>'tut-links','uses'=>'AdminController@TutorLinks'));
+
+/**
+ * View various accounts profile, 
+ * such as home, payment, tut-profile, and account profile
+ * Pass the view to be shown by the tutProfile function
+ */
+
+Route::get('tut-profile/{view?}',array('as'=>'tut-main-profile',
+    'uses'=>'TutorController@tutProfile'));
 
 
 Route::get('adm-post-payments/{amount}/{request_id}',array('as'=>'post-payments','uses'=>'AdminController@AdmPostPyments'));
