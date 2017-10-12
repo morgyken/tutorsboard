@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
 class CreateTutorEducationModelsTable extends Migration
 {
     /**
@@ -16,9 +15,13 @@ class CreateTutorEducationModelsTable extends Migration
         Schema::create('tutor_education_models', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->rememberToken();
+            $table->string('tutor_id');
+            $table->string('college');
+            $table->string('expertise');
+           
         });
     }
-
     /**
      * Reverse the migrations.
      *

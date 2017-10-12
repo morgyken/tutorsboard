@@ -22,6 +22,6 @@ class TutorPaymentModel extends Model
      */
 
     protected $hidden = [ 
-        'user_id', 'remember_token',
+        'tutor_id', 'remember_token',
     ];
 }

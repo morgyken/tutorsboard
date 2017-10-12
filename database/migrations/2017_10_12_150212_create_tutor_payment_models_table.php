@@ -14,7 +14,7 @@ class CreateTutorPaymentModelsTable extends Migration
         Schema::create('tutor_payment_models', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->rememberTocken();
+            $table->rememberToken();
             $table->string('tutor_id');
             $table->string('amount');
             $table->string('payment_type');

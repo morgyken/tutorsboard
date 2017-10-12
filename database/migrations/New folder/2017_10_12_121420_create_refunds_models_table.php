@@ -16,7 +16,7 @@ class CreateRefundsModelsTable extends Migration
         Schema::create('refunds_models', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->rememberTocken();
+            $table->rememberToken();
             $table->string('tutor_id');
             $table->string('refund_id');
             $table->string('amount');
