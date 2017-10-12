@@ -11,6 +11,7 @@ class TutorPaymentModel extends Model
     protected $connection = 'mysql';
 
     protected $fillable = [
+        
         'tutor_id', 'amount', 'payment_type',
     ];
 
@@ -20,7 +21,7 @@ class TutorPaymentModel extends Model
      * @var array
      */
 
-    protected $hidden = [
+    protected $hidden = [ 
         'user_id', 'remember_token',
     ];
 }
