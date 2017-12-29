@@ -94,7 +94,7 @@ class AdminController extends Controller
         return $question1;
     }
 
-    public function findTutorprofile($email, $optional = null){
+    public function findTutorprofile($email){
 
         /**
          * Total Questions answered by tutor
@@ -104,7 +104,7 @@ class AdminController extends Controller
 
             ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
             ->where('answered', 1)
-            ->where('user_id', $email)
+            ->where('question_bodies.user_id', $email)
             ->count();
         /**
          * The sum of answered question
@@ -112,7 +112,7 @@ class AdminController extends Controller
         $sum = DB::table('question_bodies')
             ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
-            ->where('user_id', $email)
+            ->where('question_bodies.user_id', $email)
             ->where('answered', 1)
             ->sum('question_price');
 
@@ -141,9 +141,11 @@ class AdminController extends Controller
 
         return $return;
     }
-    public function TutProfile($email, $optional=null){
+    public function TutProfile($status=null){
 
-        $details = $this->findTutorprofile($email, $optional);
+        $email = Auth::user()->email;
+
+        $details = $this->findTutorprofile($email);
 
         $sum = $details['sum'];
 
@@ -154,17 +156,44 @@ class AdminController extends Controller
         $count=  $details['count'];
         $user = Auth::User()->name;
 
-        $questions = DB::table('question_bodies')
+        /*
+        * move between the different links such as assigned, competed
+        * etc
+        */
+
+        if($status != null)
+        {
+            $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
             ->select('question_bodies.*','post_question_prices.question_deadline',
-                'post_question_prices.question_price','post_question_prices.overdue')
+                'post_question_prices.question_price')
+
+            ->where('current',1)
+
+            ->where($status, 1)
+
+            ->orderby('question_deadline', 'asc')
+
+            ->paginate(25);
+        }
+        
+        else
+        {
+            $questions = DB::table('question_bodies')
+            ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
+            ->select('question_bodies.*','post_question_prices.question_deadline',
+                'post_question_prices.question_price')
 
             ->where('current',1)
 
             ->orderby('question_deadline', 'asc')
 
             ->paginate(25);
+        }
+
+        
 
         return view('tut.home',[
 
@@ -193,6 +222,13 @@ class AdminController extends Controller
 
     }
 
+
+    public function getPayments()
+    {
+
+        Auth::user()->email;
+        $questions = DB::table('payment_models')->where('tutor_id', $user_id);
+    }
 
     /**
      *Other tutor pages

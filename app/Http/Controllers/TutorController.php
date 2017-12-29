@@ -59,7 +59,7 @@ class TutorController extends Controller
 
             ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
             ->where('answered', 1)
-            ->where('user_id', $email)
+            ->where('question_bodies.user_id', $email)
             ->count();
         /**
          * The sum of answered question
@@ -67,7 +67,7 @@ class TutorController extends Controller
         $sum = DB::table('question_bodies')
             ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
-            ->where('user_id', $email)
+            ->where('question_bodies.user_id', $email)
             ->where('answered', 1)
             ->sum('question_price');
 

@@ -44,6 +44,17 @@ class AskQuestionController extends Controller
 
             ]);
 
+        DB::table('tutor_payment')->where('order_id', session('question_id'))
+                    ->update(
+                        [
+                            'amount' => round($request['question_price'] *88* 0.34, 2),
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ]
+                 );
+
+        
+
+
         return redirect()->route('post-questions');
 
     }
@@ -100,7 +111,7 @@ class AskQuestionController extends Controller
 
         DB::table('question_matrices')->insert(
             [
-
+                'user_id' => Auth::user()->email,
                 'question_id' =>$question_id,
                 'current' => 1,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
@@ -108,6 +119,17 @@ class AskQuestionController extends Controller
 
             ]);
 
+        DB::table('tutor_payment')->insert(
+            [
+                'order_id' =>$question_id,
+                'payment_id' => rand(9999,99999),
+                'order_summary' => substr($request['question_body'], 0, 70),
+                'status'      =>0,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+
+        
         /*
          * Add question Id to session, this is to be used in the adding of the price
          */

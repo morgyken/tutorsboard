@@ -19,6 +19,7 @@ use App\DateTimeModel;
 use App\PostAnswer;
 use App\PostQuestionModel;
 use App\PostQuestionPrice;
+use App\QuestionMatrix;
 use App\SuggestDeadline;
 use App\SuggestPriceIncrease;
 use Illuminate\Http\Request;
@@ -28,6 +29,22 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends AdminController
 {
+
+    /*
+    * Get the question starts, used in the view for links
+    */
+    public static function questionStat($column)
+    {
+        //$user = Auth::user()->email;
+        $user= 'morgyken@gmail.com'; 
+
+        $countAssigned = DB::table('question_matrices')->select($column)
+        ->where('user_id',$user)  
+        ->where($column, 1) 
+        ->get();
+
+        return  count($countAssigned);
+    }
     /*
      * Suggest Price Increase here
      * The real course the price
@@ -360,7 +377,12 @@ class QuestionController extends AdminController
         ]);
     }
     
+    // count question matrices
+    public function allcounts($userid)
+    {
+        // $user = DB::table('question_matrices')->where('email', '=', $user12) ->get();
 
+    }
 
     public function increaseDeadline(Request $request, $question)
     {
