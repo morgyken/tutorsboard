@@ -11,17 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-
-    return view('gen.index');
-})->name('home');
+Route::get('/', function () {  return view('gen.index'); })->name('home');
 
 
-Route::get('sample-two/', function(){
-	return view('tut.sample');
-});
+Route::get('sample-two/', function(){ 	return view('tut.sample'); });
 
-
+Route::get('question-stat',array('as'=>'question-stat','uses'=>'QuestionController@questionStat'));
 
 Auth::routes();
 
@@ -36,7 +31,19 @@ Route::post('profile-pic',array('as'=>'profile-pic','uses'=>'UserController@file
 
 Route::get('comment-files/{question_id}/{filename}/{commentId}',array('as'=>'comment-files','uses'=>'QuestionController@CommentFilesDownload'));
 
-Route::get('all-questions',array('as'=>'all-questions','uses'=>'AdminController@TutProfile'));
+Route::get('all-questions/{status?}',
+	array(
+		'as'=>'all-questions',
+		'uses'=>'AdminController@TutProfile'
+	));
+
+// get tutor payment route, all payments
+
+Route::get('get-payment/{myurl?}',array('as'=>'get-payment','uses'=>'PaymentController@getPayments'));
+
+Route::post('post-payment',array(
+	'as'=>'paytutor',
+	'uses'=>'PaymentController@postPayments'));
 
 Route::post('ask-questions',array('as'=>'ask-questions','uses'=>'AskQuestionController@askQuestions'));
 
@@ -82,7 +89,7 @@ Route::post('/update-question/{question_id}', array('as' => 'update-question', '
  * Tutot page questions
  */
 
-Route::post('tut-questions',array('as'=>'tut-questions','uses'=>'TutController@index'));
+Route::get('tut-questions',array('as'=>'tut-questions','uses'=>'TutorController@TutProfile'))->name('tut.home');
 
 /**
  *
@@ -98,7 +105,6 @@ Route::post('/autocomplete', array('as' => 'autocomplete', 'uses'=>'SearchContro
 Route::post('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::post('autocomplete-search',array('as'=>'autocomplete.search','uses'=>'SearchController@index'));
 
@@ -140,3 +146,7 @@ Route::post('tut-payment12',array('as'=>'tut-payment','uses'=>'QuestionControlle
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

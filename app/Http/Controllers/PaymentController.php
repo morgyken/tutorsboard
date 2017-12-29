@@ -10,11 +10,23 @@ use Auth;
 
 class PaymentController extends Controller
 {
-    public function getPayments()
+    public function getPayments($myurl=null)
     {
-    	$data = DB::table('tutor_payment')->where('status', 0)->get();
+    	if($myurl == 'payment-history'){
 
-    	$amount = DB::table('tutor_payment')->select('amount')->where('status', 0)->get();
+    		$data = DB::table('tutor_payment')->->get();
+
+    	}
+    	if($myurl === 'payment-bonuses'){
+
+    		$data = DB::table('tut_payment_bonuses')->where('status', 0)->get();
+
+    	}
+    	else{
+    		$amount = DB::table('tutor_payment')->select('amount')->where('status', 0)->get();
+    	}
+
+    	//get sum of the total    	
 
     	$sum = array_sum($amount)
     	  	

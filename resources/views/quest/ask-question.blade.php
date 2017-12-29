@@ -23,7 +23,7 @@
 
             <div class="col-lg-3">
 
-                @include('part.vertical-menu1')
+                @include('part.tutor-menu')
 
             </div>
 

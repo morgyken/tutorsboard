@@ -28,6 +28,7 @@ class UpdateQuestionController extends Controller
                     [
                         'cancelled' => 1,
                         'reassigned' => 0,
+                        'user_id'   => $request->user_id,
                         'completed' => 0,
                         'rated' => 0,
                         'paid' => 0,
@@ -99,6 +100,7 @@ class UpdateQuestionController extends Controller
                         'completed' => 1, //accepted
                         'rated' => 1,
                         'paid' => 0,
+                        'user_id'   => $request->user_id,
                         'revision' => 0,
                         'answered' => 1,
                         'assigned' => 1,
@@ -136,17 +138,17 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled' => 0,
-                        'reassigned' => 0,
-                        'completed' => 1, //accepted
-                        'rated' => 1,
-                        'paid' => 0,
-                        'revision' => 0,
-                        'answered' => 1,
-                        'assigned' => 1,
-                        'current' => 0,
-                        'paid' => 1,
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        'cancelled'         => 0,
+                        'reassigned'        => 0,
+                        'completed'         => 1, //accepted
+                        'rated'             => 1,
+                        'paid'              => 0,
+                        'revision'          => 0,
+                        'answered'          => 1,
+                        'assigned'          => 1,
+                        'current'           => 0,
+                        'paid'              => 1,
+                        'updated_at'        => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
@@ -174,17 +176,18 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled' => 0,
-                        'reassigned' => 0,
-                        'completed' => 0,
-                        'rated' => 1,
-                        'paid' => 0,
-                        'revision' => 0,
-                        'answered' => 1,
-                        'assigned' => 1,
-                        'current' => 0,
-                        'paid' => 0,
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        'cancelled'     => 0,
+                        'reassigned'    => 0,
+                        'completed'     => 0,
+                        'rated'         => 1,
+                        'user_id'       => $request->user_id,
+                        'paid'          => 0,
+                        'revision'      => 0,
+                        'answered'      => 1,
+                        'assigned'      => 1,
+                        'current'       => 0,
+                        'paid'          => 0,
+                        'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
@@ -303,17 +306,18 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled' => 0,
-                        'reassigned' => 1,
-                        'completed' => 0,
-                        'rated' => 0,
-                        'paid' => 0,
-                        'revision' => 0,
-                        'answered' => 0,
-                        'assigned' => 1,
-                        'current' => 1,
-                        'paid' => 0,
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        'cancelled'     => 0,
+                        'reassigned'    => 1,
+                        'completed'     => 0,
+                        'rated'         => 0,
+                        'paid'          => 0,
+                        'user_id'       => $request->user_id,
+                        'revision'      => 0,
+                        'answered'      => 0,
+                        'assigned'      => 1,
+                        'current'       => 1,
+                        'paid'          => 0,
+                        'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
@@ -345,11 +349,13 @@ class UpdateQuestionController extends Controller
                 ->update(
                     [
                         'cancelled'         => 0,
+                       // 'user_id'           =>
                         'reassigned'        => 0,
                         'completed'         => 0,
                         'rated'             => 0,
                         'paid'              => 0,
                         'revision'          => 0,
+                        'user_id'   => $request->user_id,
                         'answered'          => 0,
                         'assigned'          => 1,
                         'current'           => 0,
