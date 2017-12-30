@@ -124,26 +124,37 @@ Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@
 
 Route::get('post-payment-request/{amount}',array('as'=>'post-payment-request','uses'=>'QuestionController@PostPaymentRequest'));
 
-Route::get('tut-profile/{email}/{optional?}',array('as'=>'tut-profile','uses'=>'AdminController@TutProfile'));
-
-Route::get('tut-links/{view}/{optional?}',array('as'=>'tut-links','uses'=>'AdminController@TutorLinks'));
-
-/**
- * View various accounts profile, 
- * such as home, payment, tut-profile, and account profile
- * Pass the view to be shown by the tutProfile function
- */
-
-Route::get('tut-profile/{view?}',array('as'=>'tut-main-profile',
-    'uses'=>'TutorController@tutProfile'));
 
 
 Route::get('adm-post-payments/{amount}/{request_id}',array('as'=>'post-payments','uses'=>'AdminController@AdmPostPyments'));
 
 Route::post('tut-payment12',array('as'=>'tut-payment','uses'=>'QuestionController@PayRequests'));
 
+//get tutor profile
+
+Route::get('tut-profile',array('as'=>'tut-profile','uses'=>'TutorController@getTutProfile'));
+
+//post tutor profile
+
+Route::post('tut-profile',array('as'=>'tut-profile','uses'=>'TutorController@postTutProfile'));
 
 
+//get tutor proggress
+
+Route::get('tut-progress',array('as'=>'tut-progress','uses'=>'TutorController@getTutProgress'));
+
+//post tutor progress
+
+Route::post('tut-progress',array('as'=>'tut-progress','uses'=>'TutorController@postTutProgress'));
+
+
+//get tutor profile
+
+Route::get('tut-account',array('as'=>'tut-account','uses'=>'TutorController@getTutAccount'));
+
+//post tutor profile
+
+Route::post('tut-account',array('as'=>'tut-account','uses'=>'TutorController@postTutAccount'));
 
 
 

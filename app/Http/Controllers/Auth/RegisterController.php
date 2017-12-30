@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -62,13 +63,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+         DB::table('tutor_accounts')->insert(
+            [
+                'account_id'        =>  rand(89000,999999), 
+                'tutor_id'          =>  $data['email'],         
+                'account_status'    => 'New',
+                'account_level'     => 'Beginner'
+                'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
         
+    
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             
         ]);
+
+
 
         
     }

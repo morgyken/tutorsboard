@@ -30,8 +30,10 @@
         <a href="#" class="list-group-item active">Payments</a>
         <a href="{{route('get-payment')}}" class="list-group-item">Upcoming Payment</a>
         <a href="{{route('get-payment', ['myurl'=>'payment-bonuses' ])}}" class="list-group-item">Bonuses</a>
-        <a href="{{route('get-payment', ['myurl'=>'payment-history' ])}}" class="list-group-item">Payment History</a>
         
+        <a href="{{route('get-payment', ['myurl'=>'payment-history' ])}}" class="list-group-item">Payment History</a>
+        <a href="{{route('get-payment', ['myurl'=>'payment-history' ])}}" class="list-group-item">Rescheduled Payments</a>
+        <a href="{{route('get-payment', ['myurl'=>'payment-history' ])}}" class="list-group-item">Refunds</a>
         
       
     </div>

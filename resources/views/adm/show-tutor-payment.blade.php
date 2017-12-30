@@ -1,8 +1,7 @@
 @extends('layouts.admin-layout-latest')
 
 @section('header')
-
-Make Tutor Payments
+Payment History
 
 @endsection
 
@@ -16,12 +15,17 @@ Make Tutor Payments
         margin-bottom: 50px;
         padding: 20px;
     }
+    .header1 > .badge{
+        background-color: green;
+        padding: 10px;
+        font-size: 13px;
+    }
 </style>
 
-
-
-      
-       <spanclass="col-md-6"><h2>Payment History</h2> </span>  <span class="col-md-6"> {{$total}} </span>       
+        <div class="header1">
+            
+          <span class="col-md-6"><h4>Next Payment</h4> </span> <h4 style="float: right; font-weight: 900; padding: 13px;" class="badge"> {{$sum}} </h4>  
+        </div>             
                   
 
                   <table class="table">

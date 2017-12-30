@@ -24,6 +24,7 @@
 
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
+
     <link rel="shortcut icon" href="{{URL::asset('theme/assets/images/gt_favicon.png ') }}">
 
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
@@ -34,6 +35,8 @@
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/bootstrap-theme.css  ') }}" media="screen" >
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/main.css ') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css ">
 
     <!-- Custom styles for our template -->
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/bootstrap-theme.css ') }}" media="screen" >
@@ -220,5 +223,8 @@
 <!-- Theme JavaScript -->
 <script src="{{ URL:: asset('theme/js/creative.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js "></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.js "></script>
 </body>
 </html>

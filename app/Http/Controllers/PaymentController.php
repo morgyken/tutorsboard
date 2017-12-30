@@ -12,26 +12,35 @@ class PaymentController extends Controller
 {
     public function getPayments($myurl=null)
     {
-    	if($myurl == 'payment-history'){
+    	$sum = 0; 
 
-    		$data = DB::table('tutor_payment')->->get();
+    	if($myurl == 'payment-history')
+    	{
 
-    	}
-    	if($myurl === 'payment-bonuses'){
-
-    		$data = DB::table('tut_payment_bonuses')->where('status', 0)->get();
+    		$data = DB::table('tutor_payment')->get();
 
     	}
-    	else{
-    		$amount = DB::table('tutor_payment')->select('amount')->where('status', 0)->get();
+    	if($myurl === 'payment-bonuses')
+    	{
+
+    		$data = DB::table('tutor_payment_bonuses')->where('status', 0)->get();
+
+    	}
+    	else
+    	{
+    		$data = DB::table('tutor_payment')->where('status', 0)->get();
     	}
 
-    	//get sum of the total    	
+    	//get sum of the total 
+    	$amount = DB::table('tutor_payment')->select('amount')->where('status', 0)->get();
 
-    	$sum = array_sum($amount)
-    	  	
+    	foreach ($amount as $key => $value) 
+    	{
+    	   		# code...
+    			$sum += $value->amount;
+    	}   
 
-       return view('adm.show-tutor-payment',['data'=> $data, 'sum'=> $sum]);
+       return view('adm.show-tutor-payment',['data'=> $data, 'myurl' => $myurl, 'sum'=> $sum]);
     }
 
     public function postPayments(Request $request)

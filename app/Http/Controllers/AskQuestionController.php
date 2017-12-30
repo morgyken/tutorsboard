@@ -32,6 +32,22 @@ use Illuminate\Support\Facades\Auth;
 class AskQuestionController extends Controller
 {
 
+    public function UpdateBonus()
+    {                //update tutor payment 
+
+        DB::table('tutor_payment')->where('order_id', session('question_id'))
+                    ->update(
+                        [
+                            'amount' => round($request['question_price'] *8* 0.22, 2),
+                            'tutor_id' => Auth::user()->email,
+                            'paid_by'  => Auth::user()->email,
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ]
+                 );
+        return redirect()->route('get-payment');
+
+    }
+
     public function PostQuestionPriceDeadline(Request $request){
 
         DB::table('post_question_prices')->insert(
@@ -44,15 +60,15 @@ class AskQuestionController extends Controller
 
             ]);
 
-        DB::table('tutor_payment')->where('order_id', session('question_id'))
-                    ->update(
-                        [
-                            'amount' => round($request['question_price'] *88* 0.34, 2),
-                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                        ]
-                 );
+       //update bonus table
 
-        
+        DB::table('tutor_payment_bonuses')->where('order_id', session('question_id'))
+            ->update(
+                [
+                            'amount' => round($request['question_price'] *88* 0.43, 2),
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]
+             );
 
 
         return redirect()->route('post-questions');
@@ -127,6 +143,17 @@ class AskQuestionController extends Controller
                 'status'      =>0,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+
+            //tutor Bonuses
+
+        DB::table('tutor_payment_bonuses')->insert(
+            [
+                'order_id'      =>  $question_id,
+                'payment_id'    =>  rand(9999,99999),
+                'status'        =>  0,
+                'created_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString()
             ]);
 
         
