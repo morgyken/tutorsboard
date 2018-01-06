@@ -18,7 +18,7 @@ class PaymentController extends Controller
     	{
 
     		$data = DB::table('tutor_payment')->get();
-
+ 
     	}
     	if($myurl === 'payment-bonuses')
     	{
@@ -81,8 +81,6 @@ class PaymentController extends Controller
                     'updated_at' 	=> \Carbon\Carbon::now()->toDateTimeString(),
                 ]);
 
-                   	return redirect()->route('get-payment');
-    	}     
-
-
-}
+                return redirect()->route('get-payment');
+    	}   
+    }

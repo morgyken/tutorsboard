@@ -52,7 +52,7 @@ foreach ($data as $key => $value) {
 
  // echo $dead;
 
-  DB::table('post_question_prices')->where('question_id', $value->question_id)
+  DB::table('question_matrices')->where('question_id', $value->question_id)
                         ->update(
                                     [
                                         'overdue' => $dead, 

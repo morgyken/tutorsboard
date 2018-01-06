@@ -26,6 +26,8 @@ class UserController extends Controller
 		return view('auth.file-upload-2');
 
 	}
+
+    
     public function fileUpload(){
 
         $request = request();

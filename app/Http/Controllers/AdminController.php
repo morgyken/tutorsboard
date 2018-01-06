@@ -27,6 +27,15 @@ class AdminController extends Controller
         return view('adm.dopayments', ['payment_req'=> $payreq]);
         
     }
+
+
+    public function AdmDashboard()
+    {
+
+        $question = DB::table('question_bodies')->get();
+
+        return view ('adm.show-index-admin', ['questions' => $question]);
+    }
     
      public function AdmPostPyments($request_id, $amount){
         
@@ -171,11 +180,17 @@ class AdminController extends Controller
 
             ->where('current',1)
 
+            //check question URL
+
             ->where($status, 1)
+
+            //check overdue Questions
+
+            ->where('overdue',0)
 
             ->orderby('question_deadline', 'asc')
 
-            ->paginate(25);
+            ->paginate(20);
         }
         
         else
@@ -188,9 +203,12 @@ class AdminController extends Controller
 
             ->where('current',1)
 
+            //do not show overdue questions
+            ->where('overdue',0)
+
             ->orderby('question_deadline', 'asc')
 
-            ->paginate(25);
+            ->paginate(20);
         }
 
         
@@ -323,12 +341,7 @@ class AdminController extends Controller
         return view ('adm.profile');
     }
 
-    public function AdmDashboard(){
-        return view ('adm.index-admin');
-    }
-
-
-
+  
     public function QuestionDetails($question_id, $optional= null){
 
        $email = Auth::user()->email;

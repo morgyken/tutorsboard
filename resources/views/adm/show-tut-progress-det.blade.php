@@ -1,20 +1,13 @@
 @extends('layouts.admin-layout-latest')
 
 <style type="text/css">
-    .mydiv
-    {
-        
-        margin-bottom: 50px;
-        padding: 20px;
-    }
-    .header1 > .badge
-    {
+    
+    .header1 > .badge{
         background-color: green;
         padding: 10px;
         font-size: 13px;
     }
-    span
-    {
+    .mydiv div{
       padding: 25px;
 
     }
@@ -22,35 +15,42 @@
 
 @section('header')
 
-Tutor Profile
+Tutor Progress
 
 @endsection
 
 @section('mycontent')
 
-<h2> My Profile</h2>
+<h3> Account Progress</h3>
 
 <hr>
+<div class="mydiv">
 
-<span class="col-md-5 col-offset-3"> QA Score </span> 
-<span class="col-md-7 col-offset-3"> 0% </span> 
+<article class="col-xl-12 maincontent">
+         
+
+    <div class="col-sm-5"> QA Score: </div>
+    <div class="col-sm-6"> 0%</div>
+       
+    <div class="col-sm-5"> Revisons </div>
+    <div class="col-sm-6"> 0.00% </div>
+       
+    <div class="col-sm-5"> Late Uploads</div>
+    <div class="col-sm-6">0.00% </div>
+    
+    <div class="col-sm-5"> Refunds </div>
+    <div class="col-sm-6"> 120 </div>
+
+    <span class="col-md-12 btn btn-success col-offset-3" style=""> Total Score </span> 
+    <span class="col-md-12 btn btn-warning col-offset-3" style=""> 0.00 % </span>
+            
+                
+</article>
+</div>
 
 
 
-<span class="col-md-5 col-offset-3"> Revisions % </span> 
-<span class="col-md-7 col-offset-3">  0.00</span> 
 
-
-<span class="col-md-5 col-offset-3"> Late Uploads</span> 
-<span class="col-md-7 col-offset-3"> 0.00% </span> 
-
-
-<span class="col-md-5 col-offset-3"> Refunds</span> 
-<span class="col-md-7 col-offset-3"> 0.00 % </span> 
-
-
-<span class="col-md-12 btn btn-lg col-offset-3" style="background-color: green; padding: 20px"> Total Score </span> 
-<span class="col-md-12 btn btn-lg col-offset-3" style="background-color: red; padding: 20px;"> 0.00 % </span>
 
 
 @endsection

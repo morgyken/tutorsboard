@@ -22,6 +22,31 @@ class UpdateQuestionController extends Controller
          * Cancel Question here
          */
 
+        if($request->update =='optout'){
+            DB::table('question_matrices')->where('question_id', $question)
+                ->update(
+                    [
+                        'cancelled' => 0,
+                        'reassigned' => 0,
+                        'user_id'   => $request->user_id,
+                        'completed' => 0,
+                        'rated' => 0,
+                        'paid' => 0,
+                        'revision' => 0,
+                        'answered' => 0,
+                        'assigned' => 0,
+                        'current' => 1,
+                        'paid' => 0,
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+            /**
+             * Add Cancel Question message here
+             * Make price of cancelling be zero
+             */
+        }
+
         if($request->update =='cancel'){
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
@@ -276,12 +301,11 @@ class UpdateQuestionController extends Controller
                         'answered' => 1,
                         'assigned' => 1,
                         'current' => 0,
-                        'paid' => 0,
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-            $this->UpdateStatus($question, 'answered');
+           
 
         }
 

@@ -18,15 +18,13 @@ class CreateTutorsTable extends Migration
             $table->timestamps();
             $table->rememberToken();
             $table->string('tutor_id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('skype');
-            $table->string('county');
-            $table->string('cardnumber');
-            $table->string('phoneno');
-            $table->string('town');
-            $table->string('ratings');
-            $table->string('level');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('skype')->nullable();
+            $table->string('county')->nullable();
+            $table->string('phoneno')->nullable();
+            $table->string('town')->nullable();
+            $table->string('ratings')->nullable();            
         });
     }
     /**

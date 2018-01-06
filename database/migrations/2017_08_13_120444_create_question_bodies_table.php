@@ -21,6 +21,8 @@ class CreateQuestionBodiesTable extends Migration
             $table->integer('question_id')->unique();
             $table->text('user_id');
             $table->text('category');
+            $table->text('paper_format');
+            $table->text('academic_level');
             $table->timestamps();
             $table->rememberToken();
 

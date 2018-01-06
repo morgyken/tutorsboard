@@ -119,6 +119,8 @@ class AskQuestionController extends Controller
                 'user_id' => Auth::user()->email,
                 'summary' => $summary1,
                 'special' => $request['special'],
+                'academic_level' => $request['academic_level'],
+                'paper_format' => $request['paper_format'], 
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 

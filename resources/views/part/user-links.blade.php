@@ -14,7 +14,9 @@ echo $usertype;
 
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-ans">Answer Question</a></p>
 
-        <p><a href="#" data-toggle="collapse" data-target="#reply">Post a reply</a></p>
+        <p><a href="#" data-toggle="collapse" data-target="#message">Reply a student</a></p>
+        
+        <p> <a href="#"  data-toggle="collapse" data-target="#Comment">Send Us a Message</a></p>
 
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-optout">Opt Out Question</a></p>
 
@@ -34,7 +36,7 @@ echo $usertype;
 
 
        
-          <p> <a href="#"  data-toggle="collapse" data-target="#reply1">Comment</a></p>
+          <p> <a href="#"  data-toggle="collapse" data-target="#message">Comment</a></p>
     
 
        

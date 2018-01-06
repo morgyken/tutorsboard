@@ -63,12 +63,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //create tutor education here 
+
+         DB::table('tutor_education')->insert(
+            [
+                'tutor_id'          =>  $data['email'],         
+                'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
+                //update tutor profie accounts 
+        DB::table('tutor_profile')->insert(
+            [
+                'tutor_id'          =>  $data['email'],         
+                'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
+        //update tutor ccounts
+
          DB::table('tutor_accounts')->insert(
             [
                 'account_id'        =>  rand(89000,999999), 
                 'tutor_id'          =>  $data['email'],         
                 'account_status'    => 'New',
-                'account_level'     => 'Beginner'
+                'account_level'     => 'Beginner',
                 'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
 

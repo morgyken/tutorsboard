@@ -11,18 +11,26 @@
 |
 */
 
-Route::get('/', function () {  return view('gen.index'); })->name('home');
+Route::get('/', function () {  return view('gen.main-index'); });
+
+
+
+
+Route::get('/sample', function () {  return view('part.auto-com'); });
 
 
 Route::get('sample-two/', function(){ 	return view('tut.sample'); });
 
 Route::get('question-stat',array('as'=>'question-stat','uses'=>'QuestionController@questionStat'));
 
+Route::get('/university', array('as'=>'university', 'uses' => 'AutoComplete@OneAutocomplete'));
+
+
 Auth::routes();
 
-Route::post('profile-pic-view/',array('as'=>'profile-pic-view','uses'=>'UserController@ProfilePicView'));
+//profile pics 
 
-
+Route::get('profile-pic-view/',array('as'=>'profile-pic-view','uses'=>'UserController@ProfilePicView'));
 Route::post('profile-pic',array('as'=>'profile-pic','uses'=>'UserController@fileUpload'));
 
 
@@ -111,51 +119,33 @@ Route::post('autocomplete-search',array('as'=>'autocomplete.search','uses'=>'Sea
 Route::post('autocomplete-ajax',array('as'=>'searchajax','uses'=>'SearchController@autoComplete'));
 
 //admin routes starts here
-
-
-Route::get('admin-question-loader',array('as'=>'admin-question-loader','uses'=>'AdminController@AdmQLoader'));
-Route::get('adm-payments',array('as'=>'adm-payments','uses'=>'AdminController@AdmPayments'));
-Route::get('adm-tutors',array('as'=>'adm-tutors','uses'=>'AdminController@AdmTutors'));
-
 Route::get('adm-tut-payments',array('as'=>'adm-tut-payments','uses'=>'AdminController@AdmGetPyments'));
-Route::get('adm-profile',array('as'=>'adm-profile','uses'=>'AdminController@AdmProfile'));
 
 Route::get('adm-dashboard',array('as'=>'adm-dashboard','uses'=>'AdminController@AdmDashboard'));
+
 
 Route::get('post-payment-request/{amount}',array('as'=>'post-payment-request','uses'=>'QuestionController@PostPaymentRequest'));
 
 
-
-Route::get('adm-post-payments/{amount}/{request_id}',array('as'=>'post-payments','uses'=>'AdminController@AdmPostPyments'));
-
 Route::post('tut-payment12',array('as'=>'tut-payment','uses'=>'QuestionController@PayRequests'));
-
 //get tutor profile
-
 Route::get('tut-profile',array('as'=>'tut-profile','uses'=>'TutorController@getTutProfile'));
-
 //post tutor profile
-
 Route::post('tut-profile',array('as'=>'tut-profile','uses'=>'TutorController@postTutProfile'));
 
-
 //get tutor proggress
-
 Route::get('tut-progress',array('as'=>'tut-progress','uses'=>'TutorController@getTutProgress'));
-
 //post tutor progress
-
 Route::post('tut-progress',array('as'=>'tut-progress','uses'=>'TutorController@postTutProgress'));
-
-
 //get tutor profile
-
 Route::get('tut-account',array('as'=>'tut-account','uses'=>'TutorController@getTutAccount'));
 
 //post tutor profile
-
 Route::post('tut-account',array('as'=>'tut-account','uses'=>'TutorController@postTutAccount'));
 
+//post tutor profile
+
+Route::post('tut-education',array('as'=>'tut-education','uses'=>'TutorController@postTutEducation'));
 
 
 Auth::routes();

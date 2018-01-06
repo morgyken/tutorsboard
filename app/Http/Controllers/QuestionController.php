@@ -448,25 +448,6 @@ class QuestionController extends AdminController
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             ]);
-
-        $file = Input::file('file');
-
-
-        foreach ($file as $files){
-
-            $name =  $files->getClientOriginalName();
-
-            DB::table('comment_files')->insert(
-                [
-                    'file_name' => $name,
-                    'comment_id' => $comments_id,
-                    'file_path'=> $path1,
-                     'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
-
-        }
-
         
         return redirect()->route('view-question', ['question_id'=> $question]);
     }
@@ -624,6 +605,7 @@ class QuestionController extends AdminController
      */
 
     public function postQuestions(){
+        
         return view('quest.ask-question');
     }
 

@@ -1,5 +1,11 @@
 @extends('layout.tut-layout1')
 
+@section('title')
+
+Available Questions 
+
+@endsection
+
 @section('body')
     <article class="col-xl-12 maincontent">
 
@@ -7,7 +13,7 @@
             <p><h2 style="margin-bottom:18px;" class="page-title">Question Details</h2></p>
 
         </header>
-        <div class="col-lg-12">
+        <div class="col-lg-12"]
             <div class="col-lg-3" ><h4></h4></div>
             <div class="col-lg-3" ><h5>Category: {{$question->category}}</h5></div>
             <div class="col-lg-3" ><h5>Time left: {!! $difference !!} </h5></div>
@@ -17,7 +23,7 @@
 
         <div class="col-lg-3">
 
-            @include('part.vertical-menu1')
+            @include('part.tutor-menu')
 
         </div>
 
