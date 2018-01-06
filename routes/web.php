@@ -25,6 +25,7 @@ Route::get('question-stat',array('as'=>'question-stat','uses'=>'QuestionControll
 
 Route::get('/university', array('as'=>'university', 'uses' => 'AutoComplete@OneAutocomplete'));
 
+Route::get('/academic-level', array( 'as'=>'academic-level', 'uses' => 'AutoComplete@AcademicLevel'));
 
 Auth::routes();
 
@@ -97,7 +98,7 @@ Route::post('/update-question/{question_id}', array('as' => 'update-question', '
  * Tutot page questions
  */
 
-Route::get('tut-questions',array('as'=>'tut-questions','uses'=>'TutorController@TutProfile'))->name('tut.home');
+Route::get('tut-questions',array('as'=>'tut-questions','uses'=>'TutorController@TutProfile'))->name('tut.home')->middleware('QuestionOverdue');;
 
 /**
  *
@@ -112,7 +113,7 @@ Route::post('/autocomplete', array('as' => 'autocomplete', 'uses'=>'SearchContro
 
 Route::post('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('QuestionOverdue');
 
 Route::post('autocomplete-search',array('as'=>'autocomplete.search','uses'=>'SearchController@index'));
 

@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
 use Storage;
+use App\Http\Controllers\PaymentController;
 use Response;
 use Session;
 use App\AcceptQuestion;
@@ -31,6 +32,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AskQuestionController extends Controller
 {
+    public function __costruct()
+    {
+        $this->middleware('QuestionOverdue');
+    }
 
     public function UpdateBonus()
     {                //update tutor payment 
@@ -44,19 +49,36 @@ class AskQuestionController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ]
                  );
+
+        DB::table('question_bodies')->where('question_id', session('question_id'))
+        ->update(
+            [
+                'category' => $request->category,
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+     );
         return redirect()->route('get-payment');
 
     }
 
+    
+
     public function PostQuestionPriceDeadline(Request $request){
+
+        $payment = new PaymentController;
 
         DB::table('post_question_prices')->insert(
             [
-                'question_id' =>session('question_id'),
-                'question_deadline' => $request['question_deadline'],
-                'question_price' =>$request['question_price'] ,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            'question_id' =>session('question_id'),
+            'question_deadline' => $request['question_deadline'],
+            'question_price'   =>$payment->QuestionPrice($request->question_price, $request->pages, $request->urgency), 
+            'urgency'          =>$request['urgency'],
+            'academic_level'   => $request->academic_level, 
+            'paper_format'     => $request->paper_format,
+            'tutor_price'      => $payment-> TutorPrice($request->question_price,'junior'),
+            'pages'           => $request['pages'],
+            'created_at'      =>\Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at'       => \Carbon\Carbon::now()->toDateTimeString()
 
             ]);
 
@@ -78,6 +100,9 @@ class AskQuestionController extends Controller
 
     public function askQuestions(Request $request)
     {
+
+        //dd($request->academic_level);
+
         $question_id = str_random(25);
 
         $number_of_words = rand (300,400);
@@ -115,12 +140,9 @@ class AskQuestionController extends Controller
             [
                 'question_body' => $request['question_body'],
                 'question_id' =>$question_id,
-                'category' => $request['category'],
                 'user_id' => Auth::user()->email,
                 'summary' => $summary1,
                 'special' => $request['special'],
-                'academic_level' => $request['academic_level'],
-                'paper_format' => $request['paper_format'], 
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 

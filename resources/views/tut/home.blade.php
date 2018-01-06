@@ -2,8 +2,6 @@
 
 @section('body')
 
-{{ \App\Http\Controllers\DateTimeController::UpdateDeadline() }}
-
     <?php
 
 

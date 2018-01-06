@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends AdminController
 {
-
     /*
     * Get the question starts, used in the view for links
     */

@@ -20,6 +20,12 @@ use Input;
 
 class UserController extends Controller
 {
+   /* public function __costruct()
+    {
+        $this->middleware('QuestionOverdue');
+    }
+
+    */
     
 	public function ProfilePicView(){
 

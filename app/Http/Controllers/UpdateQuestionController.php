@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UpdateQuestionController extends Controller
 {
+
     public function UpdateQuestionStatus(Request $request, $question)
     {
         /**

@@ -2208,6 +2208,11 @@ pre code {
   .col-lg-push-0 {
     left: auto;
   }
+  /* Hide slider image until page is fully loaded*/
+  body:not(.loaded) #slider img {
+  display:none;
+  }
+
   .col-lg-offset-12 {
     margin-left: 100%;
   }

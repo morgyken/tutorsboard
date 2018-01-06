@@ -21,11 +21,13 @@
 </head>
 <body>
 
-  <input type="text" name="category" class="form-control"  id="searchItem" placeholder="Order Subject">
+  <input type="text" name="academic_level" class="form-control" id="searchItem" placeholder="Academic level">
   
+
+
 <script type="text/javascript">
   $('#searchItem').autocomplete({
-    source: '{!! URL::route('university') !!}',
+    source: '{!! URL::route('academic-level') !!}',
     minlength:1,
     autoFocus:true,
     select: function(e, ui){

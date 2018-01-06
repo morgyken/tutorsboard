@@ -10,6 +10,104 @@ use Auth;
 
 class PaymentController extends Controller
 {
+
+    public function QuestionPrice($price, $pages, $urgency){
+
+        
+        if($pages = null)
+        {
+
+            if($urgency === 'veryhigh')
+                {
+                    $price = $price + 45;
+
+                }
+            elseif($urgency === 'high')
+                {
+                    $price = $price + 35;
+
+                }
+            elseif($urgency === 'medium')
+                {
+                    $price = $price + 25;
+
+                }
+            elseif($urgency === 'low')
+                {
+                    $price = $price + 15;
+
+                }
+            else{
+                     $price = $price;
+            }
+        }
+        else
+        {
+         if($urgency === 'veryhigh')
+                {
+                    $price = $price + 20* $pages;
+
+                }
+            elseif($urgency === 'high')
+                {
+                    $price = $price + 18 * $pages;
+
+                }
+            elseif($urgency === 'medium')
+                {
+                    $price = $price + 15* $pages;
+
+                }
+            elseif($urgency === 'low')
+                {
+                    $price = $price + 10 * $pages;
+
+                }
+            else{
+                     $price = $price;
+            }
+
+
+        }
+
+        return $price;
+        
+
+    }
+    //add grouping to this tier to get the group account payment
+
+    public function TutorPrice($question_price, $level)
+    {
+        $amount = 0;
+
+        if($level === 'junior')
+        {
+            $amount = round($question_price *88* 0.47, 2);
+        }
+         if($level === 'major')
+        {
+            $amount = round($question_price *88* 0.52, 2);
+        }
+         if($level === 'senior')
+        {
+            $amount = round($question_price *88* 0.57, 2);
+        }
+         if($level === 'proWriter')
+        {
+            $amount = round($question_price *88* 0.62, 2);
+        }
+
+         if($level === 'manager')
+        {
+            //check the nummber of orders managed and add 100* per order
+            //count of orders done during this period
+            $count = 2;
+
+            $amount = round($question_price *87* 0.65, 2) + 100* $count;
+        }
+
+        return $amount;
+    }
     public function getPayments($myurl=null)
     {
     	$sum = 0; 

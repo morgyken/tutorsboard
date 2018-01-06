@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+  /*  public function __costruct()
+    {
+        $this->middleware('QuestionOverdue');
+    }
     /*
      * Paymemt requests 
      */
