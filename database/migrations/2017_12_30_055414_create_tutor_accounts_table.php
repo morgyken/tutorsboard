@@ -22,7 +22,8 @@ class CreateTutorAccountsTable extends Migration
             $table->string('account_level')->nullable();
             $table->string('account_status')->nullable();
             $table->string('payment_method')->nullable();
-            $table->string('payment_account')->nullable();            
+            $table->string('payment_account')->nullable(); 
+            $table->string('ratings')->nullable();            
         });
     }
 

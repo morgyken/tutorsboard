@@ -4,6 +4,10 @@ echo $usertype;
 
 @if($usertype =='')
     @if($assigned->current == 1 )
+    @if(Auth::user()->user_role === 'admin')
+    <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Assign Tutor</a></p>
+
+    @endif
 
         <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Commit to Answer</a></p>
 

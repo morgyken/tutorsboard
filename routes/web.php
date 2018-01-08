@@ -16,10 +16,13 @@ Route::get('/', function () {  return view('gen.main-index'); });
 
 
 
-Route::get('/sample', function () {  return view('part.auto-com'); });
+Route::get('/sample', function () {  return view('adm.adm-all-tutors'); });
 
 
-Route::get('sample-two/', function(){ 	return view('tut.sample'); });
+
+Route::get('/sample-two', array('uses'=>'OnlineUsers@OnlineActivity'));
+
+//Route::get('sample-two/', function(){ 	return view('tut.sample'); });
 
 Route::get('question-stat',array('as'=>'question-stat','uses'=>'QuestionController@questionStat'));
 
@@ -147,6 +150,19 @@ Route::post('tut-account',array('as'=>'tut-account','uses'=>'TutorController@pos
 //post tutor profile
 
 Route::post('tut-education',array('as'=>'tut-education','uses'=>'TutorController@postTutEducation'));
+
+//get all tutors
+Route::get('adm-tutors', array('as'=>'adm-tutors','uses'=>'AdminController@admTutors'));
+
+//return all adm questions 
+Route::get('adm-questions', array('as'=>'adm-questions','uses'=>'AdminController@AdmQuestions'));
+
+
+//return search results 
+ 
+Route::post('adm-search', array('as'=>'adm-search','uses'=>'AdminController@AdmSearchResults'));
+
+
 
 
 Auth::routes();

@@ -15,11 +15,6 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
 
-                             <div class="row">
-                                <div class="col-xs-12">
-                                    @include('part.top-nav-bar')
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <div class="col-xs-3">

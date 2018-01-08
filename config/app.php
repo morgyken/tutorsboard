@@ -179,6 +179,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // this is used in showing the currently logged in users found at:
+
+        //https://github.com/thomastkim/laravel-online-users
+
+        Kim\Activity\ActivityServiceProvider::class
+
     ],
 
     /*
@@ -228,7 +234,13 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Input' => Illuminate\Support\Facades\Input::class,       
+        'Input' => Illuminate\Support\Facades\Input::class,  
+
+        // this is used in showing the currently logged in users found at:
+
+        //https://github.com/thomastkim/laravel-online-users
+
+        'Activity' => Kim\Activity\ActivityFacade::class     
 
     ],
 

@@ -20,10 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TutorController extends Controller
 {
-    public function __costruct()
-    {
-        $this->middleware('QuestionOverdue');
-    }
+
     
     public function getTutProfile()
     {        

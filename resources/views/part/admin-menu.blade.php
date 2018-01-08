@@ -11,6 +11,16 @@
       
     </div>
 </div><!--/span-->
+<div class="col-md-12" id="sidebar">
+    <div class="list-group">
+        <a href="#" class="list-group-item active link-header">Tutors </a>
+        <a href="#" class="list-group-item">New Applications <span class="badge badge-success">2</span></a>
+        <a href="#" class="list-group-item">Active Tutors<span class="badge badge-success"></span></a>
+        <a href="#" class="list-group-item">Inactive Tutors<span class="badge badge-success"></span></a>
+        <a href="#" class="list-group-item">Pro Tutors<span class="badge badge-success"></span></a>
+      
+    </div>
+</div><!--/span-->
 
 <div class="col-md-12" id="sidebar">
     <div class="list-group">
@@ -38,15 +48,5 @@
         <a href="#" class="list-group-item">Refunds</a>
         
       
-    </div>
-</div><!--/span-->
-
-<div class="col-md-12" id="sidebar">
-    <div class="list-group">
-        <a href="#" class="list-group-item active">Tutor Profile</a>
-        <a href="#" class="list-group-item">Personal Information</a>
-        <a href="#" class="list-group-item">Account Information</a>
-        <a href="#" class="list-group-item">Account Progress </a>
-             
     </div>
 </div><!--/span-->

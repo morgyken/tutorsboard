@@ -13,7 +13,7 @@ class TutorAccount extends Model
 
     protected $fillable = 	[
     						'account_id', 'tutor_id', 'account_level', 
-    						 'payment_method', 'account_status', 'payment_account' 
+    						 'payment_method', 'account_status', 'payment_account', 'ratings' 
     						];
 
     /**

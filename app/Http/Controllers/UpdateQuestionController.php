@@ -29,7 +29,7 @@ class UpdateQuestionController extends Controller
                     [
                         'cancelled' => 0,
                         'reassigned' => 0,
-                        'user_id'   => $request->user_id,
+                        'tutor_id'   => $request->user_id,
                         'completed' => 0,
                         'rated' => 0,
                         'paid' => 0,
@@ -126,7 +126,7 @@ class UpdateQuestionController extends Controller
                         'completed' => 1, //accepted
                         'rated' => 1,
                         'paid' => 0,
-                        'user_id'   => $request->user_id,
+                        'tutor_id'   => $request->user_id,
                         'revision' => 0,
                         'answered' => 1,
                         'assigned' => 1,
@@ -295,8 +295,9 @@ class UpdateQuestionController extends Controller
                     [
                         'cancelled' => 0,
                         'reassigned' => 0,
-                        'completed' => 0,
+                        'completed' => 1,
                         'rated' => 0,
+                        'tutor_id'>Auth::user()->email, 
                         'paid' => 0,
                         'revision' => 0,
                         'answered' => 1,
@@ -356,6 +357,14 @@ class UpdateQuestionController extends Controller
 
 
         if($request->update =='commit'){
+            
+
+            if($request->tutor_id != null){
+                $user_id =$request->user_id; 
+            }
+            else {
+                $user_id = $request->tutor_id;
+            }
 
 
             DB::table('post_comments')->insert(
@@ -380,7 +389,7 @@ class UpdateQuestionController extends Controller
                         'rated'             => 0,
                         'paid'              => 0,
                         'revision'          => 0,
-                        'user_id'   => $request->user_id,
+                        'tutor_id'           => $request->user_id,
                         'answered'          => 0,
                         'assigned'          => 1,
                         'current'           => 0,

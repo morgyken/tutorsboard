@@ -311,16 +311,43 @@ class AdminController extends Controller
 
     }
 
+    // search results 
+
+    public function AdmSearchResults(Request $request){
+
+        $criteria = $request->search;
+
+        $question = DB::table('question_bodies')
+            ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_matrices','question_bodies.question_id','=','question_matrices.question_id')
+            ->select('question_bodies.*', 'question_bodies.summary',
+                'question_matrices.*','question_matrices.user_id',
+                'post_question_prices.created_at',
+                'post_question_prices.*')
+            ->where('question_bodies.question_id', 'LIKE' ,'%'.$criteria.'%')
+            ->orwhere('question_bodies.user_id', 'LIKE', '%'.$criteria.'%')
+            ->orwhere('question_bodies.question_body', 'LIKE', '%'.$criteria.'%')
+            ->orwhere('question_price', 'LIKE', '%'.$criteria.'%')
+            ->orwhere('category', 'LIKE', '%'.$criteria.'%')
+            ->orderBy('post_question_prices.created_at', 'asc')
+            ->paginate(25);
+
+        return view('adm.adm-question-search',['questions'=> $question]);
+       
+
+    }
+
 
     public function returnQuery12($num){
 
         $question1 = DB::table('question_bodies')
             ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->leftjoin('question_status_models','question_bodies.question_id','=','question_status_models.question_id')
+            ->leftjoin('question_matrices','question_bodies.question_id','=','question_matrices.question_id')
             ->select('question_bodies.question_id', 'question_bodies.summary',
-                'question_status_models.status',
+                'question_matrices.*','question_matrices.user_id',
                 'post_question_prices.created_at',
-                'post_question_prices.question_deadline', 'post_question_prices.question_price')
+                'post_question_prices.*')
+            ->orderby('overdue', 'asc')
             ->orderBy('post_question_prices.created_at', 'asc')
             ->paginate($num);
 
@@ -329,12 +356,33 @@ class AdminController extends Controller
 
     public function AdmTutors(){
 
-        $user = DB::table('users')
-                ->where('user-type', '')
-                ->orderby('email')
-                ->paginate(1200);
 
-        return view ('adm.allTutors',['users'=> $user ] );
+
+        $user = DB::table('users')
+                ->join('tutor_profile', 'tutor_profile.tutor_id', '=', 'users.email')
+                ->leftjoin('tutor_accounts', 'tutor_accounts.tutor_id', '=', 'tutor_profile.tutor_id' )
+                ->where('user_role', 'tutor')
+                ->orderby('email')
+                ->paginate(20);
+
+        //dd($user);
+
+        return view ('adm.adm-all-tutors',['users'=> $user]);
+    }
+    //return all question details
+
+    public function AdmQuestions()
+    {
+        //paginate
+        $num = 50;
+
+        //find questions 
+
+        $query = $this->returnQuery12($num);
+
+        //return view
+
+        return view('adm.adm-all-questions',['questions'=> $query]);
 
     }
 

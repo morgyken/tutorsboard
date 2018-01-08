@@ -24,6 +24,7 @@ class CreateQuestionMatricesTable extends Migration
             $table->integer('completed')->nullable();
             $table->integer('rated')->nullable();
             $table->integer('paid')->nullable();
+            $table->integer('tutor_id')->nullable();
             $table->integer('revision')->nullable();
             $table->integer('cancelled')->nullable();
             $table->integer('assigned')->nullable();
@@ -31,6 +32,7 @@ class CreateQuestionMatricesTable extends Migration
              $table->integer('mybid')->nullable();
             $table->integer('suggested')->nullable();
              $table->integer('disputed')->nullable();
+
            
         });
     }
