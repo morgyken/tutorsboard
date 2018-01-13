@@ -1,6 +1,6 @@
-@extends('layout.main-layout')
+@extends('layout.tut-layout1')
 
-@section('content')
+@section('body')
 
 <!-- container -->
 <div class="container">
@@ -12,9 +12,9 @@
     <div class="row">
 
         <!-- Article main content -->
-        <article class="col-xl-12 maincontent">
+        <article   class="col-xl-12 maincontent">
             <header class="page-header">
-                <p><h1 style="margin-bottom:18px;" class="page-title">Question Details</h1></p>
+                <p><h1 style="margin-bottom:18px;" class="page-title">Ask Question</h1></p>
 
             </header>
 
@@ -30,6 +30,10 @@
                 <form action="{{route('ask-questions')}}" method="post" enctype="multipart/form-data">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        
+                        <input type="text" name="topic" class="form-control input-lg" placeholder="Enter Topic " id="topic">
+                    </div>
 
                     <div class="form-group">
                         @include('part.ckeditor')

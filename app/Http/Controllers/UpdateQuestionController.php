@@ -16,6 +16,21 @@ use Illuminate\Support\Facades\Auth;
 
 class UpdateQuestionController extends Controller
 {
+    //post comments 
+
+    public function postComment($comment, $messageType, $question)
+    {
+        DB::table('post_comments')->insert(
+                [
+                    'comment_body' => $comment,
+                    'comments_id' =>  rand(1000, 9999),
+                    'question_id' => $question,
+                    'message_type'=>$messageType,
+                    'user_id' => Auth::user()->email,
+                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
+    }
 
     public function UpdateQuestionStatus(Request $request, $question)
     {
@@ -27,25 +42,50 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled' => 0,
-                        'reassigned' => 0,
+                        
                         'tutor_id'   => $request->user_id,
-                        'completed' => 0,
-                        'rated' => 0,
-                        'paid' => 0,
-                        'revision' => 0,
-                        'answered' => 0,
-                        'assigned' => 0,
+                       
                         'current' => 1,
-                        'paid' => 0,
+                        
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-            /**
-             * Add Cancel Question message here
-             * Make price of cancelling be zero
-             */
+            //post comments
+            $this->postComment("The tutor opted out of the Question ", $request->update);
+        }
+
+        if($request->update =='accepted'){
+            DB::table('question_matrices')->where('question_id', $question)
+                ->update(
+                    [
+                        'tutor_id'   => $request->user_id,
+                        'completed' => 1,            
+                        
+                        'current' => 1,
+                        
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+            //post comments
+            $this->postComment("Congratulations, the questios was accepted by our customer", $request->update, $question);
+        }
+
+
+        if($request->update =='unassign'){
+            DB::table('question_matrices')->where('question_id', $question)
+                ->update(
+                    [  
+                        'answered' => 0,
+                        'assigned' => 0,
+                        'current' => 1,
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+            //post comments
+            $this->postComment("You have been unassigned from the Question, thank you for using our platform", $request->update);
         }
 
         if($request->update =='cancel'){
@@ -54,23 +94,17 @@ class UpdateQuestionController extends Controller
                     [
                         'cancelled' => 1,
                         'reassigned' => 0,
-                        'user_id'   => $request->user_id,
-                        'completed' => 0,
-                        'rated' => 0,
-                        'paid' => 0,
-                        'revision' => 0,
-                        'answered' => 0,
-                        'assigned' => 0,
-                        'current' => 0,
-                        'paid' => 0,
+                        'user_id'   => Auth::user()->email,
+                        'completed' => 0,                       
+            
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-            /**
-             * Add Cancel Question message here
-             * Make price of cancelling be zero
-             */
+            //post comments
+            $this->postComment("The question has been Cancelled, thank you for using our tutoring platform. For more quesries, contact our customer care.", $request->update, $question);
+
+         
         }
 
         if($request->update =='revision'){
@@ -80,11 +114,7 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled' => 0,
-                        'reassigned' => 0,
-                        'completed' => 0,
-                        'rated' => 0,
-                        'paid' => 0,
+                       
                         'revision' => 1,
                         'answered' => 0,
                         'assigned' => 1,
@@ -94,20 +124,9 @@ class UpdateQuestionController extends Controller
                     ]
                 );
 
-            /**
-             * insert the history of the ratings
-             */
+              //post comments
+            $this->postComment("The question has been set on revision, please ensure that you submit the revision on time. ", $request->update, $question);
 
-            DB::table('question_histories')->insert(
-                [
-
-                    'user_id' => Auth::user()->email,
-                    'question_id' => $question,
-                    'status' => 'Revision',
-                    'moderator' => 'Jeremy',
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
         }
 
         /**
@@ -121,80 +140,23 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled' => 0,
-                        'reassigned' => 0,
                         'completed' => 1, //accepted
                         'rated' => 1,
-                        'paid' => 0,
+                       
                         'tutor_id'   => $request->user_id,
-                        'revision' => 0,
+                      
                         'answered' => 1,
                         'assigned' => 1,
-                        'current' => 0,
-                        'paid' => 0,
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-            /**
-             * insert the history of the ratings
-             */
-
-            DB::table('question_histories')->insert(
-                [
-
-                    'user_id' => Auth::user()->email,
-                    'question_id' => $question,
-                    'status' => 'Completed',
-                    'moderator' => 'Jeremy',
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
+              //post comments
+            $this->postComment("The question is now complete. You can browse more questions and make more money.", $request->update, $question);
 
         }
 
-        /**
-         * Completed Questions
-         */
-        if($request->update =='paid'){
-
-            /**
-             * Post to assigned matrix
-             */
-            DB::table('question_matrices')->where('question_id', $question)
-                ->update(
-                    [
-                        'cancelled'         => 0,
-                        'reassigned'        => 0,
-                        'completed'         => 1, //accepted
-                        'rated'             => 1,
-                        'paid'              => 0,
-                        'revision'          => 0,
-                        'answered'          => 1,
-                        'assigned'          => 1,
-                        'current'           => 0,
-                        'paid'              => 1,
-                        'updated_at'        => \Carbon\Carbon::now()->toDateTimeString()
-                    ]
-                );
-
-            /**
-             * insert the history of the ratings
-             */
-
-            DB::table('question_histories')->insert(
-                [
-
-                    'user_id' => Auth::user()->email,
-                    'question_id' => $question,
-                    'status' => 'paid',
-                    'moderator' => 'Jeremy',
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
-
-        }
-
+        
         if($request->update =='rated'){
             /**
              * Post to assigned matrix
@@ -202,48 +164,16 @@ class UpdateQuestionController extends Controller
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled'     => 0,
-                        'reassigned'    => 0,
-                        'completed'     => 0,
+                    
                         'rated'         => 1,
-                        'user_id'       => $request->user_id,
-                        'paid'          => 0,
-                        'revision'      => 0,
-                        'answered'      => 1,
-                        'assigned'      => 1,
-                        'current'       => 0,
-                        'paid'          => 0,
+                        'user_id'       => $request->user_id,               
+                        
+                        
                         'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-            /**
-             * inssert the ratings of the question
-             */
-            DB::table('question_ratings')->insert(
-                [
-
-                    'user_id' => Auth::user()->email,
-                    'ratings' => $request->rating,
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
-
-            /**
-             * insert the history of the ratings
-             */
-
-            DB::table('question_histories')->insert(
-                [
-
-                    'user_id' => Auth::user()->email,
-                    'question_id' => $question,
-                    'status' => 'The Question has been rated',
-                    'moderator' => 'Jeremy',
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
-
+        
         }
 
 
@@ -292,60 +222,41 @@ class UpdateQuestionController extends Controller
 
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
-                    [
-                        'cancelled' => 0,
-                        'reassigned' => 0,
-                        'completed' => 1,
-                        'rated' => 0,
-                        'tutor_id'>Auth::user()->email, 
-                        'paid' => 0,
-                        'revision' => 0,
+                    [                                   
+             
+                                             
                         'answered' => 1,
-                        'assigned' => 1,
-                        'current' => 0,
+            
+                      
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-           
+                 $this->postComment("The question has been answered. Thank you for using our platform.", $request->update, $question);        
 
         }
 
-        /**
-         * Reassign Questions
-         */
 
         if($request->update =='reassigned'){
-
-
-            DB::table('post_comments')->insert(
-                [
-                    'comment_body' => "Question has been Reassigned ",
-                    'comments_id' =>  rand(1000, 9999),
-                    'question_id' => $question,
-                    'message_type'=>'Ressigned',
-                    'user_id' => Auth::user()->email,
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
 
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
-                        'cancelled'     => 0,
+                        
                         'reassigned'    => 1,
-                        'completed'     => 0,
+                        
                         'rated'         => 0,
-                        'paid'          => 0,
                         'user_id'       => $request->user_id,
-                        'revision'      => 0,
-                        'answered'      => 0,
-                        'assigned'      => 1,
-                        'current'       => 1,
+                        
+                        
+                        'assigned'      => 0,
+                        'current'       => 0,
                         'paid'          => 0,
                         'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
+
+                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.", $request->update, $question);
 
 
 
@@ -366,18 +277,9 @@ class UpdateQuestionController extends Controller
                 $user_id = $request->tutor_id;
             }
 
+            //post comments
 
-            DB::table('post_comments')->insert(
-                [
-                    'comment_body' => "Welcome! You have been assigned to this question,
-                    please ensure that you provide quality answer",
-                    'comments_id' =>  rand(1000, 9999),
-                    'question_id' => $question,
-                    'message_type'=>'Commit',
-                    'user_id' => Auth::user()->email,
-                    'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                ]);
+            $this->postComment("Thank you for taking this question. Please provide a quality, plagiarism free answer within the deadline", $request->update);
 
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
@@ -419,34 +321,37 @@ class UpdateQuestionController extends Controller
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
                 ]);
 
+            //post comments
 
-            $this->UpdateStatus($question, 'disputed');
+            $this->postComment("The question has been disputed. Kindly browse other questions as we resolve the issue. Resolving disputes takes approximately 24 hours.", $request->update, $question);
         }
+         
 
         /*
          * Check if the request is finished
          */
 
         if($request->update =='completed'){
-            $this->QuestionStatusHistory('finished_questions', $question, 'finished');
 
-            $this->QuestionHistory('completed', $question);
+             DB::table('question_matrices')->where('question_id', $question)
+                ->update(
+                    [
+                        
+                                      
+                        'user_id'       => $request->user_id,
+                        
+                        
+                        'completed'      => 1,                      
+                        'paid'          => 1,
+                        'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.", $request->update, $question);
+
+            
 
         }
-
-
-        /*
-        * Check if the request is unassined
-        */
-
-        if($request->update =='reassigned'){
-
-            $this->QuestionStatusHistory('unassigned_questions', $question, 'available');
-
-            $this->QuestionHistory('reassigned', $question);
-
-        }
-
 
         /*
         * Check if the request is paid
@@ -454,48 +359,20 @@ class UpdateQuestionController extends Controller
 
         if($request->update =='paid'){
 
-            $this->QuestionStatusHistory('finished_questions', $question, 'paid');
-
-            $this->QuestionHistory('paid', $question);
-
-        }
-
-        /*
-         * Check if the request is reassigned
-         */
-
-        if($request->update =='reassign'){
-            $this->QuestionStatusHistory('finished_questions', $question, 'reassigned');
-
-            $this->QuestionHistory('reassigned', $question);
-        }
-
-
-        /*
-         * Check if the request is Accept
-         */
-
-        if($request->update =='cancel'){
-            $this->QuestionStatusHistory('finished_questions', $question, 'cancelled');
-
-            $this->QuestionHistory('cancelled', $question);
-        }
-
-        /*
-         * Check if the request is Accept Answer
-         */
-
-        if($request->update =='accept'){
-
-            $this->UpdateStatus($question, 'accepted');
-
-            $this->QuestionHistory('accepted', $question);
+             DB::table('question_matrices')->where('question_id', $question)
+                ->update(
+                    [ 
+                        'user_id'       => $request->user_id,
+                        
+                        
+                      
+                        'paid'          => 1,
+                        'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );       
 
         }
-
-        /*
-         * Add status to the questuon
-         */
+    
 
         return redirect()->route('view-question', ['question_id'=> $question]);
 

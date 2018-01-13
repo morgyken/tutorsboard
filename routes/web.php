@@ -11,16 +11,29 @@
 |
 */
 
-Route::get('/', function () {  return view('gen.main-index'); });
+Route::group(['middleware' => 'web'], function () {
+    //
+
+
+Route::get('/', function () {  return view('gen.main-index'); })->name('general');
 
 
 
 
-Route::get('/sample', function () {  return view('adm.adm-all-tutors'); });
+Route::get('/sample', function () {  return view('auth12.image'); });
+
+Route::post('/sample3', function () {  
+
+
+
+});
 
 
 
 Route::get('/sample-two', array('uses'=>'OnlineUsers@OnlineActivity'));
+
+Route::group(['middleware' => ['auth']], function() {
+    // your routes
 
 //Route::get('sample-two/', function(){ 	return view('tut.sample'); });
 
@@ -34,8 +47,8 @@ Auth::routes();
 
 //profile pics 
 
-Route::get('profile-pic-view/',array('as'=>'profile-pic-view','uses'=>'UserController@ProfilePicView'));
-Route::post('profile-pic',array('as'=>'profile-pic','uses'=>'UserController@fileUpload'));
+Route::get('/profile-pic-view/{view}',array('as'=>'profile-pic-view','uses'=>'UserController@ProfilePicView'));
+Route::post('/profile-pic/{pic?}',array('as'=>'profile-pic','uses'=>'UserController@ProfilePic'));
 
 
 //Route::get('sample',array('as'=>'sample','uses'=>'DateTimeController@getDeadlineInSeconds12'));
@@ -51,7 +64,8 @@ Route::get('all-questions/{status?}',
 
 // get tutor payment route, all payments
 
-Route::get('get-payment/{myurl?}',array('as'=>'get-payment','uses'=>'PaymentController@getPayments'));
+Route::get('get-payment/{myurl?}/{tutorid?}',array('as'=>'get-payment','uses'=>'PaymentController@getPayments'));
+
 
 Route::post('post-payment',array(
 	'as'=>'paytutor',
@@ -101,7 +115,7 @@ Route::post('/update-question/{question_id}', array('as' => 'update-question', '
  * Tutot page questions
  */
 
-Route::get('tut-questions',array('as'=>'tut-questions','uses'=>'TutorController@TutProfile'))->name('tut.home')->middleware('QuestionOverdue');;
+Route::get('tut-questions',array('as'=>'tut-questions','uses'=>'TutorController@TutProfile'))->name('tut.home');
 
 /**
  *
@@ -116,7 +130,7 @@ Route::post('/autocomplete', array('as' => 'autocomplete', 'uses'=>'SearchContro
 
 Route::post('autocomplete',array('as'=>'autocomplete','uses'=>'SearchController@autocomplete'));
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('QuestionOverdue');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('autocomplete-search',array('as'=>'autocomplete.search','uses'=>'SearchController@index'));
 
@@ -163,8 +177,11 @@ Route::get('adm-questions', array('as'=>'adm-questions','uses'=>'AdminController
 Route::post('adm-search', array('as'=>'adm-search','uses'=>'AdminController@AdmSearchResults'));
 
 
+});
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+});

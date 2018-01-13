@@ -1,11 +1,11 @@
-@extends('layouts.admin-layout-latest')
+@extends('layout.tut-layout12')
 
 @section('header')
 Payment History
 
 @endsection
 
-@section('mycontent')
+@section('body')
 
 
 
@@ -22,9 +22,14 @@ Payment History
     }
 </style>
 
-        <div class="header1">
-            
-          <span class="col-md-6"><h4>Next Payment</h4> </span> <h4 style="float: right; font-weight: 900; padding: 13px;" class="badge"> {{$sum}} </h4>  
+        <div class="header1">            
+          <span class="col-md-3"> </span> <h4 style="float:left; font-weight: 900; padding: 13px;" class="badge"> 
+          Next Payment: {{$sum_due}} </h4>  
+        </div>
+
+        <div class="header1">            
+          <span class="col-md-3"> </span> <h4 style="float: right; font-weight: 900; padding: 13px;" class="badge badge-warning"> 
+          Total Payment: {{$sum}} </h4>  
         </div>             
                   
 
@@ -94,13 +99,8 @@ Payment History
                    <input type="hidden" name="order_array" value="{{  $data  }}">
                       {{ csrf_field() }}
                     <button type="input" class="btn btn-lg btn-block btn-success">Make Payments </button>
-                  </form>
-
-                
-                        
-      
-       
-       
+                  </form>               
+           
      
 
     @endsection

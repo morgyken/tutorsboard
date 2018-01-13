@@ -22,7 +22,7 @@ class question_body extends Model
     }
     protected $fillable = [
         'question_body', 'question_id', 'summary',
-            'user_id', 'summary', 'username','category',
+            'user_id', 'summary', 'username','category','topic'
     ];
 
     /**

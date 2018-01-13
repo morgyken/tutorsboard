@@ -356,16 +356,12 @@ class AdminController extends Controller
 
     public function AdmTutors(){
 
-
-
         $user = DB::table('users')
                 ->join('tutor_profile', 'tutor_profile.tutor_id', '=', 'users.email')
                 ->leftjoin('tutor_accounts', 'tutor_accounts.tutor_id', '=', 'tutor_profile.tutor_id' )
                 ->where('user_role', 'tutor')
                 ->orderby('email')
                 ->paginate(20);
-
-        //dd($user);
 
         return view ('adm.adm-all-tutors',['users'=> $user]);
     }

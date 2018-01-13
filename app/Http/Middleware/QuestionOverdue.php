@@ -17,7 +17,10 @@ class QuestionOverdue
      */
     public function handle($request, Closure $next)
     {
-       $app = DateTimeController::UpdateDeadline();
+       
+        ///$app = new DateTimeController();
+
+        //$app->UpdateDeadline();
 
         return $next($request);
     }

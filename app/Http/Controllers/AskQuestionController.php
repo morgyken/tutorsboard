@@ -141,6 +141,7 @@ class AskQuestionController extends Controller
                 'question_body' => $request['question_body'],
                 'question_id' =>$question_id,
                 'user_id' => Auth::user()->email,
+                'topic'    => $request->topic;
                 'summary' => $summary1,
                 'special' => $request['special'],
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),

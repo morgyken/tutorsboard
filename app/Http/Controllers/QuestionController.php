@@ -13,7 +13,7 @@ use App\AssignQuestion;
 use App\CreditCardDetails;
 use App\Transaction;
 use App\User;
-use App\PostcommentModel;
+use App\PostComments;
 use App\MakePaymentModel;
 use App\DateTimeModel;
 use App\PostAnswer;
@@ -203,7 +203,7 @@ class QuestionController extends AdminController
          *
          */
     
-        $assigned = DB::table('question_matrices')->where('question_id',$question_id)->first();
+        $status = DB::table('question_matrices')->where('question_id',$question_id)->first();
           
         $time = new DateTimeModel();
 
@@ -218,9 +218,10 @@ class QuestionController extends AdminController
          * return the comments in the following
          *
          */
+
         if(
         empty(
-        $comments= PostQuestionModel::where('question_id', $question_id)->first()
+        $comments= PostComments::where('question_id', $question_id)->first()
         )
 
         )
@@ -229,9 +230,46 @@ class QuestionController extends AdminController
         }
         else{
 
-            $comments = DB::table('post_comments')
+            $comments= DB::table('post_comments')
                 ->where('question_id', $question_id)
-                ->where('message_type', 'Comment')
+                ->get();
+        }
+
+      
+        if(
+        empty(
+        $tutor= User::where('user_role', 'tutor')->get()
+        )
+
+        )
+        {
+            $tutor= [];
+        }
+        else{
+
+            $tutor= DB::table('users')
+                ->where('user_role','tutor')
+                ->get();
+        }
+
+
+
+
+        
+
+      if(
+        empty(
+        $answer12= PostComments::where('question_id', $question_id)->first()
+        )
+
+        )
+        {
+            $answer12 = [];
+        }
+        else{
+
+           $answer12 = DB::table('post_answers')
+                ->where('question_id', $question_id)
                 ->get();
         }
 
@@ -339,10 +377,20 @@ class QuestionController extends AdminController
              * Assigned is assigned
              */
 
-            'assigned'=>$assigned,
+            'status'=>$status,
 
+           
+
+            //get tutors for select
+            'tutors' => $tutor,
+
+             //their own car
 
             'sum' => $sum,
+
+            //answer body
+
+            'answer' => $answer12,
 
 
             'sum_2' => $sum_2,
@@ -365,7 +413,7 @@ class QuestionController extends AdminController
 
             'price' => $question_price->question_price,
 
-           'posted' => $posted,
+            'posted' => $posted,
 
             'answer_files' => $manuals_ans,
 
@@ -484,6 +532,8 @@ class QuestionController extends AdminController
 
           $dest = $path;
 
+          
+
             foreach ($file as $files){
 
                 $name =  $files->getClientOriginalName();
@@ -495,7 +545,7 @@ class QuestionController extends AdminController
 
     //Question Status
 
-    
+    /*
     public function  PostAnswer(Request $request, $question){
 
         //file uploads
@@ -511,7 +561,7 @@ class QuestionController extends AdminController
             
         /*
          * Update the question status
-         */
+         
             
             $this->UpdateQuestionStatus($request, $question);
 
@@ -535,6 +585,7 @@ class QuestionController extends AdminController
         return redirect()->route('view-question', ['question_id'=> $question]);
 
     }
+    */
 
     public function questionAll()
     {

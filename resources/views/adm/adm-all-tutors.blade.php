@@ -26,11 +26,12 @@
                                         <table class="table table-bordered table-hover table-striped" style="font-size: 12px;">
                                             <thead>
                                             <tr>                                                
-                                                <th> First Name</th>
+                                                 <th> Email</th>
+                                                 <th> First Name</th>
                                                 <th> Last Name</th>
                                                 <th>County</th>
                                                 <th> Phone</th>
-                                                <th> Email</th>
+                                               
                                                 <th>Level</th>
                                                 <th>Status</th>
                                                 <th>Ratings</th>
@@ -42,11 +43,12 @@
                                         @foreach($users as $user)
                                             <tr>
                                                 
+                                               <td><a href="{{ URL::route('get-payment', ['tutorid' => $user->email, 'myurl' =>'admin'])}}">{{ $user-> email }} </a></td>
                                                 <td>{{ $user->firstname }}</td>
                                                 <td>{{$user->lastname }}</td>
                                                 <td>{{ $user->county}}</td>
                                                 <td>{{ $user->phoneno}}</td>
-                                                <td>{{ $user-> email }}</td>
+                                                
                                                 <td>{{ $user->account_level }}</td>
                                                 <td>{{ $user->account_status }}</td>
                                                 <td>
@@ -91,11 +93,12 @@
                                             <thead>
                                             <tr>  
                                                                                             
-                                              <th> First Name</th>
+                                               <th> Email</th>
+                                               <th> First Name</th>
                                                 <th> Last Name</th>
                                                 <th>County</th>
                                                 <th> Phone</th>
-                                                <th> Email</th>
+                                
                                                 <th>Level</th>
                                                 <th>Status</th>
                                                 <th>Ratings</th>
@@ -107,11 +110,12 @@
                                             <tr>
                                                 
                                                 
+                                                <td><a href="#">{{ $user-> email }} </a></td>
                                                 <td>{{ $user->firstname }}</td>
                                                 <td>{{$user->lastname }}</td>
                                                 <td>{{ $user->county}}</td>
                                                 <td>{{ $user->phoneno}}</td>
-                                                <td>{{ $user-> email }}</td>
+                                                
                                                 <td>{{ $user->account_level }}</td>
                                                 <td>{{ $user->account_status }}</td>
                                                 <td>

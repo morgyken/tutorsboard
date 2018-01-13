@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionBodiesTable extends Migration
+class AddImageToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ class CreateQuestionBodiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_bodies', function (Blueprint $table) {
+        
+        Schema::create('user_image', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('summary');
-            $table->text('special');
-            $table->text('question_body');
-            $table->integer('question_id')->unique();
-            $table->text('user_id');
-            $table->text('topic');
-            $table->text('category');
             $table->timestamps();
             $table->rememberToken();
-
+            $table->string('image');
+            $table->string('email');
+                       
         });
+    }
     }
 
     /**
@@ -35,6 +32,6 @@ class CreateQuestionBodiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_bodies');
+        
     }
 }

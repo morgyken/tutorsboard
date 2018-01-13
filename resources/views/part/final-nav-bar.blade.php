@@ -31,7 +31,7 @@
             <ul class="nav navbar-nav">
                 
                 <li><a href="#about">About us</a></li>
-                <li><a href="{{ route('all-questions')}}">Browse Jobs</a></li>
+               
 
             
             </ul>
@@ -44,6 +44,7 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
+                <li><a href="{{ route('all-questions')}}">Browse Jobs</a></li>
                 <li><a href="{{ route('register') }}">{{ Auth::user()->name }}</a></li>
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); 

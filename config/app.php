@@ -183,7 +183,12 @@ return [
 
         //https://github.com/thomastkim/laravel-online-users
 
-        Kim\Activity\ActivityServiceProvider::class
+        Kim\Activity\ActivityServiceProvider::class,
+
+        //Add image processing to the providers 
+
+        Intervention\Image\ImageServiceProvider::class
+
 
     ],
 
@@ -240,7 +245,11 @@ return [
 
         //https://github.com/thomastkim/laravel-online-users
 
-        'Activity' => Kim\Activity\ActivityFacade::class     
+        'Activity' => Kim\Activity\ActivityFacade::class,
+
+        //image processor 
+
+        'Image' => Intervention\Image\Facades\Image::class     
 
     ],
 

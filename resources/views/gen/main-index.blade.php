@@ -39,9 +39,7 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#about">About us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="{{ route('all-questions')}}">Browse Jobs</a>
-            </li>
+            
             @if (Auth::guest())
 
             <li class="nav-item">
@@ -52,6 +50,9 @@
               <a  class="nav-link js-scroll-trigger" href="{{ route('register') }}">Register</a>
             </li>
             @else
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{{ route('all-questions')}}">Browse Jobs</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger"  href="{{ route('register') }}">{{ Auth::user()->name }}</a>
             </li>

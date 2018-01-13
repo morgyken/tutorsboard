@@ -47,8 +47,7 @@
     {
         margin: -90px 10px 0px 50px;
         z-index: 9;
-        height: 180px;
-        width: 150px;
+       
         border-radius: 50%;
     }
     .image-profile
@@ -81,22 +80,24 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <div class="fb-profile">
-    <a href="{{route('profile-pic-view')}}">
+    <a href="{{route('profile-pic-view', ['view' => 'background'])}}">
     <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>
     </a>
     
-    <a href="{{route('profile-pic-view')}}">
-    <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Profile image example"/>
+    <a href="{{route('profile-pic-view', ['view' => 'profile'])}}">
+    <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Click here to upload Background Picture"/>
     </a>
     <div class="fb-profile-text">
         <div class="col-dm-9">
             <h3>Name: {{Auth::User()->name}}</h3>
+
             <p> Tutor Since: <?php
                 $date = new DateTime(Auth::User()->created_at);
                 echo $date->format("l jS \of F Y");
 
                 ?></p>
-            <p>Answered {{$count}}</p>
+            <p>Answered <span class="badge">{{ \App\Http\Controllers\QuestionController::questionStat('answered') }}</span></p>
+             
 
 
         </div>

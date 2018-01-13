@@ -66,12 +66,11 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <div class="fb-profile">
-    <a href="{{route('profile-pic-view')}}">
-    <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>
-    </a>
+    <a href="{{route('profile-pic-view', ['view' => 'background'])}}">
+    <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>    </a>
     
-    <a href="{{route('profile-pic-view')}}">
-    <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Profile image example"/>
+    <a href="{{route('profile-pic-view', ['view' => 'profile'])}}">
+    <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Click here to upload Background Picture"/>
     </a>
     <div class="fb-profile-text">
         <div class="col-dm-9">

@@ -7,31 +7,7 @@ use DB;
 class DateTimeController extends Controller
 {
 
-    public function ConvertTime( $seconds){
-
-
-          $hours = floor($seconds / (60 * 60));
-
-          // extract minutes
-          $divisor_for_minutes = $seconds % (60 * 60);
-          $minutes = floor($divisor_for_minutes / 60);
-
-          // extract the remaining seconds
-          $divisor_for_seconds = $divisor_for_minutes % 60;
-          $seconds = ceil($divisor_for_seconds);
-
-          // return the final array
-          $obj = array(
-              "h" => (int) $hours,
-              "m" => (int) $minutes,
-              "s" => (int) $seconds,
-          );
-
-        return $obj;
-
-    }
-
-public static function UpdateDeadline(){
+    public static function UpdateDeadline(){
 
         $data = DB::table('post_question_prices')
                       ->select('question_id', 'question_deadline')->get();
@@ -53,15 +29,13 @@ public static function UpdateDeadline(){
        // echo $dead;
 
         DB::table('question_matrices')->where('question_id', $value->question_id)
-                              ->update(
-                                          [
-                                              'overdue' => $dead, 
-                                              'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                                          ] 
-                                      ); 
-            }//end foreach
-
-      
+              ->update(
+                        [
+                            'overdue' => $dead, 
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ] 
+                      ); 
+            }//end foreach     
 
       }
 

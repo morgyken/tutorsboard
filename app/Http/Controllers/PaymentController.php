@@ -108,38 +108,85 @@ class PaymentController extends Controller
 
         return $amount;
     }
-    public function getPayments($myurl=null)
+
+
+    public function getPayments($myurl=null, $tutorid=null)
     {
     	$sum = 0; 
 
-    	if($myurl == 'payment-history')
-    	{
+        $sum1 = 0;
 
-    		$data = DB::table('tutor_payment')->get();
- 
-    	}
-    	if($myurl === 'payment-bonuses')
-    	{
+        $tutor_id = ''; 
+        
+        /* 
+            Check if the url comes from the admin side
+        */
 
-    		$data = DB::table('tutor_payment_bonuses')->where('status', 0)->get();
+        if($myurl === 'admin')
+        {
+            $tutor_id = $tutorid; 
+        }
 
-    	}
-    	else
-    	{
-    		$data = DB::table('tutor_payment')->where('status', 0)->get();
-    	}
+        /* 
+            Check if the url comes From the tutor side
+        */
+        else
+        {
+            $tutor_id = Auth::user()->email;
+        } 
 
-    	//get sum of the total 
-    	$amount = DB::table('tutor_payment')->select('amount')->where('status', 0)->get();
+            
+      	//select from payment history
 
-    	foreach ($amount as $key => $value) 
+    	
+
+        //check payment balance
+
+    		$data = DB::table('tutor_payment')
+
+            ->where('status', 1)->get();
+
+        dd($data);
+
+        // get total amount already paid
+    	$total_amount = $this-> getTotals(1, $tutor_id);
+
+
+        //get next payment 
+
+        $amount = $this-> getTotals(0, $tutor_id);
+        //totl amount paid 
+
+    	foreach ($total_amount as $key => $value) 
     	{
     	   		# code...
     			$sum += $value->amount;
-    	}   
+    	} 
+        //total amount  due
 
-       return view('adm.show-tutor-payment',['data'=> $data, 'myurl' => $myurl, 'sum'=> $sum]);
+        foreach ($amount as $key => $value) 
+        {
+                # code...
+                $sum1 += $value->amount;
+        }   
+
+       return view('adm.show-tutor-payment',['data'=> $data, 'sum_due' => $sum1, 'myurl' => $myurl, 'sum'=> $sum]);
     }
+
+    public function getTotals($status, $tutor_id)
+    {
+
+
+        $amount = DB::table('tutor_payment')
+            ->where('tutor_id', $tutor_id)
+            ->select('amount')
+            ->where('status', $status) ->get();
+
+        return $amount;
+
+    }
+
+
 
     public function postPayments(Request $request)
     {  

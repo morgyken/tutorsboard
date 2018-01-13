@@ -50,3 +50,19 @@
       
     </div>
 </div><!--/span-->
+
+<div class="col-md-12" id="sidebar">
+    <div class="list-group">
+        <a href="#" class="list-group-item active"> 
+            @if(Auth::user()->user_role == 'admin')
+                Tutor Profile
+            @else
+            Tutor Profile
+            @endif
+            </a>
+        <a href="{{route('tut-profile')}}" class="list-group-item">Personal Information</a>
+        <a href="{{route('tut-account')}}" class="list-group-item">Account Information</a>
+        <a href="{{route('tut-progress')}}" class="list-group-item">Account Progress </a>
+             
+    </div>
+</div><!--/span-->
