@@ -21,17 +21,20 @@ class DateTimeController extends Controller
 
         if($deadline > 0){
 
-          $dead =0 ;
+          $dead = 0 ;
         }
         else 
-          $dead =1;
+        {
+        
+          $dead = 1;
+        }
 
        // echo $dead;
 
         DB::table('question_matrices')->where('question_id', $value->question_id)
               ->update(
                         [
-                            'overdue' => $dead, 
+                            'overdue'   => $dead, 
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ] 
                       ); 

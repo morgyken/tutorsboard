@@ -19,6 +19,7 @@ class CreateQuestionBidsTable extends Migration
             $table->rememberToken();
             $table->integer('question_id');
             $table->integer('tutor_id')->nullable();
+            $table->integer('bidpoints')->nullable();
         });
     }
 

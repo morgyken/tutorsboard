@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        Commands\HourlyUpdate::class
+        Commands\HourlyUpdate::class,
+        Commands\AssignQuestions::class
     ];
 
     /**

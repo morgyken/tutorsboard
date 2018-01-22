@@ -15,12 +15,27 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
+    $tutor_id = DB::table('users')->select('email')->where('user_role', 'tutor')->get();
+
+    $tutor_id = $tutor_id->toArray();
+
+    $array_size = rand(20, 250);
+   // $array = array('admin', 'tutor', 'cust');
+
+    $active = rand(1,2);
+
+    $ratings = rand (1,5);
+
+    $account_level = ['new',  'advance', 'team', 'junior','admin']
+    $account_level_rand = rand(0,4);
+    
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'tutor_id' => $tutor_id[$array_size],
+         'active' =>$active,
+          'ratings' => $ratings,
+          'account_level' =>$account_level[$account_level_rand]b ,
+          'account_status' =>'active' ,
+           'payment_account' =>'9480238493',
+          'payment_method' => 'Equity',
     ];
-
-
 });
