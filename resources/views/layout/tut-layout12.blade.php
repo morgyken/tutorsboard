@@ -8,6 +8,10 @@
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
     <title>My title</title>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
+
+    <script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 
     <link rel="shortcut icon" href="{{URL::asset('theme/assets/images/gt_favicon.png ') }}">
 

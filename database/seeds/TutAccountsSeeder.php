@@ -6,7 +6,7 @@ use Illuminate\Database\Query\Builder;
 
 use App\User;
 
-class UsersTableSeeder extends Seeder
+class TutAccountsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

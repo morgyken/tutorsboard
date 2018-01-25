@@ -187,8 +187,11 @@ return [
 
         //Add image processing to the providers 
 
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class, 
 
+        //add Anouar
+
+        Anouar\Paypalpayment\PaypalpaymentServiceProvider::class,
 
     ],
 
@@ -240,6 +243,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Input' => Illuminate\Support\Facades\Input::class,  
+       // 'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
+
+
+         'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
 
         // this is used in showing the currently logged in users found at:
 

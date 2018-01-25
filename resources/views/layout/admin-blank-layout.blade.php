@@ -12,9 +12,12 @@
     <title>
         @yield('title')
     </title>
-
+<script src="https://momentjs.com/downloads/moment.js"></script>
     <!-- Bootstrap Core CSS -->
     <link href="{{URL::asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> 
 
         <!-- MetisMenu CSS -->
     <link href="{{URL::asset('admin/vendor/metisMenu/metisMenu.min.css')}}'" rel="stylesheet">
@@ -26,6 +29,8 @@
     <link href="{{URL::asset('admin/vendor/morrisjs/morris.css')}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
+
+    <script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
     <link href="{{URL::asset('admin/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -8,10 +8,18 @@
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
     <title>@yield('title')</title>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> 
+
+    <script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 
     <link rel="shortcut icon" href="{{URL::asset('theme/assets/images/gt_favicon.png ') }}">
 
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+
+
     
     <link href="{{URL::asset('/css/bootstrap1.css')}}" rel="stylesheet">
     

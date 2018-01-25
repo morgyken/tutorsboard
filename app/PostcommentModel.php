@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostComments extends Model
+class PostCommentsModel extends Model
 {
     protected $database = 'post_comments';
     protected $dateFormat = 'Y/m/d H:i:s';

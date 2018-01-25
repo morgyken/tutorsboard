@@ -14,20 +14,13 @@
 Route::group(['middleware' => 'web'], function () {
     //
 
-
 Route::get('/', function () {  return view('gen.main-index'); })->name('general');
-
-
-
 
 Route::get('/sample', function () {  return view('auth12.image'); });
 
 Route::post('/sample3', function () {  
 
-
-
 });
-
 
 
 Route::get('/sample-two', array('uses'=>'OnlineUsers@OnlineActivity'));
@@ -171,13 +164,32 @@ Route::get('adm-tutors', array('as'=>'adm-tutors','uses'=>'AdminController@admTu
 //return all adm questions 
 Route::get('adm-questions', array('as'=>'adm-questions','uses'=>'AdminController@AdmQuestions'));
 
-
 //return search results 
  
 Route::post('adm-search', array('as'=>'adm-search','uses'=>'AdminController@AdmSearchResults'));
 
 
+//get customer payments 
+Route::get('make-cust-payments', array('as'=>'get-cust-payments','uses'=>'CustomerPayments@getCustPayment'));
+
+//post customer
+ 
+Route::post('payment', array(
+		'as'=>'post-cust-payments',
+		'uses'=>'CustomerPayments@postCustPayment'
+	));
+
+//return search results 
+ 
+Route::get('cust-dashboard', array(
+
+	'uses'=>'UserController@viewCustomerDashboard',
+	'as' => 'cust-dashboard'
+));
+
+
 });
+
 
 
 Auth::routes();

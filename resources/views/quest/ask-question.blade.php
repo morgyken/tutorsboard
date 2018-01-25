@@ -32,7 +32,7 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         
-                        <input type="text" name="topic" class="form-control input-lg" placeholder="Enter Topic " id="topic">
+                        <input type="text" name="topic" class="form-control input-lg" placeholder="Enter Topic" required="required"  id="topic">
                     </div>
 
                     <div class="form-group">

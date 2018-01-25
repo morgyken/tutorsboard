@@ -76,14 +76,10 @@
 <script src="{{URL::asset('theme/assets/js/template.js')}}"></script>
 <script src="{{URL::asset('jquery/jquery.min.js ') }}"></script>
 <script src="{{URL::asset('boot/js/bootstrap.min.js') }}"></script>
-<script src="{{URL::asset('theme/assets/js/headroom.min.js ')}}"></script>
-<script src="{{URL::asset('theme/assets/js/jQuery.headroom.min.js ')}}"></script>
-<script src="{{URL::asset('theme/assets/js/template.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <!-- Plugin JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <!-- Theme JavaScript -->
-<script src="{{ URL:: asset('theme/js/creative.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js "></script>
 

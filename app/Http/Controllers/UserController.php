@@ -21,6 +21,16 @@ use Input;
 class UserController extends Controller
 {   
     
+
+  //view customer Controller 
+
+
+  public function viewCustomerDashboard(){
+    return view('cust.cust-dashboard');
+
+  }
+
+
   public function ProfilePicView($view){
 
 

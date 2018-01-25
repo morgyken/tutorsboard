@@ -67,6 +67,8 @@ class AskQuestionController extends Controller
 
         $payment = new PaymentController;
 
+        $quest_price = $payment-> TutorPrice($request->question_price,'junior');
+
         DB::table('post_question_prices')->insert(
             [
             'question_id' =>session('question_id'),
@@ -75,7 +77,7 @@ class AskQuestionController extends Controller
             'urgency'          =>$request['urgency'],
             'academic_level'   => $request->academic_level, 
             'paper_format'     => $request->paper_format,
-            'tutor_price'      => $payment-> TutorPrice($request->question_price,'junior'),
+            'tutor_price'      =>  $quest_price,
             'pages'           => $request['pages'],
             'created_at'      =>\Carbon\Carbon::now()->toDateTimeString(),
             'updated_at'       => \Carbon\Carbon::now()->toDateTimeString()
@@ -92,11 +94,19 @@ class AskQuestionController extends Controller
                 ]
              );
 
+        // store session amount 
 
-        return redirect()->route('post-questions');
+        $request->session()->put('order_amount', $request['question_price']);
+
+        // store session amount 
+
+        $request->session()->put('deadline', $request['question_deadline']);
+
+        //redirect to check out 
+
+        return redirect()->route('get-cust-payments');
 
     }
-
 
     public function askQuestions(Request $request)
     {
@@ -141,7 +151,7 @@ class AskQuestionController extends Controller
                 'question_body' => $request['question_body'],
                 'question_id' =>$question_id,
                 'user_id' => Auth::user()->email,
-                'topic'    => $request->topic;
+                'topic'    => $request->topic,
                 'summary' => $summary1,
                 'special' => $request['special'],
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
@@ -187,6 +197,12 @@ class AskQuestionController extends Controller
          */
 
         $request->session()->put('question_id',  $question_id);
+
+        // store session amount 
+
+        $request->session()->put('order_summary', substr($request['question_body'], 0, 200));
+
+        //redirect to post deadline view 
 
         return redirect()->route('post-deadlinePrice');
     }
