@@ -25,7 +25,7 @@
                 payment: {
                     transactions: [
                         {
-                            amount: { total: '1.00', currency: 'USD' }
+                            amount: { total: {{ session('order_amount')}}, currency: 'USD' }
                         }
                     ]
                 }

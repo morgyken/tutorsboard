@@ -12,7 +12,8 @@
 */
 
 Route::group(['middleware' => 'web'], function () {
-    //
+ 
+ //
 
 Route::get('/', function () {  return view('gen.main-index'); })->name('general');
 
@@ -171,6 +172,9 @@ Route::post('adm-search', array('as'=>'adm-search','uses'=>'AdminController@AdmS
 
 //get customer payments 
 Route::get('make-cust-payments', array('as'=>'get-cust-payments','uses'=>'CustomerPayments@getCustPayment'));
+
+//get customer payments 
+Route::get('payment-successful', array('as'=>'payment-successful','uses'=>'CustomerPayments@paymentSuccessful'));
 
 //post customer
  

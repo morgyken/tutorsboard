@@ -18,6 +18,7 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> 
+    
 
         <!-- MetisMenu CSS -->
     <link href="{{URL::asset('admin/vendor/metisMenu/metisMenu.min.css')}}'" rel="stylesheet">

@@ -1,7 +1,13 @@
-  
+<!DOCTYPE html>
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-   
-   <div id="paypal-button"></div>
+</head>
+
+<body>
+  <div id="paypal-button"></div>
 
   <script>
     paypal.Button.render({
@@ -9,36 +15,45 @@
 
       commit: true, // Show a 'Pay Now' button
 
+      client: {
+            sandbox:    'AXIV-YkJ6upa8lS4tvy_nZMSR2t47UZZMsVkXBE_QACnHukg-qOz5WMI-9Y_AhYkrvfNM6r2gYplCtfp',
+            production: 'Acg_dAGZReG-riFplRSzGBaUUw-guz4h3hf7skfmIwWbc3XddMiUnL1oZbODwchddZk1EtNINaGH9z87'
+        },
+
+        commit: true, // Show a 'Pay Now' button
+
       style: {
         color: 'gold',
-        size: 'large'
+        size: 'large',        
       },
+
 
       payment: function(data, actions) {
         /* 
          * Set up the payment here 
          */
-
          return actions.payment.create({
-                    payment: {
-                        transactions: [
-                            {
-                                amount: { total: '0.01', currency: 'USD' }
-                            }
-                        ]
-                    }
-                });
+                payment: {
+                    transactions: [
+                        {
+                            amount: { total: "{{ session('order_amount')}}", currency: 'USD' }
+                        }
+                    ]
+                }
+            });
       },
 
       onAuthorize: function(data, actions) {
         /* 
          * Execute the payment here 
          */
+         return actions.payment.execute().then(function(payment) {
 
-         // Make a call to the REST api to execute the payment
-                return actions.payment.execute().then(function() {
-                    window.alert('Payment Complete!');
-                });
+                // The payment is complete!
+                // You can now show a confirmation message to the customer
+            });
+
+         
       },
 
       onCancel: function(data, actions) {
@@ -53,7 +68,5 @@
          */
       }
     }, '#paypal-button');
-
-     </script>
-
-
+  </script>
+</body>

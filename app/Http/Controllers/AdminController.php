@@ -193,7 +193,7 @@ class AdminController extends Controller
 
             ->where('overdue',0)
 
-            ->orderby('question_deadline', 'asc')
+            ->orderby('question_deadline', 'desc')
 
             ->paginate(20);
         }
@@ -211,7 +211,7 @@ class AdminController extends Controller
             //do not show overdue questions
             ->where('overdue',0)
 
-            ->orderby('question_deadline', 'asc')
+            ->orderby('question_deadline', 'desc')
 
             ->paginate(20);
         }

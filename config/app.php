@@ -193,6 +193,12 @@ return [
 
         Anouar\Paypalpayment\PaypalpaymentServiceProvider::class,
 
+        /*
+         * BrainTree Service providers ...
+        */
+
+        //Oureastudios\Laravel\BraintreeServiceProvider::class,
+
     ],
 
     /*
@@ -243,7 +249,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Input' => Illuminate\Support\Facades\Input::class,  
-       // 'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
+       //'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,
 
 
          'Paypalpayment'   => Anouar\Paypalpayment\Facades\PaypalPayment::class,

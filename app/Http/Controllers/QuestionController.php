@@ -606,11 +606,10 @@ class QuestionController extends AdminController
          * Select distinct form table Questions
          */
 
-
         return view('questions.ask-question');
 
     }
-
+ 
     public function askPriceDeadline(Request $request)
     {
         $username = Auth::user()->email;

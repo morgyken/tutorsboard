@@ -145,7 +145,7 @@ body {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 56px);
-  background-image: url("../img/picture-2.png");
+  background-image: url("../img/pic7.jpg");
   background-position: center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -163,8 +163,8 @@ header.masthead {
       font-size: 1.02rem; } }
   @media (min-width: 992px) {
     header.masthead {
-      height: 100vh;
-      min-height: 650px;
+      
+      min-height: 400px;
       padding-top: 0;
       padding-bottom: 0; }
       header.masthead h1 {

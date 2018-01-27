@@ -82,13 +82,13 @@
       <div class="container my-auto">
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h3 class="text-uppercase" style="color: rgba(79, 134, 137, 0.8); text-shadow: 2px -1px blue;">
-              <strong>Welcome to Tutorsboard</strong>
+            <h3 class="text-uppercase" style="color: rgba(240, 95, 65, 0.9); text-shadow: 2px -1px #000;">
+              <strong>Earn Online Today!</strong>
             </h3>
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5" style="background-color: rgba(192, 203, 217, 0.7); color: #111;text-shadow: 0px -1px black;">Sign up today and start earning. Getting jobs is as easy as signing up. Apply your Expertise and earn online.  </p>
+            <p class="text-faded mb-5" style="background-color: rgba(192, 203, 217, 0.1); color: #ffa;text-shadow: 1px -1px #222; font-size: 20px;">Sign up today and start earning. Getting jobs is as easy as signing up. Apply your Expertise and earn online.  </p>
             
               @if(!Auth::check())
               <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ route('register') }}">

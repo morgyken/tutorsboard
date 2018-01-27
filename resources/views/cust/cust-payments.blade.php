@@ -37,7 +37,11 @@
     
     <div class="col-md-5">
     	<h2> Available payment Methods </h2>
+    	
         	<img src="{{URL::asset('theme/assets/images/ppvisa.jpg') }}">
+
+          <p>Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
+          </p>
 
 
     </div>
@@ -54,9 +58,7 @@
 	Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
 
 </p>
-
     @include('quest.card-payment')
-
    
   </div>
 
@@ -70,7 +72,9 @@
 <p>
 	Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
 
-	@include('cust.cust-paypal-pay-samp')
+
+
+	@include('cust.cust-paypal-pay')
 	
 </p>
   

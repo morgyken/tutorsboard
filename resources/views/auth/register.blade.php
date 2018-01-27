@@ -12,7 +12,8 @@
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <input type="" name="user_role" value="tutor">
+
+                        <input type="" name="user_role" value="{{ $user_role }}">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>

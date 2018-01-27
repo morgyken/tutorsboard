@@ -18,14 +18,18 @@ class UpdateQuestionController extends Controller
 {
     //post comments 
 
-    public function postComment($comment, $messageType, $question)
+    public function postComment($comment,  $question)
     {
         DB::table('post_comments')->insert(
                 [
                     'comment_body' => $comment,
                     'comments_id' =>  rand(1000, 9999),
                     'question_id' => $question,
-                    'message_type'=>$messageType,
+                    'message_type'=>  'Commit to Answer', 
+                    /*
+                    Message Type is done here
+
+                    */
                     'user_id' => Auth::user()->email,
                     'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),

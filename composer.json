@@ -14,7 +14,9 @@
         "laravel/tinker": "~1.0",
         "stevebauman/location": "^2.0",
         "stripe/stripe-php": "5.*",
-        "anouar/paypalpayment": ">=3.0"      
+        "anouar/paypalpayment": ">=3.0",
+        "oureastudios/laravel5-braintree": "dev-master"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

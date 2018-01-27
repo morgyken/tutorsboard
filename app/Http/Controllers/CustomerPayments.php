@@ -13,6 +13,14 @@ class CustomerPayments extends Controller
    	return view('cust.cust-payments');
 
    }
+
+   //payment successful
+
+   public function paymentSuccessful(){
+
+   		return view('cust.payment-successful');
+   }
+
    public function postCustPayment(Request $request){
 
    	//getthe price here 
@@ -21,8 +29,7 @@ class CustomerPayments extends Controller
    	$question_id =  $request->session()->get('question_id'); 
 
 
-
-   	$price = DB::table('post_question_prices')
+  	$price = DB::table('post_question_prices')
    				->select('question_price')
    				->where('question_id', $question_id)
    				->first();
@@ -43,14 +50,14 @@ class CustomerPayments extends Controller
 	  "amount" =>$price['question_price'] * 100,
 	  "currency" => "usd",
 	  //"metadata" => array("order_id" => ),
-	  "statement_descriptor" => "Payment for Home Assignmment Services",
-	  "description" => "Example charge",
+	  "statement_descriptor" => "#". substr($question_id, 0,17),
+	  "description" => "Payment for Question Answer",
 	  "source" => $token,
 	));
 
 	//dd($request->session()->all());
 
 	//rediect to customer dashboard
-	 return redirect()->route('cust-dashboard');
+	 return redirect()->route('payment-successful');
    }
 }
