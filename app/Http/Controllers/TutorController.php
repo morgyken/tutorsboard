@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use App\TutorAccount;
+
+use Exception;
+
+use Illuminate\Database\MySqlConnection;
 
 use App\question_body;
 
@@ -15,110 +20,130 @@ use Illuminate\Support\Facades\Auth;
 
 class TutorController extends Controller
 {
+
     
-    public function tutProfile1(){
+    public function getTutProfile()
+    {        
+         //signel select helper
+
+        $this->singleSelectHelper();
+
+        //return tutor top profile
+        $data = DB::table('tutor_profile')->where('tutor_id', Auth::user()->email)->firstOrFail();
+
+
+        //return tutor education
+        $data2 = DB::table('tutor_education')->where('tutor_id', Auth::user()->email)->firstOrFail();  
+
+       return view ('adm.show-tutor-profile', ['data'=> $data, 'education' => $data2]);              
+     }
+     
+
+//post tutor profile
+     public function postTutProfile(Request $request)
+    { 
+
+        //post tutor profile
+        DB::table('tutor_profile')->where('tutor_id', Auth::user()->email)
+            ->update(
+                [    
+                                  
+                    'firstname'     => $request->firstname,
+                    'lastname'      => $request->lastname,
+                    'skype'         => $request->skype,
+                    'phoneno'       => $request->phoneno,
+                    'town'          => $request->town,
+                    'county'        =>$request->county,
+                    'created_at'    =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at'    => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
+
+                   
+
+        return redirect()->route('tut-profile');
+        } 
+
+
+    public function getTutProgress()
+    {    
         
-        $email = Auth::user()->email;
 
-        $details = $this->findTutorprofile($email);
-
-        $sum = $details['sum'];
-
-        $count=  $details['count'];
-
-        $user = Auth::User()->name;
-        
-        
-        
-
-        return view('layout.tut-layout_1',[
-
-
-            'sum' => $sum,
-            /*
-             * user profile
-             */
-
-            'user'=>$user,
-
-            'count'=>$count
-
-        ]);
-        
-      
-       
-    }
-
-    public function findTutorprofile($email ){
-
-        /**
-         * Total Questions answered by tutor
-         */
-
-        $count = DB::table('question_bodies')
-
-            ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
-            ->where('answered', 1)
-            ->where('user_id', $email)
-            ->count();
-        /**
-         * The sum of answered question
-         */
-        $sum = DB::table('question_bodies')
-            ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
-            ->where('user_id', $email)
-            ->where('answered', 1)
-            ->sum('question_price');
-
-
-        $return = array('sum'=>$sum, 'count'=> $count );
-
-
-        return $return;
-    }
-    public function TutProfile($view=Null){
-
-        $email = Auth::user()->email;
-
-        $details = $this->findTutorprofile($email);
-
-        $sum = $details['sum'];
-
-        $count=  $details['count'];
-
-        $user = Auth::User()->name;
-        
-        if($view=='tut-payment'){
-            return view('tut.tut-payment');
-            
-        }
-        if($view=='tut-profile'){
-            return view('tut.tut-profile');
-            
-        }
-        if($view=='tut-account-profile'){
-            return view('tut.tut-account-profile');
-            
-        }
-        else{
-
-        return view('tut.tut-account-profile',[
-
-
-            'sum' => $sum,
-            /*
-             * user profile
-             */
-
-            'user'=>$user,
-
-            'count'=>$count
-
-        ]);
-        
-        }
+        return view ('adm.show-tut-progress-det');
 
     }
+     
+
+//post tutor profile
+     public function postTutProgress(Request $request)
+    { 
+        
+
+    }
+
+         //post tutor profile
+     public function postTutEducation(Request $request)
+    { 
+        //post education profile
+            DB::table('tutor_education')->where('tutor_id', Auth::user()->email)
+            ->update(
+                [    
+                                  
+                    'highschool'   => $request->highschool,
+                    'college'      => $request->college,
+                    'areaofstudy'  => $request->areaofstudy,
+                    'language'     => $request->language,
+
+                    'created_at'   =>\Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at'   => \Carbon\Carbon::now()->toDateTimeString(),
+                ]);
+
+             return redirect()->route('tut-profile');
+
+        
+    }
+
+    //function to help in selecting single column 
+    public function singleSelectHelper(){
+
+        return DB::query()->macro('firstOrFail', function () {
+            if ($record = $this->first()) {
+
+                return $record;
+        }
+
+            throw new Exception('No records found');
+        });
+    }
+
+    public function getTutAccount()
+    {    
+        $this->singleSelectHelper();  
+        
+
+        $data = DB::table('tutor_accounts')->where('tutor_id', Auth::user()->email)->firstOrFail();       
+
+     return view ('adm.show-tut-account-det', ['data'=> $data]);
+
+    }
+     
+
+//update tutor profile, the post is done during registration
+     public function postTutAccount(Request $request)
+    { 
+        DB::table('tutor_accounts')->where('tutor_id', Auth::user()->email)
+            ->update(
+                [
+                    'payment_method' => $request->payment_method, 
+                    'payment_account' =>$request->payment_account,                       
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]
+         );
+        return redirect()->route('tut-account');
+
+    }
+     
+     
+     
+
 
 }

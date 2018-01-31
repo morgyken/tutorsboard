@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Console;
+use Commands\HourlyUpdate;
+use Commands\AssignQuestions;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -14,6 +16,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        Commands\HourlyUpdate::class,
+        Commands\AssignQuestions::class
     ];
 
     /**
@@ -24,8 +28,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        echo "Scheduler running....";
+        $schedule->command('UpdateDeadline')->everyMinute();
     }
 
     /**

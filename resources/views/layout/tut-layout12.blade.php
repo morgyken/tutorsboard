@@ -7,18 +7,20 @@
     <meta name="description" content="">
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-    <title>Progressus - Free business bootstrap template by GetTemplate</title>
+    <title>My title</title>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" />
+
+    
+
+    <script type="text/javascript" src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 
     <link rel="shortcut icon" href="{{URL::asset('theme/assets/images/gt_favicon.png ') }}">
 
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-    <link rel="stylesheet" href="{{URL::asset('theme/assets/css/bootstrap.min.css ') }}">
-
-    <link href="{{URL::asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    
+    <link href="{{URL::asset('/css/bootstrap1.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/font-awesome.min.css ') }}">
-
-    <!-- Custom styles for our template -->
-    <link rel="stylesheet" href="{{URL::asset('theme/assets/css/bootstrap-theme.css ') }}" media="screen" >
     <link rel="stylesheet" href="{{URL::asset('theme/assets/css/main.css') }}">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,17 +64,19 @@
     }
 </style>
 
+@include('part.final-nav-bar')
+
+
 <?php $user_id = Auth::User()->id;  ?>
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 <div class="fb-profile">
-    <a href="{{route('profile-pic-view')}}">
-    <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>
-    </a>
+    <a href="{{route('profile-pic-view', ['view' => 'background'])}}">
+    <img align="left" class="fb2-image-lg" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/homepage/profile.jpg')}}" alt="Profile image example"/>    </a>
     
-    <a href="{{route('profile-pic-view')}}">
-    <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Profile image example"/>
+    <a href="{{route('profile-pic-view', ['view' => 'profile'])}}">
+    <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Click here to upload Background Picture"/>
     </a>
     <div class="fb-profile-text">
         <div class="col-dm-9">
@@ -98,7 +102,7 @@
 
 <div class="container">
     <div class="col-md-3">
-        @include('part.vertical-menu1')
+        @include('part.tutor-menu')
 
     </div>
     <div class="col-md-9">
@@ -110,4 +114,4 @@
 
 </div>
 </div>
-@include('layout.footer')
+@include('part.footer-final')

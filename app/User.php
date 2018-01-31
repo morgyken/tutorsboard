@@ -4,8 +4,6 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\question_body;
-
 
 class User extends Authenticatable
 {
@@ -16,9 +14,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','user_type'  ];
-    
-    protected $table='users';
+    protected $fillable = [
+        'name', 'email', 'password','user_role'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -28,11 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-
-    public function question_body()
-    {
-        return $this->hasMany('App\Comment', 'user_id', 'email');
-
-    }
 }

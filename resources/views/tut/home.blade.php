@@ -2,7 +2,10 @@
 
 @section('body')
 
+
+
     <?php
+
 
     function ConvertTime12( $seconds){
 
@@ -90,8 +93,19 @@
 
     ?>
 
+<script>
+$(document).ready(
+ function() {
+ setInterval(function() { 
+ var someval = Math.floor(Math.random() * 100);
+  $('#sample').text('Test' + someval);
+ }, 500);  //Delay here = 5 seconds 
+});
 
-    <div class="question">
+
+</script>
+
+    <div class="question" id="sample">
 
         <a href="{{route('view-question', ['question_id'=> $value->question_id])}}">
             <div class="clearfix quest">
@@ -103,10 +117,44 @@
                 <div class="col-md-2">
 
                     <h4 style="padding-bottom:20px;">
-                            <span class="label label-danger label-lg ">
+                        @if(($deadline12/3600) > 24 )
+
+                            <span class="label label-success label-lg ">
                                 {{ $array_of_deadline }}
-                            </span>  </h4>
-                    <h4> <span class="label label-warning ">Ksh: {{$value->question_price}}</span></h4>
+                            </span>
+                        @elseif(($deadline12/3600) > 15 )
+
+                            <span class="label label-info label-lg ">
+                                {{ $array_of_deadline }}
+                            </span> 
+                        @elseif(($deadline12/3600) > 8 )
+
+                            <span class="label label-warning label-lg ">
+                                {{ $array_of_deadline }}
+                            </span>                                                      
+
+                        @else 
+                        <span class="label label-danger label-lg ">
+                                {{ $array_of_deadline }}
+                            </span>
+                        @endif
+
+                              </h4>
+                    <h4>
+
+                    <?php 
+               $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
+
+                     ?> 
+                        <span class="label label-warning ">Ksh: {{$value->question_price}}</span>
+
+                        
+
+
+                    </h4>
+                    <h4>
+                        <span class="label" style="background: #33497b"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
+                    </h4>
                 </div>
             </div>
         </a>

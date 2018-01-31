@@ -19,14 +19,21 @@ class CreateQuestionMatricesTable extends Migration
             $table->rememberToken();
             $table->integer('question_id');
             $table->integer('current')->nullable();
+            $table->integer('user_id')->nullable();
             $table->integer('reassigned')->nullable();
             $table->integer('completed')->nullable();
             $table->integer('rated')->nullable();
             $table->integer('paid')->nullable();
+            $table->integer('tutor_id')->nullable();
             $table->integer('revision')->nullable();
             $table->integer('cancelled')->nullable();
             $table->integer('assigned')->nullable();
             $table->integer('answered')->nullable();
+             $table->integer('mybid')->nullable();
+            $table->integer('suggested')->nullable();
+             $table->integer('disputed')->nullable();
+
+           
         });
     }
 

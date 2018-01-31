@@ -13,9 +13,9 @@ class QuestionMatrix extends Model
      *
      * @var array
      */
-    protected $fillable = ['question_id', 'current', 'reassigned','completed' ,'rated','revision' ];
+    protected $fillable = ['question_id', 'current', 'reassigned','completed' ,'rated','revision', 'suggested', 'bid', 'disputed', 'user_id'];
 
-    protected $table='users';
+    protected $table='question_matrices';
 
     protected $dateFormat = 'Y/m/d H:i:s';
     protected $connection = 'mysql';
