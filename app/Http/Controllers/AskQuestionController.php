@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
 use Storage;
+use App\Http\Controllers\PaymentController;
 use Response;
 use Session;
 use App\AcceptQuestion;
@@ -31,26 +32,87 @@ use Illuminate\Support\Facades\Auth;
 
 class AskQuestionController extends Controller
 {
+    public function __costruct()
+    {
+        $this->middleware('QuestionOverdue');
+    }
 
-    public function PostQuestionPriceDeadline(Request $request){
+    public function UpdateBonus()
+    {                //update tutor payment 
 
-        DB::table('post_question_prices')->insert(
+        DB::table('tutor_payment')->where('order_id', session('question_id'))
+                    ->update(
+                        [
+                            'amount' => round($request['question_price'] *8* 0.22, 2),
+                            'tutor_id' => Auth::user()->email,
+                            'paid_by'  => Auth::user()->email,
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ]
+                 );
+
+        DB::table('question_bodies')->where('question_id', session('question_id'))
+        ->update(
             [
-                'question_id' =>session('question_id'),
-                'question_deadline' => $request['question_deadline'],
-                'question_price' =>$request['question_price'] ,
-                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'category' => $request->category,
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-
-            ]);
-
-        return redirect()->route('post-questions');
+            ]
+     );
+        return redirect()->route('get-payment');
 
     }
 
+    
+
+    public function PostQuestionPriceDeadline(Request $request){
+
+        $payment = new PaymentController;
+
+        $quest_price = $payment-> TutorPrice($request->question_price,'junior');
+
+        DB::table('post_question_prices')->insert(
+            [
+            'question_id' =>session('question_id'),
+            'question_deadline' => $request['question_deadline'],
+            'question_price'   =>$payment->QuestionPrice($request->question_price, $request->pages, $request->urgency), 
+            'urgency'          =>$request['urgency'],
+            'academic_level'   => $request->academic_level, 
+            'paper_format'     => $request->paper_format,
+            'tutor_price'      =>  $quest_price,
+            'pages'           => $request['pages'],
+            'created_at'      =>\Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at'       => \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
+       //update bonus table
+
+        DB::table('tutor_payment_bonuses')->where('order_id', session('question_id'))
+            ->update(
+                [
+                            'amount' => round($request['question_price'] *88* 0.43, 2),
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]
+             );
+
+        // store session amount 
+
+        $request->session()->put('order_amount', $request['question_price']);
+
+        // store session amount 
+
+        $request->session()->put('deadline', $request['question_deadline']);
+
+        //redirect to check out 
+
+        return redirect()->route('get-cust-payments');
+
+    }
 
     public function askQuestions(Request $request)
     {
+
+        //dd($request->academic_level);
+
         $question_id = str_random(25);
 
         $number_of_words = rand (300,400);
@@ -88,8 +150,8 @@ class AskQuestionController extends Controller
             [
                 'question_body' => $request['question_body'],
                 'question_id' =>$question_id,
-                'category' => $request['category'],
                 'user_id' => Auth::user()->email,
+                'topic'    => $request->topic,
                 'summary' => $summary1,
                 'special' => $request['special'],
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
@@ -100,7 +162,7 @@ class AskQuestionController extends Controller
 
         DB::table('question_matrices')->insert(
             [
-
+                'user_id' => Auth::user()->email,
                 'question_id' =>$question_id,
                 'current' => 1,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
@@ -108,11 +170,39 @@ class AskQuestionController extends Controller
 
             ]);
 
+        DB::table('tutor_payment')->insert(
+            [
+                'order_id' =>$question_id,
+                'payment_id' => rand(9999,99999),
+                'order_summary' => substr($request['question_body'], 0, 70),
+                'status'      =>0,
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+
+            //tutor Bonuses
+
+        DB::table('tutor_payment_bonuses')->insert(
+            [
+                'order_id'      =>  $question_id,
+                'payment_id'    =>  rand(9999,99999),
+                'status'        =>  0,
+                'created_at'    =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+
+        
         /*
          * Add question Id to session, this is to be used in the adding of the price
          */
 
         $request->session()->put('question_id',  $question_id);
+
+        // store session amount 
+
+        $request->session()->put('order_summary', substr($request['question_body'], 0, 200));
+
+        //redirect to post deadline view 
 
         return redirect()->route('post-deadlinePrice');
     }

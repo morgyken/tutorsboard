@@ -25,6 +25,8 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     
                      <input type="hidden" name="update" value="optout">
+
+                      <input type="hidden" name="user_id" value="{{ Auth::user()->email }}">
                      
                     <p id="ans"> After disputing send us a reason below the question. Note that a reason for disputing must be given</p>
                     <button type="input" class="btn btn-md col-sm-3 btn-success btn-block"> Opt Out of Question</button>

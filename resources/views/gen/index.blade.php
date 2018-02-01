@@ -2,16 +2,34 @@
 
 @section('content')
 
+<style type="text/css">
+	.para{
+		margin:20px;
+	}
+</style>
+
+<script type="text/javascript">
+	
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</script>
+
 	<!-- Header -->
 	<header id="head">
 		<div class="container">
 			<div class="row">
-				<h1 class="lead">Welcome to Home-Assign</h1>
-				<p class="tagline">Start working From home today. Join us and become a Professional Tutor
+				<h1 class="lead">Welcome to tutorsboard</h1>
+				<p class="tagline">Start working From home today. Join us and become a Professional Tutor</p>
+				<p class="tagline">Sign up is simple and fast. </p>
+				
+				
 
-				<p><a class="btn btn-default btn-lg facebk" style="background:#3b5998" role="button">Sign in With Facebook</a> </p>
-				<p><a class="btn btn-action btn-lg twt" style="background:#1da1f2" role="button">Sign in with Twitter</a></p>
-				<p><a class="btn btn-default btn-lg mail1" style="background:#f4511a"  role="button">Sign in With Gmail</a> </p>
 			</div>
 		</div>
 	</header>

@@ -18,6 +18,11 @@ class CreatePostQuestionPricesTable extends Migration
             $table->text('question_id');
             $table->integer('paid')->nullable();
             $table->integer('question_price');
+            $table->string('urgency');
+            $table->string('tutor_price');
+            $table->string('paper_format');
+            $table->string('academic_level');
+            $table->string('pages');
             $table->dateTime('question_deadline');
             $table->rememberToken();
             $table->timestamps();

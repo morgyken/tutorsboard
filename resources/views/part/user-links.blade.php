@@ -3,22 +3,28 @@ echo $usertype;
 ?>
 
 @if($usertype =='')
-    @if($assigned->current == 1 )
+    @if($status->current == 1 )
+    
+    @if(Auth::user()->user_role === 'admin')
+    <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Assign Question to a Tutor</a></p>
+    @endif
 
         <p>  <a href="#"  data-toggle="modal" data-target="#myModal-commit">Commit to Answer</a></p>
 
         <p> <a href="#"  data-toggle="collapse" style="margin-right: 12px;"
                data-target="#Comment">Send Us a Message </a></p>
 
-    @elseif($assigned->assigned == 1)
+    @elseif($status->assigned == 1)
 
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-ans">Answer Question</a></p>
 
-        <p><a href="#" data-toggle="collapse" data-target="#reply">Post a reply</a></p>
+        <p><a href="#" data-toggle="collapse" data-target="#message">Reply a student</a></p>
+        
+        <p> <a href="#"  data-toggle="collapse" data-target="#Comment">Send Us a Message</a></p>
 
         <p>   <a href="#"  data-toggle="modal" data-target="#myModal-optout">Opt Out Question</a></p>
 
-    @elseif($assigned->answered == 1)
+    @elseif($status->answered == 1)
         <p> <a href="#"  data-toggle="collapse" data-target="#Comment">Comment on the Question</a></p>
 
         <p> <a href="#"  data-toggle="collapse" data-target="#message">Send Admin Message</a></p>
@@ -34,7 +40,7 @@ echo $usertype;
 
 
        
-          <p> <a href="#"  data-toggle="collapse" data-target="#reply1">Comment</a></p>
+          <p> <a href="#"  data-toggle="collapse" data-target="#message">Comment</a></p>
     
 
        

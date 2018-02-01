@@ -4,7 +4,7 @@
                     <div class="card collapse my-4" id="message">
                         <h5 class="card-header" style="margin-top: 20px;">Reply Student</h5>
                         <div class="card-body">
-                            <form action="{{ route('post-comments', ['question_id' => $question['question_id']]) }}" method="POST">
+                            <form action="{{ route('post-comments', ['question_id' => $question['question_id']]) }}" method="POST" enctype="multipart/form-data">
 
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 

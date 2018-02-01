@@ -24,6 +24,12 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
                          <input type="hidden" name="update" value="commit">
+                          <input type="hidden" name="user_id" value="{{ Auth::user()->email }}">
+                          @if(Auth::user()->user_role === 'admin')
+                          <input type="" class="form-control input-lg" name="tutor_id">
+
+                          @endif
+
                         <p id="ans"> Take a minute and consider cancelling. Only take the project if you re sure you can Anwer the question.
 
                         </p>

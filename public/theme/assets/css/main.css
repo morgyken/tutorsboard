@@ -1,6 +1,11 @@
+
+#sidebar{
+	background-color: #1233322;
+}
+
 /* Header */
 #head {
-	background:#181015 url(../images/pic4.png) no-repeat ;
+	background:#181015 url(../images/pic1.png) no-repeat ;
 	min-height:100px;
 	text-align:center;
 	padding-top:240px;
@@ -64,7 +69,7 @@
 .fb2-image-lg{
 	z-index: 0;
 	width: 100%;
-	height: 150px;
+	height: 300px;
 	margin-bottom: 10px;
 	margin-top: -20px;
 }
@@ -73,7 +78,7 @@
 {
 	margin: -90px 10px 0px 50px;
 	z-index: 9;
-	height: 180px;
+	height: 200px;
 	width: 150px;
 	border-radius: 50%;
 }

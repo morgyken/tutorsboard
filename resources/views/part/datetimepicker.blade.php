@@ -22,21 +22,18 @@
     </style>
 
     <script>
-        var getdate = function (){
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            var dateTime = date+' '+time;
 
-            return dateTime;
+        var today = new Date();
+        var day = function () {
+            return today.getUTCDate();
         }
-
+    
     </script>
 
 
     <div class="form-group col-md-12">
 
-        <input type="text" class="form-control myinput input-lg" name="question_deadline"
-               value=getdate() id="datetimepicker4"/>
+        <input type="text" autocomplete="off" class="form-control myinput input-lg" placeholder="Select Deadline" name="question_deadline" id="datetimepicker4"/>
     </div>
 
 

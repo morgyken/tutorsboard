@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+
+  /*  public function __costruct()
+    {
+        $this->middleware('QuestionOverdue');
+    }
     /*
      * Paymemt requests 
      */
@@ -26,6 +31,15 @@ class AdminController extends Controller
         
         return view('adm.dopayments', ['payment_req'=> $payreq]);
         
+    }
+
+
+    public function AdmDashboard()
+    {
+
+        $question = DB::table('question_bodies')->get();
+
+        return view ('adm.show-index-admin', ['questions' => $question]);
     }
     
      public function AdmPostPyments($request_id, $amount){
@@ -94,7 +108,7 @@ class AdminController extends Controller
         return $question1;
     }
 
-    public function findTutorprofile($email, $optional = null){
+    public function findTutorprofile($email){
 
         /**
          * Total Questions answered by tutor
@@ -104,7 +118,7 @@ class AdminController extends Controller
 
             ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
             ->where('answered', 1)
-            ->where('user_id', $email)
+            ->where('question_bodies.user_id', $email)
             ->count();
         /**
          * The sum of answered question
@@ -112,7 +126,7 @@ class AdminController extends Controller
         $sum = DB::table('question_bodies')
             ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_bodies.question_id', '=', 'question_matrices.question_id')
-            ->where('user_id', $email)
+            ->where('question_bodies.user_id', $email)
             ->where('answered', 1)
             ->sum('question_price');
 
@@ -141,9 +155,14 @@ class AdminController extends Controller
 
         return $return;
     }
-    public function TutProfile($email, $optional=null){
 
-        $details = $this->findTutorprofile($email, $optional);
+    // Tutor profile 
+
+    public function TutProfile($status=null){
+
+        $email = Auth::user()->email;
+
+        $details = $this->findTutorprofile($email);
 
         $sum = $details['sum'];
 
@@ -154,24 +173,63 @@ class AdminController extends Controller
         $count=  $details['count'];
         $user = Auth::User()->name;
 
-        $questions = DB::table('question_bodies')
+        /*
+        * move between the different links such as assigned, competed
+        * etc
+        */
+
+        if($status != null)
+        {
+            $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
             ->select('question_bodies.*','post_question_prices.question_deadline',
-                'post_question_prices.question_price','post_question_prices.overdue')
+                'post_question_prices.question_price')
 
             ->where('current',1)
 
-            ->orderby('question_deadline', 'asc')
+            //check question URL
 
-            ->paginate(25);
+            ->where($status, 1)
 
-        return view('tut.home',[
+            //check overdue Questions
+
+            ->where('overdue',0)
+
+            ->orderby('question_deadline', 'desc')
+
+            ->paginate(20);
+        }
+        
+        else
+        {
+            $questions = DB::table('question_bodies')
+            ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
+            ->select('question_bodies.*','post_question_prices.*')
+
+            ->where('current',1)
+
+            //do not show overdue questions
+            ->where('overdue',0)
+
+            ->orwhere('overdue', null)
+
+            ->orderby('question_deadline', 'desc')
+            ->paginate(20);
+        }
+     //dd($questions);
+
+     return view('tut.home',[
+
+        //return view('quest.question-det-2', [
 
             'comments'=> $comments,
+
             /*
              * Current sum
              */
+
             'sum' => $sum,
             /*
              * user profile
@@ -193,6 +251,12 @@ class AdminController extends Controller
 
     }
 
+
+    public function getPayments()
+    {
+        Auth::user()->email;
+        $questions = DB::table('payment_models')->where('tutor_id', $user_id);
+    }
 
     /**
      *Other tutor pages
@@ -252,16 +316,43 @@ class AdminController extends Controller
 
     }
 
+    // search results 
+
+    public function AdmSearchResults(Request $request){
+
+        $criteria = $request->search;
+
+        $question = DB::table('question_bodies')
+            ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
+            ->leftjoin('question_matrices','question_bodies.question_id','=','question_matrices.question_id')
+            ->select('question_bodies.*', 'question_bodies.summary',
+                'question_matrices.*','question_matrices.user_id',
+                'post_question_prices.created_at',
+                'post_question_prices.*')
+            ->where('question_bodies.question_id', 'LIKE' ,'%'.$criteria.'%')
+            ->orwhere('question_bodies.user_id', 'LIKE', '%'.$criteria.'%')
+            ->orwhere('question_bodies.question_body', 'LIKE', '%'.$criteria.'%')
+            ->orwhere('question_price', 'LIKE', '%'.$criteria.'%')
+            ->orwhere('category', 'LIKE', '%'.$criteria.'%')
+            ->orderBy('post_question_prices.created_at', 'asc')
+            ->paginate(25);
+
+        return view('adm.adm-question-search',['questions'=> $question]);
+       
+
+    }
+
 
     public function returnQuery12($num){
 
         $question1 = DB::table('question_bodies')
             ->leftjoin('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
-            ->leftjoin('question_status_models','question_bodies.question_id','=','question_status_models.question_id')
+            ->leftjoin('question_matrices','question_bodies.question_id','=','question_matrices.question_id')
             ->select('question_bodies.question_id', 'question_bodies.summary',
-                'question_status_models.status',
+                'question_matrices.*','question_matrices.user_id',
                 'post_question_prices.created_at',
-                'post_question_prices.question_deadline', 'post_question_prices.question_price')
+                'post_question_prices.*')
+            ->orderby('overdue', 'asc')
             ->orderBy('post_question_prices.created_at', 'asc')
             ->paginate($num);
 
@@ -271,11 +362,28 @@ class AdminController extends Controller
     public function AdmTutors(){
 
         $user = DB::table('users')
-                ->where('user-type', '')
+                ->join('tutor_profile', 'tutor_profile.tutor_id', '=', 'users.email')
+                ->leftjoin('tutor_accounts', 'tutor_accounts.tutor_id', '=', 'tutor_profile.tutor_id' )
+                ->where('user_role', 'tutor')
                 ->orderby('email')
-                ->paginate(1200);
+                ->paginate(20);
 
-        return view ('adm.allTutors',['users'=> $user ] );
+        return view ('adm.adm-all-tutors',['users'=> $user]);
+    }
+    //return all question details
+
+    public function AdmQuestions()
+    {
+        //paginate
+        $num = 50;
+
+        //find questions 
+
+        $query = $this->returnQuery12($num);
+
+        //return view
+
+        return view('adm.adm-all-questions',['questions'=> $query]);
 
     }
 
@@ -287,12 +395,7 @@ class AdminController extends Controller
         return view ('adm.profile');
     }
 
-    public function AdmDashboard(){
-        return view ('adm.index-admin');
-    }
-
-
-
+  
     public function QuestionDetails($question_id, $optional= null){
 
        $email = Auth::user()->email;

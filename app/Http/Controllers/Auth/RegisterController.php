@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,13 +49,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',           
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'university' => 'required|string|max:80',
-            'phone' => 'required|string|max:25',
-            'idnumber' =>'required|string|max:8|min:8',
-            'course' => 'required|string|max:100'
+            'password' => 'required|string|min:6|confirmed', 
+        
         ]);
     }
 
@@ -66,14 +64,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //create tutor education here 
+
+         DB::table('tutor_education')->insert(
+            [
+                'tutor_id'          =>  $data['email'],         
+                'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
+                //update tutor profie accounts 
+        DB::table('tutor_profile')->insert(
+            [
+                'tutor_id'          =>  $data['email'],         
+                'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
+        //update tutor ccounts
+
+         DB::table('tutor_accounts')->insert(
+            [
+                'account_id'        =>  rand(89000,999999), 
+                'tutor_id'          =>  $data['email'],         
+                'account_status'    => 'New',
+                'account_level'     => 'Beginner',
+                'created_at'        =>  \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at'        =>  \Carbon\Carbon::now()->toDateTimeString()
+
+            ]);
+
+        
+    
         return User::create([
-            'idnumber' => $data['idnumber'],
-            'course' => $data['course'],
-            'phone' =>$data['phone'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'user_type' => $data['user_type']
+            'user_role' => $data['user_role']
+            
         ]);
+
+
+
+        
     }
+
 }
