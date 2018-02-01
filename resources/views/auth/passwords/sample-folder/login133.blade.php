@@ -10,8 +10,8 @@
   <meta name="description" content="">
   <title>Home-Asignment: Login</title>
 
-  <script src="{{ URL::asset('/theme1/landing/student/assets/web/assets/jquery/jquery.min.js ') }}"></script>
-  <link rel="icon" type="image/png" href="{{ URL::asset('/theme1/site-images/logo.png')}}" sizes="32x32" />
+<script src="{{ URL::asset('/theme1/landing/student/assets/web/assets/jquery/jquery.min.js ') }}"></script>
+<link rel="icon" type="image/png" href="{{ URL::asset('/theme1/site-images/logo.png')}}" sizes="32x32" />
     <link rel="icon" type="image/png" href="{{ URL::asset('/theme1/site-images/logo.png')}}" sizes="16x16" />
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/web/assets/mobirise-icons/mobirise-icons.css ')}}">
@@ -173,7 +173,6 @@ a:hover{
                                 @endif
                     </div>
                 </div>
-                
                   <label>
                       <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                   </label>

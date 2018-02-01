@@ -8,11 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo2.png" type="image/x-icon">
   <meta name="description" content="">
-  <title>Home-Asignment: Login</title>
+  <title>Home</title>
 
-  <script src="{{ URL::asset('/theme1/landing/student/assets/web/assets/jquery/jquery.min.js ') }}"></script>
-  <link rel="icon" type="image/png" href="{{ URL::asset('/theme1/site-images/logo.png')}}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{{ URL::asset('/theme1/site-images/logo.png')}}" sizes="16x16" />
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/web/assets/mobirise-icons/mobirise-icons.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/tether/tether.min.css ')}}">
@@ -22,20 +19,13 @@
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/socicon/css/styles.css')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/dropdown/css/style.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/theme/css/style.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/mobirise/css/mbr-additional.css ')}}" type="text/css">\
-
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/css/social-buttons.css')}}">
+  <link rel="stylesheet" href="{{ URL::asset('/theme1/login/assets/mobirise/css/mbr-additional.css ')}}" type="text/css">
   <style type="text/css">
     
 /*
     Note: It is best to use a less version of this file ( see http://css2less.cc
     For the media queries use @screen-sm-min instead of 768px.
     For .omb_spanOr use @body-bg instead of white.
-
-
-
-                            
-
 */
 /* Shared */
 .loginBtn {
@@ -102,23 +92,6 @@
   background: #E74B37;
 }
 
-/* twitter */
-.btn-twitter {
-    background: #00ACEE;
-    border-radius: 0;
-    color: #fff;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #0075a2;
-  }
-  .btn-twitter:link, .btn-twitter:visited {
-    color: #fff; 
-  }
-  .btn-twitter:active, .btn-twitter:hover {
-    background: #0075a2;
-    color: #fff; 
-  }
-
 a:hover{
   color:#ddfffe;
 }
@@ -134,6 +107,8 @@ a:hover{
 
 <section class="engine"><a href="https://mobirise.ws/n">best website maker app</a></section><section class="cid-qIcALxgs9n mbr-fullscreen mbr-parallax-background" id="header15-1">
 
+    
+
     <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(7, 59, 76);"></div>
 
     <div class="container align-right">
@@ -148,13 +123,15 @@ a:hover{
     <div class="form-container">
         <div class="media-container-column" data-form-type="formoid">
             
-            <form class="" action="{{ route('login') }}" method="post">
+            <form class="mbr-form" action="{{ route('register', ['user'=> 'cust']) }}" method="post">
+
+              <input type="hidden" name="user_role" value="cust">
 
                 {{ csrf_field() }}
 
                 <div data-for="name">
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <input type="text" class="form-control" name="email" data-form-field="Email" placeholder="Email" required="" id="">
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <input type="text" class="form-control" name="name" data-form-field="name" placeholder="name" required="" id="">
                         @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -162,6 +139,20 @@ a:hover{
                                 @endif
                     </div>
                 </div>
+
+                <div data-for="email">
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <input type="email" class="form-control px-3" name="email" data-form-field="email" 
+                        placeholder="email" required="">
+
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
                 <div data-for="password">
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <input type="password" class="form-control px-3" name="password" data-form-field="password" placeholder="Password" required="" id="email-header15-1">
@@ -173,22 +164,11 @@ a:hover{
                                 @endif
                     </div>
                 </div>
-                
-                  <label>
-                      <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                  </label>
-
-
-                
+                                 
                 
                 <span class="input-group-btn">
 
-                    <button type="input" class="btn btn-secondary btn-block btn-form display-4">LOGIN</button>
-                </span>
-
-                <span>
-                  
-                    <h5 style="color: #eee"> Lost password? Click <a class="btn-link" href="{{ route('password.request') }}"> Here to recover password</a></h5>
+                    <button type="input" class="btn btn-secondary btn-block btn-form display-4">REGISTER</button>
                 </span>
 
             </form>
@@ -204,8 +184,6 @@ a:hover{
               <button class="loginBtn loginBtn--google">
                 Login with Google
               </button>
-
-              
         </div>
     </div>
     </div>
@@ -222,4 +200,14 @@ a:hover{
 
 @include('part.new-footer')
 
+ <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/dropdown/js/script.min.js"></script>
+  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/parallax/jarallax.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/theme/js/script.js"></script>
+  <script src="assets/formoid/formoid.min.js"></script>
 

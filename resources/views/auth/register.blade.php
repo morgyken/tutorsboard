@@ -125,7 +125,7 @@ a:hover{
             
             <form class="mbr-form" action="{{ route('register') }}" method="post">
 
-              <input type="hidden" name="user_role" value="{{ $user_role }}">
+              <input type="hidden" name="user_role" value="tutor">
 
                 {{ csrf_field() }}
 

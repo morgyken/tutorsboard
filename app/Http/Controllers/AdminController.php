@@ -155,6 +155,9 @@ class AdminController extends Controller
 
         return $return;
     }
+
+    // Tutor profile 
+
     public function TutProfile($status=null){
 
         $email = Auth::user()->email;
@@ -203,27 +206,30 @@ class AdminController extends Controller
             $questions = DB::table('question_bodies')
             ->join('post_question_prices', 'question_bodies.question_id', '=', 'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
-            ->select('question_bodies.*','post_question_prices.question_deadline',
-                'post_question_prices.question_price')
+            ->select('question_bodies.*','post_question_prices.*')
 
             ->where('current',1)
 
             //do not show overdue questions
             ->where('overdue',0)
 
-            ->orderby('question_deadline', 'desc')
+            ->orwhere('overdue', null)
 
+            ->orderby('question_deadline', 'desc')
             ->paginate(20);
         }
+     //dd($questions);
 
-        
+     return view('tut.home',[
 
-        return view('tut.home',[
+        //return view('quest.question-det-2', [
 
             'comments'=> $comments,
+
             /*
              * Current sum
              */
+
             'sum' => $sum,
             /*
              * user profile
@@ -248,7 +254,6 @@ class AdminController extends Controller
 
     public function getPayments()
     {
-
         Auth::user()->email;
         $questions = DB::table('payment_models')->where('tutor_id', $user_id);
     }

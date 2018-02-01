@@ -1,73 +1,4 @@
-
-    <?php
-
-
-    function ConvertTime12( $seconds){
-
-        $dtF = new \DateTime('@0');
-        $dtT = new \DateTime("@$seconds");
-
-        $days = $dtF->diff($dtT)->format('%a');
-
-        if($days> 0){
-            return $dtF->diff($dtT)->format('%a days %h hours');
-        }
-        else {
-            return $dtF->diff($dtT)->format('%h hours %i min');
-        }
-
-
-
-    }
-
-    function getDeadlineInSeconds1($deadline){
-
-
-        $deadline = new \Carbon\Carbon($deadline);
-
-        $now = \Carbon\Carbon::now();
-
-        $difference = $deadline -> diffInSeconds($now);
-
-        $TimeStart = strtotime(\Carbon\Carbon::now());
-
-        $TimeEnd = strtotime($deadline);
-
-        $Difference = ($TimeEnd - $TimeStart);
-
-        if($Difference < 0){
-
-            return 'Overdue';
-        }
-
-
-
-        $interval = ConvertTime12($difference);
-
-        return $interval; // array ['h']=>h, ['m]=> m, ['s'] =>s
-
-    }
-
-    function getDeadlineInSeconds12($deadline){
-
-
-        $deadline = new \Carbon\Carbon($deadline);
-
-        $now = \Carbon\Carbon::now();
-
-        $difference = $deadline -> diffInSeconds($now);
-
-        $TimeStart = strtotime(\Carbon\Carbon::now());
-
-        $TimeEnd = strtotime($deadline);
-
-        $Difference = ($TimeEnd - $TimeStart);
-
-        return $Difference;
-    }
-    ?>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html >
 <head>
   <!-- Site made with Mobirise Website Builder v4.6.3, https://mobirise.com -->
@@ -75,26 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise v4.6.3, mobirise.com">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="{{ URL::asset('/theme1/all-questions/assets/images/logo2.png')}}" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/images/logo2.png" type="image/x-icon">
   <meta name="description" content="">
-  <title>Home-Assign: Browse Questions</title>
-  <link rel="icon" type="image/png" href="{{ URL::asset('/theme1/favi.png ')}}" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{{ URL::asset('/theme1/favi.png ')}}" sizes="16x16" />
-
-
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/web/assets/mobirise-icons/mobirise-icons.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/tether/tether.min.css')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap.min.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap-grid.min.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap-reboot.min.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/dropdown/css/style.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/theme/css/style.css ')}}">
-  <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/mobirise/css/mbr-additional.css ')}}" type="text/css">
+  <title>Home</title>
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  
+  
   
 </head>
-
-
-
 <body>
   <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">
 
@@ -113,7 +39,7 @@
             <div class="navbar-brand">
                 <span class="navbar-logo">
                     <a href="https://mobirise.com">
-                        <img src="{{ URL::asset('/theme1/favi.png ')}}" alt="Mobirise" style="height: 3.8rem;">
+                        <img src="assets/images/logo2.png" alt="Mobirise" style="height: 3.8rem;">
                     </a>
                 </span>
                 
@@ -153,14 +79,7 @@
             <div class="title col-12 align-center">
                 <h2 class="pb-3 mbr-fonts-style display-2">User Details&nbsp;</h2>
                 <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style display-5">
-
-
-                    {{ Auth::User()->name}} has been Tutoring since
-                    <?php
-                      $date = new DateTime(Auth::User()->created_at);
-                      echo $date->format("l jS \of F Y");
-                ?>
-
+                    Mobirise is one of the easiest website development tools available today.
                 </h3>
             </div>
         </div>
@@ -168,7 +87,6 @@
 
     <div class="container">
         <div class="media-container-column">
-          <?php $user_id = Auth::User()->id;  ?>
             
 
             
@@ -176,9 +94,7 @@
                 <div class="panel-item">
                     <div class="card-block">
                         <div class="testimonial-photo">
-                            <a href="{{route('profile-pic-view', ['view' => 'profile'])}}">
-                                <img align="left" class="fb-image-profile thumbnail" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="Click here to upload Background Picture"/>
-                                </a>
+                            <img src="assets/images/face1.jpg">
                         </div>
                         <p class="mbr-text mbr-fonts-style mbr-white display-7">
                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, aspernatur, voluptatibus, atque, tempore molestiae.
@@ -186,13 +102,10 @@
                     </div>
                     <div class="card-footer">
                         <div class="mbr-author-name mbr-bold mbr-fonts-style mbr-white display-7">
-                             {{ Auth::User()->name}}
+                             John Smith
                         </div>
-                      <small class="mbr-author-desc mbr-italic mbr-light mbr-fonts-style mbr-white display-7">
-                          Tutor
-
-                           <p>Answered <span class="badge">{{ \App\Http\Controllers\QuestionController::questionStat('answered') }}</span>
-                           </p>
+                        <small class="mbr-author-desc mbr-italic mbr-light mbr-fonts-style mbr-white display-7">
+                               Developer
                         </small>
                     </div>
                 </div>
@@ -222,117 +135,58 @@
   
   <div class="container">
     <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2">
-        BROWSE QUESTIONS
+        WHAT OUR FANTASTIC USERS SAY
     </h2>
     <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
         Click any text to edit or style it. Click blue "Gear" icon in the top right corner to hide/show images, titles and change the amount items or the block and cards background.
     </h3>
-    <div class="col-md-10 testimonials-container">  
+    <div class="col-md-10 testimonials-container"> 
+      
 
-   @foreach($question as $quest=>$value)
-
-
-
-    <?php  
-    $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);
-
-    $deadline12 = getDeadlineInSeconds12($value->question_deadline);
-
-    ?>
-      <script>
-        $(document).ready(
-         function() {
-         setInterval(function() { 
-         var someval = Math.floor(Math.random() * 100);
-          $('#sample').text('Test' + someval);
-         }, 500);  //Delay here = 5 seconds 
-        });
-  </script>
-  <style type="text/css">
-    #sample a{
-      color: #0a090e;
-    }
-
-    #sample a:hover{
-      color: #92a4b0;
-    }
-  </style>
-
-  
+      
     <div class="testimonials-item">
         <div class="user row">
           <div class="col-lg-3 col-md-4">
             <div class="user_image">
-              <img src="{{ URL::asset('/theme1/all-questions/assets/images/face3.jpg ')}}">
+              <img src="assets/images/face3.jpg">
             </div>
           </div>
           <div class="testimonials-caption col-lg-9 col-md-8">
-            <div class="user_text" id="sample">
-              <a href="{{route('view-question', ['question_id'=> $value->question_id])}}">
+            <div class="user_text ">
               <p class="mbr-fonts-style  display-7">
-                 <em>{{ $value->summary  }}</em>
+                 <em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae nostrum, quos voluptas fugiat blanditiis, temporibus expedita cumque doloribus ea, officiis consequuntur repellat minus ad veritatis? Facere similique accusamus, accusantium sunt!"</em>
               </p>
-            </a>
             </div>
             <div class="user_name mbr-bold mbr-fonts-style align-left pt-3 display-7">
-
-                  <?php 
-                      $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
-
-                     ?> 
-                 <h4>
-                        <span class="label" style="color:#2f5369; font-size: 18px;"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
-                    </h4>
+                 Helen
             </div>
             <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
-                 <div style="width:30%; float: left"> 
-                  <h5 style="padding-bottom:20px;">
-                        @if(($deadline12/3600) > 24 )
-
-                            <span class="label label-success label-lg ">
-                                {{ $array_of_deadline }}
-                            </span>
-                        @elseif(($deadline12/3600) > 15 )
-
-                            <span class="label label-info label-lg ">
-                                {{ $array_of_deadline }}
-                            </span> 
-                        @elseif(($deadline12/3600) > 8 )
-
-                            <span class="label label-warning label-lg ">
-                                {{ $array_of_deadline }}
-                            </span>                                                      
-
-                        @else 
-                        <span class="label label-danger label-lg ">
-                                {{ $array_of_deadline }}
-                            </span>
-                        @endif
-
-                              </h5>                    
-                    
-                  </div>
-                 <div style="width:25%; float: left">
-                   <h5>{{$value->category}}</h5>
-                 </div>
-                 <div style="width:25%;float: left">
-                   <h5>
-
-                    
-                        <span class="label label-warning ">Ksh: {{$value->tutor_price}}</span>
-
-                        
-
-
-                    </h5>
-                 </div>
-
-          
+                 DESIGNER
             </div>
           </div>
         </div>
-      </div>
-      @endforeach
+      </div><div class="testimonials-item">
+        <div class="user row">
+          <div class="col-lg-3 col-md-4">
+            <div class="user_image">
+              <img src="assets/images/face1.jpg">
+            </div>
+          </div>
+          <div class="testimonials-caption col-lg-9 col-md-8">
+            <div class="user_text">
+              <p class="mbr-fonts-style  display-7">
+                 <em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae nostrum, quos voluptas fugiat blanditiis, temporibus expedita cumque doloribus ea, officiis consequuntur repellat minus ad veritatis? Facere similique accusamus, accusantium sunt!"</em>
+              </p>
+            </div>
+            <div class="user_name mbr-bold mbr-fonts-style align-left pt-3 display-7">
+                 Linda
+            </div>
+            <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
+                 DEVELOPER
+            </div>
+          </div>
+        </div>
+      </div></div>
   </div>
 </section>
 
@@ -399,14 +253,14 @@
 </section>
 
 
-  <script src="{{ URL::asset('/theme1/all-questions/assets/web/assets/jquery/jquery.min.js')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/popper/popper.min.js ')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/tether/tether.min.js')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/bootstrap/js/bootstrap.min.js ')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/smoothscroll/smooth-scroll.js ')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/dropdown/js/script.min.js')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/touchswipe/jquery.touch-swipe.min.js ')}}"></script>
-  <script src="{{ URL::asset('/theme1/all-questions/assets/theme/js/script.js ')}}"></script>
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/dropdown/js/script.min.js"></script>
+  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/theme/js/script.js"></script>
   
   
 </body>
