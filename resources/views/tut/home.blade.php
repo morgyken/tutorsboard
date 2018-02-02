@@ -1,7 +1,6 @@
 
     <?php
 
-
     function ConvertTime12( $seconds){
 
         $dtF = new \DateTime('@0');
@@ -86,6 +85,7 @@
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/tether/tether.min.css')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap-grid.min.css ')}}">
+   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/bootstrap/css/bootstrap-reboot.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/dropdown/css/style.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/theme/css/style.css ')}}">
@@ -225,119 +225,149 @@
         BROWSE QUESTIONS
     </h2>
     <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
-        Click any text to edit or style it. Click blue "Gear" icon in the top right corner to hide/show images, titles and change the amount items or the block and cards background.
+        Browse the questions from the following list to obtain the best question for you to answer. Please select questions with the best deadline and answer possi
     </h3>
     <div class="col-md-10 testimonials-container">  
 
-   @foreach($question as $quest=>$value)
+    @if(count($question)==0)
+    <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
+     
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
+                <ul>
+                    <li><strong> <span style="color:#f9533b">No Questions are available</span></strong>There seems to be no questions avalible in the platform at the moment. Please refresh <a href="https://mobirise.com/">Try it now!</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+     
+@else
+
+  @foreach($question as $quest=>$value)
 
 
 
-    <?php  
-    $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);
+      <?php  
+      $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);
 
-    $deadline12 = getDeadlineInSeconds12($value->question_deadline);
+      $deadline12 = getDeadlineInSeconds12($value->question_deadline);
+
+      ?>
+        <script>
+          $(document).ready(
+           function() {
+           setInterval(function() { 
+           var someval = Math.floor(Math.random() * 100);
+            $('#sample').text('Test' + someval);
+           }, 500);  //Delay here = 5 seconds 
+          });
+    </script>
+    <style type="text/css">
+      #sample a{
+        color: #0a090e;
+      }
+
+      #sample a:hover{
+        color: #149dcc;
+      }
+    </style>
+    <?php
+
+     $user_id =  \App\Http\Controllers\UserController::CustomerId($value->question_id, 'question_matrices');
+
+     //dd($user_id);
+
 
     ?>
-      <script>
-        $(document).ready(
-         function() {
-         setInterval(function() { 
-         var someval = Math.floor(Math.random() * 100);
-          $('#sample').text('Test' + someval);
-         }, 500);  //Delay here = 5 seconds 
-        });
-  </script>
-  <style type="text/css">
-    #sample a{
-      color: #0a090e;
-    }
-
-    #sample a:hover{
-      color: #92a4b0;
-    }
-  </style>
-
-  
-    <div class="testimonials-item">
-        <div class="user row">
-          <div class="col-lg-3 col-md-4">
-            <div class="user_image">
-              <img src="{{ URL::asset('/theme1/all-questions/assets/images/face3.jpg ')}}">
+      <div class="testimonials-item">
+          <div class="user row">
+            <div class="col-lg-3 col-md-4">
+              <div class="user_image">
+                <img src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}">
+              </div>
             </div>
-          </div>
-          <div class="testimonials-caption col-lg-9 col-md-8">
-            <div class="user_text" id="sample">
-              <a href="{{route('view-question', ['question_id'=> $value->question_id])}}">
-              <p class="mbr-fonts-style  display-7">
-                 <em>{{ $value->summary  }}</em>
-              </p>
-            </a>
-            </div>
-            <div class="user_name mbr-bold mbr-fonts-style align-left pt-3 display-7">
+            <div class="testimonials-caption col-lg-9 col-md-8">
+              <div class="user_text" id="sample">
+                <a href="{{route('view-question', ['question_id'=> $value->question_id])}}">
+                <p class="mbr-fonts-style  display-7">
+                   <em>{{ $value->summary  }}</em>
+                </p>
+              </a>
+              </div>
+              <div class="user_name mbr-bold mbr-fonts-style align-left pt-3 display-7">
 
-                  <?php 
-                      $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
-
-                     ?> 
-                 <h4>
-                        <span class="label" style="color:#2f5369; font-size: 18px;"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
-                    </h4>
-            </div>
-            <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
-                 <div style="width:30%; float: left"> 
-                  <h5 style="padding-bottom:20px;">
-                        @if(($deadline12/3600) > 24 )
-
-                            <span class="label label-success label-lg ">
-                                {{ $array_of_deadline }}
-                            </span>
-                        @elseif(($deadline12/3600) > 15 )
-
-                            <span class="label label-info label-lg ">
-                                {{ $array_of_deadline }}
-                            </span> 
-                        @elseif(($deadline12/3600) > 8 )
-
-                            <span class="label label-warning label-lg ">
-                                {{ $array_of_deadline }}
-                            </span>                                                      
-
-                        @else 
-                        <span class="label label-danger label-lg ">
-                                {{ $array_of_deadline }}
-                            </span>
-                        @endif
-
-                              </h5>                    
-                    
-                  </div>
-                 <div style="width:25%; float: left">
-                   <h5>{{$value->category}}</h5>
-                 </div>
-                 <div style="width:25%;float: left">
-                   <h5>
-
-                    
-                        <span class="label label-warning ">Ksh: {{$value->tutor_price}}</span>
-
-                        
+                    <?php 
+                        $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
 
 
-                    </h5>
-                 </div>
 
-          
+                       ?> 
+                   <h4>
+                          <span class="label" style="color:#2f5369; font-size: 18px;"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
+                      </h4>
+              </div>
+              <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
+                   <div style="width:30%; float: left"> 
+                    <h5 style="padding-bottom:20px;">
+                          @if(($deadline12/3600) > 24 )
+
+                              <span class="label label-success label-lg ">
+                                  {{ $array_of_deadline }}
+                              </span>
+                          @elseif(($deadline12/3600) > 15 )
+
+                              <span class="label label-info label-lg ">
+                                  {{ $array_of_deadline }}
+                              </span> 
+                          @elseif(($deadline12/3600) > 8 )
+
+                              <span class="label label-warning label-lg ">
+                                  {{ $array_of_deadline }}
+                              </span>                                                      
+
+                          @else 
+                          <span class="label label-danger label-lg ">
+                                  {{ $array_of_deadline }}
+                              </span>
+                          @endif
+
+                                </h5>                    
+                      
+                    </div>
+                   <div style="width:25%; float: left">
+                     <h5>{{$value->category}}</h5>
+                   </div>
+                   <div style="width:25%;float: left">
+                     <h5>
+
+                      
+                          <span class="label label-warning ">Ksh: {{$value->tutor_price}}</span>              
+
+
+                      </h5>
+                   </div>
+
+            
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      @endforeach
+        @endforeach
+
+        
+
+  @endif
+
+      
   </div>
 </section>
 
-<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
-     
+<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
 
     <div class="container">
         <div class="media-container-row">
@@ -347,6 +377,20 @@
                     <li><strong>EASY AND SIMPLE</strong> - cut down the development time with drag-and-drop website builder. Drop the blocks into the page, edit content inline and publish - no technical skills required. <a href="https://mobirise.com/">Try it now!</a></li>
                     <li><strong>UNIQUE STYLES</strong> - choose from the large selection of latest pre-made blocks - full-screen intro, bootstrap carousel, content slider, responsive image gallery with lightbox, parallax scrolling, video backgrounds, hamburger menu, sticky header and more. <a href="https://mobirise.com/">Try it now!</a></li>
                 </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mbr-section content4 cid-qI9IJ9MpuF" id="content4-4">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-8">
+                <h2 class="align-center pb-3 mbr-fonts-style display-2"></h2>
+                <h3>
+                  
+                {{ $question->links()}}
+                </h3>
+                
             </div>
         </div>
     </div>
@@ -397,6 +441,7 @@
         </div>
     </div>
 </section>
+
 
 
   <script src="{{ URL::asset('/theme1/all-questions/assets/web/assets/jquery/jquery.min.js')}}"></script>
