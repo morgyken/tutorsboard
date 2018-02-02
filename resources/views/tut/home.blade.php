@@ -1,4 +1,6 @@
 
+    
+
     <?php
 
     function ConvertTime12( $seconds){
@@ -93,12 +95,8 @@
   
 </head>
 
-
-
-<body>
-  <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">
-
-    
+<body style="font-size: 20px">
+  <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">   
 
     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -288,7 +286,7 @@
           <div class="user row">
             <div class="col-lg-3 col-md-4">
               <div class="user_image">
-                <img src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}">
+                <img class="image-comment"  src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}">
               </div>
             </div>
             <div class="testimonials-caption col-lg-9 col-md-8">
@@ -308,7 +306,7 @@
 
                        ?> 
                    <h4>
-                          <span class="label" style="color:#2f5369; font-size: 18px;"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
+                          <span class="label" style="color:#2f5369;"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
                       </h4>
               </div>
               <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
@@ -351,7 +349,6 @@
 
                       </h5>
                    </div>
-
             
               </div>
             </div>

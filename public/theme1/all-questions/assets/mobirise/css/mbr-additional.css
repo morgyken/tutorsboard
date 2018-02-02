@@ -49,7 +49,7 @@ body {
 }
 .display-7 {
   font-family: 'Rubik', sans-serif;
-  font-size: 1rem;
+  font-size: 0.7em;
 }
 .display-7 > .mbr-iconfont {
   font-size: 1.6rem;
@@ -1453,10 +1453,14 @@ body {
   margin: 0;
 }
 .cid-qI9LEZJgCJ .testimonials-container .testimonials-item .user .user_image {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   overflow: hidden;
   margin: 2rem auto 2rem auto;
+   border-radius: 50%;
+    border-color: #F0E68C;
+    border-width: 1px;
+    border-style: solid;
 }
 .cid-qI9LEZJgCJ .testimonials-container .testimonials-item .user .user_image img {
   width: 100%;

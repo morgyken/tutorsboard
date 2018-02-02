@@ -216,7 +216,7 @@ class AdminController extends Controller
 
             //->get();
 
-            ->paginate(5);
+            ->paginate(20);
         }
 
         //dd($questions);
