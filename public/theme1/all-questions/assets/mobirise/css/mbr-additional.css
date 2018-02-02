@@ -483,6 +483,7 @@ body {
 }
 .text-black {
   color: #000000 !important;
+  font-size:17px !important;
 }
 a.text-primary:hover,
 a.text-primary:focus {
@@ -1436,6 +1437,7 @@ body {
 }
 .cid-qI9LEZJgCJ {
   padding-top: 60px;
+
   padding-bottom: 60px;
   background-image: url("../../../assets/images/background3.jpg");
 }
@@ -1444,13 +1446,20 @@ body {
 }
 .cid-qI9LEZJgCJ .testimonials-container .testimonials-item {
   justify-content: center;
+  margin-left: 100px;
   margin-top: 3rem;
+
+}
+.mytopmenu{
+  font-size: 20px;
 }
 .cid-qI9LEZJgCJ .testimonials-container .testimonials-item .user {
+
   background: #ffffff;
 }
 .cid-qI9LEZJgCJ .testimonials-container .testimonials-item .user.row {
-  margin: 0;
+  margin-left:-100px;
+  width: 135%;
 }
 .cid-qI9LEZJgCJ .testimonials-container .testimonials-item .user .user_image {
   width: 100px;
@@ -1586,9 +1595,10 @@ body {
   outline: none;
 }
 .cid-qI9L0sV3Ag .btn {
-  padding: 0.4rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   display: inline-flex;
   align-items: center;
+  font-size: 20px;
 }
 .cid-qI9L0sV3Ag .btn .mbr-iconfont {
   font-size: 1.6rem;
@@ -1636,6 +1646,7 @@ body {
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
   padding-left: 0;
+
 }
 .cid-qI9L0sV3Ag .navbar-toggleable-sm .navbar-collapse .navbar-nav .nav-item {
   -webkit-align-self: center;
@@ -1644,6 +1655,9 @@ body {
 .cid-qI9L0sV3Ag .navbar-toggleable-sm .navbar-collapse .navbar-buttons {
   padding-left: 0;
   padding-bottom: 0;
+}
+.navbar-collapse{
+  font-size: 20px;
 }
 .cid-qI9L0sV3Ag .dropdown .dropdown-menu {
   background: #ffffff;

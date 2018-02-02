@@ -152,7 +152,7 @@ Available Questions
                $answer_poster = \App\Http\Controllers\UserController::CustomerId($question->question_id, 'post_answers');
 
                  ?>
-                <img class="img-fluid rounded image-profile" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}">
+                <img class="image-comment" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}">
                  <hr>
             </div>
 
