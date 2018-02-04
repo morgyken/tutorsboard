@@ -145,11 +145,7 @@
     </div>
 </section>
 
-<section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">
-
-  
-
-  
+<section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">  
   <div class="container">
     <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2">
         BROWSE QUESTIONS
@@ -160,8 +156,7 @@
     <div class="col-md-10 testimonials-container">  
 
     @if(count($question)==0)
-    <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
-     
+    <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
 
     <div class="container">
         <div class="media-container-row">
@@ -291,8 +286,7 @@
           </div>
         </div>
         @endforeach
-
-        
+      
 
   @endif
 

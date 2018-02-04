@@ -140,6 +140,8 @@ class UserController extends Controller
 
          } 
 
+         //return tutor id here 
+
     public static function TutorId($question, $database)
     {
         //use the qestion to get the data
@@ -151,6 +153,19 @@ class UserController extends Controller
             return $data->tutor_id;                   
            
     } 
+
+        public static function TutorEmail($question, $database)
+    {
+        //use the qestion to get the data
+
+           $data = DB::table($database)
+           ->select('tutor_id')
+           ->where('question_id', $question)->first();
+
+            return $data->email;                   
+           
+    } 
+
 
 
     public static function CustomerEmail($question, $database)

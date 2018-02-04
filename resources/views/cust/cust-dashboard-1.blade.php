@@ -92,6 +92,18 @@
                       <div class="user_image">
                         <img class="image-comment"  src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}">
                       </div>
+                      <div style="width:25%;float: left">
+                             <h5>                             
+                                  <span class="label label-warning "><?php 
+
+                                  $ratings = App\Http\Controllers\AccountController::getAccountRating($value->tutor_id); ?></span>
+
+                                  r           
+
+
+                              </h5>
+                           </div>
+                           
                     </div>
                     <div class="testimonials-caption col-lg-9 col-md-8">
                       <div class="user_text" id="sample">
@@ -105,35 +117,44 @@
 
                             <?php 
                                 $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
-
-
-
                                ?> 
                            <h4>
                                   <span class="label" style="color:#2f5369;"> Answered by {{ $tutor }} <a href="#"> Ask Question </a></span>
+
+                                  <div class="row" style="padding-top:9px; padding-bottom:8px; padding-left: 20px ">
+
+                                    <h4>Rating: </h4>
+                                    @for($rate = 0; $rate < $ratings; $rate++ ) 
+
+                                <span class="fa fa-star" style="position: relative; color:#ff9800; "></span>
+
+                                  @endfor
+                                  </div>
+
+                                  
                               </h4>
                       </div>
-                      <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
+                      <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7" ">
                            <div style="width:30%; float: left"> 
                             <h5 style="padding-bottom:20px;">
                                   @if(($deadline12/3600) > 24 )
 
-                                      <span class="label label-success label-lg ">
+                                      <span class="label label-success label-lg" style="font-size: 1.38rem; padding:7px;">
                                           {{ $array_of_deadline }}
                                       </span>
                                   @elseif(($deadline12/3600) > 15 )
 
-                                      <span class="label label-info label-lg ">
+                                      <span class="label label-info label-lg" style="font-size: 1.38rem; padding:7px;">
                                           {{ $array_of_deadline }}
                                       </span> 
                                   @elseif(($deadline12/3600) > 8 )
 
-                                      <span class="label label-warning label-lg ">
+                                      <span class="label label-warning label-lg" style="font-size: 1.38rem; padding:7px;">
                                           {{ $array_of_deadline }}
                                       </span>                                                      
 
                                   @else 
-                                  <span class="label label-danger label-lg ">
+                                  <span class="label label-danger label-lg" style="font-size: 1.38rem; padding:7px;">
                                           {{ $array_of_deadline }}
                                       </span>
                                   @endif
@@ -142,17 +163,18 @@
                               
                             </div>
                            <div style="width:25%; float: left">
-                             <h5>{{$value->category}}</h5>
+                             <h5 style="font-size: 1.38rem; padding:7px;">{{$value->category}}</h5>
                            </div>
                            <div style="width:25%;float: left">
                              <h5>
 
                               
-                                  <span class="label label-warning ">Ksh: {{$value->tutor_price}}</span>              
+                                  <span class="label label-warning " style="font-size: 1.38rem; padding:7px;">${{$value->question_price}}.</span>              
 
 
                               </h5>
                            </div>
+                            
                     
                       </div>
                     </div>
@@ -163,6 +185,7 @@
                 
 
           @endif
+           {{ $questions->links()}}
 
               
           </div>

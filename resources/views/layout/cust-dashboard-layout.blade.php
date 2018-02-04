@@ -12,6 +12,10 @@
 
   <link rel="stylesheet" href=" {{ URL::asset('/theme1/includes/iclude1/assets/tether/tether.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap.min.css ')}}">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap-grid.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap-reboot.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/theme/css/style.css ')}}">
@@ -190,19 +194,7 @@
   @yield('comments')
 
 
-<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
-     
 
-    <div class="container">
-        <div class="media-container-row">
-            <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
-                <ol>
-              
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="features9 cid-qI9JvgIkBq" id="features9-5">  
 
