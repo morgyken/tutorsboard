@@ -1,74 +1,6 @@
 
-    
-
-    <?php
-
-    function ConvertTime12( $seconds){
-
-        $dtF = new \DateTime('@0');
-        $dtT = new \DateTime("@$seconds");
-
-        $days = $dtF->diff($dtT)->format('%a');
-
-        if($days> 0){
-            return $dtF->diff($dtT)->format('%a days %h hours');
-        }
-        else {
-            return $dtF->diff($dtT)->format('%h hours %i min');
-        }
-
-
-
-    }
-
-    function getDeadlineInSeconds1($deadline){
-
-
-        $deadline = new \Carbon\Carbon($deadline);
-
-        $now = \Carbon\Carbon::now();
-
-        $difference = $deadline -> diffInSeconds($now);
-
-        $TimeStart = strtotime(\Carbon\Carbon::now());
-
-        $TimeEnd = strtotime($deadline);
-
-        $Difference = ($TimeEnd - $TimeStart);
-
-        if($Difference < 0){
-
-            return 'Overdue';
-        }
-
-
-
-        $interval = ConvertTime12($difference);
-
-        return $interval; // array ['h']=>h, ['m]=> m, ['s'] =>s
-
-    }
-
-    function getDeadlineInSeconds12($deadline){
-
-
-        $deadline = new \Carbon\Carbon($deadline);
-
-        $now = \Carbon\Carbon::now();
-
-        $difference = $deadline -> diffInSeconds($now);
-
-        $TimeStart = strtotime(\Carbon\Carbon::now());
-
-        $TimeEnd = strtotime($deadline);
-
-        $Difference = ($TimeEnd - $TimeStart);
-
-        return $Difference;
-    }
-    ?>
-
-    <!DOCTYPE html>
+  
+<!DOCTYPE html>
 <html >
 <head>
   <!-- Site made with Mobirise Website Builder v4.6.3, https://mobirise.com -->
@@ -248,12 +180,17 @@
 
   @foreach($question as $quest=>$value)
 
+      <?php 
 
+       $deadline11 = new   \App\Http\Controllers\DateTimeController();
 
-      <?php  
-      $array_of_deadline = getDeadlineInSeconds1($value->question_deadline);
+      $array_of_deadline = $deadline11-> getDeadlineInSeconds1($value->question_deadline);
 
-      $deadline12 = getDeadlineInSeconds12($value->question_deadline);
+     // App\Http\Controllers\DateTimeController::getDeadlineInSeconds1($value->question_deadline);
+
+     // $deadline12 = new DateTimeController();
+
+      $deadline12= $deadline11->getDeadlineInSeconds13($value->question_deadline);
 
       ?>
         <script>

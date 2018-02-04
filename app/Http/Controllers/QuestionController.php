@@ -348,7 +348,7 @@ class QuestionController extends AdminController
         }
 
 
-        return view ('quest.question-det11', [
+        return view ('quest.question-det', [
 
          // return view ('quest.question-det12', [
 

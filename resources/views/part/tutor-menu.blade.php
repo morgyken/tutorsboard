@@ -3,7 +3,7 @@
     <div class="list-group">
         <a href="#" class="list-group-item active link-header">Available Question </a>
         <a href="{{ route('all-questions')}}" class="list-group-item">All Available <span class="badge badge-success">2</span></a>
-        <a href="{{ route('all-questions', ['status' =>'mybid'])}}" class="list-group-item">Bids/Applications<span class="badge badge-success">{{ \App\Http\Controllers\QuestionController::questionStat('mybid') }}</span></a>
+        <a href="{{ route('all-questions', ['status' =>'mybid'])}}" class="list-group-item">Applications<span class="badge badge-success">{{ \App\Http\Controllers\QuestionController::questionStat('mybid') }}</span></a>
         <a href="{{ route('all-questions', ['status' =>'suggested'])}}" class="list-group-item">Suggested <span class="badge badge-success">{{ \App\Http\Controllers\QuestionController::questionStat('suggested') }}</span></a>
         <a href="{{ route('all-questions', ['status' =>'assigned'])}}" class="list-group-item">In Progress <span class="badge badge-success">{{ \App\Http\Controllers\QuestionController::questionStat('assigned') }}</span></a>
       

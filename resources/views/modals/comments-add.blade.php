@@ -45,8 +45,10 @@
                                     @include('part.file-picker')
 
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                                <button type="submit" class="btn btn-primary  btn-lg btn-block">Submit</button>
                             </form>
                         </div>
                         <hr>
                     </div>
+
+

@@ -14,6 +14,8 @@ use Storage;
 
 use App\question_body;
 
+use App\Controllers\QuestionController;
+
 use Illuminate\Support\Facades\Auth;
 
 use Input;
@@ -26,7 +28,34 @@ class UserController extends Controller
 
 
   public function viewCustomerDashboard(){
-    return view('cust.cust-dashboard');
+
+
+    $user = Auth::User()->email;
+
+    //check user details 
+
+    $questions = DB::table('question_bodies')
+            ->join('post_question_prices', 'question_bodies.question_id', '=', 
+              'post_question_prices.question_id')
+            ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
+            ->select('question_bodies.*','post_question_prices.*',
+                'question_matrices.*')
+            ->where('question_bodies.user_id', $user)
+
+            ->orderby('question_deadline', 'desc')
+
+            ->paginate(15);
+
+
+    return view('cust.cust-dashboard-1', 
+      [
+        'questions' => $questions
+
+      ]
+
+
+  );
+   // return view('cust.cust-dashboard');
 
   }
 
@@ -110,6 +139,18 @@ class UserController extends Controller
            }   
 
          } 
+
+    public static function TutorId($question, $database)
+    {
+        //use the qestion to get the data
+
+           $data = DB::table($database)
+           ->select('tutor_id')
+           ->where('question_id', $question)->first();
+
+            return $data->tutor_id;                   
+           
+    } 
 
 
     public static function CustomerEmail($question, $database)

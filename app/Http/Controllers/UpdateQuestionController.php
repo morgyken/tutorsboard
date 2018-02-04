@@ -18,18 +18,14 @@ class UpdateQuestionController extends Controller
 {
     //post comments 
 
-    public function postComment($comment,  $question)
+    public function postComment($comment,  $question, $message_type)
     {
         DB::table('post_comments')->insert(
                 [
                     'comment_body' => $comment,
                     'comments_id' =>  rand(1000, 9999),
                     'question_id' => $question,
-                    'message_type'=>  'Commit to Answer', 
-                    /*
-                    Message Type is done here
-
-                    */
+                    'message_type'=>  $message_type,
                     'user_id' => Auth::user()->email,
                     'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -43,6 +39,8 @@ class UpdateQuestionController extends Controller
          */
 
         if($request->update =='optout'){
+
+            
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
                     [
@@ -56,7 +54,8 @@ class UpdateQuestionController extends Controller
                 );
 
             //post comments
-            $this->postComment("The tutor opted out of the Question ", $request->update);
+            $this->postComment("<h4>The tutor opted out of the Question: </h4>".$request->reason, 
+                $question, $request->update);
         }
 
         if($request->update =='accepted'){
@@ -73,7 +72,7 @@ class UpdateQuestionController extends Controller
                 );
 
             //post comments
-            $this->postComment("Congratulations, the questios was accepted by our customer", $request->update, $question);
+            $this->postComment("Congratulations, the questios was accepted by our customer", $request->update, $question, $request->update);
         }
 
 
@@ -89,7 +88,7 @@ class UpdateQuestionController extends Controller
                 );
 
             //post comments
-            $this->postComment("You have been unassigned from the Question, thank you for using our platform", $request->update);
+            $this->postComment("You have been unassigned from the Question, thank you for using our platform", $question, $request->update);
         }
 
         if($request->update =='cancel'){
@@ -106,7 +105,7 @@ class UpdateQuestionController extends Controller
                 );
 
             //post comments
-            $this->postComment("The question has been Cancelled, thank you for using our tutoring platform. For more quesries, contact our customer care.", $request->update, $question);
+            $this->postComment("The question has been Cancelled, thank you for using our tutoring platform. For more quesries, contact our customer care.",$question, $request->update);
 
          
         }
@@ -129,7 +128,7 @@ class UpdateQuestionController extends Controller
                 );
 
               //post comments
-            $this->postComment("The question has been set on revision, please ensure that you submit the revision on time. ", $request->update, $question);
+            $this->postComment("The question has been set on revision, please ensure that you submit the revision on time. ",$question, $request->update);
 
         }
 
@@ -156,7 +155,7 @@ class UpdateQuestionController extends Controller
                 );
 
               //post comments
-            $this->postComment("The question is now complete. You can browse more questions and make more money.", $request->update, $question);
+            $this->postComment("The question is now complete. You can browse more questions and make more money.", $question, $request->update);
 
         }
 
@@ -236,7 +235,7 @@ class UpdateQuestionController extends Controller
                     ]
                 );
 
-                 $this->postComment("The question has been answered. Thank you for using our platform.", $request->update, $question);        
+                 $this->postComment("The question has been answered. Thank you for using our platform.", $question, $request->update);        
 
         }
 
@@ -260,7 +259,7 @@ class UpdateQuestionController extends Controller
                     ]
                 );
 
-                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.", $request->update, $question);
+                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.",$question, $request->update);
 
 
 
@@ -283,7 +282,7 @@ class UpdateQuestionController extends Controller
 
             //post comments
 
-            $this->postComment("Thank you for taking this question. Please provide a quality, plagiarism free answer within the deadline", $request->update);
+            $this->postComment("Thank you for taking this question. Please provide a quality, plagiarism free answer within the deadline",$question, $request->update);
 
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
@@ -327,7 +326,7 @@ class UpdateQuestionController extends Controller
 
             //post comments
 
-            $this->postComment("The question has been disputed. Kindly browse other questions as we resolve the issue. Resolving disputes takes approximately 24 hours.", $request->update, $question);
+            $this->postComment("The question has been disputed. Kindly browse other questions as we resolve the issue. Resolving disputes takes approximately 24 hours.",$question, $request->update);
         }
          
 
@@ -351,7 +350,7 @@ class UpdateQuestionController extends Controller
                     ]
                 );
 
-                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.", $request->update, $question);
+                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.", $question, $request->update);
 
             
 

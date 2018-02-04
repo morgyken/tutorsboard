@@ -50,7 +50,7 @@
                 
             </div>
         </div>
-        <div class="collapse navbar-collapse mytop-menu" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
                 <li class="nav-item">
                     <a class="nav-link link text-black display-4" href="https://mobirise.com">
@@ -193,7 +193,7 @@
   
   <div class="container">
     <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2">
-    QUESTION BODY
+    QUESTION DETAILS
     </h2>
     <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
       The following shows question details, and the questions need to be answered within the required time. before answering the questiion, take time and ensure you can give a concrete answer. Any violations will be penalised.

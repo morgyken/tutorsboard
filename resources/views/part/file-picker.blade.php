@@ -1,4 +1,7 @@
-<style>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+ 
+ <style>
     .btn-file {
         position: relative;
         overflow: hidden;
@@ -21,48 +24,52 @@
         background-color: white !important;
         cursor: text !important;
     }
+    .btn-file{
+        font-size:2rem;
+        padding: 2px;
+    }
+    #file-input{
+        font-size: 2rem;
+    }
 </style>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link href="{{URL::asset('theme/assets/css/bootstrap-theme.css  ') }}" rel="stylesheet">
 
         <div>
             <div class="input-group">
                 <span class="input-group-btn">
-                    <span class="btn btn-primary btn-file">
+                    <span class="btn btn-secondary btn-file">
 
-                        Browse Files... <input type="file" class="input-lg" placeholder="No file selected" 
-                                               name="file[]" multiple>
+                        Browse... <input type="file" class=" input-lg form-control" style="margin-top:20px;" placeholder="No file selected" name="file[]" multiple id="file-input">
                     </span>
                 </span>
                 <input type="text" class="form-control" readonly>
             </div>
         </div>
 
-
 <script type="text/javascript" >
 
-$(document).on('change', '.btn-file :file', function() {
-var input = $(this),
-numFiles = input.get(0).files ? input.get(0).files.length : 1,
-label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-input.trigger('fileselect', [numFiles, label]);
-});
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+        });
 
-$(document).ready( function() {
-$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        $(document).ready( function() {
+        $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 
-var input = $(this).parents('.input-group').find(':text'),
-log = numFiles > 1 ? numFiles + ' files selected' : label;
+        var input = $(this).parents('.input-group').find(':text'),
+        log = numFiles > 1 ? numFiles + ' files selected' : label;
 
-if( input.length ) {
-input.val(log);
-} else {
-if( log ) alert(log);
-}
+        if( input.length ) {
+        input.val(log);
+        } else {
+        if( log ) alert(log);
+        }
 
-});
+        });
 
-});
+    });
 
 </script>
