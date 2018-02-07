@@ -7,5 +7,5 @@ use App\QuestionMatix;
 
 class QuestionStats extends Controller
 {
-    //
+    public function 
 }

@@ -8,9 +8,7 @@
 
     @section('bodytext')
 
-         <section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">
-
-          
+         <section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">       
 
           
           <div class="container">
@@ -98,9 +96,6 @@
 
                                   $ratings = App\Http\Controllers\AccountController::getAccountRating($value->tutor_id); ?></span>
 
-                                  r           
-
-
                               </h5>
                            </div>
                            
@@ -116,14 +111,17 @@
                       <div class="user_name mbr-bold mbr-fonts-style align-left pt-3 display-7">
 
                             <?php 
-                                $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
+                                $user_id = \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
                                ?> 
                            <h4>
-                                  <span class="label" style="color:#2f5369;"> Answered by {{ $tutor }} <a href="#"> Ask Question </a></span>
+                                  <span class="label" style="color:#2f5369;">Tutor ID:&nbsp&nbsp{{ $tutor }} <a href="#"> Ask the tutor Question </a></span>
 
                                   <div class="row" style="padding-top:9px; padding-bottom:8px; padding-left: 20px ">
+                                    
+                                    <p>Answered:&nbsp&nbsp <span class="badge" style="background-color:#4a5e83;font-size: 17px; "> {{ \App\Http\Controllers\QuestionController::questionStat('answered') }}</span>
+                                     </p>
 
-                                    <h4>Rating: </h4>
+                                    <h4>&nbsp&nbsp Rating:&nbsp&nbsp </h4>
                                     @for($rate = 0; $rate < $ratings; $rate++ ) 
 
                                 <span class="fa fa-star" style="position: relative; color:#ff9800; "></span>

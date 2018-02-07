@@ -147,11 +147,14 @@ class UserController extends Controller
         //use the qestion to get the data
 
            $data = DB::table($database)
-           ->select('tutor_id')
-           ->where('question_id', $question)->first();
+                   ->select('tutor_id')
+                   ->where('question_id', $question)->first();
 
-            return $data->tutor_id;                   
-           
+
+           $userId = User::select('serial')->where('email', $data->tutor_id)->first();
+
+          
+          return $userId->serial;                   
     } 
 
         public static function TutorEmail($question, $database)
