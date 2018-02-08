@@ -191,6 +191,7 @@ Route::get('cust-dashboard', array(
 	'as' => 'cust-dashboard'
 ));
 
+Route::get('/status/{question_id}', 'QuestionStatus@clientOrderStatus')->name('stats');
 
 });
 

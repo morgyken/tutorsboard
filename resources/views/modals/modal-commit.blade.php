@@ -19,18 +19,18 @@
 
                             <div class="container">
                                 <div class="media-container-row">
-                                    <div class="col-12 col-md-8">
+                                    <div class="col-12 col-md-12">
                                         <div class="media-container-row">
-                                            <div class="media-content">
+                                            <div class="media-content col-md-8">
                                                 <div class="mbr-section-text">
                                                     <p class="mbr-text align-right mb-0 mbr-fonts-style display-7">
                                                        <strong>Warning: Read the question first before commiting!</strong> Before commiting to answer, Ensure you read the question and you have the relevant skills to answer it<em>Any form of plagiarism will be penalised as stated in the terms and conditions</em> Feel free to answer the questions
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="mbr-figure" style="width:15%;">                                              
-                                                    <button type="input" class="btn btn-md col-sm-4 btn-success btn-block"> Commit to Answer</button>
-                                                    <button type="reset" class="btn btn-md col-sm-4 btn-warning btn-block" data-dismiss="modal"> Cancel</button>
+                                            <div class="mbr-figure col-md-4">                                              
+                                                    <button type="input" class="btn btn-md btn-success btn-block"> Commit to Answer</button>
+                                                    <button type="reset" class="btn btn-md btn-warning btn-block" data-dismiss="modal"> Cancel</button>
                                             </div>
                                         </div>
                                     </div>

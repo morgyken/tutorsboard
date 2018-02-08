@@ -8,22 +8,58 @@ use DB;
 
 class QuestionStatus extends Controller
 {
-    public function status($questionId, $user){
+   public function clientOrderStatus($question_id){
 
-    	//return the questions status string 
+    $status = DB::table('question_matrices')
+                    ->where('question_id', $question_id)
+                    ->first();
 
-    	$data = DB::table('question_matrices')
-    			->select('question_matrices.*')
-    			->where('questionn_id', $questionId)
-    			->first();
+    
+  
+    if($status->overdue == 1)
+    {
+        return "Overdue"; 
+    }
+    else
+        {
+    
+            if($status->revision== 1)
+            {
+                return 'Revison';
+            } 
+           
+            if($status->cancelled == 1)
+            {
+                return 'Cancelled';
+            }
+          
+            if($status->revision == 1 )
+            {
+                return "Revision";
+            }
 
-    	if($user === 'customer')
-    	{
-    		if(
-    		)
-    	}
+             if($status->paid == 1 )
+            {
+                return "Paid";
+            }
+             if($status->completed == 1)
+            {
+                return "Completed";
+            }
 
+             if($status->disputed == 1)
+            {
+                return "Disputed";
+            }
 
-    	return $tatus;
+             if($status->assigned == 1)
+            {
+                return "Assigned";
+            }
+  
+        }
+
+        return 'Nothing';
+
     }
 }

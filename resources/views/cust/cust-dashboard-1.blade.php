@@ -18,18 +18,16 @@
             <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
                 Browse the questions from the following list to obtain the best question for you to answer. Please select questions with the best deadline and answer possi
             </h3>
-            <div class="col-md-12 testimonials-container">  
+            <div class="col-md-12 testimonials-container">            
 
-           
-
-        @if(count($questions)==0)
+       
             <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
                 <div class="container">
                     <div class="media-container-row">
                         <div class="mbr-text counter-container mbr-fonts-style display-7">
                             <ul>
                                 <div class="jumbotron">
-                                  <h3>You have not posted any question yet.</h3>
+                                  <h3>Post A Question Now!</h3>
                                   <p class="lead">Post a question for study help, let our Home-assign tutors help you in your course advice</p>
                                   <a class="btn btn-lg btn-primary" href="{{route('post-questions') }}" role="button">Post a Question Now &raquo;</a>
                                 </div>                                                                  
@@ -37,8 +35,8 @@
                         </div>
                     </div>
                 </div>
-            </section>             
-        @else
+            </section>          
+       
 
           @foreach($questions as $quest=>$value)
 
@@ -156,9 +154,21 @@
                                           {{ $array_of_deadline }}
                                       </span>
                                   @endif
-
                                         </h5>                    
                               
+                            </div>
+                            <div style="width:25%; float: left">
+                              <span style="font-size:16px; padding:3px" class="label label-lg label-warning">
+
+                                <?php 
+
+                                 $status = new  \App\Http\Controllers\QuestionStatus();
+
+                                 $qustion_status = $status-> clientOrderStatus($value->question_id);
+
+                                ?>{{ $qustion_status }}
+
+                            </span> </span>
                             </div>
                            <div style="width:25%; float: left">
                              <h5 style="font-size: 1.38rem; padding:7px;">{{$value->category}}</h5>
@@ -182,7 +192,7 @@
 
                 
 
-          @endif
+    
            {{ $questions->links()}}
 
               
