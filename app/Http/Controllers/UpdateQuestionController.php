@@ -58,6 +58,29 @@ class UpdateQuestionController extends Controller
                 $question, $request->update);
         }
 
+
+        if($request->update =='activate'){
+
+            
+            DB::table('question_matrices')->where('question_id', $question)
+                ->update(
+                    [
+                        
+                        'tutor_id'  => $request->user_id,
+                       
+                        'active'    => 0,
+
+                        'cancelled' => 0,
+                        
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+            //post comments
+            $this->postComment("<h4>The Question has been re-activated </h4>".$request->reason, 
+                $question, $request->update);
+        }
+
         if($request->update =='accepted'){
             DB::table('question_matrices')->where('question_id', $question)
                 ->update(
@@ -96,6 +119,7 @@ class UpdateQuestionController extends Controller
                 ->update(
                     [
                         'cancelled' => 1,
+                        'active'    =>1,
                         'reassigned' => 0,
                         'user_id'   => Auth::user()->email,
                         'completed' => 0,                       
@@ -246,20 +270,20 @@ class UpdateQuestionController extends Controller
                 ->update(
                     [
                         
-                        'reassigned'    => 1,
-                        
+                        'reassigned'    => 1,                        
                         'rated'         => 0,
                         'user_id'       => $request->user_id,
-                        
-                        
-                        'assigned'      => 0,
+                        'tutor_id'      => $request->tutor_id,                        
+                        'assigned'      => 1,
                         'current'       => 0,
                         'paid'          => 0,
                         'updated_at'    => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
 
-                $this->postComment("The question has been reassigned. Thank you for using our tutoring platform.",$question, $request->update);
+
+
+                $this->postComment($request->comments_body , $question, $request->update);
 
 
 

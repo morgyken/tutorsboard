@@ -7,7 +7,7 @@
                              <form action="{{ route('update-question', ['question_id' => $question['question_id']]) }}"  enctype="multipart/form-data" method="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
-                         <input type="hidden" name="update" value="commit">
+                         <input type="hidden" name="update" value="postAnswer">
                           <input type="hidden" name="user_id" value="{{ Auth::user()->email }}">
                           @if(Auth::user()->user_role === 'admin')
                           <input type="" class="form-control input-lg" name="tutor_id">
@@ -35,8 +35,8 @@
                                                 </div>
                                             </div>
                                             <div class="mbr-figure" style="width:15%;">                                              
-                                                    <button type="input" class="btn btn-md col-sm-4 btn-success btn-block"> Commit to Answer</button>
-                                                    <button type="reset" class="btn btn-md col-sm-4 btn-warning btn-block" data-dismiss="modal"> Cancel</button>
+                                                    <button type="input" class="btn btn-success btn-block"> Commit to Answer</button>
+                                                    <button type="reset" class="btn btn-warning btn-block" data-dismiss="modal"> Cancel</button>
                                             </div>
                                         </div>
                                     </div>

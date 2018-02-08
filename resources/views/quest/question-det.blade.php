@@ -277,26 +277,7 @@
 
                             </blockquote>           
                              
-                                @if(Auth::user()->user_role === 'tutor')
-                                <hr>
-                                   @include('part.user-links')
-                                
-
-                                 @elseif(Auth::user()->user_role === 'admin')
-                                  <hr>
-                                   @include('part.admin-links')
-
-                                @elseif(Auth::user()->user_role === 'cust')
-                                  <hr>
-                                   @include('part.admin-links')
-
-                                @endif
-
-                                <hr>                          
-                            
-                            @include('modals.modals-all')
-
-                            @include('modals.comments-add')                       
+                                                     
 
                     <!---End of question body -->
                               
@@ -323,20 +304,20 @@
 
     </div>
 </section>
-<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
+<section class="mbr-section article content11 cid-qI9Iudr8h7 clearfix" id="content11-3">    
 
     <div class="container">
         <div class="media-container-row">
             <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
-                <ol>
-
+              
+              <h2>Question responses </h2>
                   <!-- Single Comment -->
 
             @foreach($comments as $comment =>$val )
-            <li>
-                <div class="col-md-12" style="margin-top:12px;">
+          
+                <div class="col-md-12" style="margin-top:3em;">
                     <img class="d-flex mr-3 col-md-2  image-comment rounded-circle" id="comm-pic" src="{{URL::asset('/storage/uploads/profile/'.$user_id.'/profile/profile.jpg')}}" alt="">
-                    <div class="col-md-10">
+                    <div class="col-md-9">
 
                         <h5>Created at: {{$val->created_at}}</h5><p> {!! $val->comment_body !!} </p>
 
@@ -362,11 +343,12 @@
 
                     </div>
                 </div>
-              </li>
+        
 
             @endforeach
 
             <hr>
+
 
             @if( $status->current ==1 )
                 <p> The Question is currently openned to all Tutors </p>
@@ -381,20 +363,20 @@
 
                
             @elseif($status->answered ==1)
-                @if(Auth::user()->user_role != 'tutor')
-
-                @foreach($answer as $ans =>$val )
+                @if(Auth::User()->user_role ==='tutor')
+                      <p> This Queston has been answered </p>
+                @else
+                @foreach($answer as $ans=>$val )
                 <li>
-                <blockquote class="blockquote" style="padding: 16px; border-top: 23px;">
+                <blockquote class="blockquote" style="border-top: 23px;">
 
-                    <div class="col-md-12" style="margin-top:12px; background:#EEE8AA; border-radius: 8px;">
+                    <div class="col-md-12" style="margin-top:3em; background:#EEE8AA; border-radius:3px;">
                         <img class="d-flex mr-3 col-md-2  image-comment rounded-circle" id="comm-pic" src="{{URL::asset('/storage/uploads/profile/'.$answer_poster.'/profile/profile.jpg')}}" alt="">
-                        <div class="col-md-10">
-                        <h5>Created at: {{$val->created_at}}</h5><p> {!! $val->answer_body !!} </p>      
-                        <div style="background:#fef9e7 ; padding: 10px; border-radius: 12px">
-                            <h3 style="font-size: 17px;"> Answer Attachment</h3>
-
-            
+                       <div class="col-md-9">
+                        <h3>Question Answer</h3>
+                        <h5 style="padding:1em; padding-top: 2em">Created at: {{$val->created_at}}</h5><p style="padding:1em; padding-top: 2em"> {!! $val->answer_body !!} </p>      
+                        <div style="background:#fef9e7 ; padding:4px; margin-bottom:1.5rem; border-radius:4px">
+                            <h3 style="font-size: 17px;"> Answer Attachment</h3>            
 
                             @foreach($answer_files as $file)
 
@@ -406,18 +388,15 @@
                                      ])}}"
                                     ><i class="icon-download-alt">{{$file['basename'] }}</a>   </p>
                             @endforeach
-
                         </div>
                     </div>
                   </div>
+                  
 
                 </blockquote>
-              </li>
-     
-                @endforeach
-
-                @else
-                <p> This Queston has been answered </p>
+                 
+                @endforeach        
+              
                 @endif
 
                 @endif
@@ -431,24 +410,64 @@
 
                  @include('part.cust-links')
                  @endif      
+                 </div>
+
+
              
-
-
+            </div>
+                   
         </div>
-               </ol>
+    </div>
+</section>
+<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
+              <hr>
+                 @if(Auth::user()->user_role === 'tutor')
+                    
+                         @include('part.tut-links')
+                      
+
+                       @elseif(Auth::user()->user_role === 'admin')
+                       
+                         @include('part.admin-links')
+
+                      @elseif(Auth::user()->user_role === 'cust')
+                       
+                         @include('part.cust-links')
+
+                      @endif
+                     
+                  
+                 
+            </div>
+        </div>
+    </div>
+</section>
+<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
+              
+                  @include('modals.modals-all')
+
+                  @include('modals.comments-add')
             </div>
         </div>
     </div>
 </section>
 
-<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
-     
+
+<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
 
     <div class="container">
         <div class="media-container-row">
             <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
                 <ol>
-                    <li><strong>MOBILE FRIENDLY</strong> - no special actions required, all sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site, it will adapt automagically. <a href="https://mobirise.com/">Try it now!</a></li>
+                    <li><strong>Terms Of Acceptance</strong> - The question will be closed after one week of acceptance, any revision is to be done during the same period. Any further evision will attract additional fees at 60% of the original price of the questions <a href="https://mobirise.com/">INVITE FRIENDS! </a></li>
                     <li><strong>EASY AND SIMPLE</strong> - cut down the development time with drag-and-drop website builder. Drop the blocks into the page, edit content inline and publish - no technical skills required. <a href="https://mobirise.com/">Try it now!</a></li>
                     <li><strong>UNIQUE STYLES</strong> - choose from the large selection of latest pre-made blocks - full-screen intro, bootstrap carousel, content slider, responsive image gallery with lightbox, parallax scrolling, video backgrounds, hamburger menu, sticky header and more. <a href="https://mobirise.com/">Try it now!</a></li>
                 </ol>

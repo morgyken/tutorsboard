@@ -13,7 +13,7 @@ class QuestionMatrix extends Model
      *
      * @var array
      */
-    protected $fillable = ['question_id', 'current', 'reassigned','completed' ,'rated','revision', 'suggested', 'bid', 'disputed', 'user_id'];
+    protected $fillable = ['question_id', 'current','cancelled',  'reassigned','completed' ,'rated','revision', 'suggested', 'bid', 'disputed','paid', 'user_id','active'];
 
     protected $table='question_matrices';
 

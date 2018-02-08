@@ -29,9 +29,11 @@ class CreateQuestionMatricesTable extends Migration
             $table->integer('cancelled')->default(0);
             $table->integer('assigned')->default(0);
             $table->integer('answered')->default(0);
-             $table->integer('mybid')->default(0);
+            $table->integer('mybid')->default(0);
             $table->integer('suggested')->default(0);
-             $table->integer('disputed')->default(0);
+            $table->integer('disputed')->default(0);
+            $table->integer('active')->default(0);
+
            
         });
     }

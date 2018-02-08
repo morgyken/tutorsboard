@@ -1,49 +1,18 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
  
- <style>
-    .btn-file {
-        position: relative;
-        overflow: hidden;
-    }
-    .btn-file input[type=file] {
-        position: absolute;
-        top: 0;
-        right: 0;
-        min-width: auto;
-        min-height: 100%;
-        font-size: auto;
-        text-align: right;
-        filter: alpha(opacity=0);
-        opacity: 0;
-        background: red;
-        cursor: inherit;
-        display: block;
-    }
-    input[readonly] {
-        background-color: white !important;
-        cursor: text !important;
-    }
-    .btn-file{
-        font-size:2rem;
-        padding: 2px;
-    }
-    #file-input{
-        font-size: 2rem;
-    }
-</style>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <link href="{{URL::asset('theme/assets/css/bootstrap-theme.css  ') }}" rel="stylesheet">
 
         <div>
             <div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-secondary btn-file">
+             
+                    
 
-                        Browse... <input type="file" class=" input-lg form-control" style="margin-top:20px;" placeholder="No file selected" name="file[]" multiple id="file-input">
-                    </span>
+                    <input type="file" class=" input-lg form-control" style="margin-top:20px;" placeholder="No file selected" name="file[]" multiple id="file-input">
+                   
                 </span>
-                <input type="text" class="form-control" readonly>
+                
             </div>
         </div>
 
