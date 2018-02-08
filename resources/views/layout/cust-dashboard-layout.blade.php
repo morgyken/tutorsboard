@@ -10,6 +10,8 @@
   <meta name="description" content="">
   <title> Home-Assign: @yield('title')</title>
 
+  @include('layout.extra-header')
+
   <link rel="stylesheet" href=" {{ URL::asset('/theme1/includes/iclude1/assets/tether/tether.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap.min.css ')}}">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -177,7 +179,7 @@
                     <div class="plan-list align-left">
                         <ul class="list-group list-group-flush mbr-fonts-style display-7">
                            
-                            <li class="list-group-item col-lg-10 col-md-11" style="padding-left: 40px; padding-top: 40px;">
+                            <li class="list-group-item col-lg-12 col-md-12" style="padding-left: 40px; padding-top: 40px;">
                               
                           @yield('bodytext')
                             
@@ -253,6 +255,22 @@
   <script src="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/js/bootstrap.min.js ')}}"></script>
   <script src="{{ URL::asset('/theme1/includes/iclude1/assets/smoothscroll/smooth-scroll.js ')}}"></script>
   <script src="{{ URL::asset('/theme1/includes/iclude1/assets/theme/js/script.js ')}}"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="{{URL::asset('theme/assets/js/headroom.min.js ')}}"></script>
+<script src="{{URL::asset('theme/assets/js/jQuery.headroom.min.js ')}}"></script>
+<script src="{{URL::asset('theme/assets/js/template.js')}}"></script>
+<script src="{{URL::asset('jquery/jquery.min.js ') }}"></script>
+<script src="{{URL::asset('boot/js/bootstrap.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<!-- Theme JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js "></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.js "></script>
   
   
 </body>

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class Autocomplete extends Controller
 {
-    public function OneAutocomplete(Request $request)
+    public function Universities(Request $request)
     {
 
     $term= $request->term;
@@ -38,7 +38,7 @@ class Autocomplete extends Controller
 
 	    $data = AcademicLevel::where('academic_level', 'LIKE', '%'.$term.'%')
 	    //$data = AcademicLevel::take(5)
-	    		->take(5)
+	    		->take(9)
 
 			    ->get();
 

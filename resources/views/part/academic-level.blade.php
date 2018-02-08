@@ -27,7 +27,7 @@
 
 <script type="text/javascript">
   $('#searchItem').autocomplete({
-    source: '{!! URL::route('academic-level') !!}',
+    source: "{!! URL::route('academic-level') !!}",
     minlength:1,
     autoFocus:true,
     select: function(e, ui){

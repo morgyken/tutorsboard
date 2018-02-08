@@ -47,7 +47,7 @@ class UserController extends Controller
             ->paginate(15);
 
 
-    return view('cust.cust-dashboard-1', 
+    return view('cust.cust-dashboard', 
       [
         'questions' => $questions
 

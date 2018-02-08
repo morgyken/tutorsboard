@@ -6,12 +6,15 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use DB;
 use Storage;
+use App\AcademicLevel;
 use Response;
 use Session;
 use App\AcceptQuestion;
 use App\AssignQuestion;
 use App\CreditCardDetails;
 use App\Transaction;
+
+use App\QuestionCategories;
 use App\User;
 use App\PostComments;
 use App\MakePaymentModel;
@@ -647,7 +650,7 @@ class QuestionController extends AdminController
 
     public function postdeadlinePrice(){
 
-        return view('quest.ask-deadline');
+              return view('quest.ask-deadline-1');
 
         }
 
@@ -655,9 +658,15 @@ class QuestionController extends AdminController
      * Open View to post questions
      */
 
+
+
     public function postQuestions(){
+
+      $category = QuestionCategories::select('category')
+
+                ->get();
         
-        return view('quest.ask-question');
+        return view('quest.ask-question',['category' => $category]);
     }
 
     public function generateRandomString() {
