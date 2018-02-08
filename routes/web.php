@@ -33,7 +33,11 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('question-stat',array('as'=>'question-stat','uses'=>'QuestionController@questionStat'));
 
-Route::get('/university', array('as'=>'university', 'uses' => 'AutoComplete@Universities'));
+Route::get('/university', array('as'=>'university', 
+	'uses' => 'AutoComplete@Universities'));
+
+Route::get('/categories', array('as'=>'categories', 
+	'uses' => 'AutoComplete@OrderSubject'));
 
 Route::get('/academic-level', array( 'as'=>'academic-level', 'uses' => 'AutoComplete@AcademicLevel'));
 

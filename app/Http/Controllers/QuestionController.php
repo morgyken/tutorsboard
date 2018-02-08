@@ -650,23 +650,29 @@ class QuestionController extends AdminController
 
     public function postdeadlinePrice(){
 
-              return view('quest.ask-deadline-1');
+      $academic_level = DB::table('academic_levels')
+                      ->select('academic_level') 
+                      -> get();
+
+              return view('quest.ask-deadline-1',['category'=> $this->getQuestionCategories()]);
 
         }
 
     /*
      * Open View to post questions
      */
-
-
-
-    public function postQuestions(){
-
+    public function getQuestionCategories(){
       $category = QuestionCategories::select('category')
 
                 ->get();
+
+        return $category;
+    }
+
+
+    public function postQuestions(){
         
-        return view('quest.ask-question',['category' => $category]);
+        return view('quest.ask-question',['category' => $this->getQuestionCategories()]);
     }
 
     public function generateRandomString() {

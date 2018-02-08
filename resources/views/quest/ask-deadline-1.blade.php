@@ -146,6 +146,17 @@
                            
                                @include('part.auto-com')
                             </div>
+                             <div class="form-group">
+                            <label for="topic"> 
+                                <h4>Select Question Category</h4></label>
+                                   <select type="text" name="academic_level" class="form-control" placeholder="Enter Topic" required="required"  id="topic">
+                                      @foreach($category as $item)
+                                        <option value="{{$item->category}}">
+                                          {{$item->academic_level}}
+                                        </option>
+                                      @endforeach
+                                    </select>           
+                            </div>
 
                             <div class="form-group" >
                       
@@ -160,6 +171,8 @@
                             Satisfaction is guaranteed. </strong></p>
 
                 </div>
+
+                 
                 <button type='input' class="btn btn-primary btn-md btn-block">
                     <h3>
                         <strong>  Finish
