@@ -21,7 +21,7 @@
 
   <div class="col-md-offset-1 col-md-12" >
   	<div class="col-md-7">
-  		
+
   		<h2> Order Details </h2>
 
 			<p> Order No: {{ session('question_id')}} </p>
@@ -34,10 +34,10 @@
   	</div>
 
 
-    
+
     <div class="col-md-5">
     	<h2> Available payment Methods </h2>
-    	
+
         	<img src="{{URL::asset('theme/assets/images/ppvisa.jpg') }}">
 
           <p>Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
@@ -46,9 +46,9 @@
 
     </div>
 
-    
+
 </div>
-<div  class="col-md-12"> 
+<div  class="col-md-12">
 	<hr>
 </div>
 <div class="col-md-5">
@@ -58,30 +58,26 @@
 	Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
 
 </p>
-    @include('quest.card-payment')
-   
+    @include('cust.card-payment')
+
   </div>
 
-<div class="col-md-2">	
- 
-  
+<div class="col-md-2">
+
 </div>
 <div class="col-md-5">
 
  <h2>Pay using Paypal</h2>
 <p>
+
 	Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
-
-
-
 	@include('cust.cust-paypal-pay')
-	
+
 </p>
-  
+
 </div>
-  
+
 </div>
 
 
 @endsection
-

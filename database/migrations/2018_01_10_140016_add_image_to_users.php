@@ -13,16 +13,16 @@ class AddImageToUsers extends Migration
      */
     public function up()
     {
-        
+
         Schema::create('user_image', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->rememberToken();
             $table->string('image');
             $table->string('email');
-                       
+
         });
-    }
+    
     }
 
     /**
@@ -32,6 +32,6 @@ class AddImageToUsers extends Migration
      */
     public function down()
     {
-        
+
     }
 }

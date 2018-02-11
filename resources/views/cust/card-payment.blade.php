@@ -46,6 +46,26 @@
               <input type="text" name="name" class="form-control">
         </div>
 
+        <div>
+          <label>Country</label>
+              <input type="text" name="country" class="form-control">
+        </div>
+        <div>
+          <label>State</label>
+              <input type="text" name="state" class="form-control">
+        </div>
+        <div>
+          <label>City</label>
+              <input type="text" name="city" class="form-control">
+        </div>
+
+
+        <div>
+          <label>Zip Code</label>
+              <input type="text" name="zip" class="form-control">
+        </div>
+
+
        <!--hidden fields -->
 
               <input type="hidden" name="email" value="{{ Auth::User()->email }}">

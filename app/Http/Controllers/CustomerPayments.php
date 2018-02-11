@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Auth;
 
 use Illuminate\Http\Request;
 
@@ -23,18 +24,31 @@ class CustomerPayments extends Controller
 
    public function postCustPayment(Request $request){
 
-   	//getthe price here 
-   	 //$value = $request->session()->get('key');
+     //save the customer details and the amount paid on the database
 
-   	$question_id =  $request->session()->get('question_id'); 
+     $email= Auth::User()->email;
 
+   	$question_id =  $request->session()->get('question_id');
 
-  	$price = DB::table('post_question_prices')
+    $price = DB::table('post_question_prices')
    				->select('question_price')
    				->where('question_id', $question_id)
    				->first();
 
-   //return array from object 
+    DB::table('customer_payments')->insert(
+        [
+            'payment_id' => "#". substr($question_id, 0,17),
+            'amount' =>$price['question_price'],
+            'payment_serial' => $rand(9999,999999), //unique identifier for payments, random for now, make incremental
+            'customer_id' =>Auth::user()->email,
+            'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+
+
+
+   //return array from object
 
    $price = json_decode(json_encode($price), true);
 
@@ -55,9 +69,6 @@ class CustomerPayments extends Controller
 	  "source" => $token,
 	));
 
-	//dd($request->session()->all());
-
-	//rediect to customer dashboard
 	 return redirect()->route('payment-successful');
    }
 }

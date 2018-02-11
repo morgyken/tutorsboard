@@ -24,13 +24,13 @@
 
       style: {
         color: 'gold',
-        size: 'large',        
+        size: 'large',
       },
 
 
       payment: function(data, actions) {
-        /* 
-         * Set up the payment here 
+        /*
+         * Set up the payment here
          */
          return actions.payment.create({
                 payment: {
@@ -44,8 +44,8 @@
       },
 
       onAuthorize: function(data, actions) {
-        /* 
-         * Execute the payment here 
+        /*
+         * Execute the payment here
          */
          return actions.payment.execute().then(function(payment) {
 
@@ -53,18 +53,18 @@
                 // You can now show a confirmation message to the customer
             });
 
-         
+
       },
 
       onCancel: function(data, actions) {
-        /* 
-         * Buyer cancelled the payment 
+        /*
+         * Buyer cancelled the payment
          */
       },
 
       onError: function(err) {
-        /* 
-         * An error occurred during the transaction 
+        /*
+         * An error occurred during the transaction
          */
       }
     }, '#paypal-button');

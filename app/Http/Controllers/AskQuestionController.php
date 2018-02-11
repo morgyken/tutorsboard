@@ -104,13 +104,33 @@ class AskQuestionController extends Controller
 
         //redirect to check out
 
-        return redirect()->route('get-cust-payments');
+        //return redirect()->route('get-cust-payments');
+
+    }
+
+    public function PostMetadata(Request $request){
+        //   'name', 'email' ,'country','city', 'state', 'zip'
+
+        $question_id =  $request->session()->get('question_id');
+
+        DB::table('payment_metadatas')->insert(
+            [
+                'name' => $request->name,
+                'email' =>Auth::User()->email,
+                'country' => $request->country,
+                'city'    => $request->city,
+                'state' => $request->state,
+                'zip' => $request->zip,
+                'token'=>"#". substr($question_id, 0,17),
+                'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]);
+
 
     }
 
     public function askQuestions(Request $request)
     {
-
       //get the question serial
 
       $serial = DB::table('question_bodies')
