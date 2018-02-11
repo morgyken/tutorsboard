@@ -21,7 +21,7 @@
 </head>
 <body>
 
-  <input type="text" name="category" class="form-control"  id="searchItem" placeholder="Order Subject">
+  <input type="text" name="" class="form-control"  id="searchItem" placeholder="Order Subject">
   
 <script type="text/javascript">
   $('#searchItem').autocomplete({

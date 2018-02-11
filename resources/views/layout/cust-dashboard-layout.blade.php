@@ -10,19 +10,17 @@
   <meta name="description" content="">
   <title> Home-Assign: @yield('title')</title>
 
-  @include('layout.extra-header')
-
   <link rel="stylesheet" href=" {{ URL::asset('/theme1/includes/iclude1/assets/tether/tether.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap.min.css ')}}">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap-grid.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap-reboot.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/theme/css/style.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/mobirise/css/mbr-additional.css')}}" type="text/css">
-  
+
 
 
 
@@ -46,12 +44,12 @@
   <link rel="stylesheet" href="{{ URL::asset('/theme1/sample/assets/theme/css/style.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/sample/assets/mobirise/css/mbr-additional.css ')}}" type="text/css">
 
-  
+
 </head>
 
 <body>
 
-  <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">   
+  <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">
 
     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +67,7 @@
                         <img src="{{ URL::asset('/theme1/favi.png ')}}" alt="Mobirise" style="height: 3.8rem;">
                     </a>
                 </span>
-                
+
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -95,13 +93,13 @@
         </div>
     </nav>
 </section>
-  
+
 
 <section class="engine"><a href="https://mobirise.ws/q">website creator download</a></section><section class="testimonials5 cid-qI9OEX4Gjg" id="testimonials5-h">
 
-    
 
-    
+
+
     <div class="container">
         <div class="media-container-row">
             <div class="title col-12 align-center">
@@ -127,7 +125,7 @@
 
     <div class="container">
         <div class="media-container-column">
-          <?php $user_id = Auth::User()->id;  ?>            
+          <?php $user_id = Auth::User()->id;  ?>
         <div class="mbr-testimonial align-center col-12 col-md-12">
                 <div class="panel-item">
                     <div class="card-block">
@@ -153,40 +151,40 @@
                     </div>
                 </div>
             </div>
-    </div>   
+    </div>
 </section>
 
 
 
 <section class="cid-qItTrDVKNt" id="pricing-tables1-o">
 
-    
+
     <div class="container">
         <div class="media-container-row">
 
             <div class="plan mx-2 my-2 justify-content-center col-lg-3">
                 <li class="list-group-item col-md-12">
-                
-                    <div class="col-md-12" style="padding: 2px; margin-left: 0;">                   
-                      @include('part.cust-menu')           
+
+                    <div class="col-md-12" style="padding: 2px; margin-left: 0;">
+                      @include('part.cust-menu')
                     </div>
                 </li>
             </div>
 
             <div class=" mx-2 my-2 justify-content-center col-lg-9" style="padding-left: 20px;">
-                
+
                 <div class="plan-body pb-5">
                     <div class="plan-list align-left">
                         <ul class="list-group list-group-flush mbr-fonts-style display-7">
-                           
+
                             <li class="list-group-item col-lg-12 col-md-12" style="padding-left: 40px; padding-top: 40px;">
-                              
+
                           @yield('bodytext')
-                            
+
                             </li>
                         </ul>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -198,9 +196,9 @@
 
 
 
-<section class="features9 cid-qI9JvgIkBq" id="features9-5">  
+<section class="features9 cid-qI9JvgIkBq" id="features9-5">
 
-    
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="card p-3 col-12 col-md-6">
@@ -235,9 +233,9 @@
                 </div>
             </div>
 
-            
 
-            
+
+
         </div>
     </div>
 </section>
@@ -256,22 +254,8 @@
   <script src="{{ URL::asset('/theme1/includes/iclude1/assets/smoothscroll/smooth-scroll.js ')}}"></script>
   <script src="{{ URL::asset('/theme1/includes/iclude1/assets/theme/js/script.js ')}}"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="{{URL::asset('theme/assets/js/headroom.min.js ')}}"></script>
-<script src="{{URL::asset('theme/assets/js/jQuery.headroom.min.js ')}}"></script>
-<script src="{{URL::asset('theme/assets/js/template.js')}}"></script>
-<script src="{{URL::asset('jquery/jquery.min.js ') }}"></script>
-<script src="{{URL::asset('boot/js/bootstrap.min.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<!-- Plugin JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<!-- Theme JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js "></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js "></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.js "></script>
-  
-  
+
+
 </body>
 </html>

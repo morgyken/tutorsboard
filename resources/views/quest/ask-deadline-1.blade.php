@@ -139,24 +139,28 @@
                         <div class="col-md-6">
                             <div class="form-group">
                            
-                                @include('part.academic-level')
+                               <div class="form-group">
+                            <label for="topic"> 
+                                <h4>Select Question Category</h4></label>
+                                   <select type="text" name="academic_level" class="form-control" placeholder="Enter Topic" required="required"  id="topic">
+                                    
+                                <option value="Masters">Masters </option>
+                                <option value="College">College </option>
+                                <option value="High School">High School </option>
+                                <option value="PHD">PHD </option>
+                                <option value="Junior Second Year">Junior Second Year </option>
+                                <option value="Junior Second Year ">Junior Second Year </option>
+                                <option value="Senior College">Senior College </option>
+                              
+                                    </select>           
+                            </div>
                             </div>
 
                             <div class="form-group">
                            
                                @include('part.auto-com')
                             </div>
-                             <div class="form-group">
-                            <label for="topic"> 
-                                <h4>Select Question Category</h4></label>
-                                   <select type="text" name="academic_level" class="form-control" placeholder="Enter Topic" required="required"  id="topic">
-                                      @foreach($category as $item)
-                                        <option value="{{$item->category}}">
-                                          {{$item->academic_level}}
-                                        </option>
-                                      @endforeach
-                                    </select>           
-                            </div>
+                            
 
                             <div class="form-group" >
                       

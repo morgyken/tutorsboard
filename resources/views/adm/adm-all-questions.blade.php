@@ -37,32 +37,32 @@
                                         <table class="table table-bordered table-hover table-striped" style="font-size: 12px">
                                             <thead>
                                             <thead>
-                                            <tr>  
-                                                                                            
+                                            <tr>
+
                                               <th>#</th>
                                                 <th> Details</th>
                                                 <th>Customer</th>
                                                 <th>Price</th>
                                                 <th> Tutor Amount</th>
                                                 <th>Paid</th>
-                                                <th>Overdue</th>                                               
-                                            </tr>                                                
+                                                <th>Overdue</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
                                                 <tbody>
                                         <script type="text/javascript">
-                                                    
+
                                             $(function(){
                                                  $(".table").on("click", "tr[role=\"button\"]", function (e) {
                                                       window.location = $(this).data("href");
                                                  });
                                             });
-                                        </script> 
-                                                 
+                                        </script>
+
 
                                         @foreach($questions as $question)
-                                            <tr>                                               
-                                                
+                                            <tr>
+
                                                 <td>
 
                                                     <a href="{{route('view-question', ['question_id'=> $question->question_id])}}"">{{ substr($question->question_id, 0,13) }}</a></td>
@@ -80,7 +80,7 @@
                                                     @endif
 
                                                 </td>
-                                                
+
                                             </tr>
                                         @endforeach
                                             </tbody>
@@ -111,23 +111,23 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive">
-                                     
+
                                             <thead>
                                             <thead>
-                                            <tr>  
-                                                                                            
+                                            <tr>
+
                                               <th> #</th>
-                                                
+
                                                 <th>Ratings</th>
-                                            </tr>                                                
+                                            </tr>
                                             </thead>
                                             <tbody>
 
                                         @foreach($questions as $question)
-                                            <tr>                 
+                                            <tr>
 
-                                        
-                                                
+
+
                                             </tr>
                                         @endforeach
                                             </tbody>
