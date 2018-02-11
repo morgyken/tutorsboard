@@ -19,7 +19,7 @@
               Use this pannel to ask questions for tutors to answer. The system will select for you the best tutor to handle your work, or you can choose the tutor to ask question directly.
             </h3>
             <div class="col-md-12 testimonials-container">
-              <form action="{{route('ask-questions')}}" method="post" enctype="multipart/form-data">
+              <form action="{{route('ask-questions')}}" method="post" enctype="multipart/form-data" class="ask-question">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
@@ -45,7 +45,8 @@
 
                     <div class="form-group">
                         <label for="usr">Include Files</label>
-                        @include('part.file-picker')
+                          <input type="file" class=" form-control" placeholder="No file selected"
+                              name="file[]" multiple >
                     </div>
                     <div class="row">
 

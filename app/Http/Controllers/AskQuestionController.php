@@ -38,7 +38,7 @@ class AskQuestionController extends Controller
     }
 
     public function UpdateBonus()
-    {                //update tutor payment 
+    {                //update tutor payment
 
         DB::table('tutor_payment')->where('order_id', session('question_id'))
                     ->update(
@@ -61,7 +61,7 @@ class AskQuestionController extends Controller
 
     }
 
-    
+
 
     public function PostQuestionPriceDeadline(Request $request){
 
@@ -73,9 +73,9 @@ class AskQuestionController extends Controller
             [
             'question_id' =>session('question_id'),
             'question_deadline' => $request['question_deadline'],
-            'question_price'   =>$payment->QuestionPrice($request->question_price, $request->pages, $request->urgency), 
+            'question_price'   =>$payment->QuestionPrice($request->question_price, $request->pages, $request->urgency),
             'urgency'          =>$request['urgency'],
-            'academic_level'   => $request->academic_level, 
+            'academic_level'   => $request->academic_level,
             'paper_format'     => $request->paper_format,
             'tutor_price'      =>  $quest_price,
             'pages'           => $request['pages'],
@@ -94,15 +94,15 @@ class AskQuestionController extends Controller
                 ]
              );
 
-        // store session amount 
+        // store session amount
 
         $request->session()->put('order_amount', $request['question_price']);
 
-        // store session amount 
+        // store session amount
 
         $request->session()->put('deadline', $request['question_deadline']);
 
-        //redirect to check out 
+        //redirect to check out
 
         return redirect()->route('get-cust-payments');
 
@@ -110,6 +110,16 @@ class AskQuestionController extends Controller
 
     public function askQuestions(Request $request)
     {
+
+      //get the question serial
+
+      $serial = DB::table('question_bodies')
+                            ->select('question_serial')
+                            ->orderby('question_serial', 'desc')
+                            ->first();
+        //get the head of the question serial and add 1
+
+        $question_serial = $seril-> question_serial + 1;
 
         //dd($request->academic_level);
 
@@ -154,6 +164,7 @@ class AskQuestionController extends Controller
                 'topic'    => $request->topic,
                 'summary' => $summary1,
                 'special' => $request['special'],
+                'question_serial'=>$question_serial,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
 
@@ -191,18 +202,18 @@ class AskQuestionController extends Controller
                 'updated_at'    =>  \Carbon\Carbon::now()->toDateTimeString()
             ]);
 
-        
+
         /*
          * Add question Id to session, this is to be used in the adding of the price
          */
 
         $request->session()->put('question_id',  $question_id);
 
-        // store session amount 
+        // store session amount
 
         $request->session()->put('order_summary', substr($request['question_body'], 0, 200));
 
-        //redirect to post deadline view 
+        //redirect to post deadline view
 
         return redirect()->route('post-deadlinePrice');
     }

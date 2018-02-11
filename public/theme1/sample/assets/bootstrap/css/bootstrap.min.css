@@ -2521,6 +2521,11 @@ label {
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
+
+}
+
+.ask-question label{
+    color:#f1f1f1;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -3023,7 +3028,7 @@ select[multiple].input-lg {
   font-weight: normal;
   line-height: 1.42857143;
   text-align: center;
-   
+
   -ms-touch-action: manipulation;
       touch-action: manipulation;
   cursor: pointer;
@@ -5021,7 +5026,7 @@ div .thumbnail{
   display: block;
   padding: 0px;
   margin-bottom: 0px;
- 
+
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 0px;

@@ -1,6 +1,6 @@
- <div class="card collapse my-4" id="Comment">
+                <div class="card collapse my-4" id="Comment">
                      <div class="modal-header">
-                        
+
                         <h4 class="modal-title">Send a message to customer care</h4>
                     </div>
                         <div class="card-body">
@@ -15,8 +15,8 @@
 
                           @endif
 
-                        <section class="mbr-section content7 cid-qIEMywmUVk" id="content7-1c">  
-    
+                        <section class="mbr-section content7 cid-qIEMywmUVk" id="content7-1c">
+
 
                             <div class="container">
                                 <div class="media-container-row">
@@ -32,18 +32,18 @@
                                                     <textarea class="form-control form-control input-lg" name="comment_body" rows="3"></textarea>
                                                     </div>
                                                     <div class="form-group">
-                                                        
+
                                                         <label for="usr">Include Files</label>
 
                                                         @include('part.file-picker')
 
-                                                    </div> 
+                                                    </div>
 
 
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="mbr-figure col-md-4">                                              
+                                            <div class="mbr-figure col-md-4">
                                                     <button type="input" class="btn btn-md btn-success btn-block"> Send Comments</button>
                                                     <button type="reset" class="btn btn-md btn-warning btn-block" data-dismiss="modal"> Cancel</button>
                                             </div>
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>                        
+                        </section>
 
                     </form>
                         </div>

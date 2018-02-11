@@ -663,20 +663,18 @@ a:hover {
 .form-control {
   background-color: #f1f1f1;
   box-shadow: none;
-  color:#030303;
-  font-family: 'Rubik', sans-serif;
-  font-size: 1.2em;
-  line-height: 1.23;
-  min-height: 1.2em;
-  padding: 1.02em .3em;
-}
+  color:#212737;
+  font-family:inherit;
+  font-weight:600;
+
+  }
 .form-control > .mbr-iconfont {
-  font-size: 1.6rem;
+  font-size:inherit;
 }
 .form-control,
 .form-control:focus {
   border: 1px solid #e8e8e8;
-  color: #030303;
+  color:#212737;
 }
 .form-active .form-control:invalid {
   border-color: red;
