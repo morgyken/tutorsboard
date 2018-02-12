@@ -15,6 +15,11 @@
   <link rel="stylesheet" href=" {{ URL::asset('/theme1/includes/iclude1/assets/tether/tether.min.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/includes/iclude1/assets/bootstrap/css/bootstrap.min.css ')}}">
   <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <link  rel="stylesheet" href=" https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -98,16 +103,11 @@
 
 
 <section class="engine"><a href="https://mobirise.ws/q">website creator download</a></section><section class="testimonials5 cid-qI9OEX4Gjg" id="testimonials5-h">
-
-
-
-
     <div class="container">
         <div class="media-container-row">
             <div class="title col-12 align-center">
                 <h2 class="pb-3 mbr-fonts-style display-2">User details&nbsp;</h2>
                 <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style display-5">
-
 
                 {{ Auth::User()->name}} has been Tutoring since
                     <?php
@@ -164,16 +164,7 @@
     <div class="container">
         <div class="media-container-row">
 
-            <div class="plan mx-2 my-2 justify-content-center col-lg-3">
-                <li class="list-group-item col-md-12">
-
-                    <div class="col-md-12" style="padding: 2px; margin-left: 0;">
-                      @include('part.cust-menu')
-                    </div>
-                </li>
-            </div>
-
-            <div class=" mx-2 my-2 justify-content-center col-lg-9" style="padding-left: 20px;">
+            <div class=" mx-2 my-2 justify-content-center col-lg-12" style="padding-left: 20px;">
 
                 <div class="plan-body pb-5">
                     <div class="plan-list align-left">

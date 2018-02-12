@@ -6,17 +6,21 @@
     .StripeElement {
       background-color: white;
       height: 40px;
+      width: 100rem;
       padding: 10px 12px;
       border-radius: 4px;
       border: 1px solid #007acc;
       box-shadow: 0 1px 3px 0 #e6ebf1;
       -webkit-transition: box-shadow 150ms ease;
       transition: box-shadow 150ms ease;
+      margin-bottom: 2rem;
     }
 
     form{
-      border: 1px 1px 2px 1px #272822;
+      border: 1px 1px 2px 1p #272822;
+
     }
+
 
     .StripeElement--focus {
       box-shadow: 2px 1px 3px 2px #5cb85c;
@@ -40,42 +44,6 @@
 
         {{ csrf_field() }}
 
-      <div  class="form-row form-group">
-        <div>
-          <label>Full Name on Card</label>
-              <input type="text" name="name" class="form-control">
-        </div>
-
-        <div>
-          <label>Country</label>
-              <input type="text" name="country" class="form-control">
-        </div>
-        <div>
-          <label>State</label>
-              <input type="text" name="state" class="form-control">
-        </div>
-        <div>
-          <label>City</label>
-              <input type="text" name="city" class="form-control">
-        </div>
-
-
-        <div>
-          <label>Zip Code</label>
-              <input type="text" name="zip" class="form-control">
-        </div>
-
-
-       <!--hidden fields -->
-
-              <input type="hidden" name="email" value="{{ Auth::User()->email }}">
-
-        <!--hidden fields -->
-
-              <input type="hidden" name="name" value="{{ Auth::User()->name }}">
-
-
-      </div>
       <div class="form-row">
         <label for="card-element">
           Credit or debit card
@@ -88,7 +56,7 @@
         <div id="card-errors" role="alert"></div>
       </div>
 
-      <button class="btn btn-warning btn-lg btn-block" style="margin-top: 23px;">Submit Payment</button>
+      <button class="btn btn-primary btn-lg btn-block" style="margin-top: 23px;">Submit Payment</button>
     </form>
 
 

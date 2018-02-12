@@ -9,24 +9,18 @@ use Illuminate\Http\Request;
 
 class CustomerPayments extends Controller
 {
-   public function getCustPayment(){
+    public function getCustPayment(){
 
    	return view('cust.cust-payments');
 
    }
 
-   //payment successful
-
    public function paymentSuccessful(){
 
-   		return view('cust.payment-successful');
+   		return view('cust.payment-success');
    }
 
    public function postCustPayment(Request $request){
-
-     //save the customer details and the amount paid on the database
-
-     $email= Auth::User()->email;
 
    	$question_id =  $request->session()->get('question_id');
 
@@ -34,18 +28,6 @@ class CustomerPayments extends Controller
    				->select('question_price')
    				->where('question_id', $question_id)
    				->first();
-
-    DB::table('customer_payments')->insert(
-        [
-            'payment_id' => "#". substr($question_id, 0,17),
-            'amount' =>$price['question_price'],
-            'payment_serial' => $rand(9999,999999), //unique identifier for payments, random for now, make incremental
-            'customer_id' =>Auth::user()->email,
-            'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-        ]);
-
-
 
 
    //return array from object

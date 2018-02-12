@@ -12,14 +12,14 @@
 */
 
 Route::group(['middleware' => 'web'], function () {
- 
+
  //
 
 Route::get('/', function () {  return view('gen.student-index'); })->name('general');
 
 Route::get('/sample', function () {  return view('auth12.image'); });
 
-Route::post('/sample3', function () {  
+Route::post('/sample3', function () {
 
 });
 
@@ -33,17 +33,17 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('question-stat',array('as'=>'question-stat','uses'=>'QuestionController@questionStat'));
 
-Route::get('/university', array('as'=>'university', 
+Route::get('/university', array('as'=>'university',
 	'uses' => 'AutoComplete@Universities'));
 
-Route::get('/categories', array('as'=>'categories', 
+Route::get('/categories', array('as'=>'categories',
 	'uses' => 'AutoComplete@OrderSubject'));
 
 Route::get('/academic-level', array( 'as'=>'academic-level', 'uses' => 'AutoComplete@AcademicLevel'));
 
 Auth::routes();
 
-//profile pics 
+//profile pics
 
 Route::get('/profile-pic-view/{view}',array('as'=>'profile-pic-view','uses'=>'UserController@ProfilePicView'));
 Route::post('/profile-pic/{pic?}',array('as'=>'profile-pic','uses'=>'UserController@ProfilePic'));
@@ -106,7 +106,7 @@ Route::get('sample/{question}/{status}',array('as'=>'sample','uses'=>'QuestionCo
 Route::post('/update-question/{question_id}', array('as' => 'update-question', 'uses'=>'UpdateQuestionController@UpdateQuestionStatus'));
 
 /*
- * accept answer here 
+ * accept answer here
  */
 
 /**
@@ -166,29 +166,29 @@ Route::post('tut-education',array('as'=>'tut-education','uses'=>'TutorController
 //get all tutors
 Route::get('adm-tutors', array('as'=>'adm-tutors','uses'=>'AdminController@admTutors'));
 
-//return all adm questions 
+//return all adm questions
 Route::get('adm-questions', array('as'=>'adm-questions','uses'=>'AdminController@AdmQuestions'));
 
-//return search results 
- 
+//return search results
+
 Route::post('adm-search', array('as'=>'adm-search','uses'=>'AdminController@AdmSearchResults'));
 
 
-//get customer payments 
+//get customer payments
 Route::get('make-cust-payments', array('as'=>'get-cust-payments','uses'=>'CustomerPayments@getCustPayment'));
 
-//get customer payments 
+//get customer payments
 Route::get('payment-successful', array('as'=>'payment-successful','uses'=>'CustomerPayments@paymentSuccessful'));
 
 //post customer
- 
+
 Route::post('payment', array(
 		'as'=>'post-cust-payments',
 		'uses'=>'CustomerPayments@postCustPayment'
 	));
 
-//return search results 
- 
+//return search results
+
 Route::get('cust-dashboard', array(
 
 	'uses'=>'UserController@viewCustomerDashboard',
@@ -196,6 +196,14 @@ Route::get('cust-dashboard', array(
 ));
 
 Route::get('/status/{question_id}', 'QuestionStatus@clientOrderStatus')->name('stats');
+
+//get payment meta
+Route::get('/get_payment_meta', 'AskQuestionController@getMetadata')->name('get.meta');
+
+//post payment metadata
+Route::any('/payment_meta', 'AskQuestionController@PostMetadata')->name('post.meta');
+
+Route::get('/sample', function () {  return view('cust.cust-payments-1'); });
 
 });
 

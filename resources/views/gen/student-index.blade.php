@@ -21,32 +21,37 @@
   <link rel="stylesheet" href="{{ URL::asset('/theme1/landing/student/assets/socicon/css/styles.css ') }}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/landing/student/assets/theme/css/style.css ') }}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/landing/student/assets/mobirise/css/mbr-additional.css') }}" type="text/css">
-  
-  
-  
+
+
+
 </head>
 <body>
   <section class="menu cid-qI6rykIhOD" once="menu" id="menu1-e">
 
-  @include('part.new-student-nav')  
+  @include('part.new-student-nav')
 
-    
+
 </section>
 
 <section class="engine"><a href="https://mobirise.ws">Mobirise</a></section><section class="cid-qI6rynyrrY mbr-fullscreen mbr-parallax-background" id="header2-f">
 
-    
 
-    
+
+
 
     <div class="container align-center">
         <div class="row justify-content-md-center">
             <div class="mbr-white col-md-10">
                 <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">Home-Assignment&nbsp;</h1>
-                
+
                 <p class="mbr-text pb-3 mbr-fonts-style display-5">Where your assignment needs meet Tutors and Professionals</p>
-                <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="https://mobirise.com">Signup</a>
-                    <a class="btn btn-md btn-white-outline display-4" href="https://mobirise.com">Login</a></div>
+                  @if(Auth::check())
+                      <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="{{ route('cust-dashboard')}}">Post a Question here</a>
+                    @else
+
+                      <div class="mbr-section-btn"><a class="btn btn-md btn-secondary display-4" href="{{route('register')}}">Signup</a>
+                          <a class="btn btn-md btn-white-outline display-4" href="{{ route('login')}}">Login</a></div>
+                    @endif
             </div>
         </div>
     </div>
@@ -59,16 +64,18 @@
 
 <section class="header12 cid-qI6sDs8vva mbr-fullscreen mbr-parallax-background" id="header12-i">
 
-    
+
 
     <div class="mbr-overlay" style="opacity: 0.9; background-color: rgb(15, 118, 153);">
     </div>
 
-    <div class="container  ">
+    <div class="container  " id="about">
             <div class="media-container">
                 <div class="col-md-12 align-center">
                     <h1 class="mbr-section-title pb-3 mbr-white mbr-bold mbr-fonts-style display-1">WHY CHOOSE US?</h1>
-                    <p class="mbr-text pb-3 mbr-white mbr-fonts-style display-5">We have a lot of competition therefore for us to remain competative, we have to be unique and provide unique services to our clients.</p>
+                    <p class="mbr-text pb-3 mbr-white mbr-fonts-style display-5">
+                      We have a lot of competition therefore for us to remain competative, we have to be unique and provide unique services to our clients.</p>
+                      <p class="mbr-text pb-3 mbr-white mbr-fonts-style display-5">At Home-Assignment we provide tailored and one on one tutoring experience to our esteemed students. Just sign up and have our tutors help you in your homework.
                     <div class="mbr-section-btn align-center py-2"><a class="btn btn-md btn-secondary display-4" href="https://mobirise.com">Read More&nbsp;</a></div>
 
                     <div class="icons-media-container mbr-white">
@@ -122,16 +129,16 @@
 
 <section class="header9 cid-qI6sEBqGWD mbr-fullscreen mbr-parallax-background" id="header9-j">
 
-    
 
-    
+
+
 
     <div class="container">
         <div class="media-container-column mbr-white col-md-8">
             <h1 class="mbr-section-title align-left mbr-bold pb-3 mbr-fonts-style display-1">HOME-ASSIGNMENT</h1>
             <h3 class="mbr-section-subtitle align-left mbr-light pb-3 mbr-fonts-style display-2">Also available in the mobile</h3>
             <p class="mbr-text align-left pb-3 mbr-fonts-style display-5">
-                Click any text to edit or style it. Select text to insert a link. Click blue "Gear" icon in the top right corner to hide/show buttons, text, title and change the block background. Click red "+" in the bottom right corner to add a new block. Use the top left menu to create new pages, sites and add themes.
+               Welcome to Home of Assignment, the place where you leave your assignments as you g to your hustles. Let  tutors handle your assignment and concentrate on your work.  We have the expertise, we have the tutoring platform Home-Assignment. Join today and have your Assignment done today and enjoy your studies
             </p>
             <div class="mbr-section-btn align-left"><a class="btn btn-md btn-primary display-4" href="https://mobirise.com">Read more&nbsp;</a>
                 <a class="btn btn-md btn-black-outline display-4" href="https://mobirise.com">Make an Order</a></div>
@@ -147,9 +154,9 @@
 
 <section class="header10 cid-qI84xrNWAT mbr-fullscreen mbr-parallax-background" id="header10-k">
 
-    
 
-    
+
+
 
     <div class="container">
         <div class="media-container-column mbr-white col-lg-8 col-md-10 ml-auto">
@@ -172,10 +179,10 @@
 
 <section class="features2 cid-qI85BFGydB" id="features2-o">
 
-    
 
-    
-    
+
+
+
     <div class="container">
         <div class="media-container-row">
             <div class="card p-3 col-12 col-md-6 col-lg-4">
@@ -195,7 +202,7 @@
             <div class="card p-3 col-12 col-md-6 col-lg-4">
                 <div class="card-wrapper">
                     <div class="card-img">
-                        <img src="{{ URL::asset('/theme1/landing/student/assets/images/02.jpg')}}" alt="Mobirise">
+                        <img src="{{ URL::asset('/theme1/landing/student/assets/images/02.png')}}" alt="Mobirise">
                     </div>
                     <div class="card-box ">
                         <h4 class="card-title pb-3 mbr-fonts-style display-7">Essay Writing</h4>
@@ -220,106 +227,37 @@
                 </div>
             </div>
 
-            
-        </div>
-    </div>
-</section>
 
-<section class="features3 cid-qI85CGwJI2" id="features3-p">
-
-    
-
-    
-    <div class="container">
-        <div class="media-container-row">
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="{{ URL::asset('/theme1/landing/student/assets/images/01.jpg')}}" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">Course Advice</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Mobirise is an easy website builder - just drop site elements to your page, add content and style it to look the way you like.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center">
-                        <a href="https://mobirise.com" class="btn btn-primary display-4">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="{{ URL::asset('/theme1/landing/student/assets/images/02.jpg')}}" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">Other Writing</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            All sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center">
-                        <a href="https://mobirise.com" class="btn btn-primary display-4">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card p-3 col-12 col-md-6 col-lg-4">
-                <div class="card-wrapper">
-                    <div class="card-img">
-                        <img src="{{ URL::asset('/theme1/landing/student/assets/images/02.jpg')}}" alt="Mobirise">
-                    </div>
-                    <div class="card-box">
-                        <h4 class="card-title mbr-fonts-style display-7">Full Coding Project</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Mobirise offers many site blocks in several themes, and though these blocks are pre-made, they are flexible.
-                        </p>
-                    </div>
-                    <div class="mbr-section-btn text-center">
-                        <a href="https://mobirise.com" class="btn btn-primary display-4">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            
         </div>
     </div>
 </section>
 
 <section class="countdown1 cid-qI85TxYhYM" id="countdown1-q">
-    
-    
-    
+
+
+
     <div class="container ">
         <h2 class="mbr-section-title pb-3 align-center mbr-fonts-style display-2">Countdown to Free Order</h2>
         <h3 class="mbr-section-subtitle align-center mbr-fonts-style display-5">
             Mobirise has provided for website developers a growing library of modern blocks which can be used either partially or in full for every website developed through the builder.
         </h3>
-        
+
     </div>
     <div class="container countdown-cont align-center">
         <div class="daysCountdown" title="Days"></div>
-        <div class="hoursCountdown" title="Hours"></div> 
-        <div class="minutesCountdown" title="Minutes"></div> 
+        <div class="hoursCountdown" title="Hours"></div>
+        <div class="minutesCountdown" title="Minutes"></div>
         <div class="secondsCountdown" title="Seconds"></div>
-        <div class="countdown pt-5 mt-2" data-due-date="2018/01/01"> 
+        <div class="countdown pt-5 mt-2" data-due-date="2018/01/01">
         </div>
     </div>
 </section>
 
 <section class="progress-bars1 cid-qI85WFtGb8" id="progress-bars1-r">
-    
-      
 
-    
+
+
+
 
     <div class="container">
         <h2 class="mbr-section-title pb-2 align-center mbr-fonts-style display-2">Website Statistics</h2>
@@ -342,7 +280,7 @@
                 <progress class="progress progress-primary" max="100" value="70">
                 </progress>
             </div>
-            
+
             <div class="progress2 pb-5">
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
@@ -356,7 +294,7 @@
                 <progress class="progress progress-primary" max="100" value="80">
                 </progress>
             </div>
-            
+
             <div class="progress3 pb-5">
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
@@ -370,7 +308,7 @@
                 <progress class="progress progress-primary" max="100" value="90">
                 </progress>
             </div>
-            
+
             <div class="progress4">
                 <div class="title-wrap">
                     <div class="progressbar-title mbr-fonts-style display-7">
@@ -392,9 +330,9 @@
 
 <section class="features10 cid-qI8bN2fWwo" id="features10-s">
 
-    
 
-    
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="card p-3 col-12 col-md-6 col-lg-4">
@@ -440,16 +378,16 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </section>
 
 <section class="mbr-section form3 cid-qI9s894Hpm" id="form3-y">
 
-    
 
-    
+
+
 
     <div class="container">
         <div class="row justify-content-center">
@@ -480,9 +418,9 @@
 
 <section class="cid-qI9sunWCoM" id="pricing-tables3-z">
 
-    
 
-    
+
+
     <div class="container">
         <div class="media-container-row">
             <div class=" col-12 col-lg-4 col-md-6 my-2">
@@ -558,9 +496,9 @@
 
 <section class="testimonials4 cid-qI9veCFhh3" id="testimonials4-10">
 
-  
 
-  
+
+
   <div class="container">
     <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2">
         WHAT OUR FANTASTIC USERS SAY
@@ -568,10 +506,10 @@
     <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
         Click any text to edit or style it. Click blue "Gear" icon in the top right corner to hide/show images, titles and change the amount items or the block and cards background.
     </h3>
-    <div class="col-md-10 testimonials-container"> 
-      
+    <div class="col-md-10 testimonials-container">
 
-      
+
+
     <div class="testimonials-item">
         <div class="user row">
           <div class="col-lg-3 col-md-4">

@@ -21,10 +21,10 @@ use Illuminate\Support\Facades\Auth;
 use Input;
 
 class UserController extends Controller
-{   
-    
+{
 
-  //view customer Controller 
+
+  //view customer Controller
 
 
   public function viewCustomerDashboard(){
@@ -32,10 +32,10 @@ class UserController extends Controller
 
     $user = Auth::User()->email;
 
-    //check user details 
+    //check user details
 
     $questions = DB::table('question_bodies')
-            ->join('post_question_prices', 'question_bodies.question_id', '=', 
+            ->join('post_question_prices', 'question_bodies.question_id', '=',
               'post_question_prices.question_id')
             ->leftjoin('question_matrices', 'question_matrices.question_id', '=', 'question_bodies.question_id')
             ->select('question_bodies.*','post_question_prices.*',
@@ -47,7 +47,7 @@ class UserController extends Controller
             ->paginate(15);
 
 
-    return view('cust.cust-dashboard', 
+    return view('cust.cust-dashboard',
       [
         'questions' => $questions
 
@@ -70,13 +70,13 @@ class UserController extends Controller
         }
         else{
             return view('auth.background-pic');
-        }   
+        }
 
   }
 
-   
 
-    
+
+
     public function profilePic($pic){
 
       $path ='';
@@ -90,15 +90,15 @@ class UserController extends Controller
       if($pic=='profile')
             {
                 $path = public_path().'/storage/uploads/profile/'.$user_id.'/profile/';
-                
+
             }
         else
             {
                $path= public_path().'/storage/uploads/profile/'.$user_id.'/homepage/';
             }
-                       
 
-       $rules = array('file' => 'required|max:10000|mimes:png,jpg, jpeg,bmp' ); 
+
+       $rules = array('file' => 'required|max:10000|mimes:png,jpg, jpeg,bmp' );
 
       $validator = Validator::make(Input::all(), $rules);
 
@@ -107,40 +107,40 @@ class UserController extends Controller
        if(is_array($file)){
 
              foreach ($file as $files){
-                    
+
                   $name =  $files->getClientOriginalName();
-                    
+
                   $files->move($path, 'profile.jpg');
                 }
 
 
             }
           return redirect()->route('all-questions');
-    }   
+    }
 
-   
- 
+
+
     public static function CustomerId($question, $database)
     {
         //use the qestion to get the data
 
            $data = DB::table($database)->where('question_id', $question)->first();
 
-                    
+
            if($data !=null)
            {
              $user = DB::table('users')->where('email', $data->user_id)->first();
 
              return $user->id;
-           }  
+           }
            else
            {
             return '';
-           }   
+           }
 
-         } 
+         }
 
-         //return tutor id here 
+         //return tutor id here
 
     public static function TutorId($question, $database)
     {
@@ -153,9 +153,8 @@ class UserController extends Controller
 
            $userId = User::select('serial')->where('email', $data->tutor_id)->first();
 
-          
-          return $userId->serial;                   
-    } 
+          return $userId->serial;
+    }
 
         public static function TutorEmail($question, $database)
     {
@@ -165,9 +164,9 @@ class UserController extends Controller
            ->select('tutor_id')
            ->where('question_id', $question)->first();
 
-            return $data->email;                   
-           
-    } 
+            return $data->email;
+
+    }
 
 
 
@@ -177,17 +176,17 @@ class UserController extends Controller
 
            $data = DB::table($database)->where('question_id', $question)->first();
 
-                    
+
            if($data !=null)
            {
              $user = DB::table('users')->where('email', $data->user_id)->first();
 
              return $user->email;
-           }  
+           }
            else
            {
             return '';
-           }   
+           }
 
          }
     }

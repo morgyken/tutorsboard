@@ -33,17 +33,17 @@
                 </li>
                 @else
 
-                <li class="nav-item"><a class="nav-link link text-white display-4" href=""><span class="mbri-info mbr-iconfont mbr-iconfont-btn"></span>
+                <li class="nav-item"><a class="nav-link link text-white display-4" href="{{route('all-questions')}}"><span class="mbri-info mbr-iconfont mbr-iconfont-btn"></span>
                         Browse Jobs</a>
                 </li>
 
-                <li class="nav-item"><a class="nav-link link text-white display-4" href=""><span class="mbri-touch mbr-iconfont mbr-iconfont-btn"></span>
+                <li class="nav-item"><a class="nav-link link text-white display-4" href="{{ route('cust-dashboard')}}"><span class="mbri-touch mbr-iconfont mbr-iconfont-btn"></span>
                         {{ Auth::user()->name }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link text-white display-4" href="{{ route('logout') }}" onclick="event.preventDefault(); 
+                    <a class="nav-link link text-white display-4" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();"><span class="mbri-sun mbr-iconfont mbr-iconfont-btn"></span>
-                        
+
                         Logout
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -54,6 +54,6 @@
                    @endif
 
               </ul>
-           
+
         </div>
     </nav>

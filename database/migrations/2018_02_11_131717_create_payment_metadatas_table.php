@@ -15,7 +15,7 @@ class CreatePaymentMetadatasTable extends Migration
     //   'name', 'email' ,'country','city', 'state', 'zip'
     public function up()
     {
-        Schema::create('payment_metadatas', function (Blueprint $table) {
+        Schema::create('payment_metadata', function (Blueprint $table) {
             $table->increments(10009);
             $table->rememberToken();
             $table->string('name');

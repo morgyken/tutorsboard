@@ -28,8 +28,9 @@
                             <ul>
 
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:88%">
-                                          88% Complete (success)
+                                      <div class="progress-bar progress-bar-success progress-bar-striped"
+                                      role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                                          100% Complete (success)
                                       </div>
                                   </div>
                                   <hr>
@@ -43,7 +44,12 @@
                               <div  class="col-md-12 center">
 
 
-                                <h2>Fill in the following foms with the payment details</h2>
+                                <h2>Payment Success</h2>
+
+
+                                <h2><a href="{{route('cust-dashboard')}}"> Return to dashboard </a> The question will be handled by our experts </h2>
+
+
                               </div>
                               <div  class="col-md-5">
                                   <hr>

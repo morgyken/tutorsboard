@@ -40,6 +40,14 @@ body {
 .display-4 > .mbr-iconfont {
   font-size: 1.6rem;
 }
+.paragraph2 p{
+    font-size: 1.6rem;
+    line-height: 1.rem;
+
+}
+.payment-method{
+  max-width:400px;;
+}
 .display-5 {
   font-family: 'Rubik', sans-serif;
   font-size: 1.5rem;
@@ -49,7 +57,9 @@ body {
 }
 .display-7 {
   font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: 1.3rem;
+
+  font-size: 1.7rem;
+  line-height: 1.9rem;
 }
 .display-7 > .mbr-iconfont {
   font-size: 1.4rem;

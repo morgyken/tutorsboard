@@ -1,5 +1,5 @@
 @extends('layout.cust-dashboard-layout')
-    
+
     @section('title')
 
     Client Dashboard
@@ -19,7 +19,7 @@
         if(value < 150){
             value++;
         }
-        
+
         document.getElementById('price').value =  value;
     }
     function decrementValue()
@@ -31,12 +31,12 @@
         }
         document.getElementById('price').value =  value;
     }
-    function minmax(value, min, max) 
+    function minmax(value, min, max)
     {
-        if(parseInt(value) < min || isNaN(parseInt(value))) 
-            return 20; 
-        else if(parseInt(value) > max) 
-            return 150; 
+        if(parseInt(value) < min || isNaN(parseInt(value)))
+            return 20;
+        else if(parseInt(value) > max)
+            return 150;
         else return value;
     }
 
@@ -45,9 +45,9 @@
 </script>
 
 
-         <section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">       
+         <section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">
 
-          
+
           <div class="container">
             <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2 col-md-8">
             GIVE DEADLINE
@@ -55,7 +55,7 @@
             <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5 col-md-8">
               In this panel, you will set the dates for the deadline and choose paper options. Some options are not mandatory
             </h3>
-            <div class="col-md-12 testimonials-container"> 
+            <div class="col-md-12 testimonials-container">
               <div class="clearfix col-md-8">
             <h1>Almost there! Just give us a few more details.</h1>
 
@@ -121,7 +121,7 @@
 
                         <div class="form-group col-md-3">
                             <label for="comment">Urgency </label>
-                           
+
                                 <div class="radio">
                                   <label><input type="radio" value="low" name="urgency">Low</label>
                                 </div>
@@ -138,12 +138,12 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                           
+
                                <div class="form-group">
-                            <label for="topic"> 
+                            <label for="topic">
                                 <h4>Select Question Category</h4></label>
                                    <select type="text" name="academic_level" class="form-control" placeholder="Enter Topic" required="required"  id="topic">
-                                    
+
                                 <option value="Masters">Masters </option>
                                 <option value="College">College </option>
                                 <option value="High School">High School </option>
@@ -151,19 +151,19 @@
                                 <option value="Junior Second Year">Junior Second Year </option>
                                 <option value="Junior Second Year ">Junior Second Year </option>
                                 <option value="Senior College">Senior College </option>
-                              
-                                    </select>           
+
+                                    </select>
                             </div>
                             </div>
 
                             <div class="form-group">
-                           
+
                                @include('part.auto-com')
                             </div>
-                            
+
 
                             <div class="form-group" >
-                      
+
                                 <input type="number" name="pages" id="pages" class="form-control" placeholder="Number of pages" id="pages">
                             </div>
 
@@ -176,7 +176,7 @@
 
                 </div>
 
-                 
+
                 <button type='input' class="btn btn-primary btn-md btn-block">
                     <h3>
                         <strong>  Finish
@@ -186,17 +186,17 @@
             </div>
     </form>
 
-    
+
 </div>
 
-              
+
           </div>
         </section>
-  
+
         @endsection
          @section ('comments')
          <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
-     
+
              <div class="container">
                 <div class="media-container-row">
                     <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
@@ -204,13 +204,11 @@
                           <li><strong>MOBILE FRIENDLY</strong> - no special actions required, all sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site, it will adapt automagically. <a href="https://Mobiriseirise.com/">Try it now!</a></li>
                             <li><strong>EASY AND SIMPLE</strong> - cut down the development time with drag-and-drop website builder. Drop the blocks into the page, edit content inline and publish - no technical skills required. <a href="https://mobirise.com/">Try it now!</a></li>
                             <li><strong>UNIQUE STYLES</strong> - choose from the large selection of latest pre-made blocks - full-screen intro, bootstrap carousel, content slider, responsive image gallery with lightbox, parallax scrolling, video backgrounds, hamburger menu, sticky header and more. <a href="https://mobirise.com/">Try it now!</a></li>
-                      
+
                         </ol>
                     </div>
                 </div>
             </div>
-        </section>                   
+        </section>
 
       @endsection
-
-

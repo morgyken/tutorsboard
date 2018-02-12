@@ -1,5 +1,5 @@
 
-  
+
 <!DOCTYPE html>
 <html >
 <head>
@@ -24,11 +24,11 @@
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/dropdown/css/style.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/theme/css/style.css ')}}">
   <link rel="stylesheet" href="{{ URL::asset('/theme1/all-questions/assets/mobirise/css/mbr-additional.css ')}}" type="text/css">
-  
+
 </head>
 
 <body style="font-size: 20px">
-  <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">   
+  <section class="menu cid-qI9L0sV3Ag" once="menu" id="menu2-d">
 
     <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@
                         <img src="{{ URL::asset('/theme1/favi.png ')}}" alt="Mobirise" style="height: 3.8rem;">
                     </a>
                 </span>
-                
+
             </div>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -75,9 +75,9 @@
 
 <section class="engine"><a href="https://mobirise.ws/q">website creator download</a></section><section class="testimonials5 cid-qI9OEX4Gjg" id="testimonials5-h">
 
-    
 
-    
+
+
     <div class="container">
         <div class="media-container-row">
             <div class="title col-12 align-center">
@@ -99,9 +99,9 @@
     <div class="container">
         <div class="media-container-column">
           <?php $user_id = Auth::User()->id;  ?>
-            
 
-            
+
+
         <div class="mbr-testimonial align-center col-12 col-md-12">
                 <div class="panel-item">
                     <div class="card-block">
@@ -127,25 +127,25 @@
                     </div>
                 </div>
             </div>
-    </div>   
+    </div>
 </section>
 
 <section class="mbr-section content4 cid-qI9IJ9MpuF" id="content4-4">
 
-    
+
 
     <div class="container">
         <div class="media-container-row">
             <div class="title col-12 col-md-8">
                 <h2 class="align-center pb-3 mbr-fonts-style display-2">Question Details</h2>
                 <h3 class="mbr-section-subtitle align-center mbr-light mbr-fonts-style display-5"><p>Question ID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Due Date: &nbsp;</p></h3>
-                
+
             </div>
         </div>
     </div>
 </section>
 
-<section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">  
+<section class="testimonials4 cid-qI9LEZJgCJ" id="testimonials4-g">
   <div class="container">
     <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2">
         BROWSE QUESTIONS
@@ -153,29 +153,29 @@
     <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
         Browse the questions from the following list to obtain the best question for you to answer. Please select questions with the best deadline and answer possi
     </h3>
-    <div class="col-md-10 testimonials-container">  
+    <div class="col-md-10 testimonials-container">
 
     @if(count($question)==0)
-    <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
+    <section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
 
     <div class="container">
         <div class="media-container-row">
             <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
                 <ul>
                     <li><strong> <span style="color:#f9533b">No Questions are available</span></strong>There seems to be no questions avalible in the platform at the moment. Please refresh <a href="https://mobirise.com/">Try it now!</a></li>
-                    
+
                 </ul>
             </div>
         </div>
     </div>
 </section>
 
-     
+
 @else
 
   @foreach($question as $quest=>$value)
 
-      <?php 
+      <?php
 
        $deadline11 = new   \App\Http\Controllers\DateTimeController();
 
@@ -191,10 +191,10 @@
         <script>
           $(document).ready(
            function() {
-           setInterval(function() { 
+           setInterval(function() {
            var someval = Math.floor(Math.random() * 100);
             $('#sample').text('Test' + someval);
-           }, 500);  //Delay here = 5 seconds 
+           }, 500);  //Delay here = 5 seconds
           });
     </script>
     <style type="text/css">
@@ -230,18 +230,18 @@
               </div>
               <div class="user_name mbr-bold mbr-fonts-style align-left pt-3 display-7">
 
-                    <?php 
+                    <?php
                         $user_id =  \App\Http\Controllers\UserController::CustomerEmail($value->question_id, 'question_bodies');
 
 
 
-                       ?> 
+                       ?>
                    <h4>
                           <span class="label" style="color:#2f5369;"> {{ substr($user_id, 0, strpos($user_id, '@')) }}</span>
                       </h4>
               </div>
               <div class="user_desk mbr-light mbr-fonts-style align-left pt-2 display-7">
-                   <div style="width:30%; float: left"> 
+                   <div style="width:30%; float: left">
                     <h5 style="padding-bottom:20px;">
                           @if(($deadline12/3600) > 24 )
 
@@ -252,21 +252,21 @@
 
                               <span class="label label-info label-lg ">
                                   {{ $array_of_deadline }}
-                              </span> 
+                              </span>
                           @elseif(($deadline12/3600) > 8 )
 
                               <span class="label label-warning label-lg ">
                                   {{ $array_of_deadline }}
-                              </span>                                                      
+                              </span>
 
-                          @else 
+                          @else
                           <span class="label label-danger label-lg ">
                                   {{ $array_of_deadline }}
                               </span>
                           @endif
 
-                                </h5>                    
-                      
+                                </h5>
+
                     </div>
                    <div style="width:25%; float: left">
                      <h5>{{$value->category}}</h5>
@@ -274,27 +274,27 @@
                    <div style="width:25%;float: left">
                      <h5>
 
-                      
-                          <span class="label label-warning ">Ksh: {{$value->tutor_price}}</span>              
+
+                          <span class="label label-warning ">Ksh: {{$value->tutor_price}}</span>
 
 
                       </h5>
                    </div>
-            
+
               </div>
             </div>
           </div>
         </div>
         @endforeach
-      
+
 
   @endif
 
-      
+
   </div>
 </section>
 
-<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">    
+<section class="mbr-section article content11 cid-qI9Iudr8h7" id="content11-3">
 
     <div class="container">
         <div class="media-container-row">
@@ -314,10 +314,10 @@
             <div class="title col-12 col-md-8">
                 <h2 class="align-center pb-3 mbr-fonts-style display-2"></h2>
                 <h3>
-                  
+
                 {{ $question->links()}}
                 </h3>
-                
+
             </div>
         </div>
     </div>
@@ -325,9 +325,9 @@
 
 <section class="features9 cid-qI9JvgIkBq" id="features9-5">
 
-    
 
-    
+
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="card p-3 col-12 col-md-6">
@@ -362,9 +362,9 @@
                 </div>
             </div>
 
-            
 
-            
+
+
         </div>
     </div>
 </section>
@@ -381,7 +381,7 @@
   <script src="{{ URL::asset('/theme1/all-questions/assets/dropdown/js/script.min.js')}}"></script>
   <script src="{{ URL::asset('/theme1/all-questions/assets/touchswipe/jquery.touch-swipe.min.js ')}}"></script>
   <script src="{{ URL::asset('/theme1/all-questions/assets/theme/js/script.js ')}}"></script>
-  
-  
+
+
 </body>
 </html>

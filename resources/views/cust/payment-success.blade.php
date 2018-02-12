@@ -12,11 +12,10 @@
 
           <div class="container">
             <h2 class="pb-3 mbr-fonts-style mbr-white align-center display-2">
-                Meta Data
+              Payment Success
             </h2>
             <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style mbr-white align-center display-5">
-
-              Include the following Information to Continue with the Checkout
+            You have successfuly checked out...Our tutors will handle your work, you will receive regular updates on the status of the paper
             </h3>
             <div class="col-md-12 testimonials-container">
 
@@ -28,69 +27,30 @@
                             <ul>
 
                                   <div class="progress">
-                                      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:88%">
-                                          88% Complete (success)
+                                      <div class="progress-bar progress-bar-success progress-bar-striped"
+                                      role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                                          100% Complete (success)
                                       </div>
                                   </div>
                                   <hr>
 
-                              <div class="row">
 
-                            @include('part.customer-order')
-
-
-                              </div>
-                              <div  class="col-md-12 center">
+                              <div  class="col-md-12 center page-header">
 
 
-                                <h2>Fill in the following foms with the payment details</h2>
-                              </div>
-                              <div  class="col-md-5">
-                                  <hr>
-                              </div>
-                              <div class="col-md-offset-2 col-md-8 well center">
-
-                              <h2>Pay using Credit card</h2>
-
-                              <p>
-                              	Enter your credit card details here to pay with credit card.Security is one of our main concers. Thank you for choosing home Assignment
-                              </p>
-                                  @include('cust.card-payment')
-
-                                </div>
-
-                                <div  class="col-md-5">
-                                    <hr>
-                                </div>
-                                <div  class="col-md-2">
-                                    <h2>OR </h2>
-                                </div>
-                                <div  class="col-md-5">
-                                    <hr>
-                                </div>
-
-
-
-
-                              <div class="col-md-offset-2 col-md-8 well center">
-
-                               <h2>Pay using Paypal</h2>
-                              <p>
-
-                              	Utamur vivendo argumentum vel in. Est no dicit congue. Eum ad mazim consetetur, mel ut porro assum delicata, eu error nullam disputando has. Ut eum graeci electram, an ius blandit vituperatoribus.
-                              	@include('cust.cust-paypal-pay')
-
-                              </p>
+                                <h2>Payment Success</h2>
 
                               </div>
+                              <div  class="jumbotron">
+
+
+                                <p><a href="{{route('cust-dashboard')}}"> Return to dashboard </a> The question will be handled by our experts </p>
+
 
                               </div>
 
 
-                            </div>
-                            </ul>
-                        </div>
-                    </div>
+                              </div>
                 </div>
             </section>
 

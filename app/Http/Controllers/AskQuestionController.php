@@ -102,9 +102,9 @@ class AskQuestionController extends Controller
 
         $request->session()->put('deadline', $request['question_deadline']);
 
-        //redirect to check out
-
-        //return redirect()->route('get-cust-payments');
+        //get details
+        
+        return redirect()->route('get.meta');
 
     }
 
@@ -113,19 +113,34 @@ class AskQuestionController extends Controller
 
         $question_id =  $request->session()->get('question_id');
 
-        DB::table('payment_metadatas')->insert(
+        $price = DB::table('post_question_prices')
+       				->select('question_price')
+       				->where('question_id', $question_id)
+       				->first();
+
+        DB::table('payment_metadata')->insert(
             [
                 'name' => $request->name,
                 'email' =>Auth::User()->email,
+
                 'country' => $request->country,
                 'city'    => $request->city,
+
                 'state' => $request->state,
                 'zip' => $request->zip,
-                'token'=>"#". substr($question_id, 0,17),
+
+                'amount' =>$price->question_price,
+                'token'=> "#". substr($question_id, 0,17),
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
             ]);
 
+          return redirect()->route('get-cust-payments');
+    }
+
+    public function getMetadata(){
+
+      return view('cust.cust-payments-meta');
 
     }
 
@@ -139,7 +154,7 @@ class AskQuestionController extends Controller
                             ->first();
         //get the head of the question serial and add 1
 
-        $question_serial = $seril-> question_serial + 1;
+        $question_serial = $serial-> question_serial + 1;
 
         //dd($request->academic_level);
 
@@ -190,7 +205,6 @@ class AskQuestionController extends Controller
 
             ]);
 
-
         DB::table('question_matrices')->insert(
             [
                 'user_id' => Auth::user()->email,
@@ -198,7 +212,6 @@ class AskQuestionController extends Controller
                 'current' => 1,
                 'created_at' =>\Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-
             ]);
 
         DB::table('tutor_payment')->insert(

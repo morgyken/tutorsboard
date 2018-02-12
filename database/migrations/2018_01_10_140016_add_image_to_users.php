@@ -22,7 +22,7 @@ class AddImageToUsers extends Migration
             $table->string('email');
 
         });
-    
+
     }
 
     /**
