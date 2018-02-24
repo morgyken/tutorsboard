@@ -162,6 +162,7 @@ a:hover{
                                 @endif
                     </div>
                 </div>
+                <input type="hidden" name="active", value="1">
                 <div data-for="password">
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <input type="password" class="form-control px-3" name="password" data-form-field="password" placeholder="Password" required="" id="email-header15-1">
