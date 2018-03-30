@@ -1,4 +1,4 @@
-##Synopsys
+## Synopsys
 Tutorsboard is an online tutorial project meant to help students during 
 their Studies at school. The program is designed to be very useful and 
 provide the student a platform for personal development through 
